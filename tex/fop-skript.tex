@@ -1,0 +1,84 @@
+\documentclass[a4paper, 11pt, accentcolor = tud3b]{tudreport}
+
+% Core packages.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+% Other packages.
+\usepackage[linesnumbered, ruled]{algorithm2e}
+\usepackage{enumitem}
+\usepackage[mathcal]{euscript} % Get readable mathcal font.
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{todonotes}
+\usepackage[german = quotes]{csquotes}
+\usepackage{tikz}
+\usepackage{stmaryrd}
+\usepackage{multicol}
+\usetikzlibrary{arrows.meta, shapes, backgrounds}
+
+% Basic information.
+\title{Funktionale und objektorientierte Programmierkonzepte}
+\subtitle{Skript \\ Fabian Damken, Karsten Weihe}
+\author{Fabian Damken}
+\date{\today}
+
+% Description-list styling.
+\SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
+\setlist[description]{style = multiline, leftmargin = 4cm, align = parright}
+
+\definecolor{gray}{rgb}{0.2, 0.2, 0.2}
+\definecolor{lightred}{rgb}{1, 0.3, 0}
+\definecolor{lightblue}{rgb}{0, 0.5, 1}
+\definecolor{darkred}{rgb}{0.6, 0, 0}
+\definecolor{darkgreen}{rgb}{0, 0.6, 0}
+\definecolor{orange}{rgb}{1, 0.8, 0}
+
+\tikzset{> = { Latex[length = 2mm] }}
+
+% New commands.
+\newcommand{\info}[1]{
+	\begin{figure}[H]
+		\centering
+		\fbox{\parbox[c]{0.5\textwidth}{#1}}
+	\end{figure}
+}
+\newcommand{\warning}[1]{
+    \begin{figure}[H]
+        \centering
+        \fbox{\parbox[c]{0.5\textwidth}{\textbf{Warnung:} #1}}
+    \end{figure}
+}
+\newcommand{\forwhich}{\ensuremath{{\,\vert\,}}}
+\newcommand{\abs}[1]{\ensuremath{{\lvert #1 \rvert}}}
+\newcommand{\qed}{{\hfill q.e.d.}}
+
+\newcommand{\subsubparagraph}[1]{\hspace{1cm} \textbf{#1:}}
+
+\newcommand{\definition}[2]{\subparagraph{Definition (#1)} #2}
+\newcommand{\notation}[2]{\subparagraph{Notation (#1)} #2}
+\newcommand{\theorem}[1]{\subparagraph{Theorem} #1}
+\newcommand{\intuition}[1]{\subsubparagraph{Intuition} #1}
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \listoftodos
+
+    \chapter{Einführung}
+        \include{parts/einfuehrung/einfuehrung}
+    % end
+
+    \chapter{Racket}
+        \include{parts/racket/racket}
+    % end
+
+    \chapter{Java}
+        \include{parts/java/java}
+    % end
+
+    \chapter{Glossar}
+        % TODO
+    % end
+\end{document}
