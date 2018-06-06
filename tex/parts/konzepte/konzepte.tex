@@ -34,13 +34,13 @@ gekennzeichnet, je nachdem, auf welches Paradigma sich das vorgestellte Konzept 
 	
 		Funktionale Programmiersprache sind Ausarbeitungen von deklarativen Sprachen (\ref{sec:paradigma_deklarativ}), bei denen ebenfalls die Beschreibung des Problems im Vordergrund steht. Sie werden oftmals zur Beschreibung von mathematischen Problem verwendet.
 		
-		In diesen Sprachen wir auf Konstrukte wie Schleifen (\ref{sec:konzept_schleife}) und Variablen (\ref{sec:konzept_variablen}) verzichtet, wodurch Seiteneffekte \todo{Beschreiben} verhindert werden und die Implementierung zur Lösung eines Problems robuster wird.
+		In diesen Sprachen wir auf Konstrukte wie Schleifen (\ref{sec:konzept_schleife}) und Variablen (\ref{sec:konzept_variablen}) verzichtet, wodurch Seiteneffekte (beispielsweise das Überschreiben von Zustandsvariablen) verhindert werden und die Implementierung zur Lösung eines Problems robuster wird.
 		
 		Zur Abgrenzung von funktionalen Sprachen zu imperativen Sprachen siehe \ref{sec:paradigma_abgrenzung_funktional_imperativ}.
 		
 		\paragraph{Beispiele}
 			\begin{itemize}
-				\item LISP
+				\item Lisp
 				\item Racket
 				\item Haskell
 			\end{itemize}
@@ -66,7 +66,19 @@ gekennzeichnet, je nachdem, auf welches Paradigma sich das vorgestellte Konzept 
 	% end
 	
 	\subsection{Objektorientiert}
-		\todo{Inhalt}
+		\label{sec:paradigma_oop}
+		
+		Bei der objektorientierten Programmierung (OOP) werden reale Strukturen, sogenannte Objekte in der Software abgebildet. Die Architektur der Software wird somit an bestehenden Systemen der Wirklichkeit abgebildet und erlaubt den meisten Entwickler*innen einen einfachen Zugang zu der Software, da die Wirklichkeit repräsentiert wird. Ein Programm besteht besteht aus Anweisungen, welche vorgeben, was der Computer abarbeiten soll und in welcher Reihenfolge. Somit sind (die meisten) objektorientierten Programmiersprachen ebenfalls imperativ (\ref{sec:paradigma_imperativ}).
+		
+		Durch die Vermischung mit imperativen und funktionalen Paradigmen lassen sich objektorientierte Sprachen nicht hinreichend von ersteren Abgrenzen, da letztere meistens auch Teile der imperativen und funktionalen Paradigmen beinhalten.
+		
+		\paragraph{Beispiele}
+			\begin{itemize}
+				\item Java
+				\item C++
+				\item Python
+			\end{itemize}
+		% end
 	% end
 	
 	\subsection{Abgrenzung Funktional $ \leftrightarrow $ Imperativ}

@@ -6,14 +6,30 @@
     * Was ist ein Programm/eine Programmiersprache/Programmieren überhaupt?
 2. Abstrakte Konzepte
     * placeholder
-3. Racket
+3. HtdP-TL
     * placeholder
 4. Java
     * placeholder
-5. Vergleich Racket <--> Java
+5. Vergleich HtdP-TL <--> Java
     * placeholder
-6. Glossar
+6. Komplexität und Landau-Symbolik
+    * placeholder
+7. Glossar
     * siehe Glossar
+
+
+### Gliederung VL
+
+1. Funktionale Abstraktion (am Beispiel Racket)
+2. Einführung in Java mit KarelJ
+3. Referenztypen: sehr umfassend, u.a. Klassen, Verrebung, abstrakte Klassen, Interfaces, Lambda-Ausdrücke, nested classes
+4. Methoden: Methodenkopf, Anweisungen Ausdrücke, Scope u.a.
+5. Exceptions
+6. Generics und Collections
+7. Streams und Dateien
+8. Threads und GUIs
+9. Analyse: Korrektheit, empirische und asymptotische Laufzeit 
+
 
 
 ## Glossar
@@ -29,7 +45,14 @@
 * Datei: `glossary.csv`
 
 
-## Abstrakte Konzepte (unstrukturiert)
+
+## Abstrakte Konzepte
+
+* 
+
+
+
+## Inhalte (unstrukturiert)
 
 * Literale
 * Variablen und Konstanten
@@ -56,6 +79,7 @@
     - Zuweisen und Kopieren
     - Vererbung
     - Polymorphie
+
 
 
 ## Anderes (Exkurs, etc.)
