@@ -1,24 +1,21 @@
 # FoP Skript Planung
 
+## Anmerkungen
+
+* Java
+    - Exceptions
+        + Folie 2: Was soll diese Folie heißen?
+    - Lexikalische Bestandteile
+        + Folie 22: Das `\` wird hier nicht benötigt, führt aber auch zu keinem Fehler (`'"' == '\"'`).
+        + Folien 44..55: Die Grammatik ist falsch und lässt bspw. `_attribut` nicht zu.
+    - Methoden
+        + Folien 18..19: Die Methode Subtrahiert, nach der Doku soll sie aber Dividieren.
+
+
+
 ## Gliederung
 
-1. Einführung
-    * Was ist ein Programm/eine Programmiersprache/Programmieren überhaupt?
-2. Abstrakte Konzepte
-    * placeholder
-3. HtdP-TL
-    * placeholder
-4. Java
-    * placeholder
-5. Vergleich HtdP-TL <--> Java
-    * placeholder
-6. Komplexität und Landau-Symbolik
-    * placeholder
-7. Glossar
-    * siehe Glossar
-
-
-### Gliederung VL
+### Gliederung Vorlesung
 
 1. Funktionale Abstraktion (am Beispiel Racket)
 2. Einführung in Java mit KarelJ
@@ -28,7 +25,14 @@
 6. Generics und Collections
 7. Streams und Dateien
 8. Threads und GUIs
-9. Analyse: Korrektheit, empirische und asymptotische Laufzeit 
+9. Analyse: Korrektheit, empirische und asymptotische Laufzeit
+
+Siehe [Themen](themen.md).
+
+
+### Gliederung Skript
+
+Siehe [Struktur](struktur.md).
 
 
 
@@ -46,42 +50,6 @@
 
 
 
-## Abstrakte Konzepte
-
-* 
-
-
-
-## Inhalte (unstrukturiert)
-
-* Literale
-* Variablen und Konstanten
-* Datentypen
-    - Zahlen (Ganzzahl, Fließkommazahl)
-    - Zeichen (-ketten)
-    - Boolesche Werte
-* Schlüsselwörter
-* Namen (Identifier)
-* Operatoren
-* Kommentare
-* Arrays
-* (Single) Linked List
-* Garbage Collection
-* Rekursion
-* Lambda-Ausdrücke
-* Streams
-* OOP
-    - Klassen
-        + Attribute
-    - Objekte
-        + `null`
-    - Referenzen
-    - Zuweisen und Kopieren
-    - Vererbung
-    - Polymorphie
-
-
-
 ## Anderes (Exkurs, etc.)
 
 * Komplexität
@@ -92,3 +60,5 @@
 * Gut Kommentieren
 * Sinnvoll Testen
 * Grammatiken und wie sie Programmiersprachen beschreiben
+* Fun Facts
+    - Es gilt `'"' == '\"'`
