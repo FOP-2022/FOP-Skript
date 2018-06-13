@@ -13,12 +13,14 @@
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage{todonotes}
+\usepackage{tcolorbox}
 \usepackage[german = quotes]{csquotes}
 \usepackage{tikz}
+\usepackage{wrapfig}
 \usepackage{stmaryrd}
 \usepackage{float}
 \usepackage{multicol}
-\usepackage{tcolorbox}
+\tcbuselibrary{skins}
 \usetikzlibrary{arrows.meta, shapes, backgrounds}
 
 % Basic information.
@@ -55,6 +57,8 @@
 }
 \providecommand{\forwhich}{\ensuremath{{\,\vert\,}}}
 \providecommand{\abs}[1]{\ensuremath{{\lvert #1 \rvert}}}
+
+\providecommand{\racket}{HtdP-TL}
 \providecommand{\qed}{{\hfill q.e.d.}}
 
 \providecommand{\subsubparagraph}[1]{\hspace{1cm} \textbf{#1:}}
@@ -65,23 +69,31 @@
 \providecommand{\intuition}[1]{\subsubparagraph{Intuition} #1}
 
 \providecommand{\functional}{%
-	\begin{tcolorbox}[colframe = black, colback = tud2b, boxrule = 0.5pt, arc = 4pt, left = 6pt, right = 6pt, top = 6pt, bottom = 6pt, boxsep = 0pt, width = 2.5cm]
-		\centering Funktional
+	\begin{tcolorbox}[standard jigsaw, colframe = tud2b, colback = tud2a, width = 2.5cm, left = 5pt, boxrule = 3pt, opacityback = 0.5]
+		Funktional
 	\end{tcolorbox}
 }
 \providecommand{\imperative}{%
-	\begin{tcolorbox}[colframe = black, colback = tud4b, boxrule = 0.5pt, arc = 4pt, left = 6pt, right = 6pt, top = 6pt, bottom = 6pt, boxsep = 0pt, width = 2.5cm]
+	\begin{tcolorbox}[standard jigsaw, colframe = tud4b, colback = tud4a, width = 2.5cm, left = 7pt, boxrule = 3pt, opacityback = 0.5]
 		\centering Imperativ
 	\end{tcolorbox}
 }
 \providecommand{\oop}{%
-	\begin{tcolorbox}[colframe = black, colback = tud6b, boxrule = 0.5pt, arc = 4pt, left = 6pt, right = 6pt, top = 6pt, bottom = 6pt, boxsep = 0pt, width = 3.2cm]
+	\begin{tcolorbox}[standard jigsaw, colframe = tud6b, colback = tud6a, width = 3.5cm, left = 6pt, boxrule = 3pt, opacityback = 0.5]
 		\centering Objektorientiert
 	\end{tcolorbox}
 }
-\providecommand{\functionalMark}{\flushright \functional}
-\providecommand{\imperativeMark}{\flushright \imperative}
-\providecommand{\oopMark}{\flushright \oop}
+%\providecommand{\functionalMark}{\todo{Functional Mark}}
+%\providecommand{\imperativeMark}{\todo{Imperative Mark}}
+%\providecommand{\oopMark}{\todo{OOP Mark}}
+\providecommand{\functionalMark}{\flushright \functional \flushleft}
+\providecommand{\imperativeMark}{\flushright \imperative \flushleft}
+\providecommand{\oopMark}{\flushright \oop \flushleft}
+
+\providecommand{\introduces}[2]{\label{def:#2} Dieser Abschnitt führt das Konzept #1 ein.}
+\providecommand{\implements}[3]{\label{imp:#2_#3} Dieser Abschnitt beschreibt die Implementierung von #1 in #3. Für die abstrakte Definition siehe \ref{#2}.}
+\providecommand{\refIntr}[1]{\ref{def:#1}}
+\providecommand{\refImpl}[2]{\ref{imp:#1_#2}}
 
 \begin{document}
 	\bibliographystyle{alpha}
@@ -91,31 +103,45 @@
     \listoftodos
 
     \chapter{Einführung}
+	    \label{c:einfuehrung}
+    
         \input{parts/einfuehrung/einfuehrung}
     % end
 
 	\chapter{Abstrakte Konzepte}
+		\label{c:abstrakte_konzepte}
+	
 		\input{parts/konzepte/konzepte}
 	% end
 
-    \chapter{Racket}
+    \chapter{\racket}
+	    \label{c:racket}
+    
         \input{parts/racket/racket}
     % end
 
     \chapter{Java}
+	    \label{c:java}
+    
         \input{parts/java/java}
     % end
     
-    \chapter{Vergleich Racket $ \leftrightarrow $ Java}
+    \chapter{Vergleich \racket $ \leftrightarrow $ Java}
+	    \label{c:vergleich_racket_java}
+    
 	    \input{parts/vergleichrj/vergleichrj}
     % end
     
     \chapter{Komplexität und Landau-Symbolik}
+	    \label{c:komplexitaet}
+    
 	    \input{parts/complexity/complexity}
     % end
 
     \chapter{Glossar}
-        % TODO
+	    \label{c:glossar}
+    
+        \todo{Skript zur Generierung des Glossars.}
     % end
     
     \bibliography{../zitate}

@@ -1,0 +1,68 @@
+\introduces{der lexikalischen Bestandteile einer Programmiersprache ein}{lexikalischeBestandteile}
+
+Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lexikon} der Programmiersprache aufgefasst werden, welches definiert, welche Zeichen und Wörter innerhalb eines Programms verwendet werden können und welche Bedeutung diese haben. Hier entspringt auch der Name \enquote{Lexikalische Bestandteile}.
+
+\subsection{Datentypen} \functionalMark \imperativeMark \oopMark
+	\introduces{von Datentypen}{datentypen}
+
+	Wir schauen uns in diesem Kontext zuerst die Datentypen an, wodurch festgelegt wird, welche Art von Daten wir mit der Programmiersprache verarbeiten können.
+	
+	Um eine Intuition dafür zu bekommen, was ein Datentyp ist folgendes Szenario:
+	Ein Verkehrsverbund möchte Daten über seine Straßenbahnen ablegen, genauer die Start- und Endstation einer Straßenbahn (\enquote{Hauptbahnhof}, bzw. \enquote{Willy-Brandt-Platz}), die Länge der Gesamtstrecke in Kilometern (ca. $ 2\text{km} $), den Fahrkartenpreis ($ 2,\!15\text{ \euro} $) und einen Schalter, ob die Straßenbahn gerade in Bewegung ist oder nicht.
+	
+	Auffällig ist, dass sich die Arten der Daten unterscheiden:
+	\begin{itemize}
+		\item die Start- und Endstation der Straßenbahn ist ein Text,
+		\item die Länge der Strecke ist eine Zahl,
+		\item der Fahrkartenpreis ist eine Kommazahl und
+		\item der Schalter ist ein Wahrheitswert (wahr/falsch).
+	\end{itemize}
+	Hierbei haben wir schon drei typische Datentypen in der Programmierung gefunden:
+	\begin{itemize}
+		\item Zeichenketten (\enquote{String}),
+		\item Ganzzahlen (\enquote{Integer}/\enquote{Int}),
+		\item Kommazahlen (genauer: Fließkommazahlen, da sich das Komma an jeder Stelle befinden kann) (\enquote{Float}) und
+		\item Wahrheitswerte (\enquote{Boolean}/\enquote{Bool}).
+	\end{itemize}
+	Auch werden häufig einzelne Zeichen (\enquote{Character}/\enquote{Char}) verwendet, aus welchen ein String wiederum besteht.
+	
+	Abschließend bedeutet dies, dass durch einen Datentyp beschrieben wird, welche Form (Typ) die abgelegten Daten haben und später, wie diese im Speicher abgelegt werden.
+% end
+
+\subsection{Literale} \functionalMark \imperativeMark \oopMark
+	\introduces{von Literalen}{literale}
+	
+	Als \enquote{Literale} werden Werte bezeichnet, welche nicht über Variablen oder Konstanten (siehe \refIntr{variablen}) verarbeitet werden, sondern die direkt im Quellcode des Programms stehen (das heißt \enquote{hardcoded} (festgeschrieben) sind).
+	
+	Wir behandeln die Syntax der Erstellung und Nutzung von Literalen hier nicht weiter, da sich dies von Sprache zu Sprache stark unterscheidet. Die spezielle Syntax für \racket und Java werden wir in den Abschnitten \refImpl{literale}{\racket} (\racket) und \refImpl{literale}{Java} (Java) behandeln.
+% end
+
+\subsection{Schlüsselwörter} \functionalMark \imperativeMark \oopMark
+	\introduces{von Schlüsselwörtern}{keywords}
+	
+	Schlüsselwörter (\enquote{Keywords}) werden in Programmiersprachen dazu eingesetzt, bestimmte Funktionen zu kennzeichnen. Sie beschreiben ganz bestimmte Zeichenfolgen (meist nur Text), welche meist nicht in einen anderen Kontexten verwendet werden dürfen (wir werden dies weiter behandeln im Abschnitt zu Einschränkungen von Namensgebungen in \racket und Java).
+	
+	Die Funktionalität und die Verfügbarkeit von Schlüsselwörtern ist von der Programmiersprache abhängig und wir werden diese weiter in den entsprechenden Abschnitten im \racket und Java Teil betrachten.
+% end
+
+\subsection{Bezeichner} \functionalMark \imperativeMark \oopMark
+	\introduces{von Bezeichnern}{identifier}
+	
+	Wie auch in der realen Welt müssen wir auch in der Programmierung Namen für die Elemente unseres Programms (beispielsweise Konstanten oder Variablen (siehe \refIntr{variablen})) Namen finden. Als Beispiel aus der Welt sei der Name \enquote{Streckenkilometer} gegeben, um bei dem Beispiels aus dem Abschnitt über Datentypen (\refIntr{datentypen}) zu bleiben. Innerhalb von Programmen nennen wir solche Namen \enquote{Bezeichner}, für die auch besondere Einschränkungen (Beispiel: \enquote{Ein Bezeichner darf nicht mit einer Ziffer beginnen.}) gelten können. Da letztere natürlich von der Programmiersprache abhängig sind, werden wir dies in den Abschnitten im \racket (\refImpl{identifier}{\racket}) und Java (\refImpl{identifier}{Java}) Teil betrachten.
+% end
+
+\subsection{Operatoren} \functionalMark \imperativeMark \oopMark
+	\introduces{von Operatoren}{operatoren}
+
+	Ein Operator beschreibt eine Aktion auf mindestens einem Datensatz.
+	
+	Ein Beispiel für einen Operator ist die Addition, welche $ 2 $ oder mehr Zahlen summiert. Wie wir einen solchen Operator in den konkreten Sprachen nutzen, hängt von der Sprache ab. Es gibt allerdings eine Operatoren, die (zumindest von der Bedeutung her) in allen Programmiersprachen vorhanden sind, beispielsweise die Addition. Diese Operationen werden im Abschnitt \refIntr{ausdruck-operator} beschrieben.
+% end
+
+\subsection{Strukturierung von Quellcodedateien} \functionalMark \imperativeMark \oopMark
+	\introduces{von Strukturierung von Quellcodedateien}{namespaces}
+	
+	Da mit steigender Größe des Projektes in den meisten Fällen auch die Anzahl der Quellcodedateien steigt, muss dieser Code strukturiert werden. In den meisten Sprachen stehen hier Mechanismen zur Verfügung, um den Quellcode in eine logische Struktur zu bringen, welche nicht unbedingt physikalisch abgebildet sein muss. Beispielsweise stehen hier in C++ Namespaces und in Java Packages zur Verfügung. Letztere werden wir im Abschnitt \refImpl{namespaces}{Java} näher behandeln.
+	
+	Der Unterschied einer logischen und einer physikalischen Struktur besteht darin, dass ersteres nur in den Köpfen der Menschen und (meistens) auch im Quellcode verankert ist, während physikalische Strukturen direkt im Speicher abgebildet werden (zum Beispiel in Form von Verzeichnissen).
+% end

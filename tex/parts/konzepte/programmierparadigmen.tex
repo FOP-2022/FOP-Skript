@@ -1,0 +1,107 @@
+\subsection{Deklarativ}
+    \label{sec:paradigma_deklarativ}
+
+    Der der Deklarativen Programmierung steht die Beschreibung des Problems im Vordergrund, die Lösung wird hier meist automatisiert gefunden.
+    
+    Es steht somit im Vordergrund, \textit{welches} Problem gelöst werden soll und nicht \textit{wie} ein Problem gelöst werden soll. Hierdurch ist eine genaue Trennung von Problem und Implementierung möglich, was bei imperativen Programmiersprachen (\ref{sec:paradigma_imperativ}) gar nicht oder zumindest nicht trivial möglich ist.
+    
+    Das Paradigma der deklarativen Programmierung kann in weitere unterteilt werden, beispielsweise in funktionale (\ref{sec:paradigma_funktional}) und logische Sprachen. Logische Sprachen werden hier nicht weiter ausgeführt.
+    
+    \paragraph{Beispiele}
+        \begin{itemize}
+            \item SQL, Cypher (Abfragesprachen)
+            \item Lisp, Racket, Haskell (Funktionale Sprachen)
+            \item Prolog (Logische Sprache)
+        \end{itemize}
+    % end
+% end
+
+\subsection{Funktional}
+    \label{sec:paradigma_funktional}
+
+    Funktionale Programmiersprache sind Ausarbeitungen von deklarativen Sprachen (\ref{sec:paradigma_deklarativ}), bei denen ebenfalls die Beschreibung des Problems im Vordergrund steht. Sie werden oftmals zur Beschreibung von mathematischen Problem verwendet.
+    
+    In diesen Sprachen wir auf Konstrukte wie Schleifen (\ref{sec:konzept_schleife}) und Variablen (\ref{sec:konzept_variablen}) verzichtet, wodurch Seiteneffekte (beispielsweise das Überschreiben von Zustandsvariablen) verhindert werden und die Implementierung zur Lösung eines Problems robuster wird.
+    
+    Zur Abgrenzung von funktionalen Sprachen zu imperativen Sprachen siehe \ref{sec:paradigma_abgrenzung_funktional_imperativ}.
+    
+    \paragraph{Beispiele}
+        \begin{itemize}
+            \item Lisp
+            \item Racket
+            \item Haskell
+        \end{itemize}
+    % end
+% end
+
+\subsection{Imperativ}
+    \label{sec:paradigma_imperativ}
+
+    Imperative Programmiersprachen sehen vor, dass der Entwickler beschreibt, \textit{wie} ein Problem zu lösen ist, wobei die Beschreibung des eigentlichen Problems (das \enquote{\textit{Was}}) fallen gelassen wird. Ein Programm besteht \enquote{aus einer Folge von Anweisungen [\dots], die vorgeben, in welcher Reihenfolge was vom Computer getan werden soll}. ~\cite{andreas2005grundkurs}
+    
+    Im Gegensatz zu deklarativen und funktionalen Sprachen ist die Korrektheit eines Algorithmus weniger offensichtlich und es werden Kontrollstrukturen wie Schleifen (\ref{sec:konzept_schleife}) und Variablen (\ref{sec:konzept_variablen}) eingeführt.
+    
+    Zur Abgrenzung von imperativen und funktionalen Sprachen siehe \ref{sec:paradigma_abgrenzung_funktional_imperativ}.
+    
+    \paragraph{Beispiele}
+        \begin{itemize}
+            \item Java
+            \item C/C++
+            \item Assembler
+        \end{itemize}
+    % end
+% end
+
+\subsection{Objektorientiert}
+    \label{sec:paradigma_oop}
+    
+    Bei der objektorientierten Programmierung (OOP) werden reale Strukturen, sogenannte Objekte in der Software abgebildet. Die Architektur der Software wird somit an bestehenden Systemen der Wirklichkeit abgebildet und erlaubt den meisten Entwickler*innen einen einfachen Zugang zu der Software, da die Wirklichkeit repräsentiert wird. Ein Programm besteht besteht aus Anweisungen, welche vorgeben, was der Computer abarbeiten soll und in welcher Reihenfolge. Somit sind (die meisten) objektorientierten Programmiersprachen ebenfalls imperativ (\ref{sec:paradigma_imperativ}).
+    
+    Durch die Vermischung mit imperativen und funktionalen Paradigmen lassen sich objektorientierte Sprachen nicht hinreichend von ersteren Abgrenzen, da letztere meistens auch Teile der imperativen und funktionalen Paradigmen beinhalten.
+    
+    \paragraph{Beispiele}
+        \begin{itemize}
+            \item Java
+            \item C++
+            \item Python
+        \end{itemize}
+    % end
+% end
+
+\subsection{Abgrenzung Funktional $ \leftrightarrow $ Imperativ}
+    \label{sec:paradigma_abgrenzung_funktional_imperativ}
+    
+    Die Abgrenzung von funktionalen und imperativen Sprachen lässt sich am besten anhand eines Beispiels erläutern:
+    
+    Gegeben sei das mathematische Problem, die Fakultät einer beliebigen natürlichen Zahl $ n \in \mathbb{N} _ 0 $ zu bestimmen. Mathematisch wird das Problem wie folgt rekursiv definiert:
+    \begin{equation*}
+        n! = f(n) = \begin{cases*}
+            1 & \text{ falls } n = 0 \\
+            n \cdot f(n - 1) & \text{ falls } n > 0 \\
+        \end{cases*}
+    \end{equation*}
+    
+    In einer (fiktionalen) funktionalen Sprache kann das Problem folgendermaßen implementiert werden:
+    \begin{figure}[H]
+        \centering
+        \begin{lstlisting}
+f(0) := 1
+f(n) := n * f(n - 1)
+        \end{lstlisting}
+        \caption{Funktionale Implementierung der Fakultät}
+    \end{figure}
+    
+    In einer (ebenfalls fiktionalen) imperativen Sprache kann das Problem folgendermaßen implementiert werden:
+    \begin{figure}[H]
+        \centering
+        \begin{lstlisting}
+function f(n)
+    num = 1
+    for i in 1..n
+        num = num * i
+    endloop
+endfunction
+        \end{lstlisting}
+        \caption{Imperative Implementierung der Fakultät}
+    \end{figure}
+% end

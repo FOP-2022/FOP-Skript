@@ -1,0 +1,10 @@
+Lexikalische Bestandteile
+Programmiersprache
+Programm
+Datentyp
+Daten
+Quellcode
+Syntax
+Schlüsselwörter
+Operator
+Logische vs. Physikalische Struktur
