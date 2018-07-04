@@ -8,3 +8,25 @@ Syntax
 Schlüsselwörter
 Operator
 Logische vs. Physikalische Struktur
+Variablen, Konstanten
+Algorithmus
+Implementierung
+Deklaration
+Initialisierung
+Standardbibliothek
+Funktion, Methode
+Parameter
+Zuweisung
+Auswertung
+Semantik
+Wahrheitstafel
+Kontrollstrukturen
+Verzweigungen (If)
+Schleifen
+Compile-Zeit vs. Laufzeit
+Codeblock
+Inkrementieren/Dekrementieren
+Break/Continue
+Compile-/Runtime-Fehler
+JVM
+JNI

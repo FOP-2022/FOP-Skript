@@ -12,7 +12,8 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{mathtools}
-\usepackage{todonotes}
+\usepackage{xspace}
+\usepackage[disable]{todonotes}
 \usepackage{tcolorbox}
 \usepackage[german = quotes]{csquotes}
 \usepackage{tikz}
@@ -25,7 +26,7 @@
 
 % Basic information.
 \title{Funktionale und objektorientierte Programmierkonzepte}
-\subtitle{Skript \\ Fabian Damken, Karsten Weihe}
+\subtitle{Autor: Fabian Damken}
 \author{Fabian Damken}
 \date{\today}
 
@@ -42,19 +43,18 @@
 
 \tikzset{> = { Latex[length = 2mm] }}
 
+%\newfontfamily\DejaSans{DejaVu Sans}
+
 % New commands.
-\providecommand{\info}[1]{
+\providecommand{\textbox}[1]{
 	\begin{figure}[H]
 		\centering
-		\fbox{\parbox[c]{0.5\textwidth}{#1}}
+		\fbox{\parbox[c]{0.75\textwidth}{#1}}
 	\end{figure}
 }
-\providecommand{\warning}[1]{
-    \begin{figure}[H]
-        \centering
-        \fbox{\parbox[c]{0.5\textwidth}{\textbf{Warnung:} #1}}
-    \end{figure}
-}
+\providecommand{\info}[1]{\textbox{\textbf{Info:} #1}}
+\providecommand{\warning}[1]{\textbox{\textbf{Warnung:} #1}}
+\providecommand{\funfact}[1]{\textbox{\textbf{Fun Fact:} #1}}
 \providecommand{\forwhich}{\ensuremath{{\,\vert\,}}}
 \providecommand{\abs}[1]{\ensuremath{{\lvert #1 \rvert}}}
 
@@ -83,17 +83,19 @@
 		\centering Objektorientiert
 	\end{tcolorbox}
 }
-%\providecommand{\functionalMark}{\todo{Functional Mark}}
-%\providecommand{\imperativeMark}{\todo{Imperative Mark}}
-%\providecommand{\oopMark}{\todo{OOP Mark}}
-\providecommand{\functionalMark}{\flushright \functional \flushleft}
-\providecommand{\imperativeMark}{\flushright \imperative \flushleft}
-\providecommand{\oopMark}{\flushright \oop \flushleft}
+\providecommand{\functionalMark}{\todo{Functional Mark}}
+\providecommand{\imperativeMark}{\todo{Imperative Mark}}
+\providecommand{\oopMark}{\todo{OOP Mark}}
+%\providecommand{\functionalMark}{\flushright \functional \flushleft}
+%\providecommand{\imperativeMark}{\flushright \imperative \flushleft}
+%\providecommand{\oopMark}{\flushright \oop \flushleft}
 
 \providecommand{\introduces}[2]{\label{def:#2} Dieser Abschnitt führt das Konzept #1 ein.}
-\providecommand{\implements}[3]{\label{imp:#2_#3} Dieser Abschnitt beschreibt die Implementierung von #1 in #3. Für die abstrakte Definition siehe \ref{#2}.}
+\providecommand{\implements}[3]{\label{imp:#2_#3} Dieser Abschnitt beschreibt die Implementierung von #1 in #3. Für die abstrakte Definition siehe \ref{def:#2}.}
 \providecommand{\refIntr}[1]{\ref{def:#1}}
 \providecommand{\refImpl}[2]{\ref{imp:#1_#2}}
+
+\providecommand{\HREF}[1]{\href{#1}{#1}}
 
 \begin{document}
 	\bibliographystyle{alpha}
@@ -101,6 +103,8 @@
     \maketitle
     \tableofcontents
     \listoftodos
+
+	\todo{Beispiele! Beispiele everywhere.}
 
     \chapter{Einführung}
 	    \label{c:einfuehrung}

@@ -1,1 +1,51 @@
-\todo{Schreiben}
+\introduces{von Kontrollstrukturen}{kontrollstrukturen}
+
+Bisher haben wir nur Konzepte betrachtet, die es uns ermöglichen, einen linearen und immer gleichen Ablauf des Programms zu bewerkstelligen. Aber spätestens, wenn unser Programm an irgendeiner Stelle \enquote{denken} (wir betrachten hier keine Konzepte des Machine Learnings o.ä.) soll, müssen wir anfangen, darüber nachzudenken, wie wir Entscheidungen implementieren.
+
+Hier kommen Kontrollstrukturen ins Spiel, welche uns erlauben
+\begin{enumerate}[label = \alph*)]
+	\item Entscheidungen zu treffen und
+	\item Codeblöcke zu wiederholen.
+\end{enumerate}
+
+\subsection{Verzweigungen} \functionalMark \imperativeMark \oopMark
+	\introduces{von Verzweigungen}{verzweigungen}
+
+	Wir beschäftigen uns nun mit Teil a) von obiger Liste: Verzweigungen, das wichtigste überhaupt, wenn es darum geht, in einem Programm Entscheidungen zu treffen. Wir werden nun den Haupttyp Typen von Verzweigungen kennen lernen: ein \textit{if}.
+
+	\paragraph{If}
+		Ein \textit{if} ist eine einfache Verzweigung der Form \enquote{Wenn \dots gilt, dann tue \dots. Sonst tue \dots.}. In den meisten Programmiersprachen wird dies gesprochen als \enquote{\textbf{if} \dots \textbf{then} \dots \textbf{else} \dots}, was einer einfachen Übersetzung des deutschen \enquote{wenn, dann, ansonsten} entspricht. Der sogenannte \textit{else-Block} kann bei den meisten Sprachen auch fallengelassen werden, wird die Bedingung dann zu \textit{Falsch} ausgewertet, so geschieht einfach nichts.
+		
+		In vielen Fällen muss man allerdings mehr als einen Fall betrachten, wodurch sich \textit{elseif-Blöcke} ergeben, die ungefähr die Form \enquote{\textbf{if} \dots \textbf{then} \dots \textbf{elseif} \dots \textbf{then} \dots \textbf{else} \dots} haben. Umgangssprachlich kann man ein else-if also als \enquote{wenn, dann, ansonsten wenn, $ \cdots $, ansonsten} ausdrücken. Es kann in den meisten Fällen beliebig viele else-if-Blöcke geben.
+	% end
+% end
+
+\subsection{Schleifen} \imperativeMark \oopMark
+	\introduces{von Schleifen}{schleifen}
+
+	Nun beschäftigen wir uns mit Teil b) aus obiger Liste: Schleifen. Spätestens, wenn wir unseren Code mehrmals Ausführen wollen und ihn zu diesem Zweck nicht einfach untereinander kopieren können (beispielsweise wenn die Ausführung von einem Parameter abhängt, dessen Wert wir während dem Schreiben noch nicht kennen), müssen wir unseren Code dynamisch beliebig oft ausführen. Dies ist zum Beispiel der Fall, wenn wir die Fakultät einer Zahl berechnen wollen: \[ n! \coloneqq \prod _ { i = 1 } ^ n i = 1 \cdot 2 \cdot\,\cdots\,\cdot (n - 1) \cdot n \]
+	
+	Als Grundlage für alle Schleifen dient die \textit{while-Schleife}, bei der ein Codeblock so lange ausgeführt wird, bis eine bestimmte Bedingung zu \textit{Falsch} auswertet. Der Code kann somit als \enquote{Solange \dots tue \dots} verstanden werden und sieht in den meisten Sprachen auch ähnlich aus: \enquote{\textbf{while} \dots \textbf{do}}. Als Anlehnung an die while-Schleife gibt es selten auch die until-Schleife, die genau entgegengesetzt funktioniert: Der Codeblock wird so lange ausgeführt, bis eine bestimmte Bedingung zu \textit{Wahr} auswertet.
+	
+	Damit können wir nun das obige Problem wie folgt in unserer imaginären Sprache lösen, wobei wir hier in der Variable \texttt{n} das \( n \) von oben speichern und in der Variable \texttt{x} das Ergebnis (es soll also nach der Ausführung $ \texttt{x} = n! $ gelten).
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+x = 1
+while n > 0
+	x = x * n
+
+	n = n - 1
+done
+		\end{lstlisting}
+		\caption{Beispiel: While-Schleife}
+	\end{figure}
+	
+	Der Code \texttt{x = x * n}, \texttt{n = n - 1} wird nun immer ausgeführt, solange \( \texttt{n} > 0 \) gilt. Eine Ausführung des Blocks wird \enquote{Schleifendurchlauf} oder \enquote{Iteration} genannt.
+	
+	Da es manche Fälle gibt, in denen die gesamte Ausführung innerhalb der Schleife abgebrochen werden soll oder die aktuelle Iteration abgebrochen werden soll und mit der nächsten begonnen werden soll, gibt es meist noch die Ausdrücke \enquote{break} und \enquote{continue}, welche ihrem Namen treu bleiben und die folgenden Funktionen erfüllen:
+	\begin{description}
+		\item[break] Hält die gesamt Schleifenausführung an und fährt mit der ersten Zeile nach der Schleife fort.
+		\item[continue] Hält den aktuellen Schleifendurchlauf an und fährt mit der nächsten Iteration fort. Gibt es keine weitere Iteration, so wird die Schleife beendet.
+	\end{description}
+% end

@@ -21,20 +21,20 @@
         + Operatoren
         + Strukturierung von Quellcodedateien
     - Anweisungen
-        + **Variablen und Konstanten**
-            * **Deklaration**
-            * **Initialisierung**
-        + **Zuweisungen**
-        + **Nutzung von Methoden**
-        + **Operatoren**
-            * **Auswertungsreihenfolge/Bindungsstärke**
-            * **Logische Operatoren (land, lor, lxor, lnot)**
-        + **Links-/Rechtsauswertungen**
-        + **Seiteneffekte (Multithreading, Schleifen)**
+        + Variablen und Konstanten
+            * Deklaration
+            * Initialisierung
+        + Zuweisungen
+        + Nutzung von Methoden
+        + Operatoren
+            * Auswertungsreihenfolge/Bindungsstärke
+            * Logische Operatoren (land, lor, lxor, lnot)
+        + Links-/Rechtsauswertungen
+        + Seiteneffekte (Multithreading, Schleifen)
     - Kontrollstrukturen
-        + **Verzweigungen (If, Switch)**
-        + **Schleifen (While, For)**
-            * **Kontrolle innerhalb der Schleife**
+        + Verzweigungen (If)
+        + Schleifen (While)
+            * Kontrolle innerhalb der Schleife
     - Methoden/Funktionen
         + **Aufbau (Eingabe-Verarbeitung-Ausgabe)**
             * **Parameter**
@@ -68,21 +68,21 @@
 3. TODO: HtdP-TL
 4. Java
     - Lexikalische Bestandteile
-        + **Datentypen**
-            * **Primitive**
-            * **Sonderfall String**
-            * **(Objekte)**
-        + **Literale**
-            * **Primitive**
-            * **`null`**
-        + **Schlüsselwörter**
-        + **Operatoren**
-        + **Bezeichner und Konventionen**
-        + **Strukturierung des Codes**
-            * **Klammerung**
-            * **Kommentare**
-            * **Whitespace**
-        + **Packages und Imports**
+        + Datentypen
+            * Primitive
+            * Sonderfall String
+            * *Objekte)
+        + Literale
+            * Primitive
+            * `null`
+        + Schlüsselwörter
+        + Bezeichner und Konventionen
+        + Operatoren
+        + Strukturierung des Codes
+            * Klammerung
+            * Kommentare
+            * Whitespace
+        + Packages und Imports
     - Anweisungen
         + **Variablen (Deklaration, Initialisierung)**
             * **Modifier**
@@ -176,5 +176,5 @@
         + **Konstruktoren**
         + **etc.**
 5. TODO: Vergleich Racket <--> Java
-6. TODO: Komplexität und Lanau-Symbolik
+6. Komplexität und Landau-Symbolik [Gliederung siehe TeX]
 7. Glossar

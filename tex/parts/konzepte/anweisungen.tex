@@ -1,1 +1,118 @@
-\todo{Schreiben}
+Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bestandteilen, wenden wir und nun den Anweisungen zu, die unserem Programm Leben einhauchen. Die schreiben dem Computer vor, welche Aufgaben er abzuarbeiten hat und in welcher Reihenfolge.
+
+\subsection{Variablen und Konstanten} \imperativeMark \oopMark
+	\introduces{von Variablen Konstanten}{variablen}
+	
+	Stellen wir uns vor, wir wollen das Durchschnittsalter aller Studierenden am Fachbereich Informatik berechnen. Zur Einfachheit nehmen wir hier an, es gibt nur $ 10 $ Studierende, welche die Alter $ 21, 41, 27, 18, 20, 24, 30, 17, 29, 25 $ haben. Zur Berechnung des Durchschnitts müssen wir nun alle Zahlen aufsummieren, uns das Ergebnis merken und durch die Anzahl an Studierenden dividieren. Wir merken hier schnell, das wir uns \enquote{das Ergebnis merken} müssen, da wir nicht mit so vielen Zahlen zur gleichen Zeit rechnen können.
+	
+	Das gleiche Phänomen tritt auch auf, wenn wir obigen Algorithmus programmieren wollen: Wir müssen uns Daten zwischenspeichern.
+	
+	Dies ist genau der Punkt, an dem Variablen ins Spiel kommen: Diese stellen einen kleinen, modifizierbaren, Speicher dar, dem eine Aufgabe und ein Datentyp zugeordnet ist. In unserem Fall ist die Aufgabe \textit{das Halten des Zwischenergebnisses} und der Datentyp \textit{Integer}. Um die Aufgabe erkenntlich zu machen, geben wir der Variablen einen Namen: \enquote{Gesamtalter}.
+	
+	Um das alles Zusammen zu fassen: Eine Variable ist ein benannter Zwischenspeicher innerhalb eines Programms, an dem wir Daten eines bestimmten Datentyps speichern können und die Werte verändern. Selbstverständlich können wir auf die gespeicherten Werte auch zugreifen, sonst wäre das Speichern sinnlos \footnote{In Java gibt es hier eine Ausnahme, eine sogenannte \enquote{Phantom Reference}. Für mehr Informationen siehe \HREF{https://docs.oracle.com/javase/10/docs/api/java/lang/ref/PhantomReference.html}}.
+	
+	Eine Konstante ist im Prinzip das gleiche wie eine Variable, nur ist sie nicht änderbar (sie ist \enquote{konstant}). Dies ist sinnvoll, wenn wir den gleichen Wert häufig im Programm verwenden, diesen aber nicht immer Tippen möchten. Ein prominentes Beispiel hierfür ist die Kreiszahl $ \pi \approx 3,141592653589793 $, welche in fast allen Sprachen bereits als Konstante vorliegt.
+	
+	\paragraph{Begriffe}
+		\begin{itemize}
+			\item Wenn eine Variable erstellt wird, das heißt der Typ und der Name wird festgelegt, wird dies \textins{Deklaration} genannt.
+			\item Die erste Festlegung, welchen Wert eine Variable am Anfang haben soll, wird \textit{Initialisierung} genannt. \\ Bei Konstanten ist dies dies einzige Wertfestlegung, die stattfinden kann.
+		\end{itemize}
+	% end
+% end
+
+\subsection{Zuweisungen} \imperativeMark \oopMark
+	\introduces{von Zuweisungen}{zuweisungen}
+	
+	Wenn der Wert einer Variablen festgelegt wird, wird dies \textit{Zuweisung} genannt. Wie im Abschnitt zu Variablen und Konstanten (\refIntr{variablen}) bereits erwähnt, kann einer Konstanten nur einmalig ein Wert zugewiesen werden.
+	
+	Näheres zu Zuweisungen wird im Abschnitt Links-/Rechtsauswertung (\refIntr{lrAuswertung}) behandelt.
+% end
+
+\subsection{Nutzung von Methoden} \functionalMark \imperativeMark \oopMark
+	\introduces{Methoden}{methodenNutzung}
+	
+	Fürs erste reicht es uns hier zu wissen, dass eine Methode ein weg ist, um Code zu deduplizieren an zentraler Stelle zu halten. Näheres über Methoden werden wir im Abschnitt zu Methoden und Funktionen (\refIntr{methoden}) behandeln.
+	
+	Wir werden oftmals feststellen, dass einige Dinge schwierig zu implementieren sind. Zum Glück haben die meisten Programmiersprachen eine sogenannte \textit{Standardbibliothek}, welche viele Methoden zur Verfügung stellt, die Standardaufgaben implementieren (beispielsweise die Quadratwurzel). Um diese Methoden zu nutzen, müssen die Methoden aufgerufen werden. Dies ist zu Vergleichen mit dem Aufruf einer Funktion in der Mathematik, beispielsweise der Quadratwurzelfunktion ($ \sqrt{x} \coloneqq y \in \mathbb{R} _ + : y \cdot y = x $). Wird übergeben einer Methode \textit{Parameter}, die Methode bearbeitet diese irgendwie und liefert uns ein \textit{Ergebnis} (Eingabe-Verarbeitung-Ausgabe, EVA-Prinzip). Im Fall von der Quadratwurzel übergeben wir der Funktion als Parameter eine Zahl $ x \in \mathbb{R} _ + $ und kriegen ein solches Ergebnis, sodass $ x = \sqrt{x} \cdot \sqrt{x} $ gilt (das dies in einigen Fällen nicht oder nicht vollständig lösbar ist, behandeln wir hier nicht weiter).
+% end
+
+\subsection{Operatoren} \functionalMark \imperativeMark \oopMark
+	\introduces{von Operatoren}{operatoren}
+	
+	Wir betrachten nun erneut Operatoren, welche wir bereits bei den lexikalischen Bestandteilen behandelt haben (siehe \refIntr{lexOperatoren}).
+	
+	In diesem Abschnitt behandeln wir nun einige Grundbegriffe, welche im Zusammenhang mit Operatoren immer wieder verwendet werden und schauen uns einige grundlegende Operatoren an, welche in annähernd allen Programmiersprachen vorhanden sind \footnote{Ausnahmen bilden hier manche esoterische Programmiersprachen wie beispielsweise Brainfuck. Siehe hierzu \HREF{https://de.wikipedia.org/wiki/Brainfuck}}.
+	
+	\subsubsection{Arithmetische Operatoren}
+		Oftmals vorhandene arithmetische Operatoren sind \enquote{Addition}, \enquote{Subtraktion}, \enquote{Multiplikation}, \enquote{Division} und \enquote{Modulo}. Hierbei sind auch in der Programmierung sämtliche aus der Mathematik bekannte Gesetze und Axiome anwendbar. Ein Beispiel hierfür ist die Kommutativität der Addition.
+		
+		Der Operator \enquote{Modulo} gibt uns den Wert des Restes bei einer Division zurück (Beispiel: Der Ausdruck \enquote{Rechne $ 5 $ modulo $ 3 $} gibt uns den Wert $ 2 $, da: $ 1 \cdot 3 + 2 = 5 $).
+		
+		Mathematisch kann man den Modulo-Operator wie folgt definieren:
+		\begin{equation*}
+			x \text{ modulo } y \coloneqq x - \lfloor \frac{x}{y} \rfloor
+		\end{equation*}
+	% end
+	
+	\subsubsection{Logische Operatoren}
+		Auch vorhanden sind logische Operatoren wie \enquote{AND} (logisches Und), \enquote{OR} (logisches Oder), \enquote{NOT} (logische Negation) und \enquote{XOR} (logisches exklusives Oder). Diese arbeiten auf Wahrheitswerten und ergeben folgende Wahrheitstafeln \footnote{Wahrheitstafeln beschreiben, bei welchen durch welche Operationen welche Ergebnisse vorliegen}:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c c | c c c c c}
+				$ A $ & $ B $ & $ A \texttt{ AND } B $ & $ A \texttt{ OR } B $ & $ \texttt{NOT } A $ & $ \texttt{NOT } B $ & $ A \texttt{ XOR } B $ \\
+				\hline
+				$ \mathfrak{f} $ & $ \mathfrak{f} $ & $ \mathfrak{f} $ & $ \mathfrak{f} $ & $ \mathfrak{w} $ & $ \mathfrak{w} $ & $ \mathfrak{f} $ \\
+				$ \mathfrak{f} $ & $ \mathfrak{w} $ & $ \mathfrak{f} $ & $ \mathfrak{w} $ & $ \mathfrak{w} $ & $ \mathfrak{f} $ & $ \mathfrak{w} $ \\
+				$ \mathfrak{w} $ & $ \mathfrak{f} $ & $ \mathfrak{f} $ & $ \mathfrak{w} $ & $ \mathfrak{f} $ & $ \mathfrak{w} $ & $ \mathfrak{w} $ \\
+				$ \mathfrak{w} $ & $ \mathfrak{w} $ & $ \mathfrak{w} $ & $ \mathfrak{w} $ & $ \mathfrak{f} $ & $ \mathfrak{f} $ & $ \mathfrak{f} $ \\
+			\end{tabular}
+			\caption{Wahrheitstafel für \enquote{and}, \enquote{or}, \enquote{not} und \enquote{xor}}
+		\end{table}
+		
+		\warning{Das logische Oder ist genau dann war, wenn \textbf{mindestens ein Parameter} wahr ist. Das in der Prosa übliche oder (entweder-oder) ist im \textit{exklusiven oder} (\enquote{xor}) implementiert und wird genau dann war, wenn \textbf{genau ein Parameter} wahr ist (in anderen Worten: Wenn die Parameter unterschiedlich sind).}
+		
+		Auch für die logischen Operatoren gilt, dass Gesetze und Axiome aus der Logik auch in der Programmierung anwendbar sind (beispielsweise die De Morganschen Gesetze).
+	% end
+	
+	\subsubsection{Bindungsstärke}
+		Da meistens mehrere Operatoren innerhalb eines Ausdrucks verwendet werden, ist es wichtig zu wissen, in welcher Reihenfolge die Operatoren ausgeführt werden. Diese Reihenfolge wird \enquote{Auswertungsreihenfolge} genannt und basiert auf der \enquote{Bindungsstärke} von Operatoren. Ein Operator mit einer hohen Bindungsstärke wird hierbei vor einem Operatoren mit einer geringeren Bindungsstärke ausgeführt.
+		
+		Schauen wir uns zur Veranschaulichung das simpelste Beispiel an, welches wir alle aus der Schulmathematik kennen: \enquote{Punkt vor Strich}. \\
+		Mit dieser Regel wird festgelegt, wie ein Ausdruck $ 5 + 3 \cdot 7 $ ausgewertet wird, nämlich:
+		\begin{equation*}
+			5 + 3 \cdot 7 = 5 + 21 = 26
+		\end{equation*}
+		und nicht wie folgt, wenn \enquote{Strich vor Punkt} gelten würde:
+		\begin{equation*}
+			5 + 3 \cdot 7 = 8 \cdot 7 = 56
+		\end{equation*}
+		In anderen Worten: Die Operatoren \enquote{Multiplikation} und \enquote{Division} haben eine höhere Bindungsstärke
+	% end
+% end
+
+\subsection{Links-/Rechtsauswertung} \imperativeMark \oopMark
+	\introduces{von Links- und Rechtsauswertungen}{lrAuswertung}
+	
+	Eine Auswertung findet immer dann statt, wenn der Wert eines Ausdrucks bestimmt wird. Beispielsweise sagen wir, der Ausdruck $ 1 + 3 $ wertet zu $ 4 $ aus.
+	
+	Wird dieser Wert (das Ergebnis des Ausdrucks) anschließend einer Variable zugewiesen, wird von Links- und Rechtsauswertungen gesprochen. Die Auswertung des zuzuweisenden Wertes wird dabei \textit{Rechtsauswertung} genannt. Der Ausdruck, der bestimmt, wem/was der Wert zugewiesen werden soll, wird \textit{Linksauswertung} genannt.
+	
+	Die Namensgebung resultiert daher, dass in den meisten Programmiersprachen der zuzuweisende Wert rechts und die Variable links steht, Beispiel:
+	\begin{lstlisting}
+a[b] = a[b] + 1
+	\end{lstlisting}
+	Hierbei wertet der Linksausdruck (\texttt{a[b]}) zu einer Position im Speicher aus, an der das Element gespeichert werden soll (in diesem Listing werden Arrays verwendet, diese werden erst im Abschnitt über Datenstrukturen (\refIntr{datenstrukturen}) eingeführt), und der Rechtsausdruck (\texttt{a[b] + 1}) zu dem Wert, welcher gespeichert werden soll.
+% end
+
+\subsection{Seiteneffekte} \imperativeMark \oopMark
+	\introduces{von Seiteneffekten}{seiteneffekte}
+	
+	Was bei funktionalen Sprachen verhindert wird, tritt bei imperativen Sprachen häufig auf: Seiteneffekte.
+	
+	Als Seiteneffekt wird bezeichnet, wenn sich der Zustand von etwas ändert, beispielsweise von einer Variablen. Wir sehen hier bereits, dass Seiteneffekte integraler Bestandteil von imperativen Sprachen sind (in funktionalen Sprachen nicht, da es hier kein Konzept von Variablen gibt). Seiteneffekte werden dann problematisch, wenn sich der Zustand einer Variablen verändert, ohne dass wir direkt Einfluss darauf nehmen können (zum Beispiel wenn mehrere Codeblöcke parallel zueinander ablaufen, siehe \refIntr{parallelitaet}).
+	
+	Wir werden weitere Probleme mit Seiteneffekten im späteren Kapitel über Java behandeln.
+	
+	% Multithreading, Schleifen
+% end

@@ -1,1 +1,209 @@
-\todo{Schreiben}\todo{Schreiben}
+\subsection{Datentypen}
+	\implements{Datentypen}{datentypen}{Java}
+	
+	In Java existieren viele Datentypen, die in zwei \footnote{Durch Project Valhalla \HREF{http://openjdk.java.net/projects/valhalla/} werden sich hier einige Dinge ändern.} Kategorien unterteilt werden können: \todo{Ist das mit Valhalla korrekt?}
+	\begin{itemize}
+		\item Primitive Datentypen
+		\item Objektreferenzen
+	\end{itemize}
+	
+	\paragraph{Primitive Datentypen}
+		Einer der Unterschiede zwischen primitiven Datentypen und Objektreferenzen ist, dass Daten, welche in primitiven Datentypen gespeichert sind, mit Pass-by-Value weitergegeben werden. \todo{Pass-by-Value erklären.} Außerdem sind ist die Anzahl an primitiven Datentypen begrenzt und die Datentypen sind von vornherein festgelegt. Ferner gibt es große Unterschiede bei der Behandlung von Konstanten, die wir später betrachten werden. \todo{Primitive vs. Objekte: Konstanten} als ersten Anhaltspunkt eignet sich, dass primitive Datentypen mit einem kleinen Buchstaben und Objektreferenztypen mit einem großen Buchstaben beginnen.
+		
+		Es existieren folgende primitive Datentypen:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{l | l | l | l}
+				Schlüsselwort    & Typ            & Beschreibung               & Wertebereich \\
+				\hline
+				\texttt{byte}    & Ganzzahl       & Vorzeichenbehaftet, 8 Bit  & \( -(2 ^ { 7}) \) bis \( 2 ^ { 7} - 1 \) \\
+				\texttt{short}   & Ganzzahl       & Vorzeichenbehaftet, 16 Bit & \( -(2 ^ {15}) \) bis \( 2 ^ {15} - 1 \) \\
+				\texttt{int}     & Ganzzahl       & Vorzeichenbehaftet, 32 Bit & \( -(2 ^ {31}) \) bis \( 2 ^ {31} - 1 \) \\
+				\texttt{long}    & Ganzzahl       & Vorzeichenbehaftet, 64 Bit & \( -(2 ^ {63}) \) bis \( 2 ^ {63} - 1 \) \\
+				\texttt{float}   & Fließkommazahl & einfache Genauigkeit       & \( 1,4 \cdot 10 ^ {-45} \) bis \( \approx 3,4 \cdot 10 ^ {38} \) \\
+				\texttt{double}  & Fließkommazahl & doppelte Genauigkeit       & \( 4,9 \cdot 10 ^ {324} \) bis \( \approx 1,8 \cdot 10 ^ {308} \) \\
+				\texttt{char}    & Charakter      & Unicode-Code, 16 Bit       & \( 0 \) bis \( 2 ^ {16} - 1 \) \\
+				\texttt{boolean} & Wahrheitswert  &                            & \texttt{true}/\texttt{false} \\
+			\end{tabular}
+			\caption{Liste der primitiven Datentypen in Java}
+		\end{table}
+		
+		Hierbei fällt auf, dass es in Java keinen eingebauten Datentyp für vorzeichenfreie Zahlen (\enquote{unsigned}) gibt. Dies kann bei der Verarbeitung von Binärdaten (beispielsweise bei Netzwerkkommunikation) zu Fehlern führen.
+	% end
+	
+	\todo{Objektreferenzen und String}
+% end
+
+\subsection{Literale}
+	\implements{Literalen}{literale}{Java}
+	
+	In Java gibt es Schreibweisen für Literale für alle Datentypen, wobei die Erstellung von Objekten einen Sonderfall darstellt und nicht vollständig als Literal bezeichnet werden kann (es können zwar alle Argumente fest im Code stehen, das Objekt selbst wird allerdings erst zur Laufzeit erstellt).
+	
+	In der folgenden Tabelle sind sämtliche syntaktische Methoden zu Definition von Literalen gelistet:
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{l | l}
+			Datentyp         & Primäre Schreibweise \\
+			\hline
+			\texttt{byte}    & \texttt{123}, \texttt{-123} \\
+			\texttt{short}   & \texttt{1234}, \texttt{1234} \\
+			\texttt{int}     & \texttt{12345}, \texttt{12345} \\
+			\texttt{long}    & \texttt{123456}, \texttt{123456} \\
+			\texttt{float}   & \texttt{12.34F}, \texttt{0.34F}/\texttt{.34F} \\
+			\texttt{double}  & \texttt{123.456}, \texttt{0.456}/\texttt{.456} \\
+			\texttt{char}    & \texttt{'a'} \\
+			\texttt{boolean} & \texttt{true}, \texttt{false} \\
+			\texttt{String}  & \texttt{"Hello, World!"} \\
+			\texttt{Object}  & \texttt{null} \\
+		\end{tabular}
+	\end{table}
+	
+	Bei Literalen von Zahlen gibt es außerdem folgende Besonderheiten:
+	\begin{itemize}
+		\item Bei einem \texttt{float}-Literal muss ein \enquote{\texttt{F}} am Ende des Literals angehängt werden, damit das Literal als \texttt{float} und nicht als \texttt{double} interpretiert wird. Die Groß-/Kleinschreibung ist irrelevant.
+		\item Bei einem \texttt{long}-Literal kann ein \enquote{\texttt{L}} am Ende des Literals angehängt werden, damit das Literal als \texttt{long} und nicht als \texttt{int} interpretiert wird. Die Groß-/Kleinschreibung ist irrelevant, aufgrund der Ähnlichkeit von \enquote{\texttt{l}} und \enquote{\texttt{1}} wir allerdings ein großes \enquote{\texttt{L}} empfohlen.
+		\item Bei allen Ganzzahlen (\texttt{byte}, \texttt{short}, \texttt{int}, \texttt{long}) können die Zahlen mit den Zahlensystemen Binär, Oktal, Dezimal und Hexadezimal eingegeben werden, wobei Dezimal sinnvollerweise der Standard ist. Zur Nutzung hiervon müssen den Werten bestimmte Zeichenketten vorangestellt werden. Dies sind \texttt{0b} für Binär, \texttt{0} für Oktal, nichts für Dezimal und \texttt{0x} für Hexadezimal. \\ Das heißt, die folgenden Literale sind äquivalent:
+			\begin{itemize}
+				\item \texttt{0b101010}
+				\item \texttt{052}
+				\item \texttt{42}
+				\item \texttt{0x2A}
+			\end{itemize}
+			Wobei auch hier die Groß-/Kleinschreibung irrelevant ist, für den Prefix allerdings die Kleinschreibung und für die Zahl die Großschreibung empfohlen wird.
+	\end{itemize}
+	
+	\warning{Wird bei Zahlen eine \texttt{0} vorangestellt, wird die Zahl Oktal interpretiert! Das heißt es gilt \texttt{010 \(\neq\) 10}.}
+	
+	\todo{Schreiben}
+	
+	% Primitive, null
+% end
+
+\subsection{Schlüsselwörter}
+	\implements{Schlüsselwörtern}{keywords}{Java}
+	
+	In Java existieren folgende Schlüsselwörter (kursiv geschriebene Themen werden wir nicht ausführlicher betrachten):
+	\begin{description}
+        \item[\texttt{abstract}] Markiert eine\dots
+	        \begin{description}
+	        	\item[Klasse] das heißt, diese kann abstrakte Methoden enthalten.
+	        	\item[Methode] die von Unterklassen implementiert werden muss.
+	        \end{description}
+        \item[\texttt{continue}] Fährt in einer Schleife mit dem nächsten Element fort.
+        \item[\texttt{for}] Leitet eine for-Schleife ein.
+        \item[\texttt{new}] Operator zur Erstellung eines neuen Objektes einer Klasse.
+        \item[\texttt{switch}] Leitet eine switch-Anweisung ein.
+        \item[\textit{\texttt{assert}}] \textit{Legt bestimmte Bedingungen fest, die für Parameter gelten müssen. Gelten diese wird, wird ein Fehler ausgelöst.} \todo{Wird das behandelt?}
+        \item[\texttt{default}]
+	        \begin{itemize}
+	        	\item Default-Fall in einer switch-Anweisung.
+	        	\item Definition einer Default-Methode innerhalb eines Interfaces.
+	        	\item \textit{Definition des Default-Wertes einer Methode in einer Annotation}
+	        \end{itemize}
+        \item[\texttt{if}] Leitet eine if-Verzweigung ein.
+        \item[\texttt{package}] Definition des Packages einer Klasse.
+        \item[\texttt{synchronized}] Markiert eine Methode oder einen Codeblock als synchron, das heißt es kann maximal ein Thread zur gleichen Zeit die Methode \enquote{betreten}. \todo{Wird das behandelt?}
+        \item[\texttt{boolean}] Datentyp.
+        \item[\texttt{do}] Leitet eine do-while-Schleife ein.
+        \item[\texttt{goto}] Reserviert. Löst ausschließlich einen Compilefehler aus.
+        \item[\texttt{private}] Markiert eine Klasse, einen Konstruktor, eine Methode oder ein Attribut als privat.
+        \item[\texttt{this}] Referenz auf die Instanz des aktuellen Objektes.
+        \item[\texttt{break}] Bricht die Ausführung einer Schleife ab.
+        \item[\texttt{double}] Datentyp.
+        \item[\texttt{implements}] Implementiert ein Interface.
+        \item[\texttt{protected}] Markiert eine Klasse, einen Konstruktor, eine Methode oder ein Attribut als protected.
+        \item[\texttt{throw}] Wirft eine Instanz einer Exception.
+        \item[\texttt{byte}] Datentyp.
+        \item[\texttt{else}] Leitet einen else-Block ein.
+        \item[\texttt{import}] Importiert eine Klasse/Methode aus einem anderen Paket.
+        \item[\texttt{public}]  Markiert eine Klasse, einen Konstruktor, eine Methode oder ein Attribut als public.
+        \item[\texttt{throws}] Definiert, dass ein Konstruktor/eine Methode eine bestimmte Exception werfen kann.
+        \item[\texttt{case}] Leitet einen Fall eines switch-Ausdruckes ein.
+        \item[\texttt{enum}] Leitet die Definition eines Enums ein.
+        \item[\texttt{instanceof}] Operator zum Prüfen, ob eine Instanz eine Instanz einer anderen Klasse ist.
+        \item[\texttt{return}] Gibt einen Wert zurück und bricht die Ausführung der Methode/des Konstruktors ab.
+        \item[\textit{\texttt{transient}}] \textit{Definiert, dass ein bestimmte Attribut einer Instanz nicht mit serialisiert wird.}
+        \item[\texttt{catch}] Leitet einen catch-Block ein.
+        \item[\texttt{extends}]
+	        \begin{description}
+	        	\item[Klasse] Erweitert eine bestehende (möglicherweise abstrakte) Klasse.
+	        	\item[Interface] Erweitert ein bestehendes Interface.
+	        \end{description}
+        \item[\texttt{int}] Datentyp.
+        \item[\texttt{short}] Datentyp.
+        \item[\texttt{try}] Leitet einen try-Block ein.
+        \item[\texttt{char}] Datentyp.
+        \item[\texttt{final}]
+	        \begin{description}
+	        	\item[Klasse] Die Klasse ist nicht vererbbar.
+	        	\item[Methode] Die Methode ist nicht überschreibbar.
+	        	\item[Variable] Die Variable ist nur einmal zuweisbar.
+	        \end{description}
+        \item[\texttt{interface}] Leitet die Definition eines Interfaces ein.
+        \item[\texttt{static}] Markiert eine innere Klasse, eine Methode oder ein Attribut als statisch.
+        \item[\texttt{void}] \enquote{Datentyp} als Platzhalter für \enquote{Nichts}.
+        \item[\texttt{class}] Leitet die Definition einer Klasse ein.
+        \item[\texttt{finally}] Leitet einen finally-Block ein.
+        \item[\texttt{long}] Datentyp.
+        \item[\textit{\texttt{strictfp}}] \textit{Legt fest, dass innerhalb einer Methode/einer Klasse nur strikte mathematische Operationen verwendet werden, sodass diese nicht optimiert werden sollen (es wird sich strikt an den Standard gehalten).}
+        \item[\textit{\texttt{volatile}}] \textit{Markiert ein Attribut, sodass Modifikationen an diesem atomar durchgeführt werden.}
+        \item[\texttt{const}] Reserviert. Löst ausschließlich einen Compilefehler aus.
+        \item[\texttt{float}] Datentyp.
+        \item[\textit{\texttt{native}}] \textit{Markiert die Implementierung einer Methode als nativ, das heißt, die Implementierung liegt in nativem Code (C/C++) vor. Siehe JNI (Java Native Interface).}
+        \item[\texttt{super}] Referenz auf die Instanz der Oberklasse des aktuellen Objektes.
+        \item[\texttt{while}] Leitet eine while-Schleife ein.
+	\end{description}
+	
+	Die genaue Bedeutung der obigen Schlüsselwörter werden wir in den jeweiligen Kapiteln genauer betrachten.
+% end
+
+\subsection{Bezeichner und Konventionen}
+	\implements{Bezeichnern und Namenskonventionen}{identifier}{Java}
+	
+	In Java können Zeichenketten als Bezeichner gelten, wenn sie folgenden Bedingungen genügen:
+	\begin{itemize}
+		\item Sie bestehen nur aus \texttt{a} bis \texttt{z}, \texttt{0} bis \texttt{9}, \texttt{\_} oder \texttt{\$}.
+		\item Sie beginnen nur mit \texttt{a} bis \texttt{z}, \texttt{\_} oder \texttt{\$}.
+	\end{itemize}
+	
+	Zur Benennung sind außerdem folgende Konventionen zu empfehlen:
+	\begin{itemize}
+		\item Namen von Klassen beginnen mit einem Großbuchstaben.
+		\item Namen von Methoden/Parametern/Variablen/etc. beginnen mit einem Kleinbuchstaben.
+		\item Namen von Klassen sollen Subjekte und Objekte sein. Beispiel: \enquote{\texttt{User}}
+		\item Namen von Methoden sollen mit einem Adjektiv beginnen. Beispiel: \enquote{\texttt{generateAccessToken}}
+	\end{itemize}
+	
+	\info{Die oben Bedingungen, wann eine Zeichenkette als Bezeichner dienen kann, stellen Vereinfachungen dar. Streng genommen können alle Zeichen verwendet werden, für die die Methoden \texttt{Character.isJavaIdentifierStart(char)} bzw. \texttt{Character.isJavaIdentifierPart(char)} den Wert \texttt{true} ergeben. Damit \textit{wären} auch Bezeichner wie \enquote{\texttt{\(\Delta\Psi\)}} möglich.}
+% end
+
+\subsection{Operatoren}
+	\implements{Operatoren}{lexOperatoren}{Java}
+	
+	In Java existieren die folgenden Operatoren, die genaue Bedeutung werden wir im Abschnitt \refImpl{operatoren}{Java} behandeln:
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{l | l}
+			Kategorie & Ausprägungen \\
+			\hline
+			Arithmetische Verknüpfungen & \texttt{*}, \texttt{/}, \texttt{\%}, \texttt{+}, \texttt{-} \\
+			Unäre Arithmetik            & \texttt{expr++}, \texttt{expr--}, \texttt{++expr}, \texttt{--expr}, \texttt{+expr}, \texttt{-expr} \\
+			Logik                       & \texttt{!}, \texttt{\&\&}, \texttt{||}, \texttt{\textasciicircum}, \texttt{?:} \\
+			Bitweise Logik              & \texttt{\textasciitilde}, \texttt{\&}, \texttt{|}, \texttt{\textasciicircum} \\
+			Verschiebung (Shift)        & \texttt{<{}<}, \texttt{>{}>}, \texttt{>{}>{}>} \\
+			Vergleiche                  & \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{==}, \texttt{!=}, \texttt{instanceof} \\
+			Zuweisungen                 & \texttt{=}, \texttt{+=}, \texttt{-=}, \texttt{*=}, \texttt{/=}, \texttt{\%=}, \texttt{\textasciicircum=}, \texttt{|=}, \texttt{<{}<=}, \texttt{>{}>=}, \texttt{>{}>{}>=} \\
+		\end{tabular}
+		\caption{Java: Operatoren}
+	\end{table}
+	
+	\todo{Schreiben}
+% end
+
+\subsection{Strukturierung des Codes, Packages und Imports}
+	\implements{Paketen und logischen Dateistrukturen}{namespaces}{Java}
+	
+	\todo{Schreiben}
+	
+	% Klammerung, Kommentare, Whitespaces, Packages, Imports
+% end
