@@ -1,1 +1,17 @@
+\introduces{von Dokumentation in der Software}{doku}
+
 \todo{Schreiben}
+
+\subsection{Verträge} \functionalMark \imperativeMark \oopMark
+	\introduces{von Veträgen}{vertraege}
+
+	Gerade in nicht-typisierten Programmiersprachen wie \racket ist es sehr sinnvoll, einen \textit{Vertrag} zwischen der Methode und dem Aufrufer zu schließen. In diesem Wird genau festgelegt, welcher Parameter von welchem Typ erwartet wird, wie dieser genau auszusehen hat und welchen Typ der Rückgabewert hat und wie dieser genau aussieht.
+	
+	Die Beschreibung der Funktionalität der Methode gehört nicht mit zu dem Vertrag!
+	
+	\paragraph{Beispiel}
+		Eine Funktion \(f(x)\) berechnet die reelle Quadratwurzel der übergebenen reellen Zahl \(x\). Somit ist eine Einschränkung von \(x\), dass selbiges positiv sein muss (also \(x \in \mathbb{R} _ +\)). Für die Rückgabe der Funktion können wir garantieren, dass ausschließlich positive reelle Zahlen zurück gegeben werden, also \(f(x) \in \mathbb{R} _ +\)).
+		
+		Ein Vertrag der Funktion kann nun wie oben in Textform formuliert werden oder mit einer bestimmten Syntax (zum Beispiel \enquote{\( f(x \in \mathbb{R} _ +) \in \mathbb{R} _ + \)} oder \enquote{\( f : \mathbb{R} _ + \rightarrow \mathbb{R} _ + \)}). Dies stellt aber nur ein Beispiel dar und variiert von Sprache zu Sprache.
+	% end
+% end

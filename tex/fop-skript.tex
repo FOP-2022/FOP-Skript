@@ -22,7 +22,7 @@
 \usepackage{float}
 \usepackage{multicol}
 \tcbuselibrary{skins}
-\usetikzlibrary{arrows.meta, shapes, backgrounds}
+\usetikzlibrary{arrows.meta, shapes, backgrounds, calc}
 
 % Basic information.
 \title{Funktionale und objektorientierte Programmierkonzepte}
@@ -34,6 +34,7 @@
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlist[description]{style = multiline, leftmargin = 4cm, align = parright}
 
+% TODO: Remove these colors in favor of the TU CI.
 \definecolor{gray}{rgb}{0.2, 0.2, 0.2}
 \definecolor{lightred}{rgb}{1, 0.3, 0}
 \definecolor{lightblue}{rgb}{0, 0.5, 1}
@@ -41,9 +42,35 @@
 \definecolor{darkgreen}{rgb}{0, 0.6, 0}
 \definecolor{orange}{rgb}{1, 0.8, 0}
 
+\colorlet{lstcomments}{tud4c}
+\colorlet{lstkeywords}{tud9d}
+\colorlet{lstlinenumbers}{tud0c}
+\colorlet{lststrings}{tud2c}
+\colorlet{functionalmarker}{tud2b}
+\colorlet{imperativemarker}{tud4b}
+\colorlet{oopmarker}{tud6b}
+\colorlet{errorred}{tud9b}
+\colorlet{changedpurple}{tud11a}
+
 \tikzset{> = { Latex[length = 2mm] }}
 
 %\newfontfamily\DejaSans{DejaVu Sans}
+
+\lstset{
+	backgroundcolor = \color{white},
+	basicstyle = \footnotesize,
+	breakatwhitespace = true,
+	breaklines = true,
+	breakautoindent = true,
+	commentstyle = \color{lstcomments},
+	escapeinside = {{*@}{@*}},
+	keywordstyle = \color{lstkeywords},
+	numbers = left,
+	numberstyle = \tiny\color{lstlinenumbers},
+	showstringspaces = false,
+	stringstyle = \color{lststrings},
+	tabsize = 4
+}
 
 % New commands.
 \providecommand{\textbox}[1]{
@@ -69,17 +96,17 @@
 \providecommand{\intuition}[1]{\subsubparagraph{Intuition} #1}
 
 \providecommand{\functional}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = tud2b, colback = tud2a, width = 2.5cm, left = 5pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = functionalmarker, colback = tud2a, width = 2.5cm, left = 5pt, boxrule = 3pt, opacityback = 0.5]
 		Funktional
 	\end{tcolorbox}
 }
 \providecommand{\imperative}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = tud4b, colback = tud4a, width = 2.5cm, left = 7pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = imperativemarker, colback = tud4a, width = 2.5cm, left = 7pt, boxrule = 3pt, opacityback = 0.5]
 		\centering Imperativ
 	\end{tcolorbox}
 }
 \providecommand{\oop}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = tud6b, colback = tud6a, width = 3.5cm, left = 6pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = oopmarker, colback = tud6a, width = 3.5cm, left = 6pt, boxrule = 3pt, opacityback = 0.5]
 		\centering Objektorientiert
 	\end{tcolorbox}
 }
@@ -96,6 +123,9 @@
 \providecommand{\refImpl}[2]{\ref{imp:#1_#2}}
 
 \providecommand{\HREF}[1]{\href{#1}{#1}}
+
+\providecommand{\mayfail}[1]{\color{errorred}\textbf{\texttt{#1}}}
+\providecommand{\changed}[1]{\color{changedpurple}\textbf{\texttt{#1}}}
 
 \begin{document}
 	\bibliographystyle{alpha}
@@ -148,5 +178,5 @@
         \todo{Skript zur Generierung des Glossars.}
     % end
     
-    \bibliography{../zitate}
+    \bibliography{../cite}
 \end{document}

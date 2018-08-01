@@ -1,6 +1,8 @@
 \subsection{Datentypen}
 	\implements{Datentypen}{datentypen}{Java}
 	
+	\todo{Statische Typisierung}
+	
 	In Java existieren viele Datentypen, die in zwei \footnote{Durch Project Valhalla \HREF{http://openjdk.java.net/projects/valhalla/} werden sich hier einige Dinge ändern.} Kategorien unterteilt werden können: \todo{Ist das mit Valhalla korrekt?}
 	\begin{itemize}
 		\item Primitive Datentypen
@@ -14,16 +16,15 @@
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{l | l | l | l}
-				Schlüsselwort    & Typ            & Beschreibung               & Wertebereich \\
-				\hline
-				\texttt{byte}    & Ganzzahl       & Vorzeichenbehaftet, 8 Bit  & \( -(2 ^ { 7}) \) bis \( 2 ^ { 7} - 1 \) \\
-				\texttt{short}   & Ganzzahl       & Vorzeichenbehaftet, 16 Bit & \( -(2 ^ {15}) \) bis \( 2 ^ {15} - 1 \) \\
-				\texttt{int}     & Ganzzahl       & Vorzeichenbehaftet, 32 Bit & \( -(2 ^ {31}) \) bis \( 2 ^ {31} - 1 \) \\
-				\texttt{long}    & Ganzzahl       & Vorzeichenbehaftet, 64 Bit & \( -(2 ^ {63}) \) bis \( 2 ^ {63} - 1 \) \\
-				\texttt{float}   & Fließkommazahl & einfache Genauigkeit       & \( 1,4 \cdot 10 ^ {-45} \) bis \( \approx 3,4 \cdot 10 ^ {38} \) \\
+				Schlüsselwort    & Typ            & Beschreibung               & Wertebereich                                                      \\ \hline
+				\texttt{byte}    & Ganzzahl       & Vorzeichenbehaftet, 8 Bit  & \( -(2 ^ { 7}) \) bis \( 2 ^ { 7} - 1 \)                          \\
+				\texttt{short}   & Ganzzahl       & Vorzeichenbehaftet, 16 Bit & \( -(2 ^ {15}) \) bis \( 2 ^ {15} - 1 \)                          \\
+				\texttt{int}     & Ganzzahl       & Vorzeichenbehaftet, 32 Bit & \( -(2 ^ {31}) \) bis \( 2 ^ {31} - 1 \)                          \\
+				\texttt{long}    & Ganzzahl       & Vorzeichenbehaftet, 64 Bit & \( -(2 ^ {63}) \) bis \( 2 ^ {63} - 1 \)                          \\
+				\texttt{float}   & Fließkommazahl & einfache Genauigkeit       & \( 1,4 \cdot 10 ^ {-45} \) bis \( \approx 3,4 \cdot 10 ^ {38} \)  \\
 				\texttt{double}  & Fließkommazahl & doppelte Genauigkeit       & \( 4,9 \cdot 10 ^ {324} \) bis \( \approx 1,8 \cdot 10 ^ {308} \) \\
-				\texttt{char}    & Charakter      & Unicode-Code, 16 Bit       & \( 0 \) bis \( 2 ^ {16} - 1 \) \\
-				\texttt{boolean} & Wahrheitswert  &                            & \texttt{true}/\texttt{false} \\
+				\texttt{char}    & Charakter      & Unicode-Code, 16 Bit       & \( 0 \) bis \( 2 ^ {16} - 1 \)                                    \\
+				\texttt{boolean} & Wahrheitswert  &                            & \texttt{true}/\texttt{false}
 			\end{tabular}
 			\caption{Liste der primitiven Datentypen in Java}
 		\end{table}

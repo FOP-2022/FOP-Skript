@@ -1,1 +1,206 @@
-\todo{Schreiben}
+\introduces{von Datenstrukturen}{datastruct}
+
+Eine Datenstruktur ist ein Objekt zur Speicherung und Organisation von Daten, indem diese in einer bestimmten Art und Weise angeordnet sind und es klare Namen gibt, sodass unterschiedliche Entwickler sich über  Datenstrukturen unterhalten können, ohne an eine bestimmte Programmiersprache gebunden zu sein.
+
+\info{In dieser Veranstaltung werden wir Datenstrukturen nur grob behandeln, genauer wird dies in der Veranstaltung \enquote{Algorithmen und Datenstrukturen} behandelt.}
+
+Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
+\begin{description}
+	\item[Indexbasiert] Jedes Element innerhalb einer Datenstruktur 
+	\item[Nicht Indexbasiert]
+\end{description}
+
+\subsection{Arrays, Listen, Mengen} \functionalMark \imperativeMark \oopMark
+	Bevor wir uns einige Implementierungen von Arrays, Listen und Mengen anschauen, stellt sich zuerst die Frage, was das eigentlich alles ist?
+	
+	Alle drei stellen eine Auflistung von Elementen eines beliebigen Typs dar und dienen dazu, beliebig viele und noch nicht zur Compile-Zeit bekannte Elemente in einer Variablen zusammenzufassen. Dabei wird unterschieden zwischen \textit{indexbasierten} und \textit{nicht indexbasierten} Strukturen, wobei bei ersteren jedes Element mit einem Index (einer Zahl) identifiziert werden kann, bei letzteren nicht.
+	
+	\subsubsection{Array}
+		\introduces{von Arrays}{datastructArray}
+	
+		Ein Array ist eine solche Auflistung, welche in den meisten Sprachen nicht zur Laufzeit vergrößert werden kann und in einigen Sprachen (beispielsweise C) sogar schon zur Laufzeit feststehen muss. Grob gesagt kann man sich ein Array als beschriftetes Kistensystem vorstellen, bei dem jede Kiste eine Zahl zugewiesen bekommt:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[->, shorten >= 2pt, every node/.style = { minimum width = 1cm }, elem/.style = { draw, rectangle, minimum width = 2cm }]
+				\node (i0) {\texttt{0}};
+				\node [elem, right = of i0] (e0) {\enquote{One}};
+				
+				\node [right = 2 of e0] (i1) {\texttt{1}};
+				\node [elem, right = of i1] (e1) {\enquote{Two}};
+				
+				\node [below = of i0] (i2) {\texttt{2}};
+				\node [elem, right = of i2] (e2) {\enquote{Three}};
+				
+				\node [right = 2 of e2] (i3) {\texttt{3}};
+				\node [elem, right = of i3] (e3) {\enquote{Four}};
+				
+				\draw (i0) -- (e0);
+				\draw (i1) -- (e1);
+				\draw (i2) -- (e2);
+				\draw (i3) -- (e3);
+			\end{tikzpicture}
+			\caption{Datenstruktur: Array}
+		\end{figure}
+		
+		\warning{In annähernd allen Programmiersprachen werden Arrays ab dem Index \texttt{0} indiziert! Methoden zum Anzeigen der Länge zeigen jedoch die Anzahl der Elemente an und nicht den letzten Index!}
+	% end
+	
+	\subsubsection{Liste}
+		\introduces{von Listen}{datastructList}
+		
+		Eine Liste ist einem Array sehr ähnlich, die Größe kann im Allgemeinen aber zur Laufzeit angepasst werden und es existieren viele verschiedene Implementierungen (unter anderem Implementierungen zur Abbildung auf Arrays, sogenannte Array-Listen). Oftmals ist auch eine Liste indexbasiert, dies muss aber nicht immer der Fall sein (beispielsweise bei gelinkten Listen, die wir später behandeln werden).
+	% end
+	
+	\subsubsection{Menge}
+		\introduces{von Sets/Mengen}{datastructSet}
+	
+		Eine Menge ist, lapidar gesagt, eine Liste ohne Duplikate. Ansonsten gelten genau die gleichen Fakten wie bei einer Liste: Es kann indexbasiert sein, muss es aber nicht, \dots.
+	% end
+	
+	\subsubsection{Linked List (Gelinkte Liste)}
+		Eine \textit{gelinkte Liste} ist eine indexlose Liste, in der die Datenspeicherung wie folgt abgebildet wird:
+		\begin{itemize}
+			\item Jedes Element der Liste enthält die Referenz auf:
+				\begin{itemize}
+					\item die eigentlichen Nutzdaten (data),
+					\item den Nachfolger des Elementes (next) und
+					\item im Fall von einer doppelt gelinkten Liste, eine Referenz auf das vorherige Element (previous).
+				\end{itemize}
+			\item Existiert kein nachfolgendes/vorheriges Element, so wir nichts in das Feld eingetragen.
+			\item Manchmal gibt es noch eine Schnittstelle, die eine Referenz auf das erste Element enthält und einige Methoden zur Verfügung stellt (\texttt{first}, \texttt{second}, \texttt{third}, \dots). Diese ist aber nicht vorgeschrieben.
+		\end{itemize}
+		
+		Visualisiert sieht eine einfach gelinkte Liste wie folgt aus:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[every node/.style = { align = center }, elem/.style = { draw, rectangle, minimum width = 3cm }]
+				\node [elem] (el0) {\texttt{data: } \enquote{One} \\ \texttt{next}};
+				\node [elem, right = 1.5 of el0] (el1) {\texttt{data: } \enquote{Two} \\ \texttt{next}};
+				\node [elem, right = 1.5 of el1] (el2) {\texttt{data: } \enquote{Three} \\ \texttt{next}};
+				\node [elem, right = 1.5 of el2] (el3) {\texttt{data: } \enquote{Four} \\ \texttt{next}};
+				
+				\draw (el0.west) -- (el0.east);
+				\draw (el1.west) -- (el1.east);
+				\draw (el2.west) -- (el2.east);
+				\draw (el3.west) -- (el3.east);
+				
+				\coordinate (el0n) at ($(el0.east)!0.5!(el0.south east)$);
+				\coordinate (el0a) at ($(el0.north)!0.5!(el1.north)+(0,0.5)$);
+				\draw (el0n) -| (el0a);
+				\draw [->] (el0a) -| (el1.north);
+				
+				\coordinate (el1n) at ($(el1.east)!0.5!(el1.south east)$);
+				\coordinate (el1a) at ($(el1.north)!0.5!(el2.north)+(0,0.5)$);
+				\draw (el1n) -| (el1a);
+				\draw [->] (el1a) -| (el2.north);
+				
+				\coordinate (el2n) at ($(el2.east)!0.5!(el2.south east)$);
+				\coordinate (el2a) at ($(el2.north)!0.5!(el3.north)+(0,0.5)$);
+				\draw (el2n) -| (el2a);
+				\draw [->] (el2a) -| (el3.north);
+			\end{tikzpicture}
+			\caption{Datenstruktur: Einfach gelinkte Liste}
+		\end{figure}
+		
+		Und das gleiche als doppelt gelinkte Liste:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[every node/.style = { align = center }, elem/.style = { draw, rectangle, minimum width = 3cm }]
+				\node [elem] (el0) {\texttt{data: } \enquote{One} \\ \texttt{next} \\ \texttt{previous}};
+				\node [elem, right = 1.5 of el0] (el1) {\texttt{data: } \enquote{Two} \\ \texttt{next} \\ \texttt{previous}};
+				\node [elem, right = 1.5 of el1] (el2) {\texttt{data: } \enquote{Three} \\ \texttt{next} \\ \texttt{previous}};
+				\node [elem, right = 1.5 of el2] (el3) {\texttt{data: } \enquote{Four} \\ \texttt{next} \\ \texttt{previous}};
+				
+				\coordinate (el0tl) at ($(el0.north west)!1/3!(el0.south west)$);
+				\coordinate (el0bl) at ($(el0.north west)!2/3!(el0.south west)$);
+				\coordinate (el0tr) at ($(el0.north east)!1/3!(el0.south east)$);
+				\coordinate (el0br) at ($(el0.north east)!2/3!(el0.south east)$);
+				\draw (el0tl) -- (el0tr);
+				\draw (el0bl) -- (el0br);
+				
+                \coordinate (el1tl) at ($(el1.north west)!1/3!(el1.south west)$);
+                \coordinate (el1bl) at ($(el1.north west)!2/3!(el1.south west)$);
+                \coordinate (el1tr) at ($(el1.north east)!1/3!(el1.south east)$);
+                \coordinate (el1br) at ($(el1.north east)!2/3!(el1.south east)$);
+				\draw (el1tl) -- (el1tr);
+				\draw (el1bl) -- (el1br);
+				
+                \coordinate (el2tl) at ($(el2.north west)!1/3!(el2.south west)$);
+                \coordinate (el2bl) at ($(el2.north west)!2/3!(el2.south west)$);
+                \coordinate (el2tr) at ($(el2.north east)!1/3!(el2.south east)$);
+                \coordinate (el2br) at ($(el2.north east)!2/3!(el2.south east)$);
+				\draw (el2tl) -- (el2tr);
+				\draw (el2bl) -- (el2br);
+				
+                \coordinate (el3tl) at ($(el3.north west)!1/3!(el3.south west)$);
+                \coordinate (el3bl) at ($(el3.north west)!2/3!(el3.south west)$);
+                \coordinate (el3tr) at ($(el3.north east)!1/3!(el3.south east)$);
+                \coordinate (el3br) at ($(el3.north east)!2/3!(el3.south east)$);
+				\draw (el3tl) -- (el3tr);
+				\draw (el3bl) -- (el3br);
+				
+				
+				\coordinate (el0n) at ($(el0tr)!0.5!(el0br)$);
+				\coordinate (el0a) at ($(el0.north)!0.5!(el1.north)+(0,0.5)$);
+				\draw (el0n) -| (el0a);
+				\draw [->] (el0a) -| (el1.north);
+				
+				\coordinate (el1n) at ($(el1tr)!0.5!(el1br)$);
+				\coordinate (el1a) at ($(el1.north)!0.5!(el2.north)+(0,0.5)$);
+				\draw (el1n) -| (el1a);
+				\draw [->] (el1a) -| (el2.north);
+				
+				\coordinate (el2n) at ($(el2tr)!0.5!(el2br)$);
+				\coordinate (el2a) at ($(el2.north)!0.5!(el3.north)+(0,0.5)$);
+				\draw (el2n) -| (el2a);
+				\draw [->] (el2a) -| (el3.north);
+				
+				
+				\coordinate (el1o) at ($(el1bl)!0.5!(el1.south west)$);
+				\coordinate (el1b) at ($(el0.south)!0.5!(el1.south)-(0,0.5)$);
+				\draw (el1o) -| (el1b);
+				\draw [->] (el1b) -| (el0.south);
+				
+				\coordinate (el2o) at ($(el2bl)!0.5!(el2.south west)$);
+				\coordinate (el2b) at ($(el1.south)!0.5!(el2.south)-(0,0.5)$);
+				\draw (el2o) -| (el2b);
+				\draw [->] (el2b) -| (el1.south);
+				
+				\coordinate (el3o) at ($(el3bl)!0.5!(el3.south west)$);
+				\coordinate (el3b) at ($(el2.south)!0.5!(el3.south)-(0,0.5)$);
+				\draw (el3o) -| (el3b);
+				\draw [->] (el3b) -| (el2.south);
+			\end{tikzpicture}
+			\caption{Datenstruktur: Doppelt gelinkte Liste}
+		\end{figure}
+	% end
+% end
+
+\subsection{Map}
+	\introduces{von Maps/Dictionaries}{datastructMap}
+
+	Eine \textit{Map}, oder auf \textit{Dictionary} genannt, ist eine Art Liste, welche als Indizes aber jeden beliebigen Typ haben kann (beispielsweise Strings). Damit ist beispielsweise eine Zuordnung von Namen zu Objekten möglich.
+	
+	\begin{figure}[H]
+		\centering
+			\begin{tikzpicture}[->, shorten >= 2pt, every node/.style = { minimum width = 2cm }, elem/.style = { draw, rectangle, minimum width = 1cm }]
+				\node (i0) {\texttt{"{}One{}"}};
+				\node [elem, right = of i0] (e0) {\enquote{0}};
+				
+				\node [right = 2 of e0] (i1) {\texttt{"{}Two{}"}};
+				\node [elem, right = of i1] (e1) {\enquote{1}};
+				
+				\node [below = of i0] (i2) {\texttt{"{}Three{}"}};
+				\node [elem, right = of i2] (e2) {\enquote{2}};
+				
+				\node [right = 2 of e2] (i3) {\texttt{"{}Four{}"}};
+				\node [elem, right = of i3] (e3) {\enquote{3}};
+				
+				\draw (i0) -- (e0);
+				\draw (i1) -- (e1);
+				\draw (i2) -- (e2);
+				\draw (i3) -- (e3);
+			\end{tikzpicture}
+		\caption{Datenstruktur: Map/Dictionary}
+	\end{figure}
+% end

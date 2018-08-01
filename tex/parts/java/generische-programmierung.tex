@@ -1,1 +1,420 @@
-\todo{Schreiben}
+\implements{generischer Programmierung}{generischeProgrammierung}{Java}
+
+Wir werden in diesem Kontext nur Typparameter (Generics) betrachten, welche in Java eine große Rolle spielen, wenn es um generische Programmierung geht.
+
+\subsection{Generics}
+	\label{sec:generics}
+
+	In diesem Abschnitt betrachtet wir Generics, ein Konzept zur generischen Programmierung und Typsicherheit, welches mit der Java-Version 1.5 eingeführt wurde. Wie wir bereits wissen, ist Java eine statisch typisierte Programmiersprache, das heißt der korrekte Typ muss schon zur Compilezeit feststehen.
+	
+	\paragraph{Motivation}
+		Betrachtet wir zur Motivation eine Klasse \texttt{List}, welche die folgenden Methoden aufweist:
+		\begin{description}
+			\item[\texttt{add(element: Object)}: void] Fügt ein Element zu der Liste hinzu.
+			\item[\texttt{get(index: int)}: Object] Gibt das Element an der Position \texttt{index} zurück. Existiert kein solches Element, wird \texttt{null} zurück gegeben.
+			\item[\texttt{size(): int}] Gibt die Anzahl der Element der Liste zurück.
+		\end{description}
+		Die Klasse selbst stellt eine Auflistung von Elementen dar und kann keine \texttt{null}-Elemente enthalten.
+		
+		Auffällig ist, dass sämtliche Element als Object-Referenz vorliegen. Es gibt für eine Methode, welche eine solche Liste annimmt, gibt es keine Möglichkeit, den Typ der Parameter einzuschränken. Schauen wir uns hierzu eine Methode an, welche alle Elemente aufsummieren soll. Natürlich ergibt eine solche Operation nur auf Zahlen Sinn, weshalb davon ausgegangen wird, dass sämtliche Elemente der Liste vom Typ \texttt{Integer} sind:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public Integer sum(List list) {
+	Integer result = 0;
+	for (int i = 0; i < list.size(); i++) {
+		result += *@\mayfail{(Integer) list.get(i)}@*;
+	}
+	return result;
+}
+			\end{lstlisting}
+			\caption{Java: Generics Motivation}
+			\label{fig:generics_motivation}
+		\end{figure}
+		Hier tut sich folgendes Problem auf: Wenn der Aufrufer falsche Elemente in die Liste getan hat, fliegt uns der Algorithmus an der markierten Stelle um die Ohren: Es wird eine \texttt{ClassCastException}.
+		
+		Nun haben wir zwei Möglichkeiten:
+		\begin{enumerate}
+			\item Den korrekten Aufruf dem Aufrufer überlassen und annehmen, dass wir korrekte Daten bekommen.
+			\item Die Korrektheit des Aufrufs vor der eigentlichen Ausführung überprüfen.
+			\item Die Typprüfung des Compilers nutzen, damit wir erst gar keine falschen Typen bekommen können.
+		\end{enumerate}
+		Möglichkeit 1 mag bei solch kleinen Beispielen noch funktionieren, aber spätestens, wenn wir die Liste an andere Methoden weitergeben und nicht selbst für den Fehler sorgen, wird die Fehlersuche schrecklich. Ebenso ergeht es Möglichkeit 2, denn bei tief verschachtelten Klassenstrukturen bleibt das Prüfen der Korrektheit nicht so trivial wie in unserem Beispiel.
+		
+		\info{Generell gilt: Fail Fast, am besten noch zur Compilezeit. Dies vereinfacht die Fehlersuche erheblich. Fehler, die erst in den Tiefen eines Programmes passieren, sind schwer zu finden!}
+		
+		Somit bleibt uns als einzig gute Möglichkeit die Typprüfung des Compilers zu nutzen, welche auch genau dazu dient. Es wäre also eine Möglichkeit, eine Unterklasse \texttt{IntegerList} von \texttt{List} zu erstellen, die nur \texttt{Integer}s akzeptiert. Das dies eine schlechte Idee ist, würden wir spätestens nach der zehnten, bis auf den Typ identischen, Klasse merken. Wäre es nicht toll, alles nur einmal schreiben zu müssen und den Typ nachher setzen zu können? Hier helfen uns die zuvor genannten Generics: Diese ermöglichen genau das.
+		
+		Klassen, welche Generics nutzen, sind für viele Typen geschrieben und ermöglichen die Angabe des expliziten Typs in Spitzen Klammern hinter dem Klassennamen. Des weiteren ist es auch auf Methodenebene möglich, für viele Typen generisch zu Programmieren und bei der Nutzung der Methode den eigentlichen Typ festzulegen. Wir werden uns diese beiden Fälle in den folgenden beiden Abschnitten zu generischen Klassen und Methoden anschauen. Um einen ersten Eindruck zu kriegen, was uns Generics ermöglichen, hier ein Beispiel, welche die obige Methode ersetzen kann und eine größere Typsicherheit ermöglicht:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public Integer sum(List*@\changed{<Integer>}@* list) {
+	Integer result = 0;
+	for (int i = 0; i < list.size(); i++) {
+		result += *@\changed{list.get(i)}@*;
+	}
+	return result;
+}
+			\end{lstlisting}
+			\caption{Java: Generics Motivation: Nutzung von Generics}
+			\label{fig:java_generics_motivation_gen}
+		\end{figure}
+		
+		Wir haben hier nun die Typen in den Spitzen Klammern hinter \texttt{List} festgelegt, wodurch uns die Methode \texttt{get(\dots)} direkt Elemente des Typs \texttt{Integer} gibt. Wir können somit einfach die Zahlen aufsummieren. Somit wird ein möglicher Aufrufer nun schon beim Kompilieren merken, dass der Aufruf fehlschlägt. Da wir \texttt{null}-Elemente ausgeschlossen haben, wird der Code nun immer funktionieren, sofern dieser erfolgreich Kompiliert. Weshalb wir hier \texttt{Integer} und nicht \texttt{int} verwenden, werden wir im Abschnitt \ref{sec:generics_primitive_typen} betrachten.
+	% end
+
+	\subsubsection{Generische Klassen}
+		Da wir in dem vorherigen Abschnitt gesehen haben, wofür Generics an sich gut sind, werden wir uns in diesem Abschnitt anschauen, wie wir selber generische Klassen erstellen können und uns anschauen, wie wir generische Klassen nutzen können.
+		
+		Wir schauen uns hierzu eine mögliche Implementierung der oben beschriebenen Liste an, welche noch keine Generics nutzt (die Implementierung leitet einfach alle Aufrufe an eine andere, nicht von uns implementierte List weiter):
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public class List {
+	private DelegateList delegateList = new DelegateList();
+
+	public void add(Object element) {
+		delegateList.add(element);
+	}
+
+	public Object get(int index) {
+		return delegateList.get(index);
+	}
+
+	public int size() {
+		return delegateList.size();
+	}
+}
+			\end{lstlisting}
+			\caption{Java: Implementation von \texttt{List}}
+		\end{figure}
+		
+		Diese Klasse können wir nur nutzen, wie es in Codebeispiel \ref{fig:generics_motivation} gelistet ist. Um die Klasse nun generisch Nutzbar zu machen, müssen wir sogenannte \textit{Typparameter} einführen. Diese werden in spitzen Klammern (\texttt{<}, \texttt{>}) hinter den Klassennamen geschrieben (ähnlich wie bei der Nutzung, nur werden die keine expliziten Klassen genannt, sondern Platzhalter verwendet). Als Name für Typparameter wird meist ein einzelner großer Buchstabe verwendet, um auf den ersten Blick ersichtlich zu machen, dass es sich um einen generischen Typ und nicht um eine existierende Klasse handelt.
+		
+		Die Klasse sieht, unter Nutzung von Typparametern, nun folgendermaßen aus (der Einfachheit halber nehmen wir an, die Klasse \texttt{DelegateList} sei auch generisch):
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public class List*@\changed{<T>}@* {
+	private DelegateList*@\changed{<T>}@* delegateList = new DelegateList*@\changed{<T>}@*();
+	
+	public void add(*@\changed{T}@* element) {
+		delegateList.add(element);
+	}
+	
+	public *@\changed{T}@* get(int index) {
+		return delegateList.get(index);
+	}
+	
+	public int size() {
+		return delegateList.size();
+	}
+}
+			\end{lstlisting}
+			\caption{Java: Implementation von \texttt{List<T>}}
+		\end{figure}
+		
+		Die Klasse können wir nun deutlich einfacher nutzen, wie es bereits in Codebeispiel \ref{fig:java_generics_motivation_gen} vorgestellt wurden. Es ist nun möglich, der Klasse beliebige Typen zu übergeben. Wie wir dies weiter Einschränken können, werden wir im Abschnitt \ref{sec:generics_restriction} über die Einschränkung der Typparameter behandeln.
+		
+		Den Typparameter \texttt{T} können wir nun überall in der Klasse verwenden, Instanzen des Typs verhalten sich wie Instanzen von \texttt{Object}, das heißt es können annähernd keine Operationen auf den Instanzen durchgeführt werden.
+		
+		\warning{Die Typparameter einer Klasse können nicht in dem statischen Kontext einer Klasse verwendet werden! Das heißt, die Typparameter können nicht im \texttt{static}-Block oder in statischen Methoden verwendet werden.}
+		
+		\info{Typische Namen für die Typparameter sind:
+			\begin{description}
+				\item[\texttt{T}] für beliebige Typen.
+				\item[\texttt{K}] für Typen, die einen Key darstellen.
+				\item[\texttt{V}] für Typen, die einen Wert (Value) darstellen.
+			\end{description}
+		}
+	% end
+	
+	\subsubsection{Generische Methoden}
+		In vielen Fällen ist es nicht nötig, die gesamte Klasse zu Parametrisieren, sondern es ist möglich oder auch nötig, nur einzelne Methoden generisch zu Halten. Ein gutes Beispiel hierfür sind Methoden in Utility-Klassen, bei denen gar keine Instanz der Klasse erstellt wird und damit die Klassentypparameter nicht nutzbar sind.
+		
+		Betrachten wir hierzu eine Methode, welche die Textrepräsentation eines jeden Objektes in einer Liste aneinanderhängt.
+		
+		Wir betrachten zuerst die nicht-generische Methode, welche nur Strings unterstützt:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public static String concatenate(List<String> list) {
+	String result = "";
+	for (int i = 0; i < list.size(); i++) {
+		result += list.get(i);
+	}
+	return result;
+}
+			\end{lstlisting}
+			\caption{Java: Generics an Methoden: Motivation}
+		\end{figure}
+		
+		Nun sollen auch andere Typen genutzt werden können, weshalb wir hier Typparameter einführen. Der Typparameter wird wie vorher auch in Spitze klammern gefasst und direkt vor dem Rückgabetyp plaziert. Hierdurch ist es auch möglich, den Typparameter bereits im Rückgabetyp zu verwenden, wie wir später sehen werden. Des weiteren gilt wie bei Klassen, dass für Typparameter ein einzelner, großer Buchstabe verwendet werden sollte.
+		
+		Schauen wir uns nun also die obige Methode unter Verwendung von Typparametern an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public static *@\changed{<T>}@* String concatenate(List<*@\changed{T}@*> list) {
+	String result = "";
+	for (int i = 0; i < list.size(); i++) {
+		// Da wir nun nicht mehr direkt auf Strings arbeiten, muessen wir uns erst die
+		// Textrepraesentation der Elemente holen.
+		result += list.get(i)*@\changed{.toString()}@*;
+	}
+	return result;
+}
+			\end{lstlisting}
+			\caption{Java: Generics an Methoden}
+			\label{fig:generics_methoden}
+		\end{figure}
+		
+		Nun ist es also möglich, die obige Methode mit jedem Typ aufzurufen.
+	% end
+	
+	\subsubsection{Primitive Typen und Generics}
+		\label{sec:generics_primitive_typen}
+	
+		Da Generics nur Klassentypen entgegen nehmen können, ist es somit nicht möglich, primitive Datentypen in Generics zu verwenden (also \texttt{int}, \texttt{float}, \dots). Zur Abhilfe dieses Problems gibt es sogenannte Wrapper-Klassen, welche den Wert einer primitiven Variable halten und mit Generics genutzt werden können. Namentlich sind diese:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{l | l}
+				Wrapper-Klasse     & Primitiver Typ   \\ \hline
+				\texttt{Byte}      & \texttt{byte}    \\
+				\texttt{Short}     & \texttt{short}   \\
+				\texttt{Integer}   & \texttt{int}     \\
+				\texttt{Long}      & \texttt{long}    \\
+				\texttt{Float}     & \texttt{float}   \\
+				\texttt{Double}    & \texttt{double}  \\
+				\texttt{Character} & \texttt{char}    \\
+				\texttt{Boolean}   & \texttt{boolean}
+			\end{tabular}
+			\caption{Java: Wrapper-Klassen (im Package \texttt{java.lang})}
+		\end{table}
+		Alle Wrapper-Klassen haben unter anderem die folgenden Methoden:
+		\begin{description}
+			\item[\texttt{valueOf(\dots)}] Erstellt eine Instanz der Wrapper-Klasse mit dem übergebenen primitiven Wert.
+			\item[\texttt{xxxValue()}]     Gibt den gespeicherten primitiven Wert zurück. \enquote{\texttt{xxx}} muss dabei durch den konkreten primitiven Typ ersetzt werden.
+		\end{description}
+		
+		Schauen wir uns unter diesen Voraussetzungen folgenden Code an, der den Durchschnitt zweier benachbarten Zahlen (gleitender Durchschnitt) berechnet:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+public List<Double> floatingAverage(List<Integer> list) {
+	List<Double> result = new List<Double>();
+	for (int i = 1; i < list.size(); i++) {
+		int previous = list.get(i - 1)*@\changed{.intValue()}@*;
+		int current = list.get(i)*@\changed{.intValue()}@*;
+		double average = (previous + current) / 2.0;
+		result.add(*@\changed{Double.valueOf(}@*average*@\changed{)}@*);
+	}
+	return result;
+}
+			\end{lstlisting}
+			\caption{Java: Generics und primitive Datentypen}
+			\label{fig:java_generics_motivation_gen}
+		\end{figure}
+		
+		Wir sehen, dass sich ein extremer Overhead an Code ergibt, welcher nur zum Konvertieren der Wrapper-Klassen in primitive dient. Da dies sehr nervig sein kann, wurde in Java 5 das sogenannte Autoboxing eingeführt, welches wir nun betrachten.
+	
+		\paragraph{Autoboxing}
+			Der Name \enquote{Autoboxing} bezeichnet das automatische Konvertieren von primitiven in Wrapper-Klassen und anders herum (\enquote{Unboxing}). Der primitive Wert wird in eine Wrapper-Klasse \enquote{geboxed}.
+			
+			Die Konvertierung findet genau dann statt, wenn es benötigt wird. Führen wie also eine Rechnung mit Wrapper-Klassen aus, so wird im Hintergrund der primitive Wert geunboxed und mit diesem gerechnet. Weisen wir das Ergebnis einer Wrapper-Klasse zu, so wird das Ergebnis wieder geboxed.
+			
+			\warning{Autoboxing kann zu unerwarteten Fehlern führen! Wird eine \texttt{null}-Instanz einer Wrapper-Klasse geunboxed, so führt dies zu einer \texttt{NullPointerException}!}
+			
+			Schauen wir uns also obigen Beispiel erneut an, diesmal aber mit Autoboxing:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+public List<Double> floatingAverage(List<Integer> list) {
+	List<Double> result = new List<Double>();
+	for (int i = 1; i < list.size(); i++) {
+		int previous = list.get(i - 1);              // Autounboxing
+		int current = list.get(i);                   // Autounboxing
+		double average = (previous + current) / 2.0;
+		result.add(average);                         // Autoboxing
+	}
+	return result;
+}
+				\end{lstlisting}
+				\caption{Java: Autoboxing}
+				\label{fig:java_generics_motivation_gen}
+			\end{figure}
+		% end
+	% end
+	
+	\subsubsection{Vererbung}
+		In Codebeispiel \ref{fig:java_generics_motivation_gen} verwenden wir \texttt{T}, um Listen jedes Typs annehmen zu können. Wieso können wir hier nicht einfach wie üblich \texttt{Object} nehmen? Der Grund ist: Generics unterstützen keine Vererbung, das heißt es wäre nicht möglich, Listen vom Typ \texttt{String} zu übergeben, wenn die Methode einen Parameter \texttt{List<Object>} erwartet.
+		
+		Es ist dennoch möglich, ein solches Verhalten hervorzubringen, wie wir im Abschnitt \ref{sec:generics_restriction} sehen werden.
+	% end
+	
+	\subsubsection{Einschränkung der Typparameter und Wildcards}
+		\label{sec:generics_restriction}
+	
+		Wie bereits erwähnt ist es nicht möglich, einer Methode mit Parameter \texttt{List<Object>} eine Instanz einer Liste \texttt{List<String>} zu übergeben.
+		
+		\paragraph{Wildcard}
+			Eine Möglichkeit ist es wie in \ref{fig:generics_methoden} einen uneingeschränkten Typparameter zu definieren. Eine andere Möglichkeit ist, die Wildcard \texttt{?} zu verwenden, welche alle Typen akzeptiert. Somit kann die Methode in \ref{fig:generics_methoden} zu folgender, äquivalenter, Methode umgeschrieben werden:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+public static String concatenate(List<*@\changed{?}@*> list) {
+	String result = "";
+	for (int i = 0; i < list.size(); i++) {
+		result += list.get(i).toString();
+	}
+	return result;
+}
+				\end{lstlisting}
+				\caption{Java: Generics Wildcard}
+			\end{figure}
+			Das \enquote{\texttt{?}} nimmt dann alle Typen an.
+		% end
+		
+		\paragraph{Einschränkungen der Typparameter}
+			Oftmals ist es jedoch nötig, nicht einfach alle Typen zu akzeptieren, sondern die Parameter weiter einzuschränken. Hierzu gibt es folgende essentielle Operatoren:
+			\begin{description}
+				\item[\texttt{extends}] Akzeptiert alle Typen, die eine bestimmte Klasse sind oder eine Unterklasse von dieser sind.
+				\item[\texttt{super}] Akzeptiert alle Typen, die eine bestimmte Klasse sind oder eine Oberklasse von dieser sind.
+			\end{description}
+			Wir werden gleich noch einige Beispiele betrachten, vorher sei jedoch noch gesagt, dass sich die Einschränkungen sowohl auf Typparameter selbst (also auf die Definition von \texttt{T}, \texttt{K}, \dots) anwenden lassen als auch direkt auf Wildcards (also \texttt{?}).
+			
+			\subparagraph{\texttt{extends}}
+				Erweitern wir unsere Methoden zum Aufsummieren von Zahlen so, dass die Methode alle Zahlentypen akzeptiert und Wildcards nutzt (Achtung: In dieser Implementierung werden einfach alle Nachkommastellen abgeschnitten, sollte eine Fließkommazahl übergeben werden!):
+				\begin{figure}[H]
+					\centering
+					\begin{lstlisting}[language = Java]
+public long sum(List*@\changed{<? extends Number>}@* list) {
+	long result = 0;
+	for (int i = 0; i < list.size(); i++) {
+		result += list.get(i).longValue();
+	}
+	return result;
+}
+
+// Erfolgreiche Aufrufe.
+List<Integer> integerList = new List<Integer>();
+sum(integerList);
+
+List<Long>    longList    = new List<Long>();
+sum(longList);
+
+List<Float>   floatList   = new List<Float>();
+sum(floatList);
+
+
+// Fehlschlagende Aufrufe.
+List<String> stringList = new List<String>();
+*@\mayfail{sum(stringList)}@*;
+					\end{lstlisting}
+					\caption{Java: Generic \texttt{extends}}
+				\end{figure}
+				Die Methode kann nun mit allen Unterklassen von \texttt{Number} aufgerufen werden. Eine Auswahl dieser ist auch im Codebeispiel gegeben.
+			% end
+			
+			\subparagraph{\texttt{super}}
+				Zur Nutzung von \texttt{super} schauen wir uns folgendes Beispiel an, welches die Elemente einer Liste \texttt{src} in eine Liste \texttt{dest} kopiert und dabei Typsicher verfährt:
+				\begin{figure}[H]
+					\centering
+					\begin{lstlisting}[language = Java]
+public static <T> copy(List<? extends T> src, List<? super T> dest) {
+	for (int i = 0; i < src.size(); i++) {
+		dest.add(a.get(i));
+	}
+}
+
+// Erfolgreiche Aufrufe.
+List<String>            src  = new List<String>();
+List<CharacterSequence> dest = new List<CharacterSequence>();
+copy(src, dest);
+
+
+// Fehlschlagende Aufrufe.
+List<CharacterSequence> src  = new List<CharacterSequence>();
+List<String>            dest = new List<String>();
+*@\mayfail{copy(src, dest)}@*;
+					\end{lstlisting}
+					\caption{Java: Generics \texttt{super}}
+				\end{figure}
+				Der zweite Aufruf schlägt hierbei fehl, denn weder ist \texttt{CharacterSequence} eine Unterklasse von \texttt{String}, noch ist \texttt{String} eine Oberklasse von \texttt{CharacterSequence}. Das Gegenteil ist hingegen der Fall, womit der erste Aufruf erfolgreich ist.
+			% end
+			
+			\subparagraph{Zusammenfassung \texttt{extends}/\texttt{super}}
+				Für die obige Definition von \texttt{get} und \texttt{add} (welche die übliche ist bei solchen Listen), gilt folgende Tabelle, was welche Methode zurück gibt oder annimmt:
+				\begin{table}[H]
+					\centering
+					\todo{Tabelle Generics extends/super}
+					\caption{Java: Generics Tabelle \texttt{extends}/\texttt{super}}
+				\end{table}
+			% end
+		% end
+	% end
+	
+	\subsubsection{Typlöschung (Type Erasure)}
+		In diesem Abschnitt werden wir uns mit der Implementierung von Generics im Compiler beschäftigen, welche zu einigen interessanten Eigenschaften von Generics führt.
+		
+		Implementiert werden Generics durch Typlöschung, das heißt, die Generics sind zur Laufzeit nicht mehr vorhanden. Stattdessen werden die Aufrufe, bei denen die Typen durch Generics gesteuert werden, durch den höchstmöglichen Typ (meist \texttt{Object} wenn kein \texttt{extends} genutzt wurde) und Downcasts ersetzt, das heißt, der Code wird zu einem äquivalenten Code umgebaut.
+		
+		\paragraph{Beispiel}
+			Betrachten wir folgende Methode, welche das maximale Element einer List findet:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+public <T extends Comparable<? super T>> T max(List<T> list) {
+	T max = null;
+	for (int i = 0; i < list.size(); i++) {
+		if (max == null || list.get(i).compareTo(max) > 0) {
+			max = list.get(i);
+		}
+	}
+	return max;
+}
+
+// Aufruf.
+List<Integer> list = new List<Integer>();
+list.add(1); list.add(2); list.add(3);
+Integer max = max(list);                  // max == 3
+				\end{lstlisting}
+				\caption{Java: Generics vor Typlöschung}
+			\end{figure}
+			von dem Compiler durch folgenden Code ersetzt (das Autoboxing wird hier außer Acht gelassen):
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+public Comparable max(List list) {
+	Comparable max = null;
+	for (int i = 0; i < list.size(); i++) {
+		if (max == null || ((Comparable) list.get(i)).compareTo(max) > 0) {
+			max = (Comparable) list.get(i);
+		}
+	}
+	return max;
+}
+
+// Aufruf.
+List list = new List();
+list.add(1); list.add(2); list.add(3);
+Integer max = (Integer) max(list);     // max == 3
+				\end{lstlisting}
+				\caption{Java: Generics vor Typlöschung}
+			\end{figure}
+		% end
+	% end
+	
+	\subsubsection{Limitierungen}
+		Primär durch die Typlöschung verursacht gibt es einige unerwartete Effekte, wenn man mit Generics arbeitet. Wir werden nun die zwei wichtigsten betrachten:
+		\begin{itemize}
+			\item Es ist nicht (mit vertretbarem Aufwand) möglich, ein Array eines Typparameters erstellen. Dies lässt sich durch die Typlöschung einfach begründen, wenn Code der Form \texttt{new T[10]} würde zu \texttt{new Object[10]} umgebaut werden, was nicht zu \texttt{String[]} oder welchen Typ auch immer gecastet werden kann.
+			\item Es ist außerdem nicht möglich, neue Instanzen eines Typparameters zu erstellen. Dies ist lässt sich auf zwei Faktoren zurück führen:
+				\begin{enumerate}
+					\item Es ist zur Compilezeit nicht bekannt, welche Parameter der Konstruktor hat.
+					\item Durch die Typlöschung würde Code der Form \texttt{new T()} zu \texttt{new Object()} umgebaut werden, was absolut nutzlos ist und auch nicht weiter gecastet werden kann.
+				\end{enumerate}
+		\end{itemize}
+	% end
+% end

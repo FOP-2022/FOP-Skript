@@ -1,5 +1,49 @@
-\todo{Schreiben}
+\introduces{von Methoden}{methoden}
 
-% Mit steigender Komplexität der Programme werden wir sehen, dass sich oftmals viele Stellen im Code doppelt, dreifach oder noch öfter zu finden sind. Auch wird ersichtlich, dass ein Programm, welches aus $ >200 $ Zeilen besteht, nicht mehr übersichtlich ist.
+Mit steigender Komplexität der Programme werden wir sehen, dass sich oftmals viele Stellen im Code doppelt, dreifach oder noch öfter zu finden sind. Auch wird ersichtlich, dass ein Programm, welches aus $ >200 $ Zeilen besteht, nicht mehr übersichtlich ist.
 
-%Hier können \textit{Methoden} helfen, welche den Code strukturieren.
+Hier können \textit{Methoden} helfen, welche den Code strukturieren.
+
+Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) und gibt das Ergebnis aus (Ausgabe). Somit setzen Methoden das EVA-Prinzip der Informatik um und können als Blackbox betrachtet werden, die eine bestimmte Aufgabe (beispielsweise Wurzelziehen) erledigen.
+
+\subsection{Aufbau} \functionalMark \imperativeMark \oopMark
+	Wie bereits erwähnt nimmt eine Methode Daten entgegen, verarbeitet diese und gibt das Ergebnis aus (wenn eines berechnet wurde).
+	
+	Die eingehenden Daten werden über \textit{Parameter} übergeben, im \textit{Körper} verarbeitet und mit einer \textit{Rückgabe} zurück gegeben. Dabei entspricht bei funktionalen Sprachen eine Methode einer Mathematischen Funktion, welche genau eine Sache tut und Werte zurück gibt. Bei imperativer Programmierung ist es möglich, dass Methoden keinen Rückgabewert haben und mehrere Dinge tun können (mehrere Zeilen Code).
+	
+	Schauen wir uns diese Einzelkomponenten von Methoden nochmals genauer an.
+
+	\subsubsection{Parameter} \functionalMark \imperativeMark \oopMark
+		Ein \textit{Parameter} wird von einer Methode spezifiziert (die Anzahl und der Typ der Parameter) und kann innerhalb der Methode wie eine normale Variable (oder in machen Sprachen Konstante) verwendet werden. Sie stellen die Eingabe der Daten in die Methode dar und werden vom Aufrufer übergeben.
+		
+		Parameter sind auch bekannt aus der Mathematik, beispielsweise das \enquote{\(x\)} in der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{R} : \underline{x} \mapsto x ^ 2 \] wobei \enquote{\(\mathbb{N}\)} den Typ des Parameters festlegt.
+		
+		\paragraph{Formale Parameter vs. Aktualparameter}
+			\todo{Schreiben}
+		% end
+	% end
+	
+	\subsubsection{Körper} \functionalMark \imperativeMark \oopMark
+		Der Code innerhalb einer Methode wird als \textit{Körper} der Methode bezeichnet. Dieser nutzt die Parameter der Methode, enthält den nötigen Code für die zu erledigende Aufgabe und führt die Rückgabe aus. Er stellt den wichtigsten Teil der Methode dar, denn ohne Code wäre eine Methode sinnfrei.
+		
+		Wieder als mathematische Funktion betrachtet, kann das \enquote{\( x ^ 2 \)} als Körper der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{R} : x \mapsto \underline{x ^ 2} \] verstanden werden.
+	% end
+	
+	\subsubsection{Rückgabe} \functionalMark \imperativeMark \oopMark
+		Jede Methode hat eine \textit{Rückgabe}, welche bei imperativen Sprachen auch leer sein kann (also kein expliziter Rückgabewert). Dies wird meist als \textit{Void} (englisch für \enquote{Nichts}) bezeichnet. Der \textit{Rückgabewert} ist der Wert, den die Methode aus den Parametern berechnet hat und den der Aufrufer erhält. In einer (statisch) typisierten Sprache wird außerdem der Rückgabetyp definiert, mit dem der Aufrufer rechnen kann. Die Rückgabe ist bei einer funktionalen Programmiersprache implizit, das heißt es wird nicht genau angegeben, an welcher Stelle ein Wert zurück gegeben wird. In einer imperativen Programmiersprache erfolgt die Rückgabe explizit und kann auch schon vor vollständigem Ablauf der Methode ausgeführt werden. In diesem Fall bricht die Ausführung der Methode ab. Dies kann zum Beispiels nützlich sein, wenn auf invalide Eingaben (beispielsweise negative Zahlen) geprüft wird.
+		
+		Erneut als mathematische Funktion \[ f : \underline{\mathbb{N}} \rightarrow \mathbb{R} : x \mapsto x ^ 2 \] betrachtet, kann \enquote{\(\mathbb{R}\)} als Rückgabetyp verstanden werden. Da mathematische Funktionen funktional sind, findet keine explizite Rückgabe statt, sondert es wird einfach das Quadrat von \(x\) zurück gegeben.
+	% end
+% end
+
+\subsection{Verträge} \functionalMark \imperativeMark \oopMark
+	Verträge sind Teil der Dokumentation, siehe Abschnitt \refIntr{vertraege}.
+% end
+
+\subsection{Überladen} \functionalMark \imperativeMark \oopMark
+	In den meisten Programmiersprachen ist es möglich, eine mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (\racket, Python, \dots).
+% end
+
+\subsection{Überschreiben} \oopMark
+	Im Kontext von objektorientierter Programmierung und Vererbung ist es von Zeit zu Zeit nötig, eine Implementierung einer Funktion von der Oberklasse zu ändern. Hierzu kann die gleiche Methode erneut implementiert werden, welche anschließend die vorherige Implementation ersetzt. Dies wird \textit{Überschreiben} von Methoden genannt. Die meisten Sprachen bieten hier auch die Möglichkeit, explizit die \enquote{alte} Implementierung aus der Oberklasse aufzurufen.
+% end

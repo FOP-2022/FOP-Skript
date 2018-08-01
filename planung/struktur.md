@@ -4,8 +4,9 @@
 
 * Wichtig: Siehe [nicht enthaltene Themen](struktur-themen.md).
 * Abschnitte, welche **fett** markiert sind, sind noch nicht im LaTeX-Dokument enthalten.
+* Abschnitte, welche *kursiv* markiert sind, sind noch nicht (vollständig) abgeschlossen.
 
-1. Einführung
+1. *Einführung*
 2. Abstrakte Konzepte
     - Programmierparadigmen
         + Deklarativ
@@ -36,53 +37,52 @@
         + Schleifen (While)
             * Kontrolle innerhalb der Schleife
     - Methoden/Funktionen
-        + **Aufbau (Eingabe-Verarbeitung-Ausgabe)**
-            * **Parameter**
-            * **Körper**
-            * **Rückgabe**
-        + **Veträge (--> Dokumentation)**
-        + **Formale Parameter vs. Aktualparameter**
-        + **Überladen**
-        + **Überschreiben**
-            * **Polymorhpie und Späte Bindung**
-        + **Konstruktoren**
-        + **Abarbeitung zur Laufzeit**
-    - **TODO: Klassen und OOP**
-    - Scoping
-    - Generische Programmierung
+        + Aufbau (Eingabe-Verarbeitung-Ausgabe)
+            * Parameter
+            * Körper
+            * Rückgabe
+        + Veträge (--> Dokumentation)
+        + Formale Parameter vs. Aktualparameter
+        + Überladen
+        + Überschreiben
+        + Konstruktoren
+        + Abarbeitung zur Laufzeit
+    - **TODO: Klassen und OOP (Polymorhpie und Späte Bindung, Konstruktoren)**
+    - *Scoping*
+    - *Generische Programmierung*
         + **Generics**
     - Datenstrukturen
-        + **Arrays/Listen/Set**
-            * **Linked List**
-            * **Array List**
-            * **Hash Set**
-        + **Map**
-    - Fehlerbehandlung
+        + Arrays/Listen/Set
+            * Linked List
+            * Array List
+            * Hash Set
+        + Map
+    - *Fehlerbehandlung*
         + **Exceptions**
             * **Werfen von Exceptions**
             * **Fangen von Exceptions**
             * **Exception-Typen (geprüft, nicht-geprüft)**
         + **Result Code**
-    - Dokumentation
-        + **Verträge**
-3. TODO: HtdP-TL
+    - *Dokumentation*
+        + Verträge
+3. *TODO: HtdP-TL*
 4. Java
     - Lexikalische Bestandteile
-        + Datentypen
+        + *Datentypen*
             * Primitive
             * Sonderfall String
             * *Objekte)
-        + Literale
+        + *Literale*
             * Primitive
             * `null`
         + Schlüsselwörter
         + Bezeichner und Konventionen
-        + Operatoren
-        + Strukturierung des Codes
-            * Klammerung
-            * Kommentare
-            * Whitespace
-        + Packages und Imports
+        + *Operatoren*
+        + *Strukturierung des Codes*
+            * *Klammerung*
+            * *Kommentare*
+            * *Whitespace*
+            * *Packages und Imports*
     - Anweisungen
         + **Variablen (Deklaration, Initialisierung)**
             * **Modifier**
@@ -110,16 +110,16 @@
         + **Links-/Rechtsausdrücke**
         + **Seiteneffekte (Multithreading, Schleifen)**
     - Kontrollstrukturen
-        + **Verzweigungen**
-            * **`if`**
-            * **`switch`**
-        + **Schleifen**
-            * **`while`**
-            * **`do`-`while`**
-            * **`for`**
-            * **`for` each / erweitertes `for`**
-            * **`break`, `continue`**
-    - Methoden
+        + Verzweigungen
+            * `if`
+            * `switch`
+        + Schleifen
+            * `while`
+            * `do`-`while`
+            * `for`
+            * `for` each / erweitertes `for`
+            * `break`, `continue`
+    - *Methoden*
         + **Aufgabe (Kopf/Rumpf)**
             * **Methodenkopf**
                 - **Varargs**
@@ -140,16 +140,16 @@
         + **Abarbeitung von Methodenaufrufen**
             * **Stack, Speichermodell**
     - **TODO: Klassen und OOP**
-    - Scoping
+    - *Scoping*
     - Generische Programmierung
-        + **Generics**
-            * **Generische Klassen**
-            * **Generische Methoden**
-            * **Primitive Typen und Generics, Wrapper Klassen**
-                - **Autoboxing/-unboxing**
-            * **Vererbung**
-            * **Einschränkung der Typparameter (`extends`, `super`)**
-    - Datenstrukturen
+        + Generics
+            * Generische Klassen
+            * Generische Methoden
+            * Primitive Typen und Generics, Wrapper Klassen
+                - Autoboxing/-unboxing
+            * Vererbung
+            * Einschränkung der Typparameter (`extends`, `super`)
+    - *Datenstrukturen*
         + **Die Collection-API (Collection, List, Set, Map)**
             * **Struktur**
             * **Methoden**
@@ -162,7 +162,7 @@
                 - **Sortieren**
             * **Iterator**
             * **Foreach-Schleife**
-    - Fehlerbehandlung
+    - *Fehlerbehandlung*
         + **Exceptions**
             * **Fangen von Exceptions (`try`-`catch`-`finally`)**
             * **Erstellen von Exceptions und Exception-Hierarchie**
@@ -170,11 +170,11 @@
             * **Weiterleiten von Exceptions (`throws`)**
             * **Spezielle Exceptions**
         + **Result Code**
-    - Dokumentation (JavaDoc)
+    - *Dokumentation (JavaDoc)*
         + **Klassen**
         + **Methoden**
         + **Konstruktoren**
         + **etc.**
-5. TODO: Vergleich Racket <--> Java
-6. Komplexität und Landau-Symbolik [Gliederung siehe TeX]
-7. Glossar
+5. *TODO: Vergleich Racket <--> Java*
+6. *Komplexität und Landau-Symbolik [Gliederung siehe TeX]*
+7. *Glossar*

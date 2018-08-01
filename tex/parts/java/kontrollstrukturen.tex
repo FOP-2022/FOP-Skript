@@ -1,1 +1,335 @@
-\todo{Schreiben}
+\subsection{Verzweigungen}
+	\implements{Verzweigungen}{verzweigungen}{Java}
+
+	In Java gibt es als grundlegende Art der Verzweigung nur das einfache If. Ein Switch, welches wir uns später anschauen werden, baut sehr direkt auf einem If auf reduziert größtenteils die Tipparbeit.
+
+	\subsubsection{If}
+		In \texttt{if} hat in Java die folgende Form:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+if (/* Test */) {
+	/* then-Fall */
+} else if (/* else-Test */) {
+	/* else-then-Fall */
+} else {
+	/* else-Fall */
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{if}-Verzweigung}
+		\end{figure}
+		
+		Dabei kann es beliebig viele Else-Ifs geben, oder diese können ganz weg gelassen werden. Ebenfalls kann der Else-Fall weggelassen werden, einzig und allein der Then-Fall ist nötig (dieser kann theoretisch auch leer sein, dies ergibt aber in den meisten Fällen keinen Sinn).
+		
+		Somit ist die einfache Form des \texttt{if}s:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+if (/* Test */) {
+	/* then-Fall */
+}
+			\end{lstlisting}
+			\caption{Java: Einfache \texttt{if}-Verzweigung}
+		\end{figure}
+		
+		Alle Tests (die Bedingungen für das If) \textit{müssen} zu einem \texttt{boolean} auswerten. Alle anderen Datentypen werden nicht akzeptiert und der Code wird nicht kompilieren.
+	% end
+	
+	\subsubsection{Switch}
+		Ein \texttt{switch} stellt eine Vereinfachung von vielen If-Else-Verzweigungen dar, welche alle die gleiche Operation (beispielsweise das Vergleichen von zwei Objekten) ausführen.
+		
+		Schauen wir uns als Motivation den folgenden Code an, welcher ausgibt, wie viele Primzahlen \texttt{p} mit \texttt{p <= x <= 10} existieren.
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+if (x == 1) {
+	prime = 0;
+} else if (x == 2) {
+	prime = 1;
+} else if (x == 3) {
+	prime = 2;
+} else if (x == 4) {
+	prime = 2;
+} else if (x == 5) {
+	prime = 3;
+} else if (x == 6) {
+	prime = 3;
+} else if (x == 7) {
+	prime = 4;
+} else if (x == 8) {
+	prime = 4;
+} else if (x == 9) {
+	prime = 4;
+} else if (x == 10) {
+	prime = 4;
+} else {
+	// Error.
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{switch} Motivation}
+		\end{figure}
+		
+		Mit Hilfe eines Switches können wir den Code nun äquivalent umformen:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+switch (x) {
+case 1:
+	prime = 0;
+	break;
+case 2:
+	prime = 1;
+	break;
+case 3:
+	prime = 2;
+	break;
+case 4:
+	prime = 2;
+	break;
+case 5:
+	prime = 3;
+	break;
+case 6:
+	prime = 3;
+	break;
+case 7:
+	prime = 4;
+	break;
+case 8:
+	prime = 4;
+	break;
+case 9:
+	prime = 4;
+	break;
+case 10:
+	prime = 4;
+	break;
+default:
+	// Error.
+	break;
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{switch}}
+		\end{figure}
+		
+		Der Code ist äquivalent zu der If-Else-Kaskade und ist einfacher zu verstehen. Allerdings müssen wir in jedem Case (ein einzelner Fall in dem Switch-Konstrukt) ein \texttt{break} platzieren, welches die Ausführung des Switches abbricht. Wird das \texttt{break} weggelassen, so \textit{fällt die Ausführung durch}, das heißt es wird einfach mit dem nächsten Case fortgefahren.
+		
+		Um den Nutzen hiervon verstehen zu können müssen wir uns darüber im klaren sein, wie ein Switch ausgewertet wird:
+		\begin{itemize}
+			\item Im ersten Schritt wird die \textit{Vergleichsvariable} in den Klammern hinter dem Schlüsselwort \texttt{switch} ausgewertet. Diese Variable darf nur zu einem String, einem primitiven Wert oder dem Wert eines Enums auswerten.
+			\item Anschließend wird der erhaltene Wert mit dem Wert eines jeden Cases verglichen. Hierfür ist es nötig, das hinter dem Schlüsselwort \texttt{case} ausschließlich Literale oder Konstanten mit dem gleichen Typ stehen. Es kann niemals zwei Cases mit dem gleichen Wert (auch genannt \textit{Label}) geben!
+			\item Nun wird zur ersten Zeile des Cases gesprungen, dessen Wert gleich dem Vergleichswert ist. Existiert kein solcher Case, so wird zu dem Default-Case gesprungen, welcher aber nicht existieren muss. Wird kein Code zur Ausführung gefunden, so wird das gesamte Switch übersprungen.
+			\item Sämtlicher nachfolgender Code wird nun ausgeführt, bis ein \texttt{break} gefunden wird. Dann wird aus dem Switch gesprungen un nach dem Switch fortgefahren. Außerdem beenden Returns und Exceptions wie üblich die Ausführung.
+		\end{itemize}
+		
+		Das heißt: Beim Start des Cases wird zu einer Stelle im Code gesprungen und dieser so lange ausgeführt, bis die Ausführung \textit{explizit} beendet wird oder kein Code mehr im Switch existiert.
+		
+		Mit dieser Kenntnis kann obiger Code des Switches deutlich vereinfacht werden, indem wir einfach bei jeder Primzahl den Zähler um eins erhöhen:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+prime = 0;
+switch (x) {
+	case 10:
+	case 9:
+	case 8:
+	case 7:
+		prime++;
+	case 6:
+	case 5:
+		prime++;
+	case 4:
+	case 3:
+		prime++;
+	case 2:
+		prime++;
+	case 1:
+		break;
+	default:
+		// Error.
+		break;
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{switch} mit Fall-Thru}
+		\end{figure}
+		
+		\warning{Ein Case in einem Switch öffnet keinen neuen Scope! Somit können Variablen nur einmal genutzt werden oder es muss ein Block um den Case geschrieben werden.}
+	% end
+% end
+
+\subsection{Schleifen}
+	\implements{Schleifen}{schleifen}{Java}
+	
+	\subsubsection{While-Schleife}
+		In Java sieht die zuvor vorgestellte While-Schleife wie folgt aus:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+while (/* Test */) {
+	/* Code */
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{while}-Schleife}
+		\end{figure}
+		
+		Wie auch schon beim If gesehen, darf auch hier der Test nur zu einem \texttt{boolean} und nicht zu anderen Datentypen ausgewertet werden. Der Test wird \textit{vor} jedem Schleifendurchlauf ausgeführt und bricht ab, sobald er zu \texttt{false} auswertet.
+	% end
+	
+	\subsubsection{Do-While-Schleife}
+		Als Spezialfall einer While-Schleife gibt es in Java die Do-While-Schleife, welche immer \textit{mindestens einmal} ausgeführt wird:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+do {
+	/* Code */
+} while (/* Test */);
+			\end{lstlisting}
+			\caption{Java: \texttt{do-while} Schleife}
+		\end{figure}
+		
+		Wie bei allen Schleifen und Bedingungen darf auch hier der Test nur zu einem \texttt{boolean} auswerten. Im Gegensatz zur While-Schleife wird der Test hier allerdings \textit{nach} jedem Schleifendurchlauf ausgeführt, wodurch die Schleife immer mindestens einmal ausgeführt wird.
+	% end
+	
+	\subsubsection{For-Schleife}
+		Da oftmals über Elemente einer Liste oder eines Arrays iteriert wird und der Code hierfür immer gleich ist (eine Zählvariable wird in jedem Schritt hochgezählt):
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+int i = 0;
+while (i < array.length) {
+	/* Code */
+
+	i++;
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{for each}-Schleife Motivation}
+		\end{figure}
+		kann dieser Code zu folgendem, äquivalentem, Code umgewandelt werden:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+for (int i = 0; i < array.length; i++) {
+	/* Code */
+}
+			\end{lstlisting}
+			\caption{Java: \texttt{for each}-Schleife Motivation}
+		\end{figure}
+		womit Code eingespart wird und die Iteration deutlich übersichtlicher ist.
+		
+		Die einzelnen Bestandteile des Schleifenkopfes, welche mit Semikola getrennt werden müssen, haben folgende Namen und Funktionen:
+		\begin{description}
+			\item[\texttt{int i = 0}] \textit{Initialisierung} - Der Code an dieser Stelle wird \textit{einmalig vor} Durchlauf der Schleife ausgeführt.
+			\item[\texttt{i < array.length}] \textit{Test} - Ein zu \texttt{boolean} auswertender Ausdruck, welcher \textit{vor jedem} Durchlauf ausgewertet wird. Wird die Bedingung zu \texttt{false} ausgewertet, wird die Schleife beendet.
+			\item[\texttt{i++}] \textit{Schritt} - Der Code an dieser Stelle wird \texttt{nach jedem} Durchlauf ausgeführt.
+		\end{description}
+		
+		Ferner können alle Bestandteile der For-Schleife ausgelassen werden (unter Beibehaltung der Semikola!), wobei Initialisierung und Schritt einfach nicht ausgeführt werden und die Bedingung immer zu \texttt{true} auswertet. Somit sind \enquote{\texttt{while (true) \{ \}}} und \enquote{\texttt{for (;;) \{ \}}} äquivalent.
+	% end
+	
+	\subsubsection{\enquote{Erweiterte} For-Schleife}
+		Statt wie üblich über Arrays und Listen zu iterieren:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+for (int i = 0; i < array.length; i++) {
+	Object element = array[i];
+
+	/* Code */
+}
+			\end{lstlisting}
+			\caption{Java: Erweiterte For-Schleife Motivation}
+		\end{figure}
+		kann seit Java 5 auch die \textit{erweiterte For-Schleife} verwendet werden, um über Arrays oder Instanzen von \texttt{java.util.Iterable} iterieren (alle Standard-Klassen für Listen implementieren dieses Interface):
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java]
+for (Object element : array[i]) {
+	/* Code */
+}
+			\end{lstlisting}
+			\caption{Java: Erweiterte For-Schleife}
+		\end{figure}
+		Dabei wird immer über den konkreten Typ, der im Array (oder der Liste) gespeichert ist, iteriert.
+		
+		Anders ausgedrückt: Der Code im Schleifenkörper wird für jedes Element des Arrays oder der Liste ausgeführt.
+	% end
+	
+	\subsubsection{\texttt{break}, \texttt{continue}}
+		Um eine Schleifenausführung vorzeitig auszuführen, gibt es die folgenden Schlüsselwörter:
+		\begin{description}
+			\item[\texttt{break}] Bricht die gesamte Schleifenausführung der innerstmöglichen Schleife ab.
+			\item[\texttt{continue}] Fährt mit der nächsten Iteration der innerstmöglichen Schleife fort.
+		\end{description}
+		
+		\paragraph{Beispiel}
+			Schauen wir uns abschließend folgendes schwachsinniges Beispiel an, um die Funktionalität von \texttt{break} und \texttt{continue} zu verdeutlichen. Der folgende Code summiert die ungeraden Elemente eines Arrays, wobei keine weiteren Element aufsummiert werden, sobald die Summe einmal \texttt{10} überschritten hat.
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+int sumOdd = 0;
+for (int x : array) {
+	if (x % 2 == 0) {
+		// Element is even *@\(\implies\)@* continue with next element.
+		continue;
+	}
+
+	if (sumOdd > 10) {
+		// Sum is over 10 *@\(\implies\)@* stop loop.
+		break;
+	}
+
+	sumOdd += x;
+}
+System.out.println(sumOdd);
+				\end{lstlisting}
+				\caption{Java: \texttt{break}, \texttt{continue} Beispiel}
+			\end{figure}
+			Mit den Werten \texttt{array = new int[] \{ 1, 2, 3, 4, 5, 7, 8, 9 \}} wird \texttt{16} ausgegeben, wobei der Code wie folgt ausgeführt wird:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java]
+(Zeile =  1; sumOdd =  0)
+
+(Zeile =  2; sumOdd =  0; x = 1)
+(Zeile =  3; sumOdd =  0; x = 1; (x % 2 == 0) = false)
+(Zeile =  8; sumOdd =  0; x = 1; (sumOdd > 10) = false)
+(Zeile = 13; sumOdd =  1; x = 1)
+
+(Zeile =  2; sumOdd =  1; x = 2)
+(Zeile =  3; sumOdd =  1; x = 2; (x % 2 == 0) = true)
+
+(Zeile =  2; sumOdd =  1; x = 3)
+(Zeile =  3; sumOdd =  1; x = 3; (x % 2 == 0) = false)
+(Zeile =  8; sumOdd =  1; x = 3; (sumOdd > 10) = false)
+(Zeile = 13; sumOdd =  4; x = 3)
+
+(Zeile =  2; sumOdd =  4; x = 4)
+(Zeile =  3; sumOdd =  4; x = 4; (x % 2 == 0) = true)
+
+(Zeile =  2; sumOdd =  4; x = 5)
+(Zeile =  3; sumOdd =  4; x = 5; (x % 2 == 0) = false)
+(Zeile =  8; sumOdd =  4; x = 5; (sumOdd > 10) = false)
+(Zeile = 13; sumOdd =  9; x = 5)
+
+(Zeile =  2; sumOdd =  9; x = 6)
+(Zeile =  3; sumOdd =  9; x = 6; (x % 2 == 0) = true)
+
+(Zeile =  2; sumOdd =  9; x = 7)
+(Zeile =  3; sumOdd =  9; x = 7; (x % 2 == 0) = false)
+(Zeile =  8; sumOdd =  9; x = 7; (sumOdd > 10) = false)
+(Zeile = 13; sumOdd = 16; x = 7)
+
+(Zeile =  2; sumOdd = 16; x = 8)
+(Zeile =  3; sumOdd = 16; x = 8; (x % 2 == 0) = true)
+
+(Zeile =  2; sumOdd = 16; x = 9)
+(Zeile =  3; sumOdd = 16; x = 9; (x % 2 == 0) = false)
+(Zeile =  8; sumOdd = 16; x = 9; (sumOdd > 10) = true)
+
+(Zeile = 15; sumOdd = 16)
+				\end{lstlisting}
+				\caption{Java: \texttt{break}, \texttt{continue} Beispielausführung}
+			\end{figure}
+		% end
+	% end
+% end

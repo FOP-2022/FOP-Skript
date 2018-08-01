@@ -30,3 +30,7 @@ Break/Continue
 Compile-/Runtime-Fehler
 JVM
 JNI
+Generics
+Compilezeit
+Typisierung (statisch, dynamisch, etc.)
+Generics
