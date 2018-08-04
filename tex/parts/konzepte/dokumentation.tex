@@ -1,6 +1,12 @@
 \introduces{von Dokumentation in der Software}{doku}
 
-\todo{Schreiben}
+Dabei beschäftigen wir uns nicht mit der Dokumentation, welche für den Nutzer gedacht ist und erklärt, wie unsere Software zu benutzen ist und ebenfalls nicht mit der Dokumentation der Struktur unserer Software. Stattdessen handelt es sich hierbei um die Dokumentation innerhalb des Codes zur Beschreibung, \textit{was} unser Code tut.
+
+Dabei ist es im Allgemeinen nicht wichtig, zu Beschreiben, \textit{wie} der Code etwas tut, dies kann an aus dem Code ablesen. Stattdessen ist es wichtig zu beschreiben, \textit{was} unser Code tut und, im Falle von Kommentaren im Code, \textit{warum} dies so getan wird. Dadurch ist es für andere Entwickler einfacher, den Code zu verstehen, wiederzuverwenden und zu erweitern.
+
+\memo{Es ist wichtig, \textit{was} der Code tut und \textit{warum} auf diese Weise. Nicht wie.}
+
+Wir schauen uns im folgenden einzelne Teile der Dokumentation an und dann Beispiele.
 
 \subsection{Verträge} \functionalMark \imperativeMark \oopMark
 	\introduces{von Veträgen}{vertraege}
@@ -13,5 +19,85 @@
 		Eine Funktion \(f(x)\) berechnet die reelle Quadratwurzel der übergebenen reellen Zahl \(x\). Somit ist eine Einschränkung von \(x\), dass selbiges positiv sein muss (also \(x \in \mathbb{R} _ +\)). Für die Rückgabe der Funktion können wir garantieren, dass ausschließlich positive reelle Zahlen zurück gegeben werden, also \(f(x) \in \mathbb{R} _ +\)).
 		
 		Ein Vertrag der Funktion kann nun wie oben in Textform formuliert werden oder mit einer bestimmten Syntax (zum Beispiel \enquote{\( f(x \in \mathbb{R} _ +) \in \mathbb{R} _ + \)} oder \enquote{\( f : \mathbb{R} _ + \rightarrow \mathbb{R} _ + \)}). Dies stellt aber nur ein Beispiel dar und variiert von Sprache zu Sprache.
+	% end
+% end
+
+\subsection{Beispiel}
+	\paragraph{Gute vs. schlechte Dokumentation}
+		Dieses Beispiel soll vertiefen, was mit dem Merksatz eingeführt wurde.
+		
+		Eine Bewertung der beiden Beispiele nehmen wir hier nicht vor, der Qualitätsunterschied sollte ersichtlich sein.
+		
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java, style = base]
+/**
+ * Vetrag: (p: int) --> boolean
+ *
+ * Nimmt eine Ganzzahl, prueft ob diese durch irgendeine andere, kleinere,
+ * Ganzzahl ungleich Eins teilbar ist und gibt diese Tatsache als Wahrheitswert
+ * zurueck (negiert).
+ * Bei negativen Zahlen wird immer 'false' zurueck gegeben.
+ */
+boolean isPrimeNumber(int p) {
+	// Wenn p kleiner als Zwei ist, gib 'false' zurueck.
+	if (p <= 1) {
+		return false;
+	}
+
+	// Wenn p gleich Zwei ist, gib 'true' zurueck.
+	if (p == 2) {
+		return true;
+	}
+
+	// Laufe durch alle kleineren Zahlen ab Zwei bis zur aufgerundeten Wurzel
+	// aus 'p'.
+	for (int n = 2; n <= ceil(sqrt(p)); n++) {
+		// Wenn die Zahl durch die andere Zahl teilbar ist, gib 'false' zurueck.
+		if (p % n == 0) {
+			return false;
+		}
+	}
+
+	// Gib immer 'true' zurueck, wenn die Ausfuehrung so weit kommt.
+	return true;
+}
+			\end{lstlisting}
+			\caption{Dokumentation: Beispiel 1, Code 1}
+		\end{figure}
+
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Java, style = base]
+/**
+ * Vetrag: (p: int) --> boolean
+ *
+ * Prueft, ob die gegebene Ganzzahl eine Primzahl ist.
+ */
+boolean isPrimeNumber(int p) {
+	if (p <= 1) {
+		// Es existieren keine negativen Primzahlen und '0', '1' sind keine
+		// Primzahlen.
+		return false;
+	}
+
+	// Iteriere durch alle natuerlichen Zahlen '2 <= n <= sqrt(p)' und pruefe auf
+	// Teilbarkeit. Ist 'p' durch mindestens ein 'n' teilbar, breche den Test
+	// ab mit dem Ergebnis, dass 'p' keine Primzahl ist.
+	// Ansonsten, wenn 'p' durch keine kleinere Zahl teilbar ist, ist 'p' eine
+	// Primzahl.
+	// Optimierung: Es wird nur bis 'sqrt(p)' (bzw. 'floor(sqrt(p))') gelaufen,
+	//              da 'sqrt(p)' die maximale Zahl ist, durch die 'p' teilbar
+	//              sein kann ('sqrt(p) * sqrt(p) = p').
+	for (int n = 2; n <= floor(sqrt(p)); n++) {
+		if (p % n == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+			\end{lstlisting}
+			\caption{Dokumentation: Beispiel 1, Code 2}
+		\end{figure}
 	% end
 % end

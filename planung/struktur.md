@@ -48,7 +48,7 @@
         + Konstruktoren
         + Abarbeitung zur Laufzeit
     - **TODO: Klassen und OOP (Polymorhpie und Späte Bindung, Konstruktoren)**
-    - *Scoping*
+    - Scoping
     - *Generische Programmierung*
         + **Generics**
     - Datenstrukturen
@@ -63,7 +63,7 @@
             * **Fangen von Exceptions**
             * **Exception-Typen (geprüft, nicht-geprüft)**
         + **Result Code**
-    - *Dokumentation*
+    - Dokumentation
         + Verträge
 3. *TODO: HtdP-TL*
 4. Java

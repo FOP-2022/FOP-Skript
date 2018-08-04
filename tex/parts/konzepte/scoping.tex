@@ -1,3 +1,41 @@
 \introduces{von Scoping und Scopes}{scoping}
 
-\todo{Schreiben}
+Stellen wir uns vor, in einer Programmiersprache wären \textit{alle} Variablen von \textit{überall} zugreifbar und veränderbar. Dies würde zu Chaos führen, spätestens wenn zwei Schleifen mit dem Laufindex \texttt{i} zeitgleich ausgeführt werden.
+
+Um Szenarien wie diese zu vermeiden, unterstützen die meisten Sprachen \textit{Scoping}, also bestimmte Regeln, von wo aus eine Variable zugreifbar ist und wann Variablen mit dem gleichen Namen völlig unterschiedliche Werte repräsentieren können. Diese Regeln sind zumeist sehr simpel wie und legen beispielsweise fest, dass in einer Methode definierte Variablen nicht außerhalb dieser verwendet werden können. Ein Bereich, in dem eine Variable gültig ist, wird \textit{Scope} genannt.
+
+Schauen wir uns mit obiger Regel zuerst ein Beispiel an, bevor wir zu den grundlegenden Scoping-Typen fortfahren.
+
+\paragraph{Beispiel}
+	Wir betrachten folgendes Stück Code mit obiger Scoping-Regeln, dass unterschiedliche Methoden unterschiedliche Variablen definieren und unabhängig voneinander sind:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Java, style = base]
+foo() {
+	a = "foo/a"; // Anlegen einer neuen Variable 'a' im Scope 'foo'.
+	b = "foo/b"; // Anlegen einer neuen Variable 'b' im Scope 'foo'.
+
+	print(a);    // Gibt 'foo/a' aus.
+	print(b);    // Gibt 'foo/b' aus.
+}
+
+bar() {
+	a = "bar/a"; // Anlegen einer neuen Variable 'a' im Scope 'bar', von 'foo' unabhaengig.
+
+	print(a);    // Gibt 'bar/a' aus.
+	@@!print(b)@@@;    // Schlaegt fehl, da 'b' im Scope 'bar' nicht definiert ist.
+}
+		\end{lstlisting}
+		\caption{Scoping}
+	\end{figure}
+% end
+
+\paragraph{Typen von Scopen}
+	Bei imperativen Sprachen existieren die folgenden grundlegenden Arten von Scoping:
+	\begin{description}
+		\item[Global] Alle Variablen sind global gültig und können von überall verändert werden. \\ Dies stellt eigentlich keinen Scoping-Typ dar, da kein Scoping vorgenommen wird.
+		\item[Function-Based] Variablen sind nur innerhalb einer Funktion gültig und können auch nur dort verwendet werden. \\ Beispiele: Python, BASH
+		\item[Block-Based] Variablen sind nur innerhalb eines Codeblocks (beispielsweise abgetrennt durch geschweifte Klammern) gültig. Ein Codeblock kann beispielsweise mit einer Schleife, einem If, \dots eingeleitet werden. \\ Beispiele: Java, Kotlin
+		\item[Mixed] Es werden unterschiedliche Scoping-Verfahren implementiert und der Entwickler entscheidet, welches er nutzen will. \\ Beispiele: JavaScript (eine globale Variable wird ohne Schlüsselwort, eine funktionslokale Variable mit dem Schlüsselwort \texttt{var} und eine blocklokale Variable mit dem Schlüsselwort \texttt{let} eingeleitet)
+	\end{description}
+% end
