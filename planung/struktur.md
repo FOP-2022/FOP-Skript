@@ -57,12 +57,12 @@
             * Array List
             * Hash Set
         + Map
-    - *Fehlerbehandlung*
-        + **Exceptions**
-            * **Werfen von Exceptions**
-            * **Fangen von Exceptions**
-            * **Exception-Typen (geprüft, nicht-geprüft)**
-        + **Result Code**
+    - Fehlerbehandlung
+        + Exceptions
+            * Werfen von Exceptions
+            * Fangen von Exceptions
+            * Exception-Typen (geprüft, nicht-geprüft)
+        + Result Code
     - Dokumentation
         + Verträge
 3. *TODO: HtdP-TL*
@@ -71,7 +71,7 @@
         + *Datentypen*
             * Primitive
             * Sonderfall String
-            * *Objekte)
+            * *Objekte*
         + *Literale*
             * Primitive
             * `null`

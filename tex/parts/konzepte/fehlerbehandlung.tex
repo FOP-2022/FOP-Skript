@@ -1,1 +1,130 @@
-\todo{Schreiben}
+\introduces{von Fehlerbehandlung}{fehlerbehandlung}
+
+Während der Ausführung von Code kann es immer zu Fehler kommen, welche es zu behandeln gilt (beispielsweise bei einer Division durch \text{0}). Hierbei stellt sich die Frage, wie wir dem Nutzer (oder dem Aufrufer einer Methode) erkenntlich machen, dass es zu einem Fehler gekommen ist.
+
+Dabei gibt es unterschiedliche Möglichkeiten, welche sich grob wie folgt einteilen lassen:
+\begin{itemize}
+	\item Exceptions und
+	\item Result Codes.
+\end{itemize}
+
+Diese zwei Unterarten werden wir in den folgenden Abschnitten behandeln.
+
+\subsection{Result Code}
+	\introduces{von Result Codes}{resultcodes}
+
+	Beschäftigen wir uns zuerst mit der einfachsten Methode, Fehler anzuzeigen: Wir sagen dem Aufrufer über den Rückgabewert der Methode Bescheid, ob alles korrekt abgelaufen ist.
+	
+	An einem konkreten Beispiel heißt dies:
+	\begin{itemize}
+		\item Szenario: Wir haben eine Methode \texttt{indexOf(val: String, el: char): int}, welche uns die Position des ersten Vorkommens von \texttt{el} in \texttt{val} zurück gibt. \\ Beispiel: \texttt{indexOf("asdfgas", 's')} gibt \texttt{1} zurück.
+		\item Ist das Zeichen nicht in dem String vorhanden, stellt dies einen Fehler dar.
+		\item Mit Fehlermeldung über Result Codes könnten wir nun beispielsweise \texttt{-1} zurück geben, da dies kein valider Index ist (welche immer \texttt{\(\geq\) 0} sein müssen).
+		\item Damit sieht der Aufrufer, dass der Methodenaufruf schief gegangen ist und kann entsprechend reagieren.
+	\end{itemize}
+	
+	\paragraph{Vorteile}
+		\begin{itemize}
+			\item Es werden keine expliziten Verfahren zum Melden von Fehlern benötigt.
+			\item Die genutzt Technologie wird in vielen Sprachen eingesetzt.
+		\end{itemize}
+	% end
+	
+	\paragraph{Nachteile}
+		\begin{itemize}
+			\item Manchmal ist es nicht möglich, Fehler so anzuzeigen (beispielsweise wenn alle Werte gültig sind).
+			\item Der Aufrufer muss extra prüfen und daran denken, ob und welche Codes zurück kommen könnten.
+		\end{itemize}
+	% end
+% end
+
+\subsection{Exceptions}
+	\introduces{von Exceptions}{exceptions}
+
+	Schauen wir uns nun \textit{Exception} an, ein sehr viel mächtigeres System als Result Codes.
+	
+	Die Grundidee einer Exception ist, dass die Ausführung des Codes an einer beliebigen Stelle abgebrochen wird und dem Aufrufer über einen weiteren Mechanismus (den Exceptions) aufgezeigt wird, dass es Fehler vorlag. Der Aufrufer kann den Fehler anschließend behandeln.
+	
+	Das System besteht aus den folgenden Teilen, welche wir in den nächsten Abschnitten näher betrachten:
+	\begin{itemize}
+		\item Werfen von Exceptions und
+		\item Fangen von Exceptions.
+	\end{itemize}
+	
+	\subsubsection{Werfen von Exceptions}
+		Eine Methode, welche beispielsweise die Berechnung \(\frac{a}{b}\) durchführt, muss einen Fehler auslösen, wenn \(b = 0\) gilt.
+		
+		Im Kontext von Exceptions wird dieses Auslösen eines Fehler \textit{werfen} einer Exception genannt, das heißt der Code bricht ab, es wird kein Wert zurück gegeben und der Aufrufer \enquote{erhält} den Fehler, welcher eine genauere Beschreibung enthalten kann (beispielsweise die Nachricht \enquote{MathException: Cannot divide by 0.}).
+		
+		\paragraph{Beispiel}
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java, style = base]
+divide(int a, int b) {
+	if (b == 0) {
+		// Nach der folgenden Zeile wird zum Aufrufer zurueck gekehrt, dieser
+		// erhaelt die Nachricht und die Ausfuehrung der Methode wird
+		// abgebrochen.
+		throw "MathException: Cannot divide by 0." // Werfen der Exception.
+	}
+
+	// Somit koennen wir uns nun sicher sein, dass 'b != 0' gilt und einfach mit
+	// der Division forfahren.
+	return /* Divisions-Algorithmus */
+}
+				\end{lstlisting}
+				\caption{Exceptions Werfen: Beispiel}
+				\label{fig:throw_exceptions}
+			\end{figure}
+		% end
+	% end
+	
+	\subsubsection{Fangen von Exceptions}
+		Rufen wir eine Methode auf, welche eine Exception werfen kann (dies wird je nach Sprache in der Signatur der Methode dokumentiert), so müssen wir diese \textit{fangen}. Das bedeutet, wir müssen die Exception empfangen und den Fehler behandeln (wie auch immer).
+		
+		Dies geschieht zumeist mit einem Try-Catch-Konstrukt, welcher in zwei Blöcke aufgeteilt ist:
+		\begin{itemize}
+			\item Der \textit{Try-Block} enthält den Code, der die Exception auslösen kann. Tritt irgendwo eine Exception auf, so bricht die Ausführung dieses Blocks ab.
+			\item Der \textit{Catch-Block} fängt eine mögliche Exception und wird nur ausgeführt, wenn im Try-Block ein Fehler aufgetreten ist. Sofern der Catch-Block nicht für einen Abbruch der Ausführung sorgt, wird nach seiner Ausführung einfach mit der ersten Zeile nach dem Try-Catch fortgefahren.
+			\item In den meisten Sprachen gibt es noch einen Finally-Block, diesen werden wir aber erst im Java-Abschnitt zu Exceptions (\refImpl{exceptions}{Java}) behandeln.
+		\end{itemize}
+		
+		\paragraph{Beispiel}
+			Sei wieder die Methode aus Abbildung \ref{fig:throw_exceptions} gegeben, nur rufen wir diese diesmal auf.
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Java, style = base]
+// Try-Catch-Konstrukt
+try { // Try-Block
+
+	// Dieser Aufruf geht noch gut, denn '2 != 0'.
+	divide(4, -2)
+	// Dieser Aufruf wird fehlschlagen und der Catch-Block wird ausgefuehrt.
+	divide(5, 0)
+	// Dieser Aufruf wird nicht mehr ausgefuehrt, da der vorherige Aufruf
+	// fehlgeschlagen ist.
+	divide(6, 2)
+} catch (String exception) { // Catch-Block
+
+	// Der String 'exception' enthaelt nun den Wert "MathException: Cannot divide
+	// by 0.", welcher von der Methode divide(int, int) als Fehlermeldung
+	// uebergeben wurde.
+	// Wir geben den Fehler hier einfach aus und behandeln ihn nicht weiter.
+	print(exception)
+}
+				\end{lstlisting}
+				\caption{Exceptions Fangen: Beispiel}
+			\end{figure}
+		% end
+	% end
+	
+	\subsubsection{Exception-Typen}
+		Es wird im allgemeinen zwischen den folgenden Exception-Typen unterschieden:
+		\begin{description}
+			\item[Geprüft] Diese Exceptions müssen von dem Aufrufer gefangen und behandelt oder weitergeleitet werden. Das Ignorieren der Exception führt zu einem Compiler Fehler.
+			\item[Nicht Geprüft] Diese Exceptions müssen nicht von dem Aufrufer gefangen werden und können ignoriert werden. Allerdings stürzt das Programm ab, sollte doch ein solcher Fehler auftreten.
+		\end{description}
+		
+		\info{Die Diskussion, ob man nur geprüfte Exceptions, nur ungeprüfte Exceptions oder beides verwenden sollte, ist sehr langwierig und es gibt für beide Seiten gute Argumente. Meiner Meinung nach ist die Mischform der beste Weg, da dieser am meisten Flexibilität bietet.}
+	% end
+% end
