@@ -32,7 +32,7 @@
         + Operatoren
             * Auswertungsreihenfolge/Bindungsstärke
             * Logische Operatoren (land, lor, lxor, lnot)
-            * **Bitlogische Operatoren (band, bor, bxor, bnot)**
+            * Bitlogische Operatoren (band, bor, bxor, bnot)
         + Links-/Rechtsauswertungen
         + Seiteneffekte (Multithreading, Schleifen)
     - Kontrollstrukturen
@@ -75,15 +75,17 @@
             * Linked List
             * **Zyklische Listen**
         + Map
-    - **I/O**
-    - **Multithreading und parallele Verarbeitung**
+    - I/O
+    - *Multithreading und parallele Verarbeitung*
         + **Thread**
         + **Parallelisierung**
         + **Problematiken und Annomalien (nur kurz anschneiden)**
         + **Beispiel: Window Manager**
-    - **GUI (Graphical User Interface)**
+    - *GUI (Graphical User Interface)*
     - Dokumentation
         + Verträge
+    - *Testen*
+        + **Vergleich von Fließkommazahlen**
 3. *HtdP-TL (Abgrenzung HtdP-TL <--> Racket)*
     - **Lexikalische Bestandteile**
         + **Bezeichner und Konventionen**
@@ -307,7 +309,7 @@
                 - **Sortieren**
             * **Iterator**
             * **Foreach-Schleife**
-    - **Streams**
+    - *Streams*
         + **Optional**
         + **Erstellung**
         + **Verarbeitung**
@@ -316,7 +318,7 @@
         + **Zufällige Streams (91, 93)**
         + **Eigene Streams (96, 98)**
         + **Parallele Streams und Risiken (vlg. YouTube-Video)**
-    - **I/O**
+    - *I/O*
         + **Abgrenzung: Funktionale vs. I/O Streams**
         + **Input Streams und Output Streams**
             * **Input Stream Ausprägungen**
@@ -342,16 +344,16 @@
         + **Standard Ein-/Ausgabe, Fehlerausgabe**
         + **Verarbeitung mit funktionalen Streams**
         + **Ausblick: Zip, Jar, Audio**
-    - **Native I/O**
+    - *Native I/O*
         + **Klasse `Files`**
         + **Klasse `Paths`**
-    - **Multithreading**
+    - *Multithreading*
         + **Runnable und Thread**
             * **Erstellen, Starten, Stoppen**
         + **Klasse `Thread`, Interface `Runnable`**
         + **Inferenz von verschiedenen Threads**
         + **Parallelisierung**
-    - **GUI (Graphical User Interface)**
+    - *GUI (Graphical User Interface)*
         + **Klasse `Frame`**
         + **Buttons und Action Listener**
             * **Klasse `Button`**
@@ -401,14 +403,14 @@
         + **Methoden**
         + **Konstruktoren**
         + **etc.**
-    - **Sonstiges**
+    - *Sonstiges*
         + **System Properties**
         + **Garbage Collector**
 5. *Abstraktion*
-    - **Abstraktion**
+    - *Abstraktion*
         + **Generalisierung: Gleiches zusammenfassen**
         + **Differenzieren: Verschiedenes strikt voneinander trennen**
-    - **Funktionale Abstraktion**
+    - *Funktionale Abstraktion*
         + **Funktionen sind die zentralen Bausteine**
         + **Deklarativ**
             * **Beschreibung des Ergebnisses**
@@ -426,7 +428,7 @@
             * **Rekursion**
             * **Präfixnotation**
             * **Strikte Klammerungsregeln**
-    - **Objektorientierte Abstraktion**
+    - *Objektorientierte Abstraktion*
         + **Objekte sind die zentralen Bausteine**
             * **Funktionen heißen meist Methoden**
         + **Objekte haben Zustände**

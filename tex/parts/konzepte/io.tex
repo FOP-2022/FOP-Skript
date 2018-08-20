@@ -1,0 +1,33 @@
+\introduces{von I/O}{io}
+
+Mit I/O (Input/Output, Eingabe/Ausgabe) wird im Allgemeinen das Lesen von Daten (Input, Eingabe) und das Schreiben von Daten (Output, Ausgabe) bezeichnet.
+
+Dies kann das Erstellen von Ordnern im Dateisystem sein, das Lesen von Dateien oder das Schreiben selbiger.
+
+Jede Sprache kann unterschiedlich viele unterschiedliche I/O-Operationen durchführen, die meisten unterstützen aber mindestens das Lesen und Schreiben von Dateien.
+
+\subsection{Allgemeiner Aufbau}
+	\warning{In diesem Abschnitt schauen wir uns den allgemeinen Aufbau von Lese-/Schreiboperationen an, wie er in den meisten Sprachen zu finden ist. Es gibt aber auch Sprachen, bei denen dies grundlegend anders funktioniert.}
+	
+	\paragraph{Lesen}
+		\begin{enumerate}
+			\item Die Datei wird \textit{geöffnet} (\textit{open}). Hierbei wird überprüft, ob die Datei überhaupt existiert, ob das Programm die Datei Lesen darf, u.v.m..
+			\item Die Daten werden (auf irgendeine Weise) gelesen\dots
+			\item Die Datei wird \textit{geschlossen} (\textit{close}). Dabei werden die Ressourcen wieder freigegeben, sodass ein anderes Programm die Datei lesen kann, die Datei gelöscht werden kann, etc..
+		\end{enumerate}
+		
+		\warning{Der Letzte Schritt (close) ist mit Abstand am wichtigsten, da hiermit sichergestellt wird, dass das umliegende System intakt bleibt. Eine Datei sollte \textit{immer} geschlossen werden, unabhängig ob bei dem Lesen ein Fehler aufgetreten ist.}
+	% end
+	
+	\paragraph{Schreiben}
+		Der Prozess, um eine Datei zu Schreiben ist dem Prozess zum Lesen sehr ähnlich, wie wir im folgenden sehen werden.
+	
+		\begin{enumerate}
+			\item Die Datei wird \textit{geöffnet} (\textit{open}). Hierbei wird überprüft, ob die Datei überhaupt existiert, ob das Programm die Datei Schreiben darf, u.v.m..
+			\item Die Daten werden (auf irgendeine Weise) schreiben\dots
+			\item Die Datei wird \textit{geschlossen} (\textit{close}). Dabei werden die Ressourcen wieder freigegeben, sodass ein anderes Programm die Datei lesen (oder schreiben) kann, die Datei gelöscht werden kann, etc..
+		\end{enumerate}
+		
+		\warning{Der Letzte Schritt (close) ist mit Abstand am wichtigsten, da hiermit sichergestellt wird, dass das umliegende System intakt bleibt. Eine Datei sollte \textit{immer} geschlossen werden, unabhängig ob bei dem Schreiben ein Fehler aufgetreten ist.}
+	% end
+% end

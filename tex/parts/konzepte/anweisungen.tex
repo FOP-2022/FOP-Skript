@@ -75,6 +75,24 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 		Auch für die logischen Operatoren gilt, dass Gesetze und Axiome aus der Logik auch in der Programmierung anwendbar sind (beispielsweise die De Morganschen Gesetze).
 	% end
 	
+	\subsubsection{Bitlogische Operatoren}
+		Bitlogische Operatoren arbeiten ähnlich zu den logischen Operatoren, können aber auf Zahlen operieren. Hierbei wird jedes Bit einer Zahl einzeln betrachtet, sodass wieder mit \textit{Wahr} (\texttt{1}) und \textit{Falsch} (\texttt{0}) gearbeitet werden kann. Hier sind üblicherweise ebenfalls die üblichen logischen Operatoren \enquote{AND}, \enquote{OR}, \enquote{NOT} und \enquote{XOR} verfügbar.
+		
+		Wir betrachtet nun einige Beispiele, welche allesamt auf den Zahlen \( \alpha = \texttt{1100} _ 2 = \texttt{12} _ {10} \) und \( \beta = \texttt{1010} _ 2 = \texttt{10} _ {10} \) operieren, dabei ist sowohl das Ergebnis in Binär (tiefgestellte 2) und in Dezimal (tiefgestellte 10) angegeben:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{l | c c}
+				                                  & Binär                   & Dezimal                  \\ \hline
+				\( \alpha \texttt{ AND } \beta \) & \( \texttt{1000} _ 2 \) & \( \texttt{8} _ {10} \)  \\
+				\( \alpha \texttt{ OR } \beta \)  & \( \texttt{1110} _ 2 \) & \( \texttt{14} _ {10} \) \\
+				\( \texttt{NOT } \alpha \)        & \( \texttt{0011} _ 2 \) & \( \texttt{3} _ {10} \)  \\
+				\( \texttt{NOT } \beta \)         & \( \texttt{0101} _ 2 \) & \( \texttt{5} _ {10} \)  \\
+				\( \alpha \texttt{ XOR } \beta \) & \( \texttt{0110} _ 2 \) & \( \texttt{6} _ {10} \)
+			\end{tabular}
+			\caption{Ergebnistafel für bitlogische Operationen}
+		\end{table}
+	% end
+	
 	\subsubsection{Bindungsstärke}
 		Da meistens mehrere Operatoren innerhalb eines Ausdrucks verwendet werden, ist es wichtig zu wissen, in welcher Reihenfolge die Operatoren ausgeführt werden. Diese Reihenfolge wird \enquote{Auswertungsreihenfolge} genannt und basiert auf der \enquote{Bindungsstärke} von Operatoren. Ein Operator mit einer hohen Bindungsstärke wird hierbei vor einem Operatoren mit einer geringeren Bindungsstärke ausgeführt.
 		
