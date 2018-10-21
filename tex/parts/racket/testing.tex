@@ -1,3 +1,10 @@
-\todo{Schreiben}
+\implements{Testen}{testing}{\racket}
 
-% check-expect, check-within, check-error
+Auch in \racketText ist es natürlich möglich, Tests zu schreiben.
+
+Hierzu haben wir drei grundlegende Funktionen zur Verfügung, die wie folgt heißen (auch hier wieder nur eine Auswahl, eine gesamte Liste steht in Abschnitt \ref{sec:racket_summary}):
+\begin{itemize}
+	\item \lstinline[language = Racket]|(check-expect <Ausdruck> <Erwartetes Ergebnis>)| Testet, ob der Ausdruck das erwartete Ergebnis produziert.
+	\item \lstinline[language = Racket]|(check-within <Ausdruck> <Erwartetes Ergebnis> <Delta>)| Testet, ob der Ausdruck das erwartete Ergebnis \( \pm\text{Delta} \) produziert.
+	\item \lstinline[language = Racket]|(check-error <Ausdruck> <Erwartete Fehlermeldung>)| Testet, ob der Ausdruck einen Fehler mit der erwarteten Meldung produziert.
+\end{itemize}

@@ -1,5 +1,62 @@
-\todo{Schreiben}
+\implements{Kontrollstrukturen}{kontrollstrukturen}{\racket}
 
-\subsection{Verzweigungen}
-	\todo{Schreiben} % if, cond
+In diesem Abschnitt schauen wir uns an, wie Kontrollstrukturen in \racketText umgesetzt werden. \racketText kennt dabei die Kontrollstrukturen \textit{If} und \textit{Cond} (von \enquote{Conditional}), wobei \textit{Cond} nur eine Vereinfachung von vielen geschalteten Ifs darstellt.
+
+In \racketText gibt es keine Schleifen, da \racketText eine funktionale Programmiersprache ist! Alle Wiederholungen werden über Rekursion \footnote{Siehe \refImpl{recursion}{\racket}} gelöst.
+
+\subsection{If}
+	Das \textit{If} ist die einfachste Form der Verzweigung und hat folgende Form:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(if <Abfrage> <Wahr-Fall> <Falsch-Fall>)|
+	\end{figure}
+	Wird der Ausdruck \texttt{<Abfrage>} zu Wahr ausgewertet, so wird das Ergebnis von \texttt{<Wahr-Fall>} zurück gegeben. Ansonsten wir das Ergebnis von \texttt{<Falsch-Fall>} zurück gegeben.
+	
+	\warning{Bei einem If in \racketText müssen \textit{immer} sowohl Wahr- als auch Falsch-Fall angegeben werden!}
+	
+	\paragraph{Beispiele}
+		\begin{itemize}
+			\item \lstinline[language = Racket]|(if (= (modulo x 2) 0) 'even 'odd)| \\
+				  Wertet zu \texttt{'even} aus, wenn \texttt{x} gerade ist und sonst zu \texttt{'odd}.
+			\item \lstinline[language = Racket]|(if (> x y) x y)| \\
+				  Wertet zu dem Maximum von \texttt{x} und \texttt{y} aus (also \( \max \{ x, y \} \)).
+		\end{itemize}
+	% end
+% end
+
+\subsection{Cond}
+	Ein \textit{Cond} vereinfacht verschachtelte If-Abfragen immens, wie wir gleich sehen werden. Schauen wir uns dazu folgendes verschachteltes If an:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+(if (< x y)
+	-1
+	(if (> x y)
+		1
+		0
+	)
+)
+\end{lstlisting}
+	\end{figure}
+
+	Und nun noch die allgemeine Syntax von Cond:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(cond (<Test1> <Ausdruck1>) *@\dots@* (<TestN> <AusdruckN>)) [(else <Ansonsten>)]|
+	\end{figure}
+	Wobei der gesamte Ausdruck zu \texttt{<AusdruckK>} auswertet genau dann wenn \texttt{<TestK>} Wahr wird und zu \texttt{<Ansonsten>} auswertet, wenn alle Tests negativ ausfallen.
+	
+	Dann können wir das obige If zu folgendem Code vereinfachen:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+(cond
+	((< x y) -1)
+	((> x y)  1)
+	((= x y)  0)
+)
+\end{lstlisting}
+	\end{figure}
+
+	Damit haben wir nun das nötige Handwerkszeug, um komplexe Programme zu schreiben.
 % end
