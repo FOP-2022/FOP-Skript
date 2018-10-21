@@ -34,14 +34,6 @@
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlist[description]{style = multiline, leftmargin = 4cm, align = parright}
 
-% TODO: Remove these colors in favor of the TU CI.
-\definecolor{gray}{rgb}{0.2, 0.2, 0.2}
-\definecolor{lightred}{rgb}{1, 0.3, 0}
-\definecolor{lightblue}{rgb}{0, 0.5, 1}
-\definecolor{darkred}{rgb}{0.6, 0, 0}
-\definecolor{darkgreen}{rgb}{0, 0.6, 0}
-\definecolor{orange}{rgb}{1, 0.8, 0}
-
 \colorlet{lstcomments}{tud4c}
 \colorlet{lstkeywords}{tud9d}
 \colorlet{lstlinenumbers}{tud0c}
@@ -54,8 +46,7 @@
 
 \tikzset{> = { Latex[length = 2mm] }}
 
-%\newfontfamily\DejaSans{DejaVu Sans}
-
+\lstdefinelanguage{Racket}{}
 \lstdefinestyle{base}{
 	moredelim = **[is][\color{errorred}]{@@!}{@@@},
 	moredelim = **[is][\color{changedpurple}]{@@?}{@@@}

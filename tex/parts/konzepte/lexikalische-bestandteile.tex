@@ -33,6 +33,17 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 	Als \enquote{Literale} werden Werte bezeichnet, welche nicht über Variablen oder Konstanten (siehe \refIntr{variablen}) verarbeitet werden, sondern die direkt im Quellcode des Programms stehen (das heißt \enquote{hardcoded} (festgeschrieben) sind).
 	
 	Wir behandeln die Syntax der Erstellung und Nutzung von Literalen hier nicht weiter, da sich dies von Sprache zu Sprache stark unterscheidet. Die spezielle Syntax für \racket und Java werden wir in den Abschnitten \refImpl{literale}{\racket} (\racket) und \refImpl{literale}{Java} (Java) behandeln.
+	
+	\paragraph{Escape-Sequenzen}
+		Schweifen wir nochmals kurz ab zu den Literalen und betrachten sogenannte \enquote{Escape-Sequenzen}. Eine Escape-Sequenz ist eine bestimmte Abfolge von Zeichen, die bei der Ausführung durch andere Zeichen ersetzt werden.
+		
+		\textbf{Beispiel:} Bei einer Zeichenkette, die mit einfachen Hochkommata eingeschlossen wird, ist nicht zu unterscheiden ob \texttt{'{}'{}'{}'} einen oder zwei Zeichenketten darstellt. Meistens wird nun der \textit{Backslash} (\textbackslash) genutzt,
+		um zu sagen \enquote{das nächste Zeichen ist kein Steuerzeichen, sondern ein Buchstabe}: \texttt{'\textbackslash'\textbackslash'{}'}. Nun ist klar, dass es sich um eine Zeichenkette handelt, die aus zwei Hochkommata besteht.
+		
+		Ähnlich wird es mit Zeilenumbrüchen gehandhabt. Diese werden meistens als \texttt{\textbackslash n} dargestellt (wobei das \enquote{n} für \enquote{new line} steht).
+		
+		\textit{Die genauen Escape-Sequenzen und ob diese überhaupt nötig sind hängt natürlich von der Programmiersprache ab und wir schauen es uns somit erneut an.}
+	% end
 % end
 
 \subsection{Schlüsselwörter} \functionalMark \imperativeMark \oopMark

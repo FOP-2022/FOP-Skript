@@ -1,5 +1,11 @@
 # Struktur
 
+## Weiteres
+
+* Verweise auf die Oracle-Docs und API
+* "Was brauche ich für dieses Kapitel?"
+
+
 ## Gliederung
 
 * Wichtig: Siehe [nicht enthaltene Themen](struktur-themen.md).
@@ -18,7 +24,7 @@
         + Datentypen (Zeichenketten, Ganzzahlen, Gleitkommazahlen, …)
             * **Zahlendarstellung (Ganze Zahlen, 2-Komplement, Fließkomma, IEEE 754)**
         + Literale
-            * **Escape-Sequenzen**
+            * Escape-Sequenzen
         + Schlüsselwörter
         + Bezeichner
         + Operatoren
@@ -73,86 +79,86 @@
             * Liste
             * Menge
             * Linked List
-            * **Zyklische Listen**
+            * Zyklische Listen
         + Map
     - I/O
-    - *Multithreading und parallele Verarbeitung*
-        + **Thread**
-        + **Parallelisierung**
-        + **Problematiken und Annomalien (nur kurz anschneiden)**
-        + **Beispiel: Window Manager**
-    - *GUI (Graphical User Interface)*
+    - Multithreading und parallele Verarbeitung
+        + Thread
+        + Parallelisierung
+        + *Problematiken und Annomalien (nur kurz anschneiden)*
+        + Beispiel: Window Manager
+    - GUI (Graphical User Interface)
     - Dokumentation
         + Verträge
-    - *Testen*
-        + **Vergleich von Fließkommazahlen**
-3. *HtdP-TL (Abgrenzung HtdP-TL <--> Racket)*
-    - **Lexikalische Bestandteile**
-        + **Bezeichner und Konventionen**
-        + **Datentypen**
-            * **Zahlen (Ganzzahl, Fließkomma, Bruch, Irrational, Komplex)**
-            * **Symbole**
-            * **Wahrheitswerte**
-            * **Strings**
-        + **Literale**
-        + **Strukturierung des Codes**
-    - **Anweisungen**
-        + **Methodenaufrufe**
-        + **Konstanten (Name, Typ)**
-        + **Operatoren**
-            * **Arithmetik (`+`, `-`, `*`, `/`, `modulo`, `sqrt`, `pi`)**
-            * **etc.**
-        + **Abfragen/Vergleiche**
-            * **Gleichheit, Less-/Greater-Than**
-            * **Prädikate**
-                - **Typabfragen**
-                    + **`number?`**
-                    + **`real?`**
-                    + **`rational?`**
-                    + **`integer?`**
-                    + **`natural?`**
-                    + **`string?`**
-                    + **`cons?`, `empty?`**
-    - **Kontrollstrukturen**
-        + **Verzweigungen**
-            * **If**
-            * **Cond**
-    - **Funktionen**
-        + **Bestandteile (Name, Parameter, Rückgabe)**
-        + **Verträge (siehe Doku)**
-        + **Rekursion**
-    - **Fehlerbehandlung**
-        + **Errors**
-        + **Result Code**
-    - **Datenstrukturen**
-        + **Listen**
-            * **`list`**
-            * **`cons`**
-            * **`first`, `second`, `third`, `fourth`, `fifth`, `sixth`, `seventh`, `eigth`, `rest`**
-            * **`empty`**
-        + **Structs**
-            * **Definition**
-            * **Prädikate**
-            * **Attribute + Zugriff**
-    - **Testen (`check-expect/within/error`)**
-    - **Funktionen als Daten (Parameter)**
-    - **Funktionen höherer Ordnung**
-        + **Lambdas**
-        + **Beispiele**
-            * **`filter`**
-            * **`map`**
-            * **`fold`**
-            * **Vergleich von zwei Listen**
-    - **Streams (Racket)**
-        + **`stream-cons`**
-        + **`stream-first`**
-        + **`stream-rest`**
-        + **`stream-empty?`**
-        + **`stream-map`**
-        + **`stream-filter`**
-        + **`stream-fold`**
-    - **Dokumentation (JavaDoc)**
-        + **Verträge**
+    - Testen (+ Vergleich von Fließkommazahlen)
+3. HtdP-TL (Abgrenzung HtdP-TL <--> Racket)
+    - Lexikalische Bestandteile
+        + Bezeichner und Konventionen
+        + Datentypen
+            * Zahlen (Ganzzahl, Fließkomma, Bruch, Irrational, Komplex)
+            * Symbole
+            * Wahrheitswerte
+            * Strings
+        + Literale
+        + *Strukturierung des Codes*
+    - *Anweisungen*
+        + *Methodenaufrufe*
+        + *Konstanten (Name, Typ)*
+        + *Operatoren*
+            * *Arithmetik (`+`, `-`, `*`, `/`, `modulo`, `sqrt`, `pi`)*
+            * *etc.*
+        + Abfragen/Vergleiche*
+            * *Gleichheit, Less-/Greater-Than*
+            * *Prädikate*
+                - *Typabfragen*
+                    + *`number?`*
+                    + *`real?`*
+                    + *`rational?`*
+                    + *`integer?`*
+                    + *`natural?`*
+                    + *`string?`*
+                    + *`cons?`, `empty?`*
+    - *Kontrollstrukturen*
+        + *Verzweigungen**
+            * *If*
+            * *Cond*
+    - *Funktionen*
+        + *Bestandteile (Name, Parameter, Rückgabe)*
+        + *Verträge (siehe Doku)*
+        + *Rekursion*
+    - *Fehlerbehandlung*
+        + *Errors*
+        + *Result Code*
+    - *Datenstrukturen*
+        + *Listen**
+            * *`list`*
+            * *`cons`*
+            * *`first`, `second`, `third`, `fourth`, `fifth`, `sixth`, `seventh`, `eigth`*
+            * *`rest`*
+            * *`empty`*
+        + *Structs*
+            * *Definition*
+            * *Prädikate*
+            * *Attribute + Zugriff*
+    - *Testen (`check-expect/within/error`)*
+    - *Funktionen als Daten (Parameter)*
+    - *Funktionen höherer Ordnung*
+        + *Lambdas*
+        + *Beispiele*
+            * *`filter`*
+            * *`map`*
+            * *`fold`*
+            * *Vergleich von zwei Listen*
+    - *Streams (Racket)*
+        + *`stream-cons`*
+        + *`stream-first`*
+        + *`stream-rest`*
+        + *`stream-empty?`*
+        + *`stream-map`*
+        + *`stream-filter`*
+        + *`stream-fold`*
+    - *Dokumentation*
+        + *Verträge*
 4. Java
     - Lexikalische Bestandteile
         + *Datentypen*
@@ -209,10 +215,9 @@
             * `for`
             * `for` each / erweitertes `for`
             * `break`, `continue`
-    - *Methoden*
-        + **Aufgabe (Kopf/Rumpf)**
-            * **Methodenkopf**
-                - **Varargs**
+    - Methoden
+        + Der Methodenkopf
+            * Varargs
         + **Signatur**
         + **Formale Parameter vs. Aktualparameter**
         + **Veträge in Form von Javadoc**

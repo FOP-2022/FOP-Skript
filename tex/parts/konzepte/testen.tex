@@ -1,1 +1,45 @@
-\todo{Schreiben}
+\introduces{von Testen}{testing}
+
+Das Durchführen und erstellen von Tests in der Softwareentwicklung sehr wichtig, stellt uns aber auch vor große Herausforderungen, zum Beispiel:
+\begin{itemize}
+	\item \textit{Was ist überhaupt ein Test?}
+	\item \textit{Was ist eigentlich ein guter Test?}
+	\item \textit{Wie kann ein sehr großes System getestet werden?}
+	\item Was muss beim Testen beachtet werden?
+	\item Wie können Tests automatisiert werden?
+	\item \dots
+\end{itemize}
+
+Wir werden hier nur einige grundlegende Fragen (kursiv) beantworten und nicht sehr tief in die Materie hinabsteigen. Hierzu gibt es die Vorlesung \textit{Software Engineering} im dritten Semester und das Seminar \textit{Programmanalyse und Software-Tests} (Wahlbereich).
+
+\paragraph{Was ist überhaupt ein Test?}
+	Ein Test enthält eine systematische Beschreibung von:
+	\begin{itemize}
+		\item dem erwarteten Anfangszustand des Systems,
+		\item den auszuführenden Schritten und
+		\item dem erwarteten Endergebnis.
+		\item Außerdem wird beschrieben, wie das Endergebnis validiert werden kann (beispielsweise durch Vergleich mit dem erwarteten Wert).
+	\end{itemize}
+	Außerdem muss ein Test wiederholbar sein.
+	
+	Dann kann einem Menschen oder Computer aufgetragen werden, die Schritte automatisiert durchzuführen und einen Bericht über das Ergebnis zu erstellen.
+% end
+
+\paragraph{Was ist eigentlich ein guter Test?}
+	Ein Test sollte einige Parameter für den Standardfall vorhalten, aber vor allem Randfälle testen. Tests sollen somit dafür sorgen, dass möglichst alle Teile eines Systems getestet werden.
+	
+	\textbf{Beispiel:} Wenn die Division getestet werden soll, sind Tests wie \(\frac{4}{2}\) zwar interessant, aber was tut das System bei \(\frac{4}{0}\)? Oder berechnet es die Nachkommastellen von \(\frac{4}{3}\) korrekt?
+% end
+
+\paragraph{Was muss beim Testen beachtet werden?}
+	Was genau beim Testen beachtet werden muss, hängt natürlich von dem System ab. Einige Dinge lassen sich aber allgemein sagen:
+	\begin{itemize}
+		\item Beim Vergleichen von Fließkommazahlen muss darauf geachtet werden, dass keine Äquivalenz-Vergleiche genutzt werden, da auch identische Berechnungen zu leicht anders gerundeten Zahlen führen können. Dies ist der internen Darstellung von Fließkommazahlen im Speicher zu schulden.
+		\item Somit sollte nicht auf Gleichheit geprüft werden, sondern ob das erhaltene Ergebnis \(a\) in einem bestimmten Radius \(\varepsilon\) um das erwartete Ergebnis \(e\) liegt:
+			\begin{equation*}
+				a \in [e - \varepsilon, e + \varepsilon] \quad\iff\quad e - \varepsilon \leq a \leq e + \varepsilon
+			\end{equation*}
+		\item Dabei entspricht \(\varepsilon\) dem maximalen Wert, um den das Ergebnis abweichen darf (also der Genauigkeit).
+		\item Meistens ist ein Wert wie \( \varepsilon = 10^{-8} = 0.00000001 \) vernünftig.
+	\end{itemize}
+% end

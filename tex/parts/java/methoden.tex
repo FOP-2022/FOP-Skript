@@ -1,1 +1,105 @@
-\todo{Schreiben}
+\implements{Methoden}{methoden}{Java}
+
+\textit{In Java sind Methoden immer an ein Objekt oder eine Klasse gebunden. Die Unterschiede hierzwischen werden wir uns später im Abschnitt \refImpl{oop}{Java} zu objektorientierter Programmierung in Java anschauen. In diesem Kapitel werden wir annehmen, dass sich alle Methoden in einer Klasse befinden, eine Instanz der Klasse vorliegt und die Methoden an diese Instanz gebunden sind.}
+
+Betrachten wir zur Einführung die folgende Methode:
+\begin{figure}[H]
+	\centering
+	\begin{lstlisting}
+int add(int a, int b) {
+	return a + b;
+}
+	\end{lstlisting}
+\end{figure}
+die die Summe der Zahlen \texttt{a} und \texttt{b} berechnet.
+
+Dabei entspricht \textit{int add(int a, int b)} dem Kopf der Methode und alles in den geschweiften Klammern (also \texttt{return a + b;}) dem Körper der Methode.
+
+\subsubsection{Der Methodenkopf}
+	Ein Methodenkopf hat folgenden allgemeinen Aufbau:
+	\begin{center}
+		\texttt{[MODIFIER] [GENERICS] <RÜCKGABETYP> <METHODENNAME>([PARAMETER])}
+	\end{center}
+	dabei ist die Angabe von Modifizierern (\textit{Modifier}), Generics und Parametern optional, wobei beliebig viele Parameter angegeben werden können. Die Klammern hinter dem Methodennamen müssen dennoch vorhanden sein, auch wenn keine Parameter angegeben werden.
+	
+	\paragraph{Modifizierer}
+		Die Modifizierer, die an einer Methode angegeben werden können, werden wir uns im Kapitel über objektorientierte Programmierung genauer anschauen, da die in Java vorhanden Modifizierer nur in diesem Kontext Sinn ergeben.
+		
+		\textbf{Erweitertes Wissen:} Eine Ausnahme stellt der Modifizierer \texttt{strictfp} dar, der der JVM aufträgt, arithmetische Operationen exakt wie in der Spezifikation der JVM vorzunehmen und nicht zu optimieren.
+	% end
+	
+	\paragraph{Generics}
+		Siehe \ref{sec:generics}.
+	% end
+	
+	\paragraph{Rückgabetyp}
+		Hiermit geben wir den Typ an, den das Ergebnis unserer Methode hat. Dies kann ein primitiver Datentyp oder eine Klasse sein. Wird nichts zurückgegeben, muss \texttt{void} angegeben werden, was so viel wie \enquote{nichts} heißt.
+	% end
+	
+	\paragraph{Methodenname}
+		Dies ist der Name der Methode, mit dem wir selbige referenzieren können. Der Name muss sich an die Grundregeln von Bezeichnern in Java halten (siehe \refImpl{identifier}{Java}).
+	% end
+	
+	\paragraph{Parameter}
+		Die ist eine Komma-separierte Liste von Parametern, die unsere Funktion erwartet.
+		
+		Einer dieser Parameter ist dabei aufgebaut wir eine normale Variablendeklaration, das heißt \texttt{[final] <DATENTYP> <NAME>}. Ein hier verwendeter Name kann im Körper der Methode nicht erneut für Variablen genutzt werden, der Zugriff auf den Wert des Parameters erfolgt, als wäre dieser eine ganz normale Variable. Ein in der Parameterliste angegebenes \texttt{final} verhält sich entsprechend.
+		
+		\subparagraph{Varargs}
+			Varargs sind eine spezielle Form der Parameter, die dem Aufrufer erlauben, beliebig viele Parameter zu übergeben.
+			
+			Betrachten wir hierzu folgendes Beispiel, um beliebig viele Zahlen zu addieren:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}
+int add(int[] numbers) {
+	int result = 0;
+	for (int x : numbers) {
+		result += x;
+	}
+	return result;
+}
+				\end{lstlisting}
+			\end{figure}
+			Ein Aufrufer müsste die Funktion zum Beispiel so aufrufen: \lstinline|add(new int[] { 1, 2, 3, 4, 5 })|, das heißt der müsste erst ein Array erstellen und dieses der Funktion übergeben. Dies stellt einen erheblichen Schreibaufwand dar.
+			
+			Hätten wir stattdessen unsere Funktion wie folgt mit Varargs gestaltet, vereinfacht sich der Aufruf, wie wir gleich sehen werden:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}
+int add(int... numbers) {
+	int result = 0;
+	for (int x : numbers) {
+		result += x;
+	}
+	return result;
+}
+				\end{lstlisting}
+			\end{figure}
+			nun Vereinfacht sich der funktional identische Aufruf zu \lstinline|add(1, 2, 3, 4, 5)|.
+			
+			Wir sehen auch, dass sich an dem Körper unserer Funktion nichts geändert hat, einzig und allein die manuelle Erstellung des Arrays verschwindet. Konkret heißt dies, dass Java uns die Arbeit abnimmt, das Array manuell zu erstellen, sondern dies im Hintergrund erledigt. Wenn der Aufrufer unbedingt will, kann er dennoch ein einfaches Array übergeben.
+			
+			\warning{Es ist nicht möglich, nach einem Vararg-Parameter noch weitere Parameter anzugeben, da Java sonst nicht wüsste, welche Parameter noch zum Varargs gehören und welche nicht. Vor einem Vararg-Parameter ist dies problemlos möglich.}
+		% end
+	% end
+% end
+
+\subsubsection{Signatur}
+	Die Signatur einer Methode muss innerhalb einer Klasse eindeutig sein. Zu der Signatur einer Methoden gehören
+	\begin{itemize}
+		\item der Methodenname und
+		\item die Typen der Parameter.
+	\end{itemize}
+
+	Somit sind bei den folgenden Methoden:
+	\begin{enumerate}
+		\item \lstinline|int add(int a, int b)|
+		\item \lstinline|float add(int a, int b)|
+		\item \lstinline|float add(float a, float b)|
+	\end{enumerate}
+	die Methoden 1 und 2 der Signatur nach identisch, die 3. Methode hingegen verschieden. Somit dürften in einer Klasse nur folgende Kombinationen vorkommen:
+	\begin{equation*}
+		\emptyset \,,\quad \{ 1 \} \,,\quad \{ 1, 3 \} \,,\quad \{ 2 \} \,,\quad \{ 2, 3 \}
+	\end{equation*}
+% end

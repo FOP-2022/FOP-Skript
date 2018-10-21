@@ -174,6 +174,73 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 			\caption{Datenstruktur: Doppelt gelinkte Liste}
 		\end{figure}
 	% end
+	
+	\subsubsection{Zyklische Listen}
+		Eine zyklische Liste ist eine indexlose Liste, die identisch zu einer Linked List im Speicher abgelegt ist, allerdings ist das \textit{next}-Feld des letzten Elements auf das erste Element gesetzt (und, im Falle einer doppelt gelinkten Liste, das \textit{previous}-Feld des ersten Elements auf das letzte Element). Natürlich ergibt es hier nicht wirklich einen Sinn, von einem ersten und letzten Element zu sprechen, da es in einem Kreis kein erstes/letztes Element gibt. Aber bei irgendeinem Element muss nun einmal begonnen werden.
+
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[every node/.style = { align = center }, elem/.style = { draw, rectangle, minimum width = 3cm }]
+				\node [elem] (el0) {\texttt{data: } \enquote{One} \\ \texttt{next} \\ \texttt{previous}};
+				\node [elem, right = 1.5 of el0] (el1) {\texttt{data: } \enquote{Two} \\ \texttt{next} \\ \texttt{previous}};
+				\node [elem, right = 1.5 of el1] (el2) {\texttt{data: } \enquote{Three} \\ \texttt{next} \\ \texttt{previous}};
+				
+				\coordinate (el0tl) at ($(el0.north west)!1/3!(el0.south west)$);
+				\coordinate (el0bl) at ($(el0.north west)!2/3!(el0.south west)$);
+				\coordinate (el0tr) at ($(el0.north east)!1/3!(el0.south east)$);
+				\coordinate (el0br) at ($(el0.north east)!2/3!(el0.south east)$);
+				\draw (el0tl) -- (el0tr);
+				\draw (el0bl) -- (el0br);
+				
+				\coordinate (el1tl) at ($(el1.north west)!1/3!(el1.south west)$);
+				\coordinate (el1bl) at ($(el1.north west)!2/3!(el1.south west)$);
+				\coordinate (el1tr) at ($(el1.north east)!1/3!(el1.south east)$);
+				\coordinate (el1br) at ($(el1.north east)!2/3!(el1.south east)$);
+				\draw (el1tl) -- (el1tr);
+				\draw (el1bl) -- (el1br);
+				
+				\coordinate (el2tl) at ($(el2.north west)!1/3!(el2.south west)$);
+				\coordinate (el2bl) at ($(el2.north west)!2/3!(el2.south west)$);
+				\coordinate (el2tr) at ($(el2.north east)!1/3!(el2.south east)$);
+				\coordinate (el2br) at ($(el2.north east)!2/3!(el2.south east)$);
+				\draw (el2tl) -- (el2tr);
+				\draw (el2bl) -- (el2br);
+				
+				
+				\coordinate (el0n) at ($(el0tr)!0.5!(el0br)$);
+				\coordinate (el0a) at ($(el0.north)!0.5!(el1.north)+(0,0.5)$);
+				\draw (el0n) -| (el0a);
+				\draw [->] (el0a) -| (el1.north);
+				
+				\coordinate (el1n) at ($(el1tr)!0.5!(el1br)$);
+				\coordinate (el1a) at ($(el1.north)!0.5!(el2.north)+(0,0.5)$);
+				\draw (el1n) -| (el1a);
+				\draw [->] (el1a) -| (el2.north);
+				
+				\coordinate (el2n) at ($(el2tr)!0.5!(el2br)$);
+				\coordinate (el2a) at ($(el2.north east)+(0.75,1)$);
+				\draw (el2n) -| (el2a);
+				\draw [->] (el2a) -| (el0.north);
+				
+				
+				\coordinate (el1o) at ($(el1bl)!0.5!(el1.south west)$);
+				\coordinate (el1b) at ($(el0.south)!0.5!(el1.south)-(0,0.5)$);
+				\draw (el1o) -| (el1b);
+				\draw [->] (el1b) -| (el0.south);
+				
+				\coordinate (el2o) at ($(el2bl)!0.5!(el2.south west)$);
+				\coordinate (el2b) at ($(el1.south)!0.5!(el2.south)-(0,0.5)$);
+				\draw (el2o) -| (el2b);
+				\draw [->] (el2b) -| (el1.south);
+				
+				\coordinate (el0o) at ($(el0bl)!0.5!(el0.south west)$);
+				\coordinate (el0b) at ($(el0.south west)-(0.75,1)$);
+				\draw (el0o) -| (el0b);
+				\draw [->] (el0b) -| (el2.south);
+			\end{tikzpicture}
+			\caption{Datenstruktur: Doppelt gelinkte Liste}
+		\end{figure}
+	% end
 % end
 
 \subsection{Map}

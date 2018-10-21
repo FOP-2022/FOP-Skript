@@ -1,0 +1,101 @@
+\subsection{Datentypen}
+	\implements{Datentypen}{datentypen}{\racket}
+	
+	Im folgenden schauen wir uns an, was es in \racket\, für Datentypen gibt:
+	\begin{itemize}
+		\item Zahlen
+			\begin{itemize}
+				\item Ganzzahlen
+				\item Fließkommazahlen
+				\item Brüche
+				\item Irrationale (ungenaue) Zahlen
+				\item Komplexe Zahlen
+			\end{itemize}
+		\item Wahrheitswerte
+		\item Symbole
+		\item Strings
+		\item Structs
+		\item Listen
+	\end{itemize}
+
+	Dabei ist \racket\, aber nicht statisch typisiert, das heißt die Datentypen nicht mit angegeben werden, sondern es ist ausreichend, wenn zur Laufzeit der korrekte Datentyp in einer Variable gespeichert ist (es ist zum Beispiel nicht möglich, Strings zu addieren). Ist nicht der korrekte Datentyp gespeichert, so tritt ein Fehler auf.
+	
+	\paragraph{Symbole}
+		Symbole sind einfache Zeichenketten, die ausschließlich verglichen werden können und weniger Funktionalität als Strings bieten.
+		
+		Allerdings ist die Verwendung von Symbolen sehr effizient und zu empfehlen, wenn wir mit der produzierten Zeichenkette nichts weiter tun wollen als sie zu vergleichen (dies tritt erstaunlich oft auf, öfter als man im Allgemeinen denkt).
+	% end
+	
+	\paragraph{Listen}
+		Listen ist einer der wichtigsten Datentypen in \racket. Wir werden uns diesen wichtigen Datentyp im Abschnitt \ref{sec:racket_lists} genauer anschauen.
+	% end
+	
+	\paragraph{Sondertyp \textit{Struct}}
+		Ein \textit{Struct} (eine Struktur) ist von dem Entwickler definierbar und ermöglicht es, komplexe Datentypen zu speichern. Wir werden uns diesen besonderen Datentyp im Abschnitt \ref{sec:structs} anschauen.
+	% end
+% end
+
+\subsection{Literale}
+	\implements{Literalen}{literale}{\racket}
+	
+	Wie wir Literale im Code ablegen, hängt von dem Datentyp ab, den wir produzieren wollen:
+	
+	\todo{Komplexe Zahl}
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{l | l}
+			\textbf{Datentyp} & \textbf{Schreibweise} \\ \hline
+			Ganzzahl & \lstinline[language = Racket]|42| \\
+			Fließkommazahl & \lstinline[language = Racket]|21.5| \\
+			Bruch & \lstinline[language = Racket]|2/3| \\
+			Irrationale (ungenaue) Zahl & \lstinline[language = Racket]|#i2.1415| \\
+			Komplexe Zahl & \lstinline[language = Racket]|5i+2| \\
+			Wahrheitswert & \lstinline[language = Racket]|true|, \lstinline[language = Racket]|false|, \lstinline[language = Racket]|#t|, \lstinline[language = Racket]|#f|, \lstinline[language = Racket]|#true|, \lstinline[language = Racket]|#false| \\
+			Symbol & \lstinline[language = Racket]|'symbol|, \lstinline[language = Racket]|'"string as symbol"| \\
+		\end{tabular}
+		\caption{\racket: Literale verschiedener Datentypen}
+	\end{table}
+
+	\paragraph{Symbol-Literale}
+		Wenn wir Symbole verwenden, der Text hinter den Symbolen allerdings ein valides Literal eines anderen Datentyps darstellt, so wird das Symbol in den jeweiligen Datentyp umgeformt. Außerdem können wir auch Leerzeichen und Klammern innerhalb eines Symbols verwenden, wenn wir diesen einen Backslash (\(\backslash\)) voranstellen. Wenn wir viele Leerzeichen innerhalb eines Symbols verwenden wollen, können wir um den Inhalt des Symbols Senkrechtstriche setzen.
+		
+		Somit ist alles folgende äquivalent:
+		\begin{itemize}
+			\item \lstinline[language = Racket]|'"string as symbol"| \(\iff\) \lstinline[language = Racket]|"string as symbol"|
+			\item \lstinline[language = Racket]|'12.34| \(\iff\) \lstinline[language = Racket]|12.34|
+			\item \lstinline[language = Racket]|'\ \(| \(\iff\) \texttt{'| (|} \todo{lstinline}
+		\end{itemize}
+	% end
+% end
+
+\subsection{Bezeichner und Konventionen}
+	\implements{Bezeichnern und Konventionen}{identifier}{\racket}
+
+	In \racket\, können annähernd alle Zeichen in Bezeichnern genutzt werden, u.a. \texttt{-}, \texttt{?}, usw.. Nicht möglich ist es, eine Zahl als das erste Zeichen eines Bezeichners zu wählen.
+	
+	Damit sind beispielsweise folgende Bezeichner gültig:
+	\begin{itemize}
+		\item \texttt{odd?}
+		\item \texttt{-}
+		\item \texttt{+-123?!}
+	\end{itemize}
+
+	\paragraph{Konventionen}
+		Bei der Benennung von Variablen und Funktionen sind folgende Konventionen üblich:
+		\begin{itemize}
+			\item Es werden nur Kleinbuchstaben verwendet.
+			\item Einzelne Wortabschnitte werden mit Bindestrichen getrennt (Beispiel: \texttt{is-this-real}).
+			\item Zur Benennung von Funktionen gibt es noch weitere Konventionen:
+				\begin{itemize}
+					\item Funktionen zur Umwandlung von Datentyp A in Datentyp B werden \texttt{A->B} genannt.
+					\item Funktionen, deren Rückgabe ein Wahrheitswert ist, wird in Fragezeichen nachgestellt. Beispiel: \texttt{odd?}
+					\item \todo{Weiterführen}
+				\end{itemize}
+		\end{itemize}
+	% end
+% end
+
+\subsection{Strukturierung des Codes}
+	\todo{Schreiben}
+% end
