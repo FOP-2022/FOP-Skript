@@ -1,39 +1,104 @@
-\todo{Schreiben}
+Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie wir Anweisungen formulieren können.
 
-\subsection{Methodenaufrufe}
-	\todo{Schreiben}
+\subsection{Funktionsaufrufe}
+	\implements{Funktionsaufrufen}{methodenNutzung}{\racket}
+	
+	Der zentrale Bestandteil von Anweisungen in \racketText\, sind Funktionsaufrufe. Mit diesen werden alle anderen Anweisungen (Addition, Subtraktion, \dots) realisiert.
+	
+	Der allgemeine Aufbau eines Funktionsaufrufs ist:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(<methodenname> [parameter])|
+	\end{figure}
+	Wobei verschiedene Parameter mit Leerzeichen getrennt werden.
+	
+	\paragraph{Beispiel}
+		Wir nehmen im folgenden an, dass eine Funktion \texttt{add} existiert, welche beliebig viele Parameter annimmt und die Summe dieser Zahlen bildet.
+		
+		Dann können wir die Funktion beispielsweise wie folgt aufrufen:
+		\begin{itemize}
+			\item \lstinline[language = Racket]|(add 1)|		\tabto{3cm} \(\rightarrow 1\)
+			\item \lstinline[language = Racket]|(add 1 2 3)|    \tabto{3cm} \(\rightarrow 6\)
+			\item \lstinline[language = Racket]|(add 40.5 1.5)| \tabto{3cm} \(\rightarrow 42\)
+		\end{itemize}
+	% end
 % end
 
 \subsection{Konstanten}
-	\todo{Schreiben}
+	\implements{Konstanten}{variablen}{\racket}
+	
+	Es ist uns in \racketText möglich, Daten in Konstanten abzulegen. Diese können wir, wie der Name es bereits sagt, nicht mehr modifizieren.
+	
+	Die Allgemeine Syntax zur Definition einer Konstante ist:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(define <name> <ausdruck>)|
+	\end{figure}
+	Dabei ist \texttt{<name>} ein Bezeichner, der den Bedingungen für Bezeichner genügen muss (siehe \refImpl{identifier}{\racket}). Als \texttt{<ausdruck>} können wir jeden beliebigen Ausdruck verwenden, also entweder einen Funktionsaufruf oder ein Literal (ein Literal ist auch ein Ausdruck).
+	
+	\paragraph{Beispiele}
+		Wir nehmen wie oben an, dass eine Funktion \texttt{add} existiert, welche beliebig viele Parameter annimmt und die Summe dieser Zahlen bildet.
+		
+		Dann sind beispielsweise alle folgenden Konstantendefinitionen zulässig:
+		\begin{itemize}
+			\item \lstinline[language = Racket]|(define PI #i2.1415)| 				  \tabto{7.5cm} Konstante \texttt{PI} mit Wert \texttt{\#i2.1415}.
+			\item \lstinline[language = Racket]|(define the-answer (add 39.5 1.5 1))| \tabto{7.5cm} Konstante \texttt{the-answer} mit Wert \texttt{42}.
+		\end{itemize}
+	% end
 % end
 
-\subsection{Operatoren}
-	\todo{Schreiben}
+\subsection{\enquote{Operatoren}}
+	\implements{Operatoren}{operatoren}{\racket}
 
-	\subsubsection{Arithmetik}
-		\todo{Schreiben}
-	% end
+	Wie wir bereits im Abschnitt über Funktionsaufrufe gesehen haben, läuft in \racketText alles auf selbige hinaus. Somit sind auch die üblichen Operatoren mit Funktionen realisiert.
+
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{l l l l}
+			\textbf{Operator} & \textbf{Funktionsdefinition}          & \textbf{Beispiel}                                & \textbf{Sonderfall}                 \\ \hline
+			Addition          & \texttt{(+ [Summanden])}              & \( \texttt{(+ 1 2 3)} \rightarrow 6 \)           & \( \texttt{(+)} \rightarrow 0 \)    \\
+			Subtraktion       & \texttt{(- <Minuend> [Subtrahenden])} & \( \texttt{(- 1 2 3)} \rightarrow -4 \)          & \( \texttt{(- 1)} \rightarrow -1 \) \\
+			Multiplikation    & \texttt{(+ [Faktoren])}               & \( \texttt{(* 1 2 3)} \rightarrow 6 \)           & \( \texttt{(*)} \rightarrow 1 \)    \\
+			Division          & \texttt{(+ <Dividend> [Divisoren])}   & \( \texttt{(/ 1 2 3)} \rightarrow \frac{1}{6} \) & \( \texttt{(/ 1)} \rightarrow 1 \)
+		\end{tabular}
+		\caption{Auswahl einiger \enquote{Operatoren} aus \racket}
+	\end{table}
+
+	In Abschnitt \ref{sec:racket_summary} werden nochmals alle Standard-Funktionen zusammengefasst.
 % end
 
 \subsection{Abfragen/Vergleiche}
-	\todo{Schreiben}
+	Auch in \racketText müssen Entscheidungen getroffen werden, weshalb uns grundlegende Vergleichsoperationen zur Verfügung stehen und Funktionen, um die Ergebnisse dieser Vergleiche zusammenzuführen.
+	
+	In diesem Abschnitt schauen wir uns einige dieser Vergleichsoperationen an, eine längere Liste befindet sich im Abschnitt \ref{sec:racket_summary}, in dem alle Funktionen übersichtlich dargestellt sind.
 
 	\subsubsection{Gleichheit, Größer-/Kleiner-Gleich}
-		\todo{Schreiben}
+		Diese üblichen Vergleichsoperatoren für Zahlen stehen uns selbstverständlich auch in \racketText zur Verfügung.
+		
+		Die allgemeine Syntax ist hier \texttt{(<Vergleich> <Zahl1> <Zahl2>)}, wobei wir als \texttt{<Vergleich>} folgendes nutzen können:
+		\begin{itemize}
+			\item \texttt{=}  \tabto{1cm} Prüft, ob \( \texttt{Zahl1} = \texttt{Zahl 2} \)
+			\item \texttt{>}  \tabto{1cm} Prüft, ob \( \texttt{Zahl1} > \texttt{Zahl 2} \)
+			\item \texttt{<}  \tabto{1cm} Prüft, ob \( \texttt{Zahl1} < \texttt{Zahl 2} \)
+			\item \texttt{>=} \tabto{1cm} Prüft, ob \( \texttt{Zahl1} \geq \texttt{Zahl 2} \)
+			\item \texttt{<=} \tabto{1cm} Prüft, ob \( \texttt{Zahl1} \leq \texttt{Zahl 2} \)
+		\end{itemize}
 	% end
 	
-	\subsubsection{Prädikate}
-		\todo{Schreiben}
-		
+	\subsubsection{Typüberprüfung}
+		Da \racketText wie bereits erwähnt nicht statisch typisiert ist, müssen wir in einigen Fällen den Typ selbst überprüfen (beispielsweise ist es sinnvoll zu prüfen, ob in einer Konstante wirklich eine Zahl steht, bevor wir diese summieren). Dazu stellt \racketText einige Prädikate bereit, die uns diese Arbeit abnehmen. Wie auch im vorherigen Abschnitt schauen wir uns hier nur eine kleine Auswahl an, eine große Liste befindet sich im Abschnitt \ref{sec:racket_summary}.
+	
+	
+		Die allgemeine Syntax ist hier \texttt{(<Prädikat> <Ausdruck>)}, wobei wir als \texttt{<Prädikat>} folgendes nutzen können:
 		\begin{itemize}
-			\item \lstinline[language = Racket|number?|
-			\item \lstinline[language = Racket|real?|
-			\item \lstinline[language = Racket|rational?|
-			\item \lstinline[language = Racket|integer?|
-			\item \lstinline[language = Racket|natural?|
-			\item \lstinline[language = Racket|string?|
-			\item \lstinline[language = Racket|cons?|, \lstinline[language = Racket|empty?|
+			\item \lstinline[language = Racket]|number?|   \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine Zahl ist.
+			\item \lstinline[language = Racket]|real?|     \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine reelle Zahl ist.
+			\item \lstinline[language = Racket]|rational?| \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine rationale Zahl ist.
+			\item \lstinline[language = Racket]|integer?|  \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine ganze Zahl ist.
+			\item \lstinline[language = Racket]|natural?|  \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine natürliche Zahl ist.
+			\item \lstinline[language = Racket]|string?|   \tabto{2cm} Prüft, ob der Wert des Ausdrucks ein String ist.
+			\item \lstinline[language = Racket]|cons?|     \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine Liste ist.
+			\item \lstinline[language = Racket]|empty?|    \tabto{2cm} Prüft, ob der Wert des Ausdrucks eine leere Liste ist.
 		\end{itemize}
 	% end
 % end

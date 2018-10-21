@@ -8,6 +8,7 @@
 \usepackage[linesnumbered, ruled]{algorithm2e}
 \usepackage{cite}
 \usepackage{enumitem}
+\usepackage{tabto}
 \usepackage[mathcal]{euscript} % Get readable mathcal font.
 \usepackage{hyperref}
 \usepackage{listings}
@@ -46,14 +47,47 @@
 
 \tikzset{> = { Latex[length = 2mm] }}
 
-\lstdefinelanguage{Racket}{}
+\lstdefinelanguage{Racket}{
+	% TODO: Add Keywords.
+	morekeywords = {
+		list,
+		cons,
+		first,
+		second,
+		third,
+		fourth,
+		fifth,
+		sixth,
+		seventh,
+		eigth,
+		rest,
+		empty,
+		number,
+		real,
+		rational,
+		integer,
+		natural,
+		string,
+		true,
+		false,
+		\#t,
+		\#f,
+		\#true,
+		\#false,
+		define,
+		remainder
+	},
+	sensitive = true,
+	morecomment=[l]{;},
+	morestring=[b]"
+}
 \lstdefinestyle{base}{
 	moredelim = **[is][\color{errorred}]{@@!}{@@@},
 	moredelim = **[is][\color{changedpurple}]{@@?}{@@@}
 }
 \lstset{
 	backgroundcolor = \color{white},
-	basicstyle = \ttfamily\footnotesize\color{black},
+	basicstyle = \ttfamily\normalsize\color{black},
 	breakatwhitespace = true,
 	breaklines = true,
 	breakautoindent = true,
@@ -82,6 +116,7 @@
 \providecommand{\abs}[1]{\ensuremath{{\lvert #1 \rvert}}}
 
 \providecommand{\racket}{HtdP-TL}
+\providecommand{\racketText}{\racket\,}
 \providecommand{\qed}{{\hfill q.e.d.}}
 
 \providecommand{\subsubparagraph}[1]{\hspace{1cm} \textbf{#1:}}

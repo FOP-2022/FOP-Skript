@@ -149,16 +149,9 @@
             * *`map`*
             * *`fold`*
             * *Vergleich von zwei Listen*
-    - *Streams (Racket)*
-        + *`stream-cons`*
-        + *`stream-first`*
-        + *`stream-rest`*
-        + *`stream-empty?`*
-        + *`stream-map`*
-        + *`stream-filter`*
-        + *`stream-fold`*
     - *Dokumentation*
         + *Verträge*
+    - *Zusammenfassung*
 4. Java
     - Lexikalische Bestandteile
         + *Datentypen*

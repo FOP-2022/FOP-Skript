@@ -40,8 +40,6 @@
 	
 	Wie wir Literale im Code ablegen, hängt von dem Datentyp ab, den wir produzieren wollen:
 	
-	\todo{Komplexe Zahl}
-	
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{l | l}
@@ -50,7 +48,7 @@
 			Fließkommazahl & \lstinline[language = Racket]|21.5| \\
 			Bruch & \lstinline[language = Racket]|2/3| \\
 			Irrationale (ungenaue) Zahl & \lstinline[language = Racket]|#i2.1415| \\
-			Komplexe Zahl & \lstinline[language = Racket]|5i+2| \\
+			Komplexe Zahl & \lstinline[language = Racket]|2+5i| \\
 			Wahrheitswert & \lstinline[language = Racket]|true|, \lstinline[language = Racket]|false|, \lstinline[language = Racket]|#t|, \lstinline[language = Racket]|#f|, \lstinline[language = Racket]|#true|, \lstinline[language = Racket]|#false| \\
 			Symbol & \lstinline[language = Racket]|'symbol|, \lstinline[language = Racket]|'"string as symbol"| \\
 		\end{tabular}
@@ -64,7 +62,7 @@
 		\begin{itemize}
 			\item \lstinline[language = Racket]|'"string as symbol"| \(\iff\) \lstinline[language = Racket]|"string as symbol"|
 			\item \lstinline[language = Racket]|'12.34| \(\iff\) \lstinline[language = Racket]|12.34|
-			\item \lstinline[language = Racket]|'\ \(| \(\iff\) \texttt{'| (|} \todo{lstinline}
+			\item \lstinline[language = Racket]|'\ \(| \(\iff\) \texttt{'| (|}
 		\end{itemize}
 	% end
 % end
