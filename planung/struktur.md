@@ -351,6 +351,7 @@
         + **Klasse `Thread`, Interface `Runnable`**
         + **Inferenz von verschiedenen Threads**
         + **Parallelisierung**
+<!--
     - *GUI (Graphical User Interface)*
         + **Klasse `Frame`**
         + **Buttons und Action Listener**
@@ -396,6 +397,7 @@
                 - **`JTable`**
                 - **`JScrollPane`**
         + **Applets (`JApplet`)**
+-->
     - *Dokumentation (JavaDoc)*
         + **Klassen**
         + **Methoden**
@@ -431,5 +433,5 @@
             * **Funktionen heißen meist Methoden**
         + **Objekte haben Zustände**
         + **Erst die Daten, dann die Funktion**
-6. *Komplexität und Landau-Symbolik [Gliederung siehe TeX]*
-7. *Glossar*
+<!-- 6. *Komplexität und Landau-Symbolik [Gliederung siehe TeX]* -->
+<!-- 7. *Glossar* -->
