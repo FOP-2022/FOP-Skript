@@ -1,29 +1,97 @@
-\todo{Schreiben}
+\implements{Datenstrukturen}{datastruct}{\racket}
+
+In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in \racketText implementiert werden und wie wir eigene hinzufügen können.
 
 \subsection{Listen}
-	\todo{Schreiben}
+	Listen sind der zentrale Bestandteil von \racketText, wie der Name der Ursprungssprache (LISP / List Processing) schon vermuten lässt.
 	
+	Listen sind in \racketText die einzige Möglichkeit, \enquote{beliebig viele} Daten in einem Feld zu speichern und mit Hilfe von Rekursion über diese zu iterieren. Listen werden dabei als einfach gelinkte Listen abgelegt, das heißt eine Liste besteht aus den Kopf (\texttt{first}) und dem Rest der Liste (\texttt{rest}).
+	
+	Zum Umgang mit diesen Listen sind folgende Funktionen/Konstanten verfügbar (alle Daten können auch ad-hoc von einem Ausdruck berechnet werden):
 	\begin{itemize}
-		\item \lstinline[language = Racket]|list|
-		\item \lstinline[language = Racket]|cons|
-		\item \lstinline[language = Racket]|first|, \lstinline[language = Racket]|second|, \lstinline[language = Racket]|third|, \lstinline[language = Racket]|fourth|, \lstinline[language = Racket]|fifth|, \lstinline[language = Racket]|sixth|, \lstinline[language = Racket]|seventh|, \lstinline[language = Racket]|eigth|
-		\item \lstinline[language = Racket]|rest|
-		\item \lstinline[language = Racket]|empty|
+		\item \lstinline[language = Racket]|(cons <Elemente> <Liste>)| \\ Funktion. Hängt das Element vorne an die Liste.
+		\item \lstinline[language = Racket]|empty| \\ Konstante. entspricht einer leeren Liste und wird zum anlegen einer neuen Liste benötigt (als zweiter Parameter zur \texttt{cons}),
+		\item \lstinline[language = Racket]|(list [Elemente])| \\ Funktion. Erstellt eine eine neue Liste, die alle gegebenen Elemente enthält. Die Elemente werden durch Leerzeichen getrennt.
+		\item \lstinline[language = Racket]|(first <Liste>)| \\ Funktion. Gibt das erste Element der Liste zurück, also den Kopf.
+		\item \lstinline[language = Racket]|(rest <Liste>)| \\ Funktion. Gibt den Rest der Liste (also die gesamte Liste ohne den Kopf) zurück. Ist die Liste leer, gibt es einen Fehler.
+		\item \lstinline[language = Racket]|(second <Liste>)|, \lstinline[language = Racket]|(third <Liste>)|, \lstinline[language = Racket]|(fourth <Liste>)|, \lstinline[language = Racket]|(fifth <Liste>)|, \lstinline[language = Racket]|(sixth <Liste>)|, \lstinline[language = Racket]|(seventh <Liste>)|, \lstinline[language = Racket]|(eighth <Liste>)| \\ Funktionen. Geben das zweite/\dots/achte Element der Liste zurück.
+		\item \lstinline[language = Racket]|(cons? <Arg>)| \\ Funktion. Gibt an, ob das gegebene Argument eine Liste ist.
+		\item \lstinline[language = Racket]|(empty? <Arg)| \\ Funktion. Gibt an, ob das gegebene Argument eine leere Liste ist.
 	\end{itemize}
 % end
 
 \subsection{Structs}
-	\todo{Schreiben}
+	Structs ermöglichen uns, viele Daten in einer Konstanten (oder einem Parameter) abzulegen und damit komplexe Datenstrukturen zu erstellen.
 	
 	\subsubsection{Definition}
-		\todo{Schreiben}
+		Zur Definition eines Struct-Typs wird folgender Code genutzt:
+		\begin{figure}[H]
+			\centering
+			\lstinline[language = Racket]|(define-struct <Name> ([Attribute]))|
+		\end{figure}
+		Der Name gibt an, unter welchen Namen wir das Struct referenzieren können. Die Attribute definieren, unter welchem Namen wir Daten in dem Struct speichern können. Auf diese können wir anschließend zugreifen. Unterschiedliche Attribute können wir durch Leerzeichen separieren.
+		
+		\paragraph{Beispiel}
+			Legen wir als Beispiel ein Struct zur Speicherung von Daten über einen Studierenden an:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Racket]
+(define-struct student (name matr-number))
+\end{lstlisting}
+			\end{figure}
+		% end
 	% end
 	
 	\subsubsection{Prädikate}
-		\todo{Schreiben}
+		Um zu Prüfen, ob eine Konstante \texttt{x} vom Typ des Structs \texttt{<Name>} ist, können wir die automatisch generierte Funktion \texttt{<Name>?} nutzen.
+		
+		\paragraph{Beispiel}
+			Um zu prüfen, ob eine Variable \texttt{x} vom Typ \texttt{student} ist, nutzen wir folgende Code:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Racket]
+(student? x)
+\end{lstlisting}
+			\end{figure}
+		% end
 	% end
 	
 	\subsubsection{Nutzung, Attribute und Zugriff}
-		\todo{Schreiben}
+		Die Erstellung einer \enquote{Instanz} eines Structs \texttt{<Name>} geschieht wie folgt:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+(make-<Name> [Parameter-Daten])
+\end{lstlisting}
+		\end{figure}
+		Für die Parameter müssen wir die Daten in der korrekten Reihenfolge wie in der Struct-Definition übergeben.
+		
+		Um auf bestimmte Attribute eines Structs \texttt{x} zuzugreifen, nutzen wir folgenden Code:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+(<Name>-<Attribut> x)
+\end{lstlisting}
+		\end{figure}
+		Dies gibt den Wert des jeweiligen Attributs zurück.
+		
+		\paragraph{Beispiel}
+			Wir nehmen als Beispiel wieder das Studierenden-Struct her. Nun wollen wir eine Funktion anlegen, die den Namen des Studierenden ausgibt, zwei Structs anlegen und die Funktion aufrufen.
+			
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}[language = Racket]
+(define (print-name x) (print (student-name)))
+
+(define fd (make-student "Fabian Damken"  1234567))
+(define fk (make-student "Florian Kadner" 8912345))
+(define lr (make-student "Lukas Roehrig"  6789123))
+
+(print-name fd)
+(print-name fk)
+(print-name lr)
+\end{lstlisting}
+			\end{figure}
+		% end
 	% end
 % end

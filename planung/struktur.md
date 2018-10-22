@@ -125,20 +125,20 @@
         + Bestandteile (Name, Parameter, Rückgabe)
         + Verträge (siehe Doku)
         + Rekursion
-    - *Fehlerbehandlung*
-        + *Errors*
-        + *Result Code*
-    - *Datenstrukturen*
-        + *Listen*
-            * *`list`*
-            * *`cons`*
-            * *`first`, `second`, `third`, `fourth`, `fifth`, `sixth`, `seventh`, `eigth`*
-            * *`rest`*
-            * *`empty`*
-        + *Structs*
-            * *Definition*
-            * *Prädikate*
-            * *Attribute + Zugriff*
+    - Fehlerbehandlung
+        + Errors
+        + Result Code
+    - Datenstrukturen
+        + Listen
+            * `list`
+            * `cons`
+            * `first`, `second`, `third`, `fourth`, `fifth`, `sixth`, `seventh`, `eigth`
+            * `rest`
+            * `empty`
+        + Structs
+            * Definition
+            * Prädikate
+            * Attribute + Zugriff
     - *Funktionen als Daten (Parameter)*
     - *Funktionen höherer Ordnung*
         + *Lambdas*
@@ -147,8 +147,8 @@
             * *`map`*
             * *`fold`*
             * *Vergleich von zwei Listen*
-    - *Dokumentation*
-        + *Verträge*
+    - Dokumentation
+        + Verträge
     - Testen (`check-expect/within/error`)
     - *Zusammenfassung*
 4. Java

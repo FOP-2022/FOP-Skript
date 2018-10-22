@@ -88,12 +88,20 @@
 				\begin{itemize}
 					\item Funktionen zur Umwandlung von Datentyp A in Datentyp B werden \texttt{A->B} genannt.
 					\item Funktionen, deren Rückgabe ein Wahrheitswert ist, wird in Fragezeichen nachgestellt. Beispiel: \texttt{odd?}
-					\item \todo{Weiterführen}
 				\end{itemize}
 		\end{itemize}
 	% end
 % end
 
 \subsection{Strukturierung des Codes}
-	\todo{Schreiben}
+	In \racketText werden an allen Stellen Klammern verwendet. Zur Strukturierung ist es gut zu wissen, dass der Typ der Klammer (rund, geschweift, eckig) keinen Einfluss auf die Funktionalität hat, sofern der identische Typ zur Schließung verwendet wird.
+	
+	Das heißt, die folgenden Codes sind äquivalent:
+	\begin{itemize}
+		\item \lstinline[language = Racket]|(add 1 2 3)|
+		\item \lstinline[language = Racket]|{add 1 2 3}|
+		\item \lstinline[language = Racket]|[add 1 2 3]|
+	\end{itemize}
+
+	Dadurch kann der Quellcode an vielen Stellen übersichtlicher gestaltet werden.
 % end
