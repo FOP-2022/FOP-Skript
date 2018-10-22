@@ -1,9 +1,59 @@
-\todo{Schreiben}
+\implements{Fehlerbehandlung}{fehlerbehandlung}{\racket}
 
-\subsection{Errors}
-	\todo{Schreiben}
-% end
+In \racketText gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
+\begin{itemize}
+	\item Exceptions in Form von Errors und
+	\item Result Codes.
+\end{itemize}
 
 \subsection{Result Codes}
-	\todo{Schreiben}
+	\implements{Result Codes}{resultcodes}{\racket}
+	
+	In \racketText werden Result Codes nicht besonders implementiert, wir können sie nur durch Fallunterscheidungen nutzen.
+	
+	\paragraph{Beispiel}
+		Als Beispiel implementieren wir eine Funktion, welche die reelle Quadratwurzel einer Zahl berechnet. Ist die gegebene Zahl negativ, so gibt die Funktion \(-1\) zurück (Result Code).
+		
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+(define (square-root-real x)
+	(if (< x 0)
+		-1
+		(sqrt x) ; Die Funktion sqrt gibt fuer negative Werte ein komplexes Ergebnis.
+	)
+)
+\end{lstlisting}
+		\end{figure}
+	% end
+% end
+
+\subsection{Errors}
+	\implements{Errors}{exceptions}{\racket}
+	
+	Außerdem können wir Errors einsetzen, um Fehler anzuzeigen. Diese sind meistens besser geeignet, da die Ausführung direkt abbricht und der Aufrufer nicht prüfen muss, ob ein Fehler aufgetreten ist.
+	
+	Ein Error lösen wir wie folgt aus:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(error <Funktionsname> <Fehlermeldung>)|
+	\end{figure}
+	Der Funktionsname in dem der Fehler aufgetreten ist wird als Symbol übergeben, die Fehlermeldung als String.
+	
+	\paragraph{Beispiel}
+		Wir implementieren folgende Funktion:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+(define (square-root-real x)
+	(if (< x 0)
+		(error 'square-root "Illegal value for real square root!")
+		(sqrt x) ; Die Funktion sqrt gibt fuer negative Werte ein komplexes Ergebnis.
+	)
+)
+			\end{lstlisting}
+		\end{figure}
+	
+		Rufen wir die Funktion nun mit \lstinline[language = Racket]|(square-root-real -4)| auf, so bekommen wir folgende Fehlermeldung: \texttt{square-root-real: Illegal value for real square root!}
+	% end
 % end
