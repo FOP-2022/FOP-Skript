@@ -1,0 +1,13 @@
+name,contract
+Addition,+ :: number... -> number
+Subtraktion,- :: number... -> number
+Multiplikation,* :: number... -> number
+Division,* :: number number -> number
+Quadrat,sqr :: number -> number
+Quadratwurzel,sqrt :: number -> number
+Potenz,expt :: number number -> number
+Minimum,min :: number... -> number
+Maximum,max :: number... -> number
+Betrag,abs :: number -> number
+Modulo,modulo :: number number -> number
+Modulo,remainder :: number number -> number

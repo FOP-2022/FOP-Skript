@@ -150,7 +150,7 @@
     - Dokumentation
         + Verträge
     - Testen (`check-expect/within/error`)
-    - *Zusammenfassung*
+    - Zusammenfassung
 4. Java
     - Lexikalische Bestandteile
         + *Datentypen*

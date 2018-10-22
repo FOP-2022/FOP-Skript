@@ -1,0 +1,14 @@
+name,contract
+Leere Liste,empty
+Anhängen an Liste,cons :: any (listof any) -> (listof any)
+Erstellen von Liste,list :: any... -> (listof any)
+Erstes Element von Liste,first :: (listof any) -> any
+\( \vdots \),\( \vdots \)
+Achtes Element von Liste,eighth :: (listof any) -> any
+Datenmapping,map :: (X -> Y) (listof X) -> (listof Y)
+Datenfilterung,filter :: (X -> boolean) (listof X) -> (listof X)
+Akkumulation,foldl :: (X... Y -> Y) Y (listof X)... -> Y
+Struct Definieren,(define-struct <Name> (<Parameter>...))
+Struct Erstellen,make-<Name> :: any... -> struct
+Struct-Attribut holen,<Name>-<Attribut> struct -> any
+Struct-Typ Testen,<Name>? any -> boolean

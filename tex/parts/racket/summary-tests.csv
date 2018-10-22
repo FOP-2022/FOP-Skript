@@ -1,0 +1,4 @@
+name,contract
+Gleichheit,check-expect :: any any -> void
+Ähnlichkeit,check-within :: number number number -> void
+Fehler,check-error :: error string -> void

@@ -1,0 +1,3 @@
+name,contract
+Lambda,(lambda <Parameter>...)
+Lexikalischer Scope,(local (<Definition>...) <Ausdruck>)

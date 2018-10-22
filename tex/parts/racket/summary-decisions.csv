@@ -1,0 +1,11 @@
+name,contract
+Null,zero? :: number -> boolean
+Gerade,even? :: number -> boolean
+Ungerade,odd :: number -> boolean
+Größer,> :: number number... -> boolean
+Kleiner,< :: number number... -> boolean
+Größer-Gleich,>= :: number number... -> boolean
+Kleiner-Gleich,<= :: number number... -> boolean
+Gleich,= :: number number... -> boolean
+Liste,cons? :: any -> boolean
+Leere Liste,cons? :: (listof any) -> boolean

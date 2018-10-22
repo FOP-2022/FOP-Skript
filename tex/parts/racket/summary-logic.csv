@@ -1,0 +1,4 @@
+name,contract
+Konjunktion,and :: boolean... -> boolean
+Disjunktion,or :: boolean... -> boolean
+Negation,not :: boolean -> boolean
