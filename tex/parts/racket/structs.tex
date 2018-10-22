@@ -3,6 +3,8 @@
 In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in \racketText implementiert werden und wie wir eigene hinzufügen können.
 
 \subsection{Listen}
+	\label{sec:racket_lists}
+
 	Listen sind der zentrale Bestandteil von \racketText, wie der Name der Ursprungssprache (LISP / List Processing) schon vermuten lässt.
 	
 	Listen sind in \racketText die einzige Möglichkeit, \enquote{beliebig viele} Daten in einem Feld zu speichern und mit Hilfe von Rekursion über diese zu iterieren. Listen werden dabei als einfach gelinkte Listen abgelegt, das heißt eine Liste besteht aus den Kopf (\texttt{first}) und dem Rest der Liste (\texttt{rest}).
@@ -21,6 +23,8 @@ In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in \racketText 
 % end
 
 \subsection{Structs}
+	\label{sec:racket_structs}
+
 	Structs ermöglichen uns, viele Daten in einer Konstanten (oder einem Parameter) abzulegen und damit komplexe Datenstrukturen zu erstellen.
 	
 	\subsubsection{Definition}

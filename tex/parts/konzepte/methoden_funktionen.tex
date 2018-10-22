@@ -19,7 +19,12 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 		Parameter sind auch bekannt aus der Mathematik, beispielsweise das \enquote{\(x\)} in der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{R} : \underline{x} \mapsto x ^ 2 \] wobei \enquote{\(\mathbb{N}\)} den Typ des Parameters festlegt.
 		
 		\paragraph{Formale Parameter vs. Aktualparameter}
-			\todo{Schreiben}
+			Wir unterscheiden zwischen den \textit{Formalen Parametern} und den \textit{Aktualen Parametern}.
+			
+			\begin{itemize}
+				\item Die \textit{Formalen Parameter} sind diejenigen Parameter, die bei der Methodendefinition angegeben werden.
+				\item Die \textit{Aktualen Parameter} sind diejenigen Parameter, die bei dem Methodenaufruf angegeben werden.
+			\end{itemize}
 		% end
 	% end
 	
@@ -41,9 +46,9 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 % end
 
 \subsection{Rekursion} \functionalMark \imperativeMark \oopMark
-	\label{sec:abstract_recursion}
+	\introduces{von Rekursion}{rekursion}
 
-	\textbox{Um die Rekursion zu verstehen, muss man zuerst die Rekursion (Siehe \ref{sec:abstract_recursion}) verstehen.}
+	\textbox{Um die Rekursion zu verstehen, muss man zuerst die Rekursion (Siehe \refIntr{rekursion}) verstehen.}
 	
 	Rekursion bezeichnet ein Paradigma, bei dem sich eine Methode selbst aufruft und damit eine Schleife vermeidet. Dadurch ist es möglich, viele Probleme sehr übersichtlich zu lösen, wodurch der Code lesbarer und damit wartbarer wird. Wenn man es mit der Rekursion allerdings übertreibt, wird der Code sehr schwer verständlich.
 	

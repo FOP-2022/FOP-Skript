@@ -1,25 +1,85 @@
-\todo{Schreiben}
+\label{sec:higher_order_func}
+
+In diesem Abschnitt schauen wir uns Funktionen höherer Ordnung an. Die Art von Funktionen, die eine funktionale Sprache so mächtig machen.
+
+Die Idee von Funktionen höherer Ordnung (Higher-Order Functions) ist, dass eine Funktion von einer anderen Funktion generiert wird und die Parameter von ersterer Funktion nutzen kann. Um diese Möglichkeiten vollständig auszunutzen, müssen wir uns als erstes Lambdas anschauen.
 
 \subsection{Lambdas}
-	\todo{Schreiben}
+	Ein Lambda ist eine anonyme Funktion (also eine Funktion ohne Name), die beispielsweise von einer Funktion zurückgegeben werden kann oder in einer Konstanten gespeichert werden kann.
+	
+	Die allgemeine Syntax ist:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(lambda ([Parameter]) (<Ausdruck>))|
+	\end{figure}
+	Die Parameter definieren, wie viele Parameter das Lambda annehmen kann und unter welchen Namen diese abgelegt werden. Innerhalb des Ausdrucks können diese Parameter dann verwendet werden, genau so wie bei Funktionen.
+	
+	Ein Ausdruck wie \lstinline[language = Racket]|(lambda (a b) (+ a b))| wertet dann nur nicht wie üblich zu einem Wert aus, sondern, in diesem Fall, zu einer Funktion, welche zwei Zahlen addiert.
+	
+	Daraus folgt, dass die Ausdrücke \lstinline[language = Racket]|(define (add a b) (+ a b))| und \lstinline[language = Racket]|(define add (lambda (a b) (+ a b)))| äquivalent sind.
+% end
+
+\subsection{Funktionen höherer Ordnung}
+	Wenn wir eine Funktion schreiben wollen, die eine Konstante \(k\) auf eine andere Zahl addiert, machen wir dies üblicherweise wie folgt:
+	\begin{itemize}
+		\item \( k = 2 \): \lstinline[language = Racket]|(define (add-2 x) (+ x 2))|
+		\item \( k = 3 \): \lstinline[language = Racket]|(define (add-3 x) (+ x 3))|
+		\item \( k = 4 \): \lstinline[language = Racket]|(define (add-4 x) (+ x 4))|
+	\end{itemize}
+	Wie wir sehr schnell sehen, entsteht viel duplizierter Code.
+	
+	Um dies zu vermeiden, können wir die obigen Funktionen in einer Funktion höherer Ordnung umwandeln, die von einer anderen, äußeren, Funktion erstellt wird und beliebige Konstanten addiert:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+(define (add-k k)
+	(lambda (x) (+ x k))
+)
+		\end{lstlisting}
+	\end{figure}
+	Die Funktion \texttt{add-k} selbst addiert erst einmal keine Konstante, gibt aber eine Funktion zurück, welche ausschließlich die Konstante \(k\) addiert.
+	
+	Somit kann der obige Code wie folgt vereinfacht werden:
+	\begin{itemize}
+		\item \( k = 2 \): \lstinline[language = Racket]|(define add-2 (add-k 2))|
+		\item \( k = 3 \): \lstinline[language = Racket]|(define add-3 (add-k 3))|
+		\item \( k = 4 \): \lstinline[language = Racket]|(define add-4 (add-k 4))|
+	\end{itemize}
+	Von von \texttt{add-k} produzierte Funktion heißt dann \textit{Funktion höherer Ordnung}.
+	
+	\textbox{In einem solch kleinen Beispiel ist der Nutzen natürlich sehr überschaubar. Doch bei deutlich komplexen Funktion kommt zum Vorschein, wie viel Macht Funktionen höherer Ordnung haben.}
+% end
+
+\subsection{Funktionen als Daten}
+	Wie wir eben gesehen haben, sind Funktionen nichts anderes als Daten, die man zurück geben kann. Was man zurück geben kann, kann man auch als Parameter übergeben, ebenso Funktionen. Wir werden in den folgenden Beispielen sehen, wie man diese Eigenschaft (in Kombination mit Rekursion) geschickt ausnutzen kann, um saubere Lösungen für Probleme zu erarbeiten.
 % end
 
 \subsection{Beispiele}
-	\todo{Schreiben}
-
 	\subsubsection{Filter}
-		\todo{Schreiben}
-	% end
-	
-	\subsubsection{Map}
-		\todo{Schreiben}
-	% end
-	
-	\subsubsection{Fold}
-		\todo{Schreiben}
-	% end
-	
-	\subsubsection{Vergleich von zwei Listen}
-		\todo{Schreiben}
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+;; filter :: (X -> boolean) (listof X) -> (listof X)
+;;
+;; Nimmt die gegebene Liste und entfernt alle Elemente, fuer die predicate?
+;; false zurueck gibt.
+;;
+;; Beispiele:
+;;   (filter even? (list 1 2 3 4 5 6 7 8 9)) -> (list 2 4 6 8)
+;;   (filter (lambda (x) (natural? (sqrt x))) (list 3 4 5 9 13 16 18))
+;;       -> (list 4 9 16)
+(define (filter predicate? list)
+	(cond
+		; Ende der Liste --> Ende der Rekursion --> Rekursionsanker.
+		((empty? list) empty)
+		; Praedikat Wahr --> Hinzufuegen zum Ergebnis.
+		((predicate? (first list))
+			(cons (first list) (filter predicate? (rest list))))
+		; Praedikat Falsch --> Fortfahren mit dem Rest der Liste.
+		(else (filter predicate? (rest list)))
+	)
+)
+\end{lstlisting}
+		\end{figure}
 	% end
 % end

@@ -12,7 +12,7 @@
 * Abschnitte, welche **fett** markiert sind, sind noch nicht im LaTeX-Dokument enthalten.
 * Abschnitte, welche *kursiv* markiert sind, sind noch nicht (vollständig) abgeschlossen.
 
-1. *Einführung*
+1. Einführung
 2. Abstrakte Konzepte
     - Programmierparadigmen
         + Deklarativ
@@ -84,7 +84,6 @@
     - Multithreading und parallele Verarbeitung
         + Thread
         + Parallelisierung
-        + *Problematiken und Annomalien (nur kurz anschneiden)*
         + Beispiel: Window Manager
     - GUI (Graphical User Interface)
     - Dokumentation
@@ -139,14 +138,11 @@
             * Definition
             * Prädikate
             * Attribute + Zugriff
-    - *Funktionen als Daten (Parameter)*
-    - *Funktionen höherer Ordnung*
-        + *Lambdas*
-        + *Beispiele*
-            * *`filter`*
-            * *`map`*
-            * *`fold`*
-            * *Vergleich von zwei Listen*
+    - Funktionen höherer Ordnung
+        + Lambdas
+        + Funktionen als Daten (Parameter)
+        + Beispiele
+            * `filter`
     - Dokumentation
         + Verträge
     - Testen (`check-expect/within/error`)

@@ -120,7 +120,7 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 	\begin{lstlisting}
 a[b] = a[b] + 1
 	\end{lstlisting}
-	Hierbei wertet der Linksausdruck (\texttt{a[b]}) zu einer Position im Speicher aus, an der das Element gespeichert werden soll (in diesem Listing werden Arrays verwendet, diese werden erst im Abschnitt über Datenstrukturen (\refIntr{datenstrukturen}) eingeführt), und der Rechtsausdruck (\texttt{a[b] + 1}) zu dem Wert, welcher gespeichert werden soll.
+	Hierbei wertet der Linksausdruck (\texttt{a[b]}) zu einer Position im Speicher aus, an der das Element gespeichert werden soll (in diesem Listing werden Arrays verwendet, diese werden erst im Abschnitt über Datenstrukturen (\refIntr{datastruct}) eingeführt), und der Rechtsausdruck (\texttt{a[b] + 1}) zu dem Wert, welcher gespeichert werden soll.
 % end
 
 \subsection{Seiteneffekte} \imperativeMark \oopMark
@@ -128,7 +128,7 @@ a[b] = a[b] + 1
 	
 	Was bei funktionalen Sprachen verhindert wird, tritt bei imperativen Sprachen häufig auf: Seiteneffekte.
 	
-	Als Seiteneffekt wird bezeichnet, wenn sich der Zustand von etwas ändert, beispielsweise von einer Variablen. Wir sehen hier bereits, dass Seiteneffekte integraler Bestandteil von imperativen Sprachen sind (in funktionalen Sprachen nicht, da es hier kein Konzept von Variablen gibt). Seiteneffekte werden dann problematisch, wenn sich der Zustand einer Variablen verändert, ohne dass wir direkt Einfluss darauf nehmen können (zum Beispiel wenn mehrere Codeblöcke parallel zueinander ablaufen, siehe \refIntr{parallelitaet}).
+	Als Seiteneffekt wird bezeichnet, wenn sich der Zustand von etwas ändert, beispielsweise von einer Variablen. Wir sehen hier bereits, dass Seiteneffekte integraler Bestandteil von imperativen Sprachen sind (in funktionalen Sprachen nicht, da es hier kein Konzept von Variablen gibt). Seiteneffekte werden dann problematisch, wenn sich der Zustand einer Variablen verändert, ohne dass wir direkt Einfluss darauf nehmen können (zum Beispiel wenn mehrere Codeblöcke parallel zueinander ablaufen, siehe \refIntr{multithreading}).
 	
 	Wir werden weitere Probleme mit Seiteneffekten im späteren Kapitel über Java behandeln.
 % end

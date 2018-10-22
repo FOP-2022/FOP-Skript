@@ -23,11 +23,12 @@
 \usepackage{float}
 \usepackage{multicol}
 \usepackage{csvsimple}
+\usepackage{wrapfig}
 \tcbuselibrary{skins}
 \usetikzlibrary{arrows.meta, shapes, backgrounds, calc}
 
 % Basic information.
-\title{Funktionale und objektorientierte Programmierkonzepte}
+\title{Funktionale und objektorientierte Programmierkonzepte \\ Version 1.0}
 \subtitle{Autor: Fabian Damken}
 \author{Fabian Damken}
 \date{\today}
@@ -49,7 +50,6 @@
 \tikzset{> = { Latex[length = 2mm] }}
 
 \lstdefinelanguage{Racket}{
-	% TODO: Add Keywords.
 	morekeywords = {
 		list,
 		cons,
@@ -81,7 +81,9 @@
 		cond,
 		error,
 		define-struct,
-		print
+		print,
+		lambda,
+		else
 	},
 	sensitive = true,
 	morecomment=[l]{;},
@@ -134,23 +136,35 @@
 \providecommand{\intuition}[1]{\subsubparagraph{Intuition} #1}
 
 \providecommand{\functional}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = functionalmarker, colback = tud2a, width = 2.5cm, left = 5pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = functionalmarker, colback = tud2a, width = 2.5cm, height = 1.2cm, left = 5pt, boxrule = 3pt, opacityback = 0.8]
 		Funktional
 	\end{tcolorbox}
 }
 \providecommand{\imperative}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = imperativemarker, colback = tud4a, width = 2.5cm, left = 7pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = imperativemarker, colback = tud4a, width = 2.5cm, height = 1.2cm, left = 7pt, boxrule = 3pt, opacityback = 0.8]
 		\centering Imperativ
 	\end{tcolorbox}
 }
 \providecommand{\oop}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = oopmarker, colback = tud6a, width = 3.5cm, left = 6pt, boxrule = 3pt, opacityback = 0.5]
+	\begin{tcolorbox}[standard jigsaw, colframe = oopmarker, colback = tud6a, width = 3.5cm, height = 1.2cm, left = 6pt, boxrule = 3pt, opacityback = 0.8]
 		\centering Objektorientiert
 	\end{tcolorbox}
 }
-\providecommand{\functionalMark}{\todo{Functional Mark}}
-\providecommand{\imperativeMark}{\todo{Imperative Mark}}
-\providecommand{\oopMark}{\todo{OOP Mark}}
+\providecommand{\functionalMark}{%
+	\tikz[overlay, remember picture] \node at (16,1.1) {
+		\functional
+	};
+}
+\providecommand{\imperativeMark}{%
+	\tikz[overlay, remember picture] \node at (13,1.1) {
+		\imperative
+	};
+}
+\providecommand{\oopMark}{%
+	\tikz[overlay, remember picture] \node at (9.5,1.1) {
+		\oop
+	};
+}
 %\providecommand{\functionalMark}{\flushright \functional \flushleft}
 %\providecommand{\imperativeMark}{\flushright \imperative \flushleft}
 %\providecommand{\oopMark}{\flushright \oop \flushleft}
@@ -168,8 +182,6 @@
     \maketitle
     \tableofcontents
     \listoftodos
-
-	\todo{Beispiele! Beispiele everywhere.}
 
     \chapter{Einführung}
 	    \label{c:einfuehrung}
@@ -201,10 +213,16 @@
     	Dieses Kapitel wird in den nächsten Wochen folgen.
     % end
     
-    \chapter{Abstraktion}
-	    \label{c:abstraktion}
+    %\chapter{Abstraktion}
+	%    \label{c:abstraktion}
+    %
+	%    \input{parts/abstraktion/abstraktion}
+    %% end
     
-	    \input{parts/abstraktion/abstraktion}
+    \chapter{Abstraktion}
+    	\label{c:abstraktion}
+    	
+    	Dieses Kapitel wird in den nächsten Wochen folgen.
     % end
     
     %\chapter{Komplexität und Landau-Symbolik}

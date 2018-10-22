@@ -32,7 +32,7 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 	
 	Als \enquote{Literale} werden Werte bezeichnet, welche nicht über Variablen oder Konstanten (siehe \refIntr{variablen}) verarbeitet werden, sondern die direkt im Quellcode des Programms stehen (das heißt \enquote{hardcoded} (festgeschrieben) sind).
 	
-	Wir behandeln die Syntax der Erstellung und Nutzung von Literalen hier nicht weiter, da sich dies von Sprache zu Sprache stark unterscheidet. Die spezielle Syntax für \racket und Java werden wir in den Abschnitten \refImpl{literale}{\racket} (\racket) und \refImpl{literale}{Java} (Java) behandeln.
+	Wir behandeln die Syntax der Erstellung und Nutzung von Literalen hier nicht weiter, da sich dies von Sprache zu Sprache stark unterscheidet. Die spezielle Syntax für \racket und Java werden wir in jeweiligen Abschnitten behandeln.
 	
 	\paragraph{Escape-Sequenzen}
 		Schweifen wir nochmals kurz ab zu den Literalen und betrachten sogenannte \enquote{Escape-Sequenzen}. Eine Escape-Sequenz ist eine bestimmte Abfolge von Zeichen, die bei der Ausführung durch andere Zeichen ersetzt werden.
@@ -57,7 +57,7 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 \subsection{Bezeichner} \functionalMark \imperativeMark \oopMark
 	\introduces{von Bezeichnern}{identifier}
 	
-	Wie auch in der realen Welt müssen wir auch in der Programmierung Namen für die Elemente unseres Programms (beispielsweise Konstanten oder Variablen (siehe \refIntr{variablen})) Namen finden. Als Beispiel aus der Welt sei der Name \enquote{Streckenkilometer} gegeben, um bei dem Beispiels aus dem Abschnitt über Datentypen (\refIntr{datentypen}) zu bleiben. Innerhalb von Programmen nennen wir solche Namen \enquote{Bezeichner}, für die auch besondere Einschränkungen (Beispiel: \enquote{Ein Bezeichner darf nicht mit einer Ziffer beginnen.}) gelten können. Da letztere natürlich von der Programmiersprache abhängig sind, werden wir dies in den Abschnitten im \racket (\refImpl{identifier}{\racket}) und Java (\refImpl{identifier}{Java}) Teil betrachten.
+	Wie auch in der realen Welt müssen wir auch in der Programmierung Namen für die Elemente unseres Programms (beispielsweise Konstanten oder Variablen (siehe \refIntr{variablen})) Namen finden. Als Beispiel aus der Welt sei der Name \enquote{Streckenkilometer} gegeben, um bei dem Beispiels aus dem Abschnitt über Datentypen (\refIntr{datentypen}) zu bleiben. Innerhalb von Programmen nennen wir solche Namen \enquote{Bezeichner}, für die auch besondere Einschränkungen (Beispiel: \enquote{Ein Bezeichner darf nicht mit einer Ziffer beginnen.}) gelten können. Da letztere natürlich von der Programmiersprache abhängig sind, werden wir dies in jeweiligen Abschnitten von \racketText und Java beleuchten.
 % end
 
 \subsection{Operatoren} \functionalMark \imperativeMark \oopMark
@@ -65,13 +65,13 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 
 	Ein Operator beschreibt eine Aktion auf mindestens einem Datensatz.
 	
-	Ein Beispiel für einen Operator ist die Addition, welche $ 2 $ oder mehr Zahlen summiert. Wie wir einen solchen Operator in den konkreten Sprachen nutzen, hängt von der Sprache ab. Es gibt allerdings eine Operatoren, die (zumindest von der Bedeutung her) in allen Programmiersprachen vorhanden sind, beispielsweise die Addition. Diese Operationen werden im Abschnitt \refIntr{operator} beschrieben.
+	Ein Beispiel für einen Operator ist die Addition, welche $ 2 $ oder mehr Zahlen summiert. Wie wir einen solchen Operator in den konkreten Sprachen nutzen, hängt von der Sprache ab. Es gibt allerdings eine Operatoren, die (zumindest von der Bedeutung her) in allen Programmiersprachen vorhanden sind, beispielsweise die Addition. Diese Operationen werden im Abschnitt \refIntr{operatoren} beschrieben.
 % end
 
 \subsection{Strukturierung von Quellcodedateien} \functionalMark \imperativeMark \oopMark
 	\introduces{von Strukturierung von Quellcodedateien}{namespaces}
 	
-	Da mit steigender Größe des Projektes in den meisten Fällen auch die Anzahl der Quellcodedateien steigt, muss dieser Code strukturiert werden. In den meisten Sprachen stehen hier Mechanismen zur Verfügung, um den Quellcode in eine logische Struktur zu bringen, welche nicht unbedingt physikalisch abgebildet sein muss. Beispielsweise stehen hier in C++ Namespaces und in Java Packages zur Verfügung. Letztere werden wir im Abschnitt \refImpl{namespaces}{Java} näher behandeln.
+	Da mit steigender Größe des Projektes in den meisten Fällen auch die Anzahl der Quellcodedateien steigt, muss dieser Code strukturiert werden. In den meisten Sprachen stehen hier Mechanismen zur Verfügung, um den Quellcode in eine logische Struktur zu bringen, welche nicht unbedingt physikalisch abgebildet sein muss. Beispielsweise stehen hier in C++ Namespaces und in Java Packages zur Verfügung. Letztere werden wir im Abschnitt zu Java behandeln.
 	
 	Der Unterschied einer logischen und einer physikalischen Struktur besteht darin, dass ersteres nur in den Köpfen der Menschen und (meistens) auch im Quellcode verankert ist, während physikalische Strukturen direkt im Speicher abgebildet werden (zum Beispiel in Form von Verzeichnissen).
 % end
