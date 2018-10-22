@@ -1,5 +1,45 @@
-\todo{Schreiben}
+\implements{Dokumentation}{doku}{\racket}
 
 \subsection{Veträge}
-	\todo{Schreiben}
+	\implements{Verträgen}{vetraege}{\racket}
+	
+	Nehmen wir an, wir haben eine Funktion \texttt{(moving-average data n)} implementiert, welche den gleitenden Durchschnitt einer Liste \texttt{data} mit den vorherigen \texttt{n} Daten berechnet. Diese Funktion gibt eine Liste mit der Länge \( \text{Length}(\texttt{moving-average}) - (n - 1) \) zurück.
+	
+	Den Vertrag der Funktion schreiben wir nun wie folgt in den Code:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+;; moving-average :: (listof number) number -> (listof number)
+(define (moving-average data n) *@\dots@*)
+\end{lstlisting}
+	\end{figure}
+% end
+
+\subsection{Funktionsdokumentation}
+	Eine vollständige Funktionsdokumentation besteht aus:
+	\begin{itemize}
+		\item Einer Beschreibung, was die Methode tut.
+		\item Dem Vertrag der Methode, wie oben beschrieben.
+		\item Mindestens einem Nutzungsbeispiel.
+	\end{itemize}
+
+	Somit ist die folgende Methode korrekt dokumentiert:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+;; factorial :: number -> number
+;;
+;; Berechnet die Fakultaet einer gegebenen natuerlichen Zahl.
+;;
+;; Beispiele:
+;;   (factorial 3) -> 2
+;;   (factorial 5) -> 120
+(define (factorial n)
+	(if (= n 1)
+		1
+		(* n (factorial (- n 1)))
+	)
+)
+\end{lstlisting}
+	\end{figure}
 % end
