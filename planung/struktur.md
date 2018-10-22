@@ -22,7 +22,6 @@
         + Abgrenzung Funktional <--> Imperativ
     - Lexikalische Bestandteile
         + Datentypen (Zeichenketten, Ganzzahlen, Gleitkommazahlen, …)
-            * **Zahlendarstellung (Ganze Zahlen, 2-Komplement, Fließkomma, IEEE 754)**
         + Literale
             * Escape-Sequenzen
         + Schlüsselwörter
@@ -101,36 +100,36 @@
             * Strings
         + Literale
         + *Strukturierung des Codes*
-    - *Anweisungen*
-        + *Methodenaufrufe*
-        + *Konstanten (Name, Typ)*
-        + *Operatoren*
-            * *Arithmetik (`+`, `-`, `*`, `/`, `modulo`, `sqrt`, `pi`)*
-            * *etc.*
-        + Abfragen/Vergleiche*
-            * *Gleichheit, Less-/Greater-Than*
-            * *Prädikate*
-                - *Typabfragen*
-                    + *`number?`*
-                    + *`real?`*
-                    + *`rational?`*
-                    + *`integer?`*
-                    + *`natural?`*
-                    + *`string?`*
-                    + *`cons?`, `empty?`*
-    - *Kontrollstrukturen*
-        + *Verzweigungen**
-            * *If*
-            * *Cond*
-    - *Funktionen*
-        + *Bestandteile (Name, Parameter, Rückgabe)*
-        + *Verträge (siehe Doku)*
-        + *Rekursion*
+    - Anweisungen
+        + Methodenaufrufe
+        + Konstanten (Name, Typ)
+        + Operatoren
+            * Arithmetik (`+`, `-`, `*`, `/`, `modulo`, `sqrt`, `pi`)
+            * etc.
+        + Abfragen/Vergleiche
+            * Gleichheit, Less-/Greater-Than
+            * Prädikate
+                - Typabfragen
+                    + `number?`
+                    + `real?`
+                    + `rational?`
+                    + `integer?`
+                    + `natural?`
+                    + `string?`
+                    + `cons?`, `empty?`
+    - Kontrollstrukturen
+        + Verzweigungen
+            * If
+            * Cond
+    - Funktionen
+        + Bestandteile (Name, Parameter, Rückgabe)
+        + Verträge (siehe Doku)
+        + Rekursion
     - *Fehlerbehandlung*
         + *Errors*
         + *Result Code*
     - *Datenstrukturen*
-        + *Listen**
+        + *Listen*
             * *`list`*
             * *`cons`*
             * *`first`, `second`, `third`, `fourth`, `fifth`, `sixth`, `seventh`, `eigth`*
@@ -140,7 +139,6 @@
             * *Definition*
             * *Prädikate*
             * *Attribute + Zugriff*
-    - *Testen (`check-expect/within/error`)*
     - *Funktionen als Daten (Parameter)*
     - *Funktionen höherer Ordnung*
         + *Lambdas*
@@ -151,6 +149,7 @@
             * *Vergleich von zwei Listen*
     - *Dokumentation*
         + *Verträge*
+    - Testen (`check-expect/within/error`)
     - *Zusammenfassung*
 4. Java
     - Lexikalische Bestandteile

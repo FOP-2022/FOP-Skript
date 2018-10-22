@@ -1,13 +1,47 @@
-\todo{Schreiben}
+\implements{Funktionen}{methoden}{\racket}
 
-\subsection{Bestandteile}
-	\todo{Schreiben}
+In diesem Abschnitt schauen wir uns an, wie Methoden als Funktionen in \racketText umgesetzt werden.
+
+Hierzu müssen wir verstehen, was eine Funktion in \racketText genau ist: Eine deklarative Beschreibung dessen, was mit den Eingabedaten getan werden soll und wir das Ergebnis aussehen soll. Eine Rückgabe eines Wertes gibt es an sich nicht, die Funktion wird einfach ausgewertet und der entstehende Wert zurück gegeben.
+
+\subsection{Bestandteile} % Name, Parameter, Rückgabe
+	Eine Funktion definieren wir wie folgt:
+	\begin{figure}[H]
+		\centering
+		\lstinline[language = Racket]|(define (<Name> [Parameter-Bezeichner]) <Ausdruck>)|
+	\end{figure}
+	Der Name muss dabei ein gültiger Bezeichner sein, die Parameter werden durch Leerzeichen getrennt hintereinander geschrieben und vom Aufrufer mit Daten gefüllt. Der gegebene Ausdruck kann dann die Parameter-Konstanten nutzen, um das Ergebnis zu berechnen.
+	
+	\paragraph{Beispiel}
+		Schauen wir uns folgendes Beispiel an, welches den Durchschnittswert von 5 Zahlen berechnet:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}[language = Racket]
+(define (average a b c d e)
+	(/ (+ a b c d e) 5)
+)
+\end{lstlisting}
+		\end{figure}
+	% end
 % end
 
 \subsection{Verträge}
-	\todo{Schreiben}
+	Verträge sind Teil der Dokumentation, siehe \refImpl{doku}{\racket}.
 % end
 
 \subsection{Rekursion}
-	\todo{Schreiben}
+	\implements{Rekursion}{recursion}{\racket}
+	
+	In \racketText ist Rekursion die einzige Möglichkeit, wie wir Code doppelt ausführen können. Die Nutzung der Rekursion ist, da \racketText eine funktionale Sprache ist, sehr mathematisch, wie wir an folgendem Beispiel zur Berechnung der Fakultät sehen:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}[language = Racket]
+(define (factorial n)
+	(if (= n 1)
+		1
+		(* n (factorial (- n 1)))
+	)
+)
+\end{lstlisting}
+	\end{figure}
 % end

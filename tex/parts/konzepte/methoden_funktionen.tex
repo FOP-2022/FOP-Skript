@@ -40,6 +40,40 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 	Verträge sind Teil der Dokumentation, siehe Abschnitt \refIntr{vertraege}.
 % end
 
+\subsection{Rekursion} \functionalMark \imperativeMark \oopMark
+	\label{sec:abstract_recursion}
+
+	\textbox{Um die Rekursion zu verstehen, muss man zuerst die Rekursion (Siehe \ref{sec:abstract_recursion}) verstehen.}
+	
+	Rekursion bezeichnet ein Paradigma, bei dem sich eine Methode selbst aufruft und damit eine Schleife vermeidet. Dadurch ist es möglich, viele Probleme sehr übersichtlich zu lösen, wodurch der Code lesbarer und damit wartbarer wird. Wenn man es mit der Rekursion allerdings übertreibt, wird der Code sehr schwer verständlich.
+	
+	Schauen wir uns als Beispiel eine mathematische Definition an, bei der Rekursion eingesetzt wird: Die Fakultät \( n! \) einer natürlichen Zahl \( n \in \mathbb{N} \):
+	\begin{equation*}
+		n! =
+			\begin{cases}
+				1                & \text{falls } n = 1 \\
+				n \cdot (n - 1)! & \text{sonst}
+			\end{cases}
+	\end{equation*}
+	
+	Hier wird im zweiten Fall der Fallunterscheidung Rekursion eingesetzt, indem die Fakultät-Funktion erneut genutzt wird.
+	
+	\paragraph{Rekursionsanker}
+		Der \textit{Rekursionsanker} bezeichnet den Teil der Funktion, der dafür zuständig ist, dass der Methodenaufruf beendet wird. Im obigen Beispiel ist dies der erste Fall der Fallunterscheidung, da dieser die Rekursion abbricht.
+		
+		\subparagraph{Übung}
+		In folgendem Beispiel wird die \(n\)-te Fibonacci-Zahl berechnet. Was ist in diesem Fall der Rekursionsanker?
+		\begin{equation*}
+			\text{Fib}(n) =
+				\begin{cases}
+					0                                     & \text{falls } n = 0 \\
+					1                                     & \text{falls } n = 1 \\
+					\text{Fib}(n - 1) + \text{Fib}(n - 2) & \text{sonst}
+				\end{cases}
+		\end{equation*}
+	% end
+% end
+
 \subsection{Überladen} \functionalMark \imperativeMark \oopMark
 	In den meisten Programmiersprachen ist es möglich, eine mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (\racket, Python, \dots).
 % end
