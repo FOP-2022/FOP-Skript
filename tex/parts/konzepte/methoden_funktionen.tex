@@ -66,6 +66,8 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 	\paragraph{Rekursionsanker}
 		Der \textit{Rekursionsanker} bezeichnet den Teil der Funktion, der dafür zuständig ist, dass der Methodenaufruf beendet wird. Im obigen Beispiel ist dies der erste Fall der Fallunterscheidung, da dieser die Rekursion abbricht.
 		
+		Es kann auch mehrere Rekursionsanker geben, die zusammen zum Ende der Rekursion führen.
+		
 		\subparagraph{Übung}
 		In folgendem Beispiel wird die \(n\)-te Fibonacci-Zahl berechnet. Was ist in diesem Fall der Rekursionsanker?
 		\begin{equation*}
@@ -76,11 +78,15 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 					\text{Fib}(n - 1) + \text{Fib}(n - 2) & \text{sonst}
 				\end{cases}
 		\end{equation*}
+		Dies führt zu der Fibonacci-Folge
+		\begin{equation*}
+			0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, \cdots
+		\end{equation*}
 	% end
 % end
 
 \subsection{Überladen} \functionalMark \imperativeMark \oopMark
-	In den meisten Programmiersprachen ist es möglich, eine mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (\racket, Python, \dots).
+	In den meisten Programmiersprachen ist es möglich, eine mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (Racket, Python, \dots).
 % end
 
 \subsection{Überschreiben} \oopMark

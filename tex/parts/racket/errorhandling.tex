@@ -1,15 +1,15 @@
-\implements{Fehlerbehandlung}{fehlerbehandlung}{\racket}
+\implements{Fehlerbehandlung}{fehlerbehandlung}{Racket}
 
-In \racketText gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
+In Racket gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
 \begin{itemize}
 	\item Exceptions in Form von Errors und
 	\item Result Codes.
 \end{itemize}
 
 \subsection{Result Codes}
-	\implements{Result Codes}{resultcodes}{\racket}
+	\implements{Result Codes}{resultcodes}{Racket}
 	
-	In \racketText werden Result Codes nicht besonders implementiert, wir können sie nur durch Fallunterscheidungen nutzen.
+	In Racket werden Result Codes nicht besonders implementiert, wir können sie nur durch Fallunterscheidungen nutzen.
 	
 	\paragraph{Beispiel}
 		Als Beispiel implementieren wir eine Funktion, welche die reelle Quadratwurzel einer Zahl berechnet. Ist die gegebene Zahl negativ, so gibt die Funktion \(-1\) zurück (Result Code).
@@ -29,7 +29,7 @@ In \racketText gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlu
 % end
 
 \subsection{Errors}
-	\implements{Errors}{exceptions}{\racket}
+	\implements{Errors}{exceptions}{Racket}
 	
 	Außerdem können wir Errors einsetzen, um Fehler anzuzeigen. Diese sind meistens besser geeignet, da die Ausführung direkt abbricht und der Aufrufer nicht prüfen muss, ob ein Fehler aufgetreten ist.
 	

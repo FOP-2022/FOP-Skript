@@ -3,7 +3,7 @@ Leere Liste,empty
 Anhängen an Liste,cons :: any (listof any) -> (listof any)
 Erstellen von Liste,list :: any... -> (listof any)
 Erstes Element von Liste,first :: (listof any) -> any
-\( \vdots \),\( \vdots \)
+...,...
 Achtes Element von Liste,eighth :: (listof any) -> any
 Datenmapping,map :: (X -> Y) (listof X) -> (listof Y)
 Datenfilterung,filter :: (X -> boolean) (listof X) -> (listof X)

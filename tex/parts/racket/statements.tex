@@ -1,9 +1,9 @@
-Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie wir Anweisungen formulieren können.
+Schauen wir uns nun an, wie man überhaupt Dinge in Racket tut, also wie wir Anweisungen formulieren können.
 
 \subsection{Funktionsaufrufe}
-	\implements{Funktionsaufrufen}{methodenNutzung}{\racket}
+	\implements{Funktionsaufrufen}{methodenNutzung}{Racket}
 	
-	Der zentrale Bestandteil von Anweisungen in \racketText\, sind Funktionsaufrufe. Mit diesen werden alle anderen Anweisungen (Addition, Subtraktion, \dots) realisiert.
+	Der zentrale Bestandteil von Anweisungen in Racket sind Funktionsaufrufe. Mit diesen werden alle anderen Anweisungen (Addition, Subtraktion, \dots) realisiert.
 	
 	Der allgemeine Aufbau eines Funktionsaufrufs ist:
 	\begin{figure}[H]
@@ -25,16 +25,16 @@ Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie 
 % end
 
 \subsection{Konstanten}
-	\implements{Konstanten}{variablen}{\racket}
+	\implements{Konstanten}{variablen}{Racket}
 	
-	Es ist uns in \racketText möglich, Daten in Konstanten abzulegen. Diese können wir, wie der Name es bereits sagt, nicht mehr modifizieren.
+	Es ist uns in Racket möglich, Daten in Konstanten abzulegen. Diese können wir, wie der Name es bereits sagt, nicht mehr modifizieren.
 	
 	Die Allgemeine Syntax zur Definition einer Konstante ist:
 	\begin{figure}[H]
 		\centering
 		\lstinline[language = Racket]|(define <name> <ausdruck>)|
 	\end{figure}
-	Dabei ist \texttt{<name>} ein Bezeichner, der den Bedingungen für Bezeichner genügen muss (siehe \refImpl{identifier}{\racket}). Als \texttt{<ausdruck>} können wir jeden beliebigen Ausdruck verwenden, also entweder einen Funktionsaufruf oder ein Literal (ein Literal ist auch ein Ausdruck).
+	Dabei ist \texttt{<name>} ein Bezeichner, der den Bedingungen für Bezeichner genügen muss (siehe \refImpl{identifier}{Racket}). Als \texttt{<ausdruck>} können wir jeden beliebigen Ausdruck verwenden, also entweder einen Funktionsaufruf oder ein Literal (ein Literal ist auch ein Ausdruck).
 	
 	\paragraph{Beispiele}
 		Wir nehmen wie oben an, dass eine Funktion \texttt{add} existiert, welche beliebig viele Parameter annimmt und die Summe dieser Zahlen bildet.
@@ -48,9 +48,9 @@ Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie 
 % end
 
 \subsection{\enquote{Operatoren}}
-	\implements{Operatoren}{operatoren}{\racket}
+	\implements{Operatoren}{operatoren}{Racket}
 
-	Wie wir bereits im Abschnitt über Funktionsaufrufe gesehen haben, läuft in \racketText alles auf selbige hinaus. Somit sind auch die üblichen Operatoren mit Funktionen realisiert.
+	Wie wir bereits im Abschnitt über Funktionsaufrufe gesehen haben, läuft in Racket alles auf selbige hinaus. Somit sind auch die üblichen Operatoren mit Funktionen realisiert.
 
 	\begin{table}[H]
 		\centering
@@ -61,19 +61,19 @@ Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie 
 			Multiplikation    & \texttt{(+ [Faktoren])}               & \( \texttt{(* 1 2 3)} \rightarrow 6 \)           & \( \texttt{(*)} \rightarrow 1 \)    \\
 			Division          & \texttt{(+ <Dividend> [Divisoren])}   & \( \texttt{(/ 1 2 3)} \rightarrow \frac{1}{6} \) & \( \texttt{(/ 1)} \rightarrow 1 \)
 		\end{tabular}
-		\caption{Auswahl einiger \enquote{Operatoren} aus \racket}
+		\caption{Auswahl einiger \enquote{Operatoren} aus Racket}
 	\end{table}
 
 	In Abschnitt \ref{sec:racket_summary} werden nochmals alle Standard-Funktionen zusammengefasst.
 % end
 
 \subsection{Abfragen/Vergleiche}
-	Auch in \racketText müssen Entscheidungen getroffen werden, weshalb uns grundlegende Vergleichsoperationen zur Verfügung stehen und Funktionen, um die Ergebnisse dieser Vergleiche zusammenzuführen.
+	Auch in Racket müssen Entscheidungen getroffen werden, weshalb uns grundlegende Vergleichsoperationen zur Verfügung stehen und Funktionen, um die Ergebnisse dieser Vergleiche zusammenzuführen.
 	
 	In diesem Abschnitt schauen wir uns einige dieser Vergleichsoperationen an, eine längere Liste befindet sich im Abschnitt \ref{sec:racket_summary}, in dem alle Funktionen übersichtlich dargestellt sind.
 
 	\subsubsection{Gleichheit, Größer-/Kleiner-Gleich}
-		Diese üblichen Vergleichsoperatoren für Zahlen stehen uns selbstverständlich auch in \racketText zur Verfügung.
+		Diese üblichen Vergleichsoperatoren für Zahlen stehen uns selbstverständlich auch in Racket zur Verfügung.
 		
 		Die allgemeine Syntax ist hier \texttt{(<Vergleich> <Zahl1> <Zahl2>)}, wobei wir als \texttt{<Vergleich>} folgendes nutzen können:
 		\begin{itemize}
@@ -86,7 +86,7 @@ Schauen wir uns nun an, wie man überhaupt Dinge in \racketText\, tut, also wie 
 	% end
 	
 	\subsubsection{Typüberprüfung}
-		Da \racketText wie bereits erwähnt nicht statisch typisiert ist, müssen wir in einigen Fällen den Typ selbst überprüfen (beispielsweise ist es sinnvoll zu prüfen, ob in einer Konstante wirklich eine Zahl steht, bevor wir diese summieren). Dazu stellt \racketText einige Prädikate bereit, die uns diese Arbeit abnehmen. Wie auch im vorherigen Abschnitt schauen wir uns hier nur eine kleine Auswahl an, eine große Liste befindet sich im Abschnitt \ref{sec:racket_summary}.
+		Da Racket wie bereits erwähnt nicht statisch typisiert ist, müssen wir in einigen Fällen den Typ selbst überprüfen (beispielsweise ist es sinnvoll zu prüfen, ob in einer Konstante wirklich eine Zahl steht, bevor wir diese summieren). Dazu stellt Racket einige Prädikate bereit, die uns diese Arbeit abnehmen. Wie auch im vorherigen Abschnitt schauen wir uns hier nur eine kleine Auswahl an, eine große Liste befindet sich im Abschnitt \ref{sec:racket_summary}.
 	
 	
 		Die allgemeine Syntax ist hier \texttt{(<Prädikat> <Ausdruck>)}, wobei wir als \texttt{<Prädikat>} folgendes nutzen können:

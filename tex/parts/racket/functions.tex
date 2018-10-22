@@ -1,8 +1,8 @@
-\implements{Funktionen}{methoden}{\racket}
+\implements{Funktionen}{methoden}{Racket}
 
-In diesem Abschnitt schauen wir uns an, wie Methoden als Funktionen in \racketText umgesetzt werden.
+In diesem Abschnitt schauen wir uns an, wie Methoden als Funktionen in Racket umgesetzt werden.
 
-Hierzu müssen wir verstehen, was eine Funktion in \racketText genau ist: Eine deklarative Beschreibung dessen, was mit den Eingabedaten getan werden soll und wir das Ergebnis aussehen soll. Eine Rückgabe eines Wertes gibt es an sich nicht, die Funktion wird einfach ausgewertet und der entstehende Wert zurück gegeben.
+Hierzu müssen wir verstehen, was eine Funktion in Racket genau ist: Eine deklarative Beschreibung dessen, was mit den Eingabedaten getan werden soll und wir das Ergebnis aussehen soll. Eine Rückgabe eines Wertes gibt es an sich nicht, die Funktion wird einfach ausgewertet und der entstehende Wert zurück gegeben.
 
 \subsection{Bestandteile} % Name, Parameter, Rückgabe
 	Eine Funktion definieren wir wie folgt:
@@ -26,13 +26,13 @@ Hierzu müssen wir verstehen, was eine Funktion in \racketText genau ist: Eine d
 % end
 
 \subsection{Verträge}
-	Verträge sind Teil der Dokumentation, siehe \refImpl{doku}{\racket}.
+	Verträge sind Teil der Dokumentation, siehe \refImpl{doku}{Racket}.
 % end
 
 \subsection{Rekursion}
-	\implements{Rekursion}{rekursion}{\racket}
+	\implements{Rekursion}{rekursion}{Racket}
 	
-	In \racketText ist Rekursion die einzige Möglichkeit, wie wir Code doppelt ausführen können. Die Nutzung der Rekursion ist, da \racketText eine funktionale Sprache ist, sehr mathematisch, wie wir an folgendem Beispiel zur Berechnung der Fakultät sehen:
+	In Racket ist Rekursion die einzige Möglichkeit, wie wir Code doppelt ausführen können. Die Nutzung der Rekursion ist, da Racket eine funktionale Sprache ist, sehr mathematisch, wie wir an folgendem Beispiel zur Berechnung der Fakultät sehen:
 	\begin{figure}[H]
 		\centering
 		\begin{lstlisting}[language = Racket]

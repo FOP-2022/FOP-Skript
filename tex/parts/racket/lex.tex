@@ -1,7 +1,7 @@
 \subsection{Datentypen}
-	\implements{Datentypen}{datentypen}{\racket}
+	\implements{Datentypen}{datentypen}{Racket}
 	
-	Im folgenden schauen wir uns an, was es in \racket\, für Datentypen gibt:
+	Im folgenden schauen wir uns an, was es in Racket für Datentypen gibt:
 	\begin{itemize}
 		\item Zahlen
 			\begin{itemize}
@@ -18,7 +18,7 @@
 		\item Listen
 	\end{itemize}
 
-	Dabei ist \racket\, aber nicht statisch typisiert, das heißt die Datentypen nicht mit angegeben werden, sondern es ist ausreichend, wenn zur Laufzeit der korrekte Datentyp in einer Variable gespeichert ist (es ist zum Beispiel nicht möglich, Strings zu addieren). Ist nicht der korrekte Datentyp gespeichert, so tritt ein Fehler auf.
+	Dabei ist Racket aber nicht statisch typisiert, das heißt die Datentypen nicht mit angegeben werden, sondern es ist ausreichend, wenn zur Laufzeit der korrekte Datentyp in einer Variable gespeichert ist (es ist zum Beispiel nicht möglich, Strings zu addieren). Ist nicht der korrekte Datentyp gespeichert, so tritt ein Fehler auf.
 	
 	\paragraph{Symbole}
 		Symbole sind einfache Zeichenketten, die ausschließlich verglichen werden können und weniger Funktionalität als Strings bieten.
@@ -27,7 +27,7 @@
 	% end
 	
 	\paragraph{Listen}
-		Listen ist einer der wichtigsten Datentypen in \racket. Wir werden uns diesen wichtigen Datentyp im Abschnitt \ref{sec:racket_lists} genauer anschauen.
+		Listen ist einer der wichtigsten Datentypen in Racket. Wir werden uns diesen wichtigen Datentyp im Abschnitt \ref{sec:racket_lists} genauer anschauen.
 	% end
 	
 	\paragraph{Sondertyp \textit{Struct}}
@@ -36,7 +36,7 @@
 % end
 
 \subsection{Literale}
-	\implements{Literalen}{literale}{\racket}
+	\implements{Literalen}{literale}{Racket}
 	
 	Wie wir Literale im Code ablegen, hängt von dem Datentyp ab, den wir produzieren wollen:
 	
@@ -52,7 +52,7 @@
 			Wahrheitswert & \lstinline[language = Racket]|true|, \lstinline[language = Racket]|false|, \lstinline[language = Racket]|#t|, \lstinline[language = Racket]|#f|, \lstinline[language = Racket]|#true|, \lstinline[language = Racket]|#false| \\
 			Symbol & \lstinline[language = Racket]|'symbol|, \lstinline[language = Racket]|'"string as symbol"| \\
 		\end{tabular}
-		\caption{\racket: Literale verschiedener Datentypen}
+		\caption{Racket: Literale verschiedener Datentypen}
 	\end{table}
 
 	\paragraph{Symbol-Literale}
@@ -68,9 +68,9 @@
 % end
 
 \subsection{Bezeichner und Konventionen}
-	\implements{Bezeichnern und Konventionen}{identifier}{\racket}
+	\implements{Bezeichnern und Konventionen}{identifier}{Racket}
 
-	In \racket\, können annähernd alle Zeichen in Bezeichnern genutzt werden, u.a. \texttt{-}, \texttt{?}, usw.. Nicht möglich ist es, eine Zahl als das erste Zeichen eines Bezeichners zu wählen.
+	In Racket können annähernd alle Zeichen in Bezeichnern genutzt werden, u.a. \texttt{-}, \texttt{?}, usw.. Nicht möglich ist es, eine Zahl als das erste Zeichen eines Bezeichners zu wählen.
 	
 	Damit sind beispielsweise folgende Bezeichner gültig:
 	\begin{itemize}
@@ -94,7 +94,7 @@
 % end
 
 \subsection{Strukturierung des Codes}
-	In \racketText werden an allen Stellen Klammern verwendet. Zur Strukturierung ist es gut zu wissen, dass der Typ der Klammer (rund, geschweift, eckig) keinen Einfluss auf die Funktionalität hat, sofern der identische Typ zur Schließung verwendet wird.
+	In Racket werden an allen Stellen Klammern verwendet. Zur Strukturierung ist es gut zu wissen, dass der Typ der Klammer (rund, geschweift, eckig) keinen Einfluss auf die Funktionalität hat, sofern der identische Typ zur Schließung verwendet wird.
 	
 	Das heißt, die folgenden Codes sind äquivalent:
 	\begin{itemize}

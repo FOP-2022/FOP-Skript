@@ -1,7 +1,7 @@
-\implements{Dokumentation}{doku}{\racket}
+\implements{Dokumentation}{doku}{Racket}
 
-\subsection{Veträge}
-	\implements{Verträgen}{vertraege}{\racket}
+\subsection{Verträge}
+	\implements{Verträgen}{vertraege}{Racket}
 	
 	Nehmen wir an, wir haben eine Funktion \texttt{(moving-average data n)} implementiert, welche den gleitenden Durchschnitt einer Liste \texttt{data} mit den vorherigen \texttt{n} Daten berechnet. Diese Funktion gibt eine Liste mit der Länge \( \text{Length}(\texttt{moving-average}) - (n - 1) \) zurück.
 	
@@ -9,7 +9,7 @@
 	\begin{figure}[H]
 		\centering
 		\begin{lstlisting}[language = Racket]
-;; moving-average :: (listof number) number -> (listof number)
+;; Type: (listof number) number -> (listof number)
 (define (moving-average data n) *@\dots@*)
 \end{lstlisting}
 	\end{figure}
@@ -18,22 +18,16 @@
 \subsection{Funktionsdokumentation}
 	Eine vollständige Funktionsdokumentation besteht aus:
 	\begin{itemize}
-		\item Einer Beschreibung, was die Methode tut.
 		\item Dem Vertrag der Methode, wie oben beschrieben.
-		\item Mindestens einem Nutzungsbeispiel.
+		\item Und aus einer kurzen Beschreibung des Ergebnisses.
 	\end{itemize}
 
 	Somit ist die folgende Methode korrekt dokumentiert:
 	\begin{figure}[H]
 		\centering
 		\begin{lstlisting}[language = Racket]
-;; factorial :: number -> number
-;;
-;; Berechnet die Fakultaet einer gegebenen natuerlichen Zahl.
-;;
-;; Beispiele:
-;;   (factorial 3) -> 2
-;;   (factorial 5) -> 120
+;; Type:    number -> number
+;; Returns: n!
 (define (factorial n)
 	(if (= n 1)
 		1
@@ -42,4 +36,8 @@
 )
 \end{lstlisting}
 	\end{figure}
+	\begin{itemize}
+		\item Der Vertrag ist in diesem Beispiel in Zeile 1 notiert,
+		\item die Beschreibung des Ergebnisses in Zeile 2.
+	\end{itemize}
 % end

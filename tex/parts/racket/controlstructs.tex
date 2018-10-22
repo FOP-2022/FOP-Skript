@@ -1,8 +1,8 @@
-\implements{Kontrollstrukturen}{kontrollstrukturen}{\racket}
+\implements{Kontrollstrukturen}{kontrollstrukturen}{Racket}
 
-In diesem Abschnitt schauen wir uns an, wie Kontrollstrukturen in \racketText umgesetzt werden. \racketText kennt dabei die Kontrollstrukturen \textit{If} und \textit{Cond} (von \enquote{Conditional}), wobei \textit{Cond} nur eine Vereinfachung von vielen geschalteten Ifs darstellt.
+In diesem Abschnitt schauen wir uns an, wie Kontrollstrukturen in Racket umgesetzt werden. Racket kennt dabei die Kontrollstrukturen \textit{If} und \textit{Cond} (von \enquote{Conditional}), wobei \textit{Cond} nur eine Vereinfachung von vielen geschalteten Ifs darstellt.
 
-In \racketText gibt es keine Schleifen, da \racketText eine funktionale Programmiersprache ist! Alle Wiederholungen werden über Rekursion \footnote{Siehe \refImpl{rekursion}{\racket}} gelöst.
+In Racket gibt es keine Schleifen, da Racket eine funktionale Programmiersprache ist! Alle Wiederholungen werden über Rekursion \footnote{Siehe \refImpl{rekursion}{Racket}} gelöst.
 
 \subsection{If}
 	Das \textit{If} ist die einfachste Form der Verzweigung und hat folgende Form:
@@ -12,7 +12,7 @@ In \racketText gibt es keine Schleifen, da \racketText eine funktionale Programm
 	\end{figure}
 	Wird der Ausdruck \texttt{<Abfrage>} zu Wahr ausgewertet, so wird das Ergebnis von \texttt{<Wahr-Fall>} zurück gegeben. Ansonsten wir das Ergebnis von \texttt{<Falsch-Fall>} zurück gegeben.
 	
-	\warning{Bei einem If in \racketText müssen \textit{immer} sowohl Wahr- als auch Falsch-Fall angegeben werden!}
+	\warning{Bei einem If in Racket müssen \textit{immer} sowohl Wahr- als auch Falsch-Fall angegeben werden!}
 	
 	\paragraph{Beispiele}
 		\begin{itemize}
