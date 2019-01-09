@@ -19,7 +19,7 @@ Wir werden in diesem Kontext nur Typparameter (Generics) betrachten, welche in J
 		Auffällig ist, dass sämtliche Element als Object-Referenz vorliegen. Es gibt für eine Methode, welche eine solche Liste annimmt, gibt es keine Möglichkeit, den Typ der Parameter einzuschränken. Schauen wir uns hierzu eine Methode an, welche alle Elemente aufsummieren soll. Natürlich ergibt eine solche Operation nur auf Zahlen Sinn, weshalb davon ausgegangen wird, dass sämtliche Elemente der Liste vom Typ \texttt{Integer} sind:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public Integer sum(List list) {
 	Integer result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -48,7 +48,7 @@ public Integer sum(List list) {
 		Klassen, welche Generics nutzen, sind für viele Typen geschrieben und ermöglichen die Angabe des expliziten Typs in Spitzen Klammern hinter dem Klassennamen. Des weiteren ist es auch auf Methodenebene möglich, für viele Typen generisch zu Programmieren und bei der Nutzung der Methode den eigentlichen Typ festzulegen. Wir werden uns diese beiden Fälle in den folgenden beiden Abschnitten zu generischen Klassen und Methoden anschauen. Um einen ersten Eindruck zu kriegen, was uns Generics ermöglichen, hier ein Beispiel, welche die obige Methode ersetzen kann und eine größere Typsicherheit ermöglicht:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public Integer sum(List@@?<Integer>@@@ list) {
 	Integer result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -70,7 +70,7 @@ public Integer sum(List@@?<Integer>@@@ list) {
 		Wir schauen uns hierzu eine mögliche Implementierung der oben beschriebenen Liste an, welche noch keine Generics nutzt (die Implementierung leitet einfach alle Aufrufe an eine andere, nicht von uns implementierte List weiter):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public class List {
 	private DelegateList delegateList = new DelegateList();
 
@@ -95,7 +95,7 @@ public class List {
 		Die Klasse sieht, unter Nutzung von Typparametern, nun folgendermaßen aus (der Einfachheit halber nehmen wir an, die Klasse \texttt{DelegateList} sei auch generisch):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public class List@@?<T>@@@ {
 	private DelegateList@@?<T>@@@ delegateList = new DelegateList@@?<T>@@@();
 	
@@ -155,7 +155,7 @@ public static String concatenate(List<String> list) {
 		Schauen wir uns nun also die obige Methode unter Verwendung von Typparametern an:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public static @@?<T>@@@ String concatenate(List<@@?T@@@> list) {
 	String result = "";
 	for (int i = 0; i < list.size(); i++) {
@@ -201,7 +201,7 @@ public static @@?<T>@@@ String concatenate(List<@@?T@@@> list) {
 		Schauen wir uns unter diesen Voraussetzungen folgenden Code an, der den Durchschnitt zweier benachbarten Zahlen (gleitender Durchschnitt) berechnet:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java, style = base]
+			\begin{lstlisting}
 public List<Double> floatingAverage(List<Integer> list) {
 	List<Double> result = new List<Double>();
 	for (int i = 1; i < list.size(); i++) {
@@ -229,7 +229,7 @@ public List<Double> floatingAverage(List<Integer> list) {
 			Schauen wir uns also obigen Beispiel erneut an, diesmal aber mit Autoboxing:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java, style = base]
+				\begin{lstlisting}
 public List<Double> floatingAverage(List<Integer> list) {
 	List<Double> result = new List<Double>();
 	for (int i = 1; i < list.size(); i++) {
@@ -262,7 +262,7 @@ public List<Double> floatingAverage(List<Integer> list) {
 			Eine Möglichkeit ist es wie in \ref{fig:generics_methoden} einen uneingeschränkten Typparameter zu definieren. Eine andere Möglichkeit ist, die Wildcard \texttt{?} zu verwenden, welche alle Typen akzeptiert. Somit kann die Methode in \ref{fig:generics_methoden} zu folgender, äquivalenter, Methode umgeschrieben werden:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java, style = base]
+				\begin{lstlisting}
 public static String concatenate(List<@@??@@@> list) {
 	String result = "";
 	for (int i = 0; i < list.size(); i++) {
@@ -288,7 +288,7 @@ public static String concatenate(List<@@??@@@> list) {
 				Erweitern wir unsere Methoden zum Aufsummieren von Zahlen so, dass die Methode alle Zahlentypen akzeptiert und Wildcards nutzt (Achtung: In dieser Implementierung werden einfach alle Nachkommastellen abgeschnitten, sollte eine Fließkommazahl übergeben werden!):
 				\begin{figure}[H]
 					\centering
-					\begin{lstlisting}[language = Java, style = base]
+					\begin{lstlisting}
 public long sum(List@@?<? extends Number>@@@ list) {
 	long result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -321,7 +321,7 @@ List<String> stringList = new List<String>();
 				Zur Nutzung von \texttt{super} schauen wir uns folgendes Beispiel an, welches die Elemente einer Liste \texttt{src} in eine Liste \texttt{dest} kopiert und dabei Typsicher verfährt:
 				\begin{figure}[H]
 					\centering
-					\begin{lstlisting}[language = Java, style = base]
+					\begin{lstlisting}
 public static <T> copy(List<? extends T> src, List<? super T> dest) {
 	for (int i = 0; i < src.size(); i++) {
 		dest.add(a.get(i));
@@ -364,7 +364,7 @@ List<String>            dest = new List<String>();
 			Betrachten wir folgende Methode, welche das maximale Element einer List findet:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java, style = base]
+				\begin{lstlisting}
 public <T extends Comparable<? super T>> T max(List<T> list) {
 	T max = null;
 	for (int i = 0; i < list.size(); i++) {
@@ -385,7 +385,7 @@ Integer max = max(list);                  // max == 3
 			von dem Compiler durch folgenden Code ersetzt (das Autoboxing wird hier außer Acht gelassen):
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java, style = base]
+				\begin{lstlisting}
 public Comparable max(List list) {
 	Comparable max = null;
 	for (int i = 0; i < list.size(); i++) {

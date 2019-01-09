@@ -7,7 +7,7 @@
 		In \texttt{if} hat in Java die folgende Form:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 if (/* Test */) {
 	/* then-Fall */
 } else if (/* else-Test */) {
@@ -24,7 +24,7 @@ if (/* Test */) {
 		Somit ist die einfache Form des \texttt{if}s:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 if (/* Test */) {
 	/* then-Fall */
 }
@@ -41,7 +41,7 @@ if (/* Test */) {
 		Schauen wir uns als Motivation den folgenden Code an, welcher ausgibt, wie viele Primzahlen \texttt{p} mit \texttt{p <= x <= 10} existieren.
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 if (x == 1) {
 	prime = 0;
 } else if (x == 2) {
@@ -72,7 +72,7 @@ if (x == 1) {
 		Mit Hilfe eines Switches können wir den Code nun äquivalent umformen:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 switch (x) {
 case 1:
 	prime = 0;
@@ -127,7 +127,7 @@ default:
 		Mit dieser Kenntnis kann obiger Code des Switches deutlich vereinfacht werden, indem wir einfach bei jeder Primzahl den Zähler um eins erhöhen:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 prime = 0;
 switch (x) {
 	case 10:
@@ -164,7 +164,7 @@ switch (x) {
 		In Java sieht die zuvor vorgestellte While-Schleife wie folgt aus:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 while (/* Test */) {
 	/* Code */
 }
@@ -179,7 +179,7 @@ while (/* Test */) {
 		Als Spezialfall einer While-Schleife gibt es in Java die Do-While-Schleife, welche immer \textit{mindestens einmal} ausgeführt wird:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 do {
 	/* Code */
 } while (/* Test */);
@@ -194,7 +194,7 @@ do {
 		Da oftmals über Elemente einer Liste oder eines Arrays iteriert wird und der Code hierfür immer gleich ist (eine Zählvariable wird in jedem Schritt hochgezählt):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 int i = 0;
 while (i < array.length) {
 	/* Code */
@@ -207,7 +207,7 @@ while (i < array.length) {
 		kann dieser Code zu folgendem, äquivalentem, Code umgewandelt werden:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 for (int i = 0; i < array.length; i++) {
 	/* Code */
 }
@@ -230,7 +230,7 @@ for (int i = 0; i < array.length; i++) {
 		Statt wie üblich über Arrays und Listen zu iterieren:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 for (int i = 0; i < array.length; i++) {
 	Object element = array[i];
 
@@ -242,7 +242,7 @@ for (int i = 0; i < array.length; i++) {
 		kann seit Java 5 auch die \textit{erweiterte For-Schleife} verwendet werden, um über Arrays oder Instanzen von \texttt{java.util.Iterable} iterieren (alle Standard-Klassen für Listen implementieren dieses Interface):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}[language = Java]
+			\begin{lstlisting}
 for (Object element : array[i]) {
 	/* Code */
 }
@@ -265,7 +265,7 @@ for (Object element : array[i]) {
 			Schauen wir uns abschließend folgendes schwachsinniges Beispiel an, um die Funktionalität von \texttt{break} und \texttt{continue} zu verdeutlichen. Der folgende Code summiert die ungeraden Elemente eines Arrays, wobei keine weiteren Element aufsummiert werden, sobald die Summe einmal \texttt{10} überschritten hat.
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java]
+				\begin{lstlisting}
 int sumOdd = 0;
 for (int x : array) {
 	if (x % 2 == 0) {
@@ -287,7 +287,7 @@ System.out.println(sumOdd);
 			Mit den Werten \texttt{array = new int[] \{ 1, 2, 3, 4, 5, 7, 8, 9 \}} wird \texttt{16} ausgegeben, wobei der Code wie folgt ausgeführt wird:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}[language = Java]
+				\begin{lstlisting}
 (Zeile =  1; sumOdd =  0)
 
 (Zeile =  2; sumOdd =  0; x = 1)
