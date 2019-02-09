@@ -1,1 +1,159 @@
-\todo{Schreiben}
+Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und Ausdrücke formulieren können.
+
+\subsection{Variablen}
+	\implements{Variablen}{variablen}{Java}
+	
+	Die allgemeine Syntax zur Deklaration einer Variablen ist:
+	\begin{figure}[H]
+		\centering
+		\lstinline|<modifier> <typ> <name>;|
+	\end{figure}
+	Dabei ist \texttt{<modifier>} eine Reihe von Schlüsselwörtern, welche das Verhalten der Variablen modifizieren (genannt \enquote{Modifier}). Diese werden wir uns weiter unten genau anschauen. \texttt{<typ>} ist der Datentyp der Variablen (dies kann ein primitiver Datentyp aber auch ein Referenztyp sein). Der Name der Variablen wird mit \texttt{<name>} festgelegt.
+	
+	\subsubsection{Modifier}
+		Für eine lokale Variable (das heißt eine Variable innerhalb eines Codeblocks oder als Parameter) existiert ausschließlich folgender Modifier:
+		\begin{description}
+			\item[\texttt{final}] Sorgt dafür, dass die Variable nur einmal zugewiesen werden kann (zum Beispiel direkt nach oder noch während der Deklaration). Wenn möglich sollte eine Variable immer als \lstinline|final| markiert werden, um versehentliches Überschreiben des Wertes zu verhindern.
+		\end{description}
+		Handelt es sich bei der Variablen um eine Instanz- oder Klassenvariable, sind zusätzlich folgende Modifier verfügbar:
+		\begin{description}
+			\item[\texttt{volatile}] Bei der Zuweisung der Variablen geschieht die Zuweisung \textit{atomar}. Dieser Modifier kann nicht mit \lstinline|final| modifiziert werden.
+			\item[\texttt{transient}] Bei der Serialisierung einer Instanzvariablen wird dieses Feld nicht serialisiert.
+			\item[\(\bullet\)] Sämtliche Sichtbarkeitsmodifizierer (siehe \ref{sec:visibility}).
+		\end{description}
+		Alle Modifier können wir mit kleinen Einschränkungen beliebig kombinieren.
+		
+		Beispiel: Eine Definition einer privaten Klassenvariable \texttt{timestamp}, die atomar Zugewiesen werden soll und nicht mit serialisiert werden soll sieht so aus:
+		\begin{figure}[H]
+			\centering
+			\lstinline|private static transient volatile long timestamp;|
+		\end{figure}
+	% end
+	
+	\subsubsection{Lokale Variablen, Konstanten, Attribute, Arraykomponenten}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Null- und Defaultwerte}
+		Klassenvariablen, die nicht \lstinline|final| sind, werden bestimmte Default-Werte zugewiesen (sofern die Variable nicht während der Deklaration direkt zugewiesen wird):
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{l | l}
+				\textbf{Typ} & \textbf{Default-Wert} \\ \hline
+				\lstinline|byte| & \lstinline|0| \\
+				\lstinline|short| & \lstinline|0| \\
+				\lstinline|int| & \lstinline|0| \\
+				\lstinline|long| & \lstinline|0| \\
+				\lstinline|float| & \lstinline|0.0F| \\
+				\lstinline|double| & \lstinline|0.0| \\
+				\lstinline|boolean| & \lstinline|false| \\
+				\lstinline|char| & \lstinline|'\000'| (Null-Byte) \\
+				\lstinline|Object| und Unterklassen & \lstinline|null| \\
+			\end{tabular}
+			\caption{Java: Defaultwerte}
+		\end{table}
+	% end
+% end
+
+\subsection{Zuweisungen}
+	\implements{Zuweisungen}{zuweisungen}{Java}
+	
+	Um eine Variable zuzuweisen, wird folgender Ausdruck verwendet:
+	\begin{figure}[H]
+		\centering
+		\lstinline|<variable> = <ausdruck>;|
+	\end{figure}
+	Dabei ist der linke Teil \texttt{<variable>} der Name der Variablen, welcher der Wert des Ausdrucks \texttt{<ausdruck>} zugewiesen wird. Der Ausdruck kann dabei beliebig komplex sein.
+	
+	Wie können den Wert auch zeitgleich mit der Deklaration zuweisen, die Syntax ist dann wie folgt:
+	\begin{figure}[H]
+		\centering
+		\lstinline|<modifier> <typ> <name> = <ausdruck>;|
+	\end{figure}
+
+	Eine Besonderheit ist hier, dass der Ausdruck einer normalen Zuweisung den Wert der Zuweisung zurück gibt (das heißt es gilt \texttt{(<variable> = <ausdruck>) == <ausdruck>}).
+% end
+
+\subsection{Methodenaufrufe}
+	\todo{Schreiben}
+% end
+
+\subsection{Operatoren}
+	\todo{Schreiben}
+	
+	\subsubsection{Arithmetische Operatoren}
+		\todo{Schreiben}
+		
+		\paragraph{Typsicherheit}
+			\todo{Schreiben}
+		% end
+		
+		\paragraph{Kommazahlen und Division}
+			\todo{Schreiben}
+		% end
+	% end
+	
+	\subsubsection{Logische Operatoren}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Bitlogische Operatoren}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Spezielle Operatoren (\texttt{new}, \texttt{instanceof})}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Bindungsstärke der Operatoren}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Klammerung}
+		\todo{Schreiben}
+	% end
+% end
+
+\subsection{Rückgabe von Werten}
+	\todo{Schreiben}
+	
+	\paragraph{Sonderfall \texttt{finally}}
+		\todo{Schreiben}
+	% end
+% end
+
+\subsection{Polymorphie}
+	\todo{Schreiben}
+	
+	\subsubsection{Schlüsselwort \lstinline|this|}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Schlüsselwort \lstinline|super|}
+		\todo{Schreiben}
+	% end
+% end
+
+\subsection{Implizite und Explizite Typkonvertierung (Casts)}
+	\todo{Schreiben}
+	
+	\subsubsection{Primitive Typen}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Wrapper Typen}
+		\todo{Schreiben}
+	% end
+	
+	\subsubsection{Objekte (\enquote{Downcast})}
+		\todo{Schreiben}
+	% end
+% end
+
+\subsection{Links-/Rechtsausdrücke}
+	\todo{Schreiben}
+% end
+
+\subsection{Seiteneffekte}
+	\todo{Schreiben}
+% end

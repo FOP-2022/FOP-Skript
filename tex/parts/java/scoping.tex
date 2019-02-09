@@ -1,1 +1,26 @@
-\todo{Schreiben}
+\implements{Scoping und Scopes}{scoping}{Java}
+
+In Java wird immer dann ein neuer Scope geöffnet, wenn eine geschweifte Klammer auf geht und ein Scope geschlossen, wenn die geschweifte Klammer zu geht. Das ist zum Beispiel bei Methoden und Schleifen der Fall.
+
+Das bedeutet: Eine Variable, die wir innerhalb einer Methode definieren (inklusive der Parameter) ist von außerhalb nicht zugreifbar. Das gleiche gilt für Variablen, die innerhalb eines If-Blocks oder dem Körper einer Schleife definiert wurden.
+
+\textbf{Beispiel:} \\
+\begin{lstlisting}
+int multiply(int a, int b) {
+	int result = 0;
+
+	int bAbs = Math.abs(b);
+	for (int i = 0; i < Math.abs(b); i++) {
+		result += a;
+	}
+
+	if (b < 0) {
+		return -result;
+	} else {
+		return result;
+	}
+}
+\end{lstlisting}
+Auf die Variablen \texttt{a}, \texttt{b} und \texttt{result} kann von außerhalb der Methode nicht zugegriffen werden. Ebenfalls kann nicht auf \texttt{i} zugegriffen werden, dies ist aber schon außerhalb der Schleife (also in Zeile 1 bis 4 und 8 bis 14) nicht möglich.
+
+Der Wert der Variable \texttt{result} wird zurück gegeben, womit der Aufrufer Zugriff auf den Wert der Variable hat, aber ohne Kenntnis darüber, wie das Ergebnis zustande gekommen ist.

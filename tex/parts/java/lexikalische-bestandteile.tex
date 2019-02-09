@@ -1,30 +1,30 @@
 \subsection{Datentypen}
 	\implements{Datentypen}{datentypen}{Java}
 	
-	\todo{Statische Typisierung}
+	Java ist eine statisch Typisierte Sprache, das heißt der Typ einer Variable muss jederzeit angegeben werden und dem Compiler bekannt sein. Es ist nicht möglich, eine Variable nacheinander für zum Beispiel Zahlen und Zeichenketten zu verwenden.
 	
-	In Java existieren viele Datentypen, die in zwei \footnote{Durch Project Valhalla \HREF{http://openjdk.java.net/projects/valhalla/} werden sich hier einige Dinge ändern.} Kategorien unterteilt werden können: \todo{Ist das mit Valhalla korrekt?}
+	In Java existieren viele Datentypen, die in zwei Kategorien unterteilt werden können:
 	\begin{itemize}
 		\item Primitive Datentypen
 		\item Objektreferenzen
 	\end{itemize}
 	
 	\paragraph{Primitive Datentypen}
-		Einer der Unterschiede zwischen primitiven Datentypen und Objektreferenzen ist, dass Daten, welche in primitiven Datentypen gespeichert sind, mit Pass-by-Value weitergegeben werden. \todo{Pass-by-Value erklären.} Außerdem sind ist die Anzahl an primitiven Datentypen begrenzt und die Datentypen sind von vornherein festgelegt. Ferner gibt es große Unterschiede bei der Behandlung von Konstanten, die wir später betrachten werden. \todo{Primitive vs. Objekte: Konstanten} als ersten Anhaltspunkt eignet sich, dass primitive Datentypen mit einem kleinen Buchstaben und Objektreferenztypen mit einem großen Buchstaben beginnen.
+		Einer der Unterschiede zwischen primitiven Datentypen und Objektreferenzen ist, dass Daten, welche in primitiven Datentypen gespeichert sind, mit Pass-by-Value weitergegeben werden. Das bedeutet, die Daten werden bei einer Übergabe an die Methode kopiert und Änderungen an den Daten an einer Stelle wirken sich nicht auf andere Stelle aus. Außerdem sind ist die Anzahl an primitiven Datentypen begrenzt und die Datentypen sind von vornherein festgelegt. Ferner gibt es große Unterschiede bei der Behandlung von Konstanten, die wir später betrachten werden. \todo{Primitive vs. Objekte: Konstanten} Als ersten Anhaltspunkt eignet sich, dass primitive Datentypen mit einem kleinen Buchstaben und Objektreferenztypen mit einem großen Buchstaben beginnen.
 		
 		Es existieren folgende primitive Datentypen:
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{l | l | l | l}
-				Schlüsselwort    & Typ            & Beschreibung               & Wertebereich                                                      \\ \hline
-				\texttt{byte}    & Ganzzahl       & Vorzeichenbehaftet, 8 Bit  & \( -(2 ^ { 7}) \) bis \( 2 ^ { 7} - 1 \)                          \\
-				\texttt{short}   & Ganzzahl       & Vorzeichenbehaftet, 16 Bit & \( -(2 ^ {15}) \) bis \( 2 ^ {15} - 1 \)                          \\
-				\texttt{int}     & Ganzzahl       & Vorzeichenbehaftet, 32 Bit & \( -(2 ^ {31}) \) bis \( 2 ^ {31} - 1 \)                          \\
-				\texttt{long}    & Ganzzahl       & Vorzeichenbehaftet, 64 Bit & \( -(2 ^ {63}) \) bis \( 2 ^ {63} - 1 \)                          \\
-				\texttt{float}   & Fließkommazahl & einfache Genauigkeit       & \( 1,4 \cdot 10 ^ {-45} \) bis \( \approx 3,4 \cdot 10 ^ {38} \)  \\
-				\texttt{double}  & Fließkommazahl & doppelte Genauigkeit       & \( 4,9 \cdot 10 ^ {324} \) bis \( \approx 1,8 \cdot 10 ^ {308} \) \\
-				\texttt{char}    & Charakter      & Unicode-Code, 16 Bit       & \( 0 \) bis \( 2 ^ {16} - 1 \)                                    \\
-				\texttt{boolean} & Wahrheitswert  &                            & \texttt{true}/\texttt{false}
+				Schlüsselwort       & Typ            & Beschreibung               & Wertebereich                                                      \\ \hline
+				\lstinline|byte|    & Ganzzahl       & Vorzeichenbehaftet, 8 Bit  & \( -(2 ^ { 7}) \) bis \( 2 ^ { 7} - 1 \)                          \\
+				\lstinline|short|   & Ganzzahl       & Vorzeichenbehaftet, 16 Bit & \( -(2 ^ {15}) \) bis \( 2 ^ {15} - 1 \)                          \\
+				\lstinline|int|     & Ganzzahl       & Vorzeichenbehaftet, 32 Bit & \( -(2 ^ {31}) \) bis \( 2 ^ {31} - 1 \)                          \\
+				\lstinline|long|    & Ganzzahl       & Vorzeichenbehaftet, 64 Bit & \( -(2 ^ {63}) \) bis \( 2 ^ {63} - 1 \)                          \\
+				\lstinline|float|   & Fließkommazahl & einfache Genauigkeit       & \( 1,4 \cdot 10 ^ {-45} \) bis \( \approx 3,4 \cdot 10 ^ {38} \)  \\
+				\lstinline|double|  & Fließkommazahl & doppelte Genauigkeit       & \( 4,9 \cdot 10 ^ {324} \) bis \( \approx 1,8 \cdot 10 ^ {308} \) \\
+				\lstinline|char|    & Charakter      & Unicode-Code, 16 Bit       & \( 0 \) bis \( 2 ^ {16} - 1 \)                                    \\
+				\lstinline|boolean| & Wahrheitswert  &                            & \texttt{true}/\texttt{false}
 			\end{tabular}
 			\caption{Liste der primitiven Datentypen in Java}
 		\end{table}
@@ -32,7 +32,27 @@
 		Hierbei fällt auf, dass es in Java keinen eingebauten Datentyp für vorzeichenfreie Zahlen (\enquote{unsigned}) gibt. Dies kann bei der Verarbeitung von Binärdaten (beispielsweise bei Netzwerkkommunikation) zu Fehlern führen.
 	% end
 	
-	\todo{Objektreferenzen und String}
+	\paragraph{Objektreferenzen}
+		Neben primitiven Datentypen gibt es noch die Objektreferenzen. Diese verhalten sich anders als primitive Datentypen, wobei uns vor allem die folgenden Unterschiede auffallen:
+		\begin{itemize}
+			\item Es gibt als einziges \enquote{echtes} Literal den Wert \lstinline|null|, der aussagt, dass die Objektreferenz kein Objekt referenziert. Jegliche Methodenaufrufe auf dieser Referenz brechen mit einer \lstinline|NullPointerException| ab. Deshalb muss vor jedem Zugriff auf eine solche Referenz geprüft werden, ob sie ungleich \lstinline|null| ist.
+			\item Werden Objektreferenzen als Parameter übergeben, so wird hierbei ausschließlich die Referenz übergeben und auf das gleiche Objekt referenziert (Pass-by-Reference). Das bedeutet, eine Änderung an dem Objekt an einer Stelle kann sich an beliebig vielen anderen stellen auswirken.
+		\end{itemize}
+		Wir werden uns Objektreferenzen im Abschnitt \refImpl{oop}{Java} über objektorientierte Programmierung in Java nochmals genauer anschauen.
+	% end
+	
+	\paragraph{Sonderfall \lstinline|String|}
+		Ein \lstinline|String| ist eine Objektreferenz, kann allerdings in manchen Bereichen als ein primitiver Datentyp angesehen werden. Beispielsweise existieren, wir wir weiter unten noch sehen werden, Literale für diesen Datentyp, welche implizit ein Objekt erzeugen. Auch scheint ein String mit Pass-by-Value übergeben zu werden, da ein String nicht veränderbar ist (alle Methoden eines Strings erzeugen immer einen neuen String).
+		
+		Insgesamt existieren folgende Unterschiede:
+		\begin{itemize}
+			\item Ein String ist \textit{immutable}, das heißt nicht veränderlich.
+			\item Dadurch scheint es, als wird ein String Pass-by-Value übergeben.
+			\item Bei Konstanten wird ein String als primitiver Typ angesehen und gleich behandelt.
+			\item Es gibt eine syntaktische Form, String-Literale auszudrücken.
+			\item Trotz allem ist es möglich, einem String den Wert \lstinline|null| zuzuweisen. Dies ist gleichermaßen praktisch wie nervig.
+		\end{itemize}
+	% end
 % end
 
 \subsection{Literale}
@@ -57,6 +77,10 @@
 			\texttt{Object}   & \texttt{null}
 		\end{tabular}
 	\end{table}
+	\begin{itemize}
+		\item \texttt{String} ist hier kein primitiver Datentyp, das heißt mit einem String-Literal wird auch immer ein neues Objekt erzeugt.
+		\item Das Literal \texttt{null} für \texttt{Object} ist allgemein anwendbar, wenn mit Objekten gearbeitet wird. Allerdings kann dies zu unerwarteten \textit{\texttt{NullPointerExceptions}} führen, welche wir später noch eingehend betrachten werden.
+	\end{itemize}
 	
 	Bei Literalen von Zahlen gibt es außerdem folgende Besonderheiten:
 	\begin{itemize}
@@ -74,9 +98,26 @@
 	
 	\warning{Wird bei Zahlen eine \texttt{0} vorangestellt, wird die Zahl Oktal interpretiert! Das heißt es gilt \texttt{010 \(\neq\) 10}.}
 	
-	\todo{Schreiben}
-	
-	% Primitive, null
+	\paragraph{Escape-Sequenzen}
+		Escape-Sequenzen werden innerhalb eines Strings mit einem Backslash (\textbackslash) eingeleitet und bestehen in den meisten Fällen auf einem Zeichen.
+		
+		In Java sind folgende Escape-Sequenzen verfügbar:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | l}
+				\textbf{Escape-Sequenz} & \textbf{Repräsentiertes Zeichen} \\ \hline
+				\lstinline|\t|          & Tab.                             \\
+				\lstinline|\b|          & Backspace.                       \\
+				\lstinline|\n|          & New line.                        \\
+				\lstinline|\r|          & Carriage Return.                 \\
+				\lstinline|\f|          & Formfeed.                        \\
+				\lstinline|\'|          & Single quote.                    \\
+				\lstinline|\"|          & Double quote.                    \\
+				\lstinline|\\|          & Backslash.
+			\end{tabular}
+			\caption{Java: Escape-Sequenzen}
+		\end{table}
+	% end
 % end
 
 \subsection{Schlüsselwörter}
@@ -93,7 +134,7 @@
         \item[\texttt{for}] Leitet eine for-Schleife ein.
         \item[\texttt{new}] Operator zur Erstellung eines neuen Objektes einer Klasse.
         \item[\texttt{switch}] Leitet eine switch-Anweisung ein.
-        \item[\textit{\texttt{assert}}] \textit{Legt bestimmte Bedingungen fest, die für Parameter gelten müssen. Gelten diese wird, wird ein Fehler ausgelöst.} \todo{Wird das behandelt?}
+        \item[\texttt{assert}] Legt bestimmte Bedingungen fest, die für Parameter gelten müssen. Gelten diese nicht, wird ein Fehler ausgelöst.
         \item[\texttt{default}]
 	        \begin{itemize}
 	        	\item Default-Fall in einer switch-Anweisung.
@@ -102,7 +143,7 @@
 	        \end{itemize}
         \item[\texttt{if}] Leitet eine if-Verzweigung ein.
         \item[\texttt{package}] Definition des Packages einer Klasse.
-        \item[\texttt{synchronized}] Markiert eine Methode oder einen Codeblock als synchron, das heißt es kann maximal ein Thread zur gleichen Zeit die Methode \enquote{betreten}. \todo{Wird das behandelt?}
+        \item[\texttt{synchronized}] Markiert eine Methode oder einen Codeblock als synchron, das heißt es kann maximal ein Thread zur gleichen Zeit die Methode \enquote{betreten}.
         \item[\texttt{boolean}] Datentyp.
         \item[\texttt{do}] Leitet eine do-while-Schleife ein.
         \item[\texttt{goto}] Reserviert. Löst ausschließlich einen Compilefehler aus.
@@ -196,14 +237,45 @@
 		\end{tabular}
 		\caption{Java: Operatoren}
 	\end{table}
-	
-	\todo{Schreiben}
 % end
 
 \subsection{Strukturierung des Codes, Packages und Imports}
-	\implements{Paketen und logischen Dateistrukturen}{namespaces}{Java}
+	\implements{Paketen und Code-Strukturierung}{namespaces}{Java}
 	
-	\todo{Schreiben}
+	\subsubsection{Kommentare}
+		Es gibt drei verschiedene Arten von Kommentaren in Java:
+		\begin{itemize}
+			\item Einzeilige Kommentare \\ Der Kommentar ist nur in der aktuellen Zeile gültig.
+			\item Blockkommentare \\ Der Kommentar ist gültig, bis der Kommentar explizit beendet wird (auch über Zeilenumbrüche hinweg).
+			\item Javadoc \\ Dies ist eine besondere Form eines Blockkommentars, der so nur vor einer Methode, einem Feld oder einem Typ stehen kann (und, um es ganz genau zu nehmen, vor der \lstinline|package|-Deklaration in einer Datei \texttt{package-info.java}). Diese besondere Form von Kommentaren wird genutzt, um den Code zu Dokumentieren und anschließend eine HTML-Dokumentation daraus zu generieren. Wir werden dies im Abschnitt \refImpl{doku}{Java} über Javadoc intensiver anschauen.
+		\end{itemize}
+	% end
 	
-	% Klammerung, Kommentare, Whitespaces, Packages, Imports
+	\subsubsection{Whitespaces}
+		Jegliche Whitespaces (Tab, Zeilenumbruch, Leerzeichen) sind in Java optional und dienen nur der Strukturierung des Codes. Trotz das dies überflüssig ist, empfiehlt es sich, wenn wir unseren Code einrücken, gezielt Zeilenumbrüche setzen und so unseren Code lesbar machen.
+	% end
+	
+	\subsubsection{Klammerung}
+		In Java werden jegliche Verfügbaren Klammern genutzt ((), {}, [], <>). Sie haben die folgenden Zwecke:
+		\begin{description}
+			\item[\texttt{()}] Klammerung von Ausdrücken (um die Operatorenpräzedenz festzulegen), Aufrufen von Methoden/Konstruktoren, Notwendig bei If-Ausdrücken, Switch-Case und Schleifen.
+			\item[\texttt{\{\}}] Kennzeichnung von Codeblöcken (Klassen-/Methodendefinition, If-Ausdrücke, Schleifen, Switch-Case, \dots).
+			\item[\texttt{[]}] Zugriff auf die Elemente eines Arrays und Erstellung von Arrays.
+			\item[\texttt{<>}] Vergleichsoperatoren und Generics.
+		\end{description}
+	% end
+	
+	\subsubsection{Packages und Imports}
+		Als übergeordnete Strukturierung unserer Klassen existiert das Konstrukt von \textit{Packages}, mit denen Klassen gruppiert und somit logisch zusammengefasst werden können. Beispielsweise können wir alle Klassen, die mit dem Zugriff auf eine Datenbank zu tun haben in ein Package \texttt{database} legen, und die Klassen, die mit dem User Interface zu tun haben in ein Package \texttt|ui|. Der Name eines Packages muss ein gültiger Bezeichner sein. Um eine Klasse in einem Package abzulegen, muss die Klasse zum einen mit der Zeile \lstinline|package /* Packagename */;| starten und außerdem im korrekten Ordner liegen (das heißt eine Klasse im Package \texttt{ui} muss in einem Ordner \texttt{ui} liegen).
+		
+		Damit entsteht eine logische Trennung und das Projekt wird übersichtlicher. Der \textit{voll-qualifizierte Klassen} ist dann der Name der Klasse mit dem vorangestellten Package-Namen. Hierdurch werden Kollisionen in der Klassenbenennung vermieden. Beispiel: Unsere Klasse \texttt{Connection} liegt im Package \texttt{database}. Dann ist der voll-qualifizierte Name dieser Klasse \texttt{database.Connection}. Nutzen wir innerhalb einer Klasse eine andere Klasse, die nicht im selben Package und nicht im Package \texttt{java.lang} liegt, so müssen wir entweder den voll-qualifizierten Klassennamen bei jeder Verwendung angeben oder die Klasse mit dem Ausdruck \lstinline|import /* Voll-qualifizierter Klassenname */;| importieren. Dann können wir die Klasse überall nutzen, als wäre sie im gleichen Package. Standardmäßig sind alle Klassen aus \lstinline{java.lang} importiert.
+		
+		Um Packages von Unterpackages zu trennen, können wir Punkte innerhalb des Package-Namen nutzen. Somit können wir beispielsweise Klassen, die mit der Datenbank und konkret mit MySQL zu tun haben, in ein Package \lstinline{database.mysql} legen.
+		
+		\paragraph{Konvention}
+			Zur Vermeidung von Kollisionen ist es üblich, allen Packages innerhalb eines Projektes den umgekehrten Namen der Domain voranzustellen, für die das Projekt entwickelt wird (Bindestriche oder andere nicht-Java-konforme Zeichen werden dabei durch einen Unterstrich ersetzt, siehe §3.8 Java-Spezifikation). Danach folgt der Projektname.
+			
+			Bei der Entwicklung von Nabla für das Fachgebiet Algorithmik am Fachbereich Informatik an der TU Darmstadt sollte also der Packagename \lstinline|de.tu\_darmstadt.informatik.algo.nabla| vorangestellt werden.
+		% end
+	% end
 % end

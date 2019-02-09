@@ -103,3 +103,54 @@ int add(int... numbers) {
 		\emptyset \,,\quad \{ 1 \} \,,\quad \{ 1, 3 \} \,,\quad \{ 2 \} \,,\quad \{ 2, 3 \}
 	\end{equation*}
 % end
+
+\subsubsection{Formale Parameter vs. Aktualparameter}
+	Damit es bei Unterhaltungen über Methoden nicht zu Verwirrungen kommt, schauen wir uns noch die Begriffe \textit{Formale Parameter} und \textit{Aktualparameter} an:
+	\begin{description}
+		\item[Formale Parameter] Formale Parameter sind jene, welche bei der Definition einer Methode angegeben werden.
+		\item[Aktualparameter] Aktualparameter sind die Parameter, welche einer Methode bei einem Aufruf übergeben werden.
+	\end{description}
+
+	\textbf{Beispiel:} \\
+	\begin{lstlisting}
+void doIt(int a, int b) { /* ... */ }
+
+int g = 9.81;
+doIt(1, g)
+	\end{lstlisting}
+	In diesem Beispiel sind \texttt{a} und \texttt{b} die formalen Parameter und \texttt{1} und \texttt{g} die Aktualparameter.
+% end
+
+\subsubsection{Veträge in Form von Javadoc}
+	Verträge sind Teil der Dokumentation, siehe \refImpl{doku}{Java}.
+% end
+
+\subsubsection{Überladen}
+	Wie wir bereits im Abschnitt über Signaturen gesehen haben, muss ausschließlich die Signatur einer Methode in einer Klasse eindeutig sein, nicht der Name der Methode.
+	
+	Wird ein Methodenname mehrmals in einer Klasse verwendet, so wird diese Methode \textit{überladen}. Dies ist sinnvoll, wenn eine Methode beispielsweise unterschiedliche Parametertypen annehmen kann, um mit ihnen zu arbeiten, ein jeweils eigener Methodenname aber keinen Sinn ergibt.
+	
+	\textbf{Beispiel:} \\
+	Wir haben eine Klasse mit folgenden Methoden:
+	\begin{itemize}
+		\item \lstinline|String valueOf(int a)|
+		\item \lstinline|String valueOf(float a)|
+	\end{itemize}
+	dann ist die Methode \texttt{valueOf(\dots)} \textit{überladen}. Bei einem Aufruf \lstinline|valueOf(42)| wird die erste, bei einem Aufruf \lstinline|valueOf(4.2F)| die zweite Methode verwendet.
+	
+	\paragraph{Problematiken}
+		Manchmal kann der Compiler nicht entscheiden, welche der überladenen Methoden aufgerufen werden soll. In diesem Fall muss der Typ eines Parameters genauer spezifiziert werden, damit der Code kompiliert.
+		
+		\textbf{Beispiel:} \\
+		Wir haben eine Klasse mit folgenden Methoden:
+		\begin{itemize}
+			\item \lstinline|String valueOf(Integer a)|
+			\item \lstinline|String valueOf(Long a)|
+		\end{itemize}
+		Bei einem Aufruf \lstinline|valueOf(null)| könnten beide Methoden aufgerufen werden, der Typ passt bei beiden. Somit kann der Compiler den Code so nicht kompilieren und bricht ab. Zur Lösung müssen wir den Typ genauer spezifizieren, zum Beispiel durch einen Downcast: \lstinline|valueOf((Integer) null)|. Nun wird die erwartete Methode aufgerufen.
+	% end
+% end
+
+%\subsubsection{Abarbeitung von Methodenaufrufen}
+%	\todo{Schreiben}
+%% end
