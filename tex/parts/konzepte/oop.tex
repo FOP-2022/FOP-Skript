@@ -1,25 +1,61 @@
 \todo{Schreiben}
 
 \subsection{Konzept}
+	Das Paradigma der objektorientierten Programmierung haben wir uns bereits im Abschnitt zu Programmierparadigmen (siehe \refIntr{oop}) angeschaut.
+	
+	In der objektorientierten Programmierung dreht sich also alles um sogenannte \textit{Objekte}. Aber wie bringen wir dem Computer bei, unseren Code als Objekt, beziehungsweise als Objekte, anzusehen? Hierbei stoßen wir auf die Konzepte von Klassen, Methoden, Interfaces und Vererbung. Dies werden wir uns in den folgenden Abschnitten genauer anschauen.
+	
+	Das Grundlegende Prinzip der Objektorientierung ist, komplexe Sachverhalten wie sie in der Realität auftreten zu vereinfachen und möglichst Realitätsnah abzubilden. Dazu betrachten wir die Programmierung wie die Realität, bei der sich ebenfalls alles um Objekte dreht.
+% end
+
+\subsection{Klassen, Objekte und Methoden} \imperativeMark \oopMark
+	\introduces{von Klassen, Objekten und Methoden}{classes}
+	
+	\textit{Klassen} können wir als \enquote{Vorlagen} für \textit{Objekte} ansehen und Objekte realisieren eine Klasse dahingehend, als dass bestimmte Eigenschaften der Klasse mit Werten gefüllt werden. Diese Eigenschaften sind Attribute, die für jedes Objekt getrennt gespeichert und verarbeitet werden und aus Methoden, welche Funktionalitäten zu einer Klasse, beziehungsweise einem Objekt, hinzufügen.
+	
+	Schauen wir uns ein Beispiel an: Um uns herum sind viele Personen, die wir grob als Klasse \enquote{Mensch} mit dem Attribut \enquote{name} abbilden können. Dann sind Personen wie \enquote{Florian} mit dem Namen \enquote{Florian Kadner} und Fabian mit dem Namen \enquote{Fabian Damken} \textit{Instanzen} dieser Klasse, genannt \textit{Objekte}. Wollen wir nun einem Menschen die Funktionalität \enquote{gehen} hinzufügen, so fügen wir der Klasse \enquote{Mensch} eine Methode \enquote{gehen} hinzu. Damit können wir nun diese Methode auf jedem Menschen aufrufen, zum Beispiel auf Fabian und Florian. Diese laufen nun wild durch die Gegend.
+	
+	Das fasst alles grob zusammen, was wir abstrakt über Klasse, Objekte und Methoden lernen können. Je nach Programmiersprache gibt es hier noch viele Besonderheiten, die wir uns für Java noch genauer im Abschnitt \refImpl{classes}{Java} anschauen werden.
+	
+	Schauen wir uns noch kurz an, was es mit \textit{statischen} Attributen/Methoden auf sich hat. Statische Attribute und Methoden \enquote{hängen} direkt an der Klasse und verhalten sich nicht je nach Objekt anders. Das bedeutet, dass auf die Attribute und Methoden auch ohne ein konkretes Objekt zugegriffen werden kann und dass jedes Objekt auf den den selben Wert zugreift wie andere Objekte der gleichen Klasse. An dieser Stelle müssen wir darauf achten, nicht zu viele statische Attribute und Methoden zu verwenden, da hiermit die Objektorientierung wieder ausgehebelt werden kann.
+	
+	Noch eine kurze Begriffsklärung:
+	\begin{description}
+		\item[Klasse] Die Vorlage für Objekte. Kann Attribute und Methoden enthalten.
+		\item[Objekt] Ein Objekt einer Klasse ist die Realisierung der selbigen mit festgelegten Attributwerten.
+		\item[Instanz] Das gleiche wie ein Objekt.
+		\item[Instanzvariable] Ein Attribut einer Klasse, welches Instanzspezifisch ist.
+		\item[Klassenvariabke] Ein Attribut einer Klasse, welches für alle Instanzen das selbe ist.
+		\item[Methode] Ein aufrufbares Stück Code, welches Parameter annimmt, Daten zurück geben kann und auf die Attribute der Klasse/des Objektes zugreifen kann.
+		\item[Klassenmethode] Das gleiche wie eine Methode, nur dass die für alle Instanzen gleich ist, ohne Erstellung einer Instanz aufgerufen werden kann und somit auch keinen Zugriff auf die Instanzvariablen hat.
+	\end{description}
+% end
+
+\subsection{Vererbung} \imperativeMark \oopMark
+	Klassen und Objekte sind gut und schön, aber betrachten wir folgendes Beispiel: Wir haben die Klassen \enquote{Quadrat} und \enquote{Kreis}, die beide eine Methode \enquote{ausmalen} implementieren. Die Implementierung ist in dem Fall für beide Klassen gleich und wir haben den Code einfach kopiert. Ist die Implementierung nun Fehlerhaft, so müssen wir beide Methoden anpassen und dürfen dies auch nicht vergessen. Hier kommt Vererbung ins Spiel: Wir erstellen eine Oberklasse \enquote{Form}, von der die Klassen \enquote{Quadrat} und \enquote{Kreis} erben: \todo{Stopped here.}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[main/.style = { draw, rectangle, minimum height = 0.8cm, minimum width = 2cm }]
+			\node [main] (shape) {Form};
+			\coordinate [below = of shape] (needle);
+			\node [main, below left = of needle] (circle) {Kreis};
+			\node [main, below right = of needle] (square) {Quadrat};
+			
+			\draw (circle) |- (needle);
+			\draw (square) |- (needle);
+			\draw [->] (needle) -- (shape);
+		\end{tikzpicture}
+	\end{figure}
+% end
+
+\subsection{Abstrakte Klassen} \imperativeMark \oopMark
 	\todo{Schreiben}
 % end
 
-\subsection{Klassen, Objekte und Methoden}
+\subsection{Interfaces} \imperativeMark \oopMark
 	\todo{Schreiben}
 % end
 
-\subsection{Vererbung}
-	\todo{Schreiben}
-% end
-
-\subsection{Abstrakte Klassen}
-	\todo{Schreiben}
-% end
-
-\subsection{Interfaces}
-	\todo{Schreiben}
-% end
-
-\subsection{Polymorphie und späte Bindung}
+\subsection{Polymorphie und späte Bindung} \imperativeMark \oopMark
 	\todo{Schreiben}
 % end
