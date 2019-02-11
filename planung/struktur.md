@@ -58,8 +58,8 @@
         + Rekursion
     - Scoping
     - **Klassen und OOP (UML)**
-        + **Konzept**
-        + **Klasse, Objekte und Methoden (+ Attribute)**
+        + Konzept
+        + Klasse, Objekte und Methoden (+ Attribute)
         + **Vererbung**
         + **Abstrakte Klassen**
         + **Interfaces**
