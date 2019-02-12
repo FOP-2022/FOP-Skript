@@ -60,9 +60,9 @@
     - **Klassen und OOP (UML)**
         + Konzept
         + Klasse, Objekte und Methoden (+ Attribute)
-        + **Vererbung**
-        + **Abstrakte Klassen**
-        + **Interfaces**
+        + Vererbung
+        + Abstrakte Klassen
+        + Interfaces
         + **Polymorphie und späte Bindung**
     - Fehlerbehandlung
         + Exceptions

@@ -29,10 +29,20 @@
 		\item[Methode] Ein aufrufbares Stück Code, welches Parameter annimmt, Daten zurück geben kann und auf die Attribute der Klasse/des Objektes zugreifen kann.
 		\item[Klassenmethode] Das gleiche wie eine Methode, nur dass die für alle Instanzen gleich ist, ohne Erstellung einer Instanz aufgerufen werden kann und somit auch keinen Zugriff auf die Instanzvariablen hat.
 	\end{description}
+
+	\paragraph{UML-Diagramm}
+		Eine Klasse wird wie folgt in UML\footnote{Unified Modeling Language, eine Definition von vielen Diagrammtypen. In dem Skript werden wir nur das UML-Klassendiagramm nutzen, weitere Diagramme werden in der Veranstaltung \enquote{Software Engineering} behandelt.} dargestellt:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\umlclass{Klassenname}{Attribute}{Methoden}
+			\end{tikzpicture}
+		\end{figure}
+	% end
 % end
 
 \subsection{Vererbung} \imperativeMark \oopMark
-	Klassen und Objekte sind gut und schön, aber betrachten wir folgendes Beispiel: Wir haben die Klassen \enquote{Quadrat} und \enquote{Kreis}, die beide eine Methode \enquote{ausmalen} implementieren. Die Implementierung ist in dem Fall für beide Klassen gleich und wir haben den Code einfach kopiert. Ist die Implementierung nun Fehlerhaft, so müssen wir beide Methoden anpassen und dürfen dies auch nicht vergessen. Hier kommt Vererbung ins Spiel: Wir erstellen eine Oberklasse \enquote{Form}, von der die Klassen \enquote{Quadrat} und \enquote{Kreis} erben: \todo{Stopped here.}
+	Klassen und Objekte sind schön und gut, aber betrachten wir folgendes Beispiel: Wir haben die Klassen \enquote{Quadrat} und \enquote{Kreis}, die beide eine Methode \enquote{ausmalen} implementieren. Die Implementierung ist in dem Fall für beide Klassen gleich und wir haben den Code einfach kopiert. Ist die Implementierung nun Fehlerhaft, so müssen wir beide Methoden anpassen und dürfen dies auch nicht vergessen. Hier kommt Vererbung ins Spiel: Wir erstellen eine Oberklasse \enquote{Form}, von der die Klassen \enquote{Quadrat} und \enquote{Kreis} erben:
 	\begin{figure}[H]
 		\centering
 		\begin{tikzpicture}[main/.style = { draw, rectangle, minimum height = 0.8cm, minimum width = 2cm }]
@@ -46,16 +56,59 @@
 			\draw [->] (needle) -- (shape);
 		\end{tikzpicture}
 	\end{figure}
+	Das bedeutet nun, dass alle Methoden, die in der Klasse \enquote{Form} definiert sind, auch in den Klassen \enquote{Kreis} und \enquote{Quadrat} verfügbar sind. Somit müssen wir die Methode \enquote{ausmalen} nur einmal implementieren.
+	
+	In den meisten Programmiersprachen ist es nur möglich, von maximal einer Klasse zu erben. Mehrfachvererbung wird auch von einigen Sprachen implementiert, dies erhöht an vielen Stellen allerdings die Komplexität und wurde deshalb in den moderneren Sprachen weg gelassen.
+	
+	\paragraph{UML-Diagramm}
+		\todo{Malen}
+	% end
 % end
 
 \subsection{Abstrakte Klassen} \imperativeMark \oopMark
-	\todo{Schreiben}
+	\textit{Abstrakte Klassen} bieten uns einen Weg, eine Methode zu definieren, aber nicht zu implementieren. Das bedeutet, wir definieren den Namen, die Parameter und den Rückgabetyp einer Methode ohne diese zu implementieren und überlassen es den Unterklassen, die Methode zu implementieren.
+	
+	Dadurch ist es möglich, eine ebene an Abstraktion zu erreichen, die wir uns am besten an einem Beispiel anschauen: Wir haben die abstrakte Klasse \enquote{Form}, welche die Methode \enquote{gewicht()} definiert. Diese Methode zur Berechnung des Gewichtes der jeweiligen Form ist Abstrakt und wird von jeder Form (zum Beispiel \enquote{Ball} oder \enquote{Quader}) implementiert. Wir können nun eine Methode \lstinline|double calculateNewton(Form form, double acc)| entwickeln, welche die Kraft berechnet, die auf eine Form \texttt{form} bei einer Beschleunigung von \texttt{acc} wirkt. Das Gewicht der erhält die Methode dabei durch die vorher definierte abstrakte Methode \enquote{gewicht()}, die in den Unterklassen implementiert ist.
+	
+	Dabei wird immer die Implementierung aufgerufen, die gerade in dem Objekt steht, siehe \refIntr{polymorphy}.
+	
+	\paragraph{UML-Diagramm}
+		\todo{Malen}
+	% end
 % end
 
 \subsection{Interfaces} \imperativeMark \oopMark
-	\todo{Schreiben}
+	Ein \textit{Interface} ist eine besondere abstrakte Klasse und definiert ausschließlich abstrakte Methoden und kann keine Methoden implementieren. Auch kann eine Klasse in den meisten Sprachen auch mehrere Interfaces \textit{implementieren}. Dadurch können wir feste Schnittstellen definieren und Klassen, welche diese Schnittstellen implementieren und können im Rahmen dieser alle gleich genutzt werden.
+	
+	Schauen wir uns dies wieder an einem Beispiel aus der Realität an: In Java existiert das Interface \lstinline|Comparable|. Dieses Interface definiert eine einzige Methode \lstinline|int compareTo(Object obj)|, mit der das Objekt, auf dem die Methode aufgerufen wird, mit dem übergebenen Objekt verglichen werden kann. Nun kann jede Klasse, die dieses Interface implementiert ist nun als \enquote{Vergleichbar} markiert und kann zum Beispiel innerhalb von sortierten Listen verwendet werden.\footnote{Hier gibt es auch noch andere Möglichkeiten, wir werden dies im Abschnitt \refImpl{datastruct}{Java} genauer betrachten.}
+	
+	\paragraph{UML-Diagramm}
+		\todo{Malen}
+	% end
 % end
 
 \subsection{Polymorphie und späte Bindung} \imperativeMark \oopMark
-	\todo{Schreiben}
+	\introduces{von Polymorphie und später Bindung}{polymorphy}
+
+	Dies ist eines der wichtigsten Eigenschaften bei objektorientierter Programmierung. Polymorphie beschreibt die Eigenschaft, dass im die Implementierung einer Methode aufgerufen wird, die in dem Vererbungsbaum eines Objektes an tiefstmöglicher Stelle steht und nicht zwangsweise die Implementierung aufgerufen wird, die in der referenzierten Klasse vorhanden ist.
+	
+	Betrachten wir hierzu ein Beispiel, um das Prinzip zu veranschaulichen: Wir haben eine Klasse \enquote{Form} mit einer abstrakten Methode \enquote{gewicht()}, die von den Klassen \enquote{Kreis} und \enquote{Quadrat} überschrieben wird. Dies können wir auch in einem UML-Diagramm\footnote{UML, Unified Modeling Language, ist ein Standard, wie bestimmte Dinge, z.B. Klassen, dargestellt werden können. Wir betrachten hier nur Klassendiagramme, genaueres hierzu wird in der Veranstaltung \enquote{Software Engineering} behandelt.} darstellen: \todo{Stopped here.}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			\umlclass{Form}{}{
+				\umlvirt{+ gewicht()} \\
+			}
+			\coordinate [below = of Form] (needle);
+			\umlclass[below left = 1 of needle]{Kreis}{}{
+				+ gewicht() \\
+			}
+			\umlclass[below right = 1 of needle]{Quadrat}{}{
+				+ gewicht() \\
+			}
+			
+			\umlinherit{Kreis}{Form}
+			\umlinherit{Quadrat}{Form}
+		\end{tikzpicture}
+	\end{figure}
 % end
