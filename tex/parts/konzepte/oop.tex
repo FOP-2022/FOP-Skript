@@ -107,8 +107,9 @@
 				+ gewicht() \\
 			}
 			
-			\umlinherit{Kreis}{Form}
-			\umlinherit{Quadrat}{Form}
+			\umlinherit{needle}{Form}
+			\draw (Kreis) |- (needle);
+			\draw (Quadrat) |- (needle);
 		\end{tikzpicture}
 	\end{figure}
 % end
