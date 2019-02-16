@@ -75,30 +75,84 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 % end
 
 \subsection{Methodenaufrufe}
-	\todo{Schreiben}
+	\implements{Methodenaufrufen}{methodenNutzung}{Java}
+	
+	Der allgemeine Ausdruck, um eine Methode in Java aufzurufen ist:
+	\begin{figure}[H]
+		\centering
+		\lstinline|<objekt>.<methodenname>([parameter], [parameter], ...)|
+	\end{figure}
+	Der Methodenname muss immer gegeben sein, ebenso wie das Objekt (beziehungsweise bei einer statischen Methode die Klasse), welches/welche das Objekt enthält. Die Parameter müssen gegeben sein, wenn die aufgerufene Methode dies fordert, es gibt aber auch Methoden, die keine Parameter erfordern.
+	
+	Wir können die Rückgabe der Methode auch einer Variablen zuweisen, die Syntax ist dann wie folgt:
+	\begin{figure}[H]
+		\centering
+		\lstinline|<variable> = <objekt>.<methodenname>([parameter], [parameter], ...)|
+	\end{figure}
+	Dies ist nur möglich, wenn die Methode einen Rückgabetyp hat, das heißt der Rückgabetyp nicht \lstinline|void| ist.
 % end
 
 \subsection{Operatoren}
-	\todo{Schreiben}
+	\implements{Operatoren}{operatoren}{Java}
 	
-	\subsubsection{Arithmetische Operatoren}
-		\todo{Schreiben}
-		
-		\paragraph{Typsicherheit}
-			\todo{Schreiben}
-		% end
+	\subsubsection{Arithmetik-Operatoren}
+		Es existieren die folgenden arithmetischen Operatoren, die allesamt alle primitiven und numerischen Datentypen (\lstinline|byte|, \lstinline|short|, \lstinline|int|, \lstinline|long|, \lstinline|float|, \lstinline|double|) annehmen:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | l | l}
+				\textbf{Operator} & \textbf{Syntax}                & \textbf{Beschreibung}                                    \\ \hline
+				\texttt{++}       & \texttt{a++}, \texttt{++a}     & \texttt{a} wird um 1 \textit{inkrementiert}.             \\
+				\texttt{-{}-}     & \texttt{a-{}-}, \texttt{a-{}-} & \texttt{a} wird um 1 \textit{dekrementiert}.             \\
+				\texttt{*}        & \texttt{a * b}                 & \texttt{a} und \texttt{b} werden \textit{multipliziert}. \\
+				\texttt{/}        & \texttt{a / b}                 & \texttt{a} wird durch \texttt{b} \textit{dividiert}.     \\
+				\texttt{\%}       & \texttt{a \% b}                & Es wird \( \texttt{a} \textbf{ mod } \texttt{b} \) berechnet (d.h. \( \texttt{a} - \big\lfloor \frac{\texttt{a}}{\texttt{b}} \big\rfloor \texttt{b} \)) (\textit{Modulo}). \\
+				\texttt{+}        & \texttt{a + b}                 & \texttt{a} und \texttt{b} werden \textit{addiert}.       \\
+				\texttt{-}        & \texttt{a - b}                 & \texttt{b} wird von \texttt{a} \textit{subtrahiert}.
+			\end{tabular}
+		\end{table}
+		Bei den Inkrementierungs-/Dekrementierungs-Operatoren ist der Unterschied zwischen den Syntaxen \texttt{a++} und \texttt{++a} (beziehungsweise \texttt{a-{}-} und \texttt{-{}-a}), dass das Ergebnis von ersterem Ausdruck den Wert von \texttt{a} vor der Inkrementierung/Dekrementierung und \texttt{++a}/\texttt{-{}-a} den Wert nach der Inkrementierung/Dekrementierung als Ergebnis liefert (Postfix vs. Prefix Operatoren). Das bedeutet, dass \texttt{a++ == a}, \texttt{a-{}- == a}, \texttt{++a == a + 1} und \texttt{-{}-a == a - 1} gelten.
 		
 		\paragraph{Kommazahlen und Division}
-			\todo{Schreiben}
+			Eine Division wird immer als \textit{Ganzzahldivision} durchgeführt, wenn nicht mindestens einer der Parameter eine Fließkommazahl ist. Das bedeutet, dass Nachkommastellen nur berechnet werden, wenn mindestens einer der Parameter ein \lstinline|float| oder \lstinline|double| ist.
+			
+			Eine Ganzzahldivision von \(a\) und \(b\) entspricht \( \big\lfloor \frac{a}{b} \big\rfloor \), dass heißt, die Nachkommastellen werden abgeschnitten.
 		% end
 	% end
 	
-	\subsubsection{Logische Operatoren}
-		\todo{Schreiben}
+	\subsubsection{Logik- und Vergleichs-Operatoren}
+		Es existieren die folgenden logischen Operatoren und Vergleichsoperatoren, die alle als Ergebnis ein \lstinline|boolean| zurück geben.
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | l | l | l}
+				\textbf{Operator} & \textbf{Syntax}   & \textbf{Parametertyp} & \textbf{Beschreibung}                                         \\ \hline
+				   \texttt{<}     & \texttt{a < b}    & primitive Zahl        & Ist \texttt{a} kleiner \texttt{b}?                            \\
+				   \texttt{>}     & \texttt{a > b}    & primitive Zahl        & Ist \texttt{a} größer \texttt{b}?                             \\
+				   \texttt{<=}    & \texttt{a <= b}   & primitive Zahl        & Ist \texttt{a} kleiner-gleich \texttt{b}?                     \\
+				   \texttt{>=}    & \texttt{a >= b}   & primitive Zahl        & Ist \texttt{a} größer-gleich \texttt{b}?                      \\
+				   \texttt{==}    & \texttt{a == b}   & Beliebig              & Ist \texttt{a} identisch zu \texttt{b}?                       \\
+				   \texttt{!=}    & \texttt{a != b}   & Beliebig              & Ist \texttt{a} nicht identisch zu \texttt{b}?                 \\
+				  \texttt{\&\&}   & \texttt{a \&\& b} & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem UND.  \\
+				   \texttt{||}    & \texttt{a || b}   & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem ODER. \\
+				   \texttt{\^}    & \texttt{a \^{} b} & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem XOR.
+			\end{tabular}
+		\end{table}
+		\textit{Identisch} bedeutet für Zahlen, dass diese bis auf die letzte Nachkommastelle gleich sind. Für Objekte bedeutet dies, dass es ein und das selbe Objekt sind (das heißt, dass die Speicheradresse identisch ist). Eine Änderung auf \texttt{a} ändert somit auch \texttt{b}, wenn \texttt{a == b} gilt (nur bei Objekten!). Aufgrund dessen ist es auch nicht möglich, Strings mit \texttt{==} zu vergleichen, da dies bei Benutzereingaben oder ähnlichem immer \lstinline|false| liefern würde, da die Objekte nur den gleichen Inhalt haben und nicht identisch sind (siehe auch \ref{sec:equals_identity}).
 	% end
 	
-	\subsubsection{Bitlogische Operatoren}
-		\todo{Schreiben}
+	\subsubsection{Bitlogik-Operatoren}
+		Die bitlogischen Operatoren können auf primitive Ganzzahlen (\lstinline|byte|, \lstinline|short|, \lstinline|int|, \lstinline|long|) angewendet werden. Diese wenden die üblichen logischen Verknüpfungen auf Bit-Ebene an, dass heißt, die Zahl wird in Binärdarstellung überführt und die Verknüpfung der Reihe nach auf jedes Bit einzeln angewendet (bei ungleich großen Datentypen werden die fehlenden Stellen bei dem kleineren mit Nullen aufgefüllt). Der Rückgabetyp entspricht immer dem größeren Datentyp. Es existieren die folgenden Operatoren:
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | l | l}
+				\textbf{Operator} & \textbf{Syntax}      & \textbf{Beschreibung}                                                                               \\ \hline
+				  \texttt{<{}<}   & \texttt{a <{}< b}    & Verschiebt die Bits von \texttt{a} um \texttt{b} Stellen nach links.                                \\
+				  \texttt{>{}>}   & \texttt{a >{}> b}    & Verschiebt die Bits von \texttt{a} um \texttt{b} Stellen nach rechts.                               \\
+				\texttt{>{}>{}>}  & \texttt{a >{}>{}> b} & Verschiebt die Bits von \texttt{a} um \texttt{b} Stellen nach rechts und behält das Vorzeichen bei. \\
+				   \texttt{\&}    & \texttt{a \& b}      & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer UND-Verknüpfung.                         \\
+				   \texttt{\^}    & \texttt{a \^{} b}    & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer XOR-Verknüpfung.                         \\
+				   \texttt{|}     & \texttt{a | b}       & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer ODER-Verknüpfung.
+			\end{tabular}
+		\end{table}
 	% end
 	
 	\subsubsection{Spezielle Operatoren (\texttt{new}, \texttt{instanceof})}

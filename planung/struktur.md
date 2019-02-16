@@ -57,13 +57,13 @@
         + Abarbeitung zur Laufzeit
         + Rekursion
     - Scoping
-    - **Klassen und OOP (UML)**
+    - Klassen und OOP (UML)
         + Konzept
         + Klasse, Objekte und Methoden (+ Attribute)
         + Vererbung
         + Abstrakte Klassen
         + Interfaces
-        + **Polymorphie und späte Bindung**
+        + Polymorphie und späte Bindung
     - Fehlerbehandlung
         + Exceptions
             * Werfen von Exceptions
@@ -166,18 +166,17 @@
             * Whitespace
             * Packages und Imports
     - Anweisungen
-        + **Variablen (Deklaration, Initialisierung)**
-            * **Modifier**
+        + Variablen (Deklaration, Initialisierung)
+            * Modifier
             * **Lokale Variable, Konstante, Attribut, Arraykomponente**
-            * **Null- und Defaultwerte**
-        + **Zuweisungen (mit Operationen)**
-        + **Methodenaufrufe**
-        + **Operatoren**
-            * **Arithmetische Operationen**
-                - **Typsicherheit**
-                - **Kommazahlen und Division**
-            * **Logische Operatoren**
-            * **Bitlogische Operatoren**
+            * Null- und Defaultwerte
+        + Zuweisungen (mit Operationen)
+        + Methodenaufrufe
+        + Operatoren
+            * Arithmetische Operationen
+                - Kommazahlen und Division
+            * Logische Operatoren
+            * Bitlogische Operatoren
             * **Spezielle Operatoren (`new`, `instanceof`)**
             * **Bindungsstärke der Operatoren**
             * **Klammerung**
