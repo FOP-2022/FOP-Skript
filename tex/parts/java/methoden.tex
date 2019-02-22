@@ -151,6 +151,44 @@ doIt(1, g)
 	% end
 % end
 
+\subsection{Rückgabe von Werten}
+	Wie wir bereits gesehen haben, wird bei der Definition einer Methode ebenfalls ein Rückgabetyp definiert. Definieren wir einen Rückgabetyp, so müssen wir auch einen entsprechenden Wert zurück gegen. Dies wird mit dem Schlüsselwort \lstinline|return| vollführt. Die allgemeine Syntax ist hierbei \lstinline|return [AUSDRUCK];|, wobei der Ausdruck durch einen solchen ersetzt werden muss, der zu dem Rückgabetyp auswertet. Der Ausdruck \lstinline|return;| kann auch verwendet werden, wenn der Rückgabetyp \lstinline|void| ist. Hiermit kann die Besonderheit ausgenutzt werden, dass eine Methode sofort zurück geht, sobald ein Return ausgeführt wurde. Damit ist es zum Beispiel möglich, am Anfang der Methode einige Einschränkungen der Parameter zu prüfen und erst fortzufahren, sobald die Bedingungen erfüllt sind:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+void doIt(Integer a, Integer b) {
+	if (a == null || b == null) {
+	return;  // Vorzeitiges Return.
+	}
+	if (a < 0 || b < 0) {
+		return;  // Vorzeitiges Return.
+	}
+	
+	...
+}
+\end{lstlisting}
+	\end{figure}
+	
+	\paragraph{Sonderfall \texttt{finally}}
+		Wird ein Return innerhalb eines Try-Finally verwendet, so wird nach der Ausführung des Returns zuerst noch der \lstinline|finally|-Block ausgeführt und erst danach zurück zum Aufrufer gesprungen. Befindet sich innerhalb des Finallys wiederum ein Return, so wird der Wert des letzten Returns zurück gegeben.
+		
+		\textbf{Beispiel:}
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+int add(int a, int b) {
+	try {
+		return a + b;
+	} finally {
+		return a - b;
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Wird die Methode mit \lstinline|add(2, 1)| aufgerufen, so werden die Zeilen in der Reihenfolge \( (3, 5) \) ausgeführt und der Wert \lstinline|1| zurück gegeben.
+	% end
+% end
+
 %\subsubsection{Abarbeitung von Methodenaufrufen}
 %	\todo{Schreiben}
 %% end

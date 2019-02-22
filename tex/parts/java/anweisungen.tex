@@ -107,7 +107,8 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 				\texttt{/}        & \texttt{a / b}                 & \texttt{a} wird durch \texttt{b} \textit{dividiert}.     \\
 				\texttt{\%}       & \texttt{a \% b}                & Es wird \( \texttt{a} \textbf{ mod } \texttt{b} \) berechnet (d.h. \( \texttt{a} - \big\lfloor \frac{\texttt{a}}{\texttt{b}} \big\rfloor \texttt{b} \)) (\textit{Modulo}). \\
 				\texttt{+}        & \texttt{a + b}                 & \texttt{a} und \texttt{b} werden \textit{addiert}.       \\
-				\texttt{-}        & \texttt{a - b}                 & \texttt{b} wird von \texttt{a} \textit{subtrahiert}.
+				\texttt{-}        & \texttt{a - b}                 & \texttt{b} wird von \texttt{a} \textit{subtrahiert}.     \\
+				\texttt{-}        & \texttt{-a}                    & Negiert das Vorzeichen von \texttt{a}.
 			\end{tabular}
 		\end{table}
 		Bei den Inkrementierungs-/Dekrementierungs-Operatoren ist der Unterschied zwischen den Syntaxen \texttt{a++} und \texttt{++a} (beziehungsweise \texttt{a-{}-} und \texttt{-{}-a}), dass das Ergebnis von ersterem Ausdruck den Wert von \texttt{a} vor der Inkrementierung/Dekrementierung und \texttt{++a}/\texttt{-{}-a} den Wert nach der Inkrementierung/Dekrementierung als Ergebnis liefert (Postfix vs. Prefix Operatoren). Das bedeutet, dass \texttt{a++ == a}, \texttt{a-{}- == a}, \texttt{++a == a + 1} und \texttt{-{}-a == a - 1} gelten.
@@ -133,7 +134,8 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 				   \texttt{!=}    & \texttt{a != b}   & Beliebig              & Ist \texttt{a} nicht identisch zu \texttt{b}?                 \\
 				  \texttt{\&\&}   & \texttt{a \&\& b} & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem UND.  \\
 				   \texttt{||}    & \texttt{a || b}   & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem ODER. \\
-				   \texttt{\^}    & \texttt{a \^{} b} & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem XOR.
+				   \texttt{\^}    & \texttt{a \^{} b} & Wahrheitswert         & Verknüpft \texttt{a} und \texttt{b} mit einem logischem XOR.  \\
+				   \texttt{!}     & \texttt{!a}       & Wahrheitswert         & Negiert den Wahrheitswert von \texttt{a}
 			\end{tabular}
 		\end{table}
 		\textit{Identisch} bedeutet für Zahlen, dass diese bis auf die letzte Nachkommastelle gleich sind. Für Objekte bedeutet dies, dass es ein und das selbe Objekt sind (das heißt, dass die Speicheradresse identisch ist). Eine Änderung auf \texttt{a} ändert somit auch \texttt{b}, wenn \texttt{a == b} gilt (nur bei Objekten!). Aufgrund dessen ist es auch nicht möglich, Strings mit \texttt{==} zu vergleichen, da dies bei Benutzereingaben oder ähnlichem immer \lstinline|false| liefern würde, da die Objekte nur den gleichen Inhalt haben und nicht identisch sind (siehe auch \ref{sec:equals_identity}).
@@ -150,57 +152,153 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 				\texttt{>{}>{}>}  & \texttt{a >{}>{}> b} & Verschiebt die Bits von \texttt{a} um \texttt{b} Stellen nach rechts und behält das Vorzeichen bei. \\
 				   \texttt{\&}    & \texttt{a \& b}      & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer UND-Verknüpfung.                         \\
 				   \texttt{\^}    & \texttt{a \^{} b}    & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer XOR-Verknüpfung.                         \\
-				   \texttt{|}     & \texttt{a | b}       & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer ODER-Verknüpfung.
+				   \texttt{|}     & \texttt{a | b}       & Verknüpft die Bits von \texttt{a} und \texttt{b} mit einer ODER-Verknüpfung.                        \\
+				\texttt{\(\sim\)} & \texttt{\(\sim\)a}   & Negiert die Bits von \texttt{a}.
 			\end{tabular}
 		\end{table}
 	% end
 	
-	\subsubsection{Spezielle Operatoren (\texttt{new}, \texttt{instanceof})}
-		\todo{Schreiben}
+	\subsubsection{Spezielle Operatoren}
+		Zusätzlich zu den oben genannten Operatoren gibt es noch die Operatoren \lstinline|new|, \lstinline|instanceof| und der Ternäre Operator, die etwas anders funktionieren.
+		\begin{description}
+			\item[\lstinline|new|] Mit diesem Operator können neue Instanzen (Objekte) einer Klasse erstellt werden und die allgemeine Syntax lautet \lstinline|new <klasse>([parameter], [parameter], ...)|; diesen Operator werden wird im Abschnitt \ref{sec:constructor} genauer betrachten.
+			\item[\lstinline|instanceof|] Mit diesem Operator kann geprüft werden, ob ein Objekt eine Instanz einer bestimmten Klasse darstellt, die allgemeine Syntax hierfür lautet \lstinline|<objekt> instanceof <klasse>|. Beispielsweise wäre für eine Variable \lstinline|Number x = 1.2| der Ausdruck \lstinline|x instanceof Double| wahr, der Ausdruck \lstinline|x instanceof Integer| jedoch falsch.
+			\item[Ternärer Operator] Mit diesem Operator können, ähnlich wie bei einem If, Fallunterscheidungen vorgenommen werden. Die allgemeine Syntax lautet \lstinline|<test> ? <wahr-fall> : <sonst-fall>|. Dabei wird zuerst der Test ausgewertet, ist dieser Wahr, so wird das Ergebnis von dem wahr-Fall zurück gegeben, sonst das Ergebnis von dem sonst-Fall. Dabei muss der Test zu einem Wahrheitswert auswerten und die beiden Fälle zu dem gleichen Typ, beziehungsweise einem kompatiblen Typ für den äußeren Ausdruck.
+		\end{description}
 	% end
 	
 	\subsubsection{Bindungsstärke der Operatoren}
-		\todo{Schreiben}
+		Die Bindungsstärke der Operatoren in Java gliedert sich wie folgt, wobei die oberste Zeile die stärkste Bindungsstärke hat und mehrere Elemente auf einer Zeile die gleiche Bindungsstärke:
+		\begin{enumerate}
+			\item \texttt{expr++}, \texttt{expr--}
+			\item \texttt{++expr}, \texttt{--expr}, \texttt{+expr}, \texttt{-expr}, \texttt{\(\sim\)}, \texttt{!}
+			\item \texttt{*}, \texttt{/}, \texttt{\%}
+			\item \texttt{+}, \texttt{-}
+			\item \texttt{<{}<}, \texttt{>{}>}, \texttt{>{}>{}>}
+			\item \texttt{<}, \texttt{>}, \texttt{<=}, \texttt{>=}, \texttt{instanceof}
+			\item \texttt{==}, \texttt{!=}
+			\item \texttt{\&}
+			\item \texttt{\^}
+			\item \texttt{|}
+			\item \texttt{\&\&}
+			\item \texttt{||}
+			\item \texttt{? :}
+			\item \texttt{=}, \texttt{+=}, \texttt{-=}, \texttt{*=}, \texttt{/=}, \texttt{\%=}, \texttt{\&=}, \texttt{\^{}=}, \texttt{|=}, \texttt{<{}<=}, \texttt{>{}>=}, \texttt{>{}>{}>=}
+		\end{enumerate}
 	% end
 	
 	\subsubsection{Klammerung}
-		\todo{Schreiben}
+		Um die Bindungsstärke von Operatoren zu beeinflussen, können Ausdrücke wie in der Mathematik geklammert werden, wobei die innerste Klammer immer zuerst ausgewertet wird. Hierfür dürfen ausschließlich runde Klammern (\texttt{(}, \texttt{)}) genutzt werden.
 	% end
 % end
 
-\subsection{Rückgabe von Werten}
-	\todo{Schreiben}
-	
-	\paragraph{Sonderfall \texttt{finally}}
-		\todo{Schreiben}
-	% end
-% end
-
-\subsection{Polymorphie}
-	\todo{Schreiben}
-	
-	\subsubsection{Schlüsselwort \lstinline|this|}
-		\todo{Schreiben}
-	% end
-	
-	\subsubsection{Schlüsselwort \lstinline|super|}
-		\todo{Schreiben}
-	% end
-% end
-
-\subsection{Implizite und Explizite Typkonvertierung (Casts)}
-	\todo{Schreiben}
+\subsection{Implizite und Explizite Typenkonversion (Casts)}
+	Schauen wir uns zuerst einmal an, was wir unter einer Typenkonversion verstehen: Wenn wir eine Variable \lstinline|int a = 41| haben, können wir diese Problemlos einer anderen Variable mit dem Datentyp \lstinline|long| zuweisen (\lstinline|long b = a|). Hier liegt uns eine \textit{implizite Typenkonversion} vor, bei der der Datentyp \lstinline|int| zu einem \lstinline|long| umgewandelt wird. Wir gehen nun getrennt auf primitive Typenkonversionen, Wrapper-Typen und Objektkonversionen ein.
 	
 	\subsubsection{Primitive Typen}
-		\todo{Schreiben}
+		Eine primitive Typenkonversion haben wir bereits gesehen. Eine implizite Typenkonversion ist immer dann möglich, wenn der neue Datentyp eine größere oder gleiche Datenmenge halten kann wie der alte Datentyp (das heißt es ist zum Beispiel nicht implizit möglich, eine Fließkommazahl in eine Ganzzahl zu konvertieren).
+		
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[main/.style = { draw, rectangle, minimum height = 0.9cm, minimum width = 2cm }]
+				\node [main] (byte) {\lstinline|byte|};
+				\node [main, right = 2 of byte] (short) {\lstinline|short|};
+				\node [main, right = 2 of short] (int) {\lstinline|int|};
+				\node [main, right = 2 of int] (long) {\lstinline|long|};
+				\node [main, below = 2 of int] (float) {\lstinline|float|};
+				\node [main, right = 2 of float] (double) {\lstinline|double|};
+				\node [main, above = 2 of short] (char) {\lstinline|char|};
+				
+				\draw [->] (char) -| (int);
+				
+				\draw [->] (byte) -- (short);
+				\draw [->] (short) -- (int);
+				\draw [->] (int) -- (long);
+			
+				\coordinate [below = 1 of long] (needle);
+				\draw (long) -- (needle);
+				\draw [->] (needle) -| (float);
+				
+				\draw [->] (float) -- (double);
+			\end{tikzpicture}
+		\end{figure}
+		Der Pfeil \( A \rightarrow B \) bedeutet, dass \(A\) implizit in \(B\) konvertiert werden kann. Der Rückweg ist ausgeschlossen. Außerdem ist die Konvertierung transitiv, dass bedeutet, wenn \( A \rightarrow B \) und \( B \rightarrow C \), dann geht auch \( A \rightarrow C \).
+		
+		Eine explizite Konvertierung wird vorgenommen, indem der neue Typ in Klammern vor die Variable (oder den Ausdruck) des alten Typs gesetzt wird:
+		\begin{figure}[H]
+			\centering
+			\lstinline|(<neuer-typ>) <ausdruck>|
+		\end{figure}
+		Beispielsweise Wertet der Ausdruck \( 1 / 2.0 \) zu einem \lstinline|double| aus und das Ergebnis muss explizit in ein \lstinline|int| konvertiert werden: \lstinline|(int) (1 / 2.0)|. Das Ergebnis wäre in diesem Falle \lstinline|0|, da bei einer Typenkonvertierung von einer Fließkommazahl in eine Ganzzahl die Nachkommastellen abgeschnitten werden.
 	% end
 	
-	\subsubsection{Wrapper Typen}
-		\todo{Schreiben}
+	\subsubsection{Wrappertypen}
+		Wie wir im Abschnitt zu Generics (\ref{sec:generics}) sehen werden, sind primitive Typen nicht immer hilfreich. Manchmal möchten wir auch Zahlen oder ähnliches in Objekten speichern können. Hier kommen die sogenannten \textit{Wrappertypen} ins Spiel.
+		
+		Wrappertypen sind Klassen, die eine primitive Variable speichern und diese bei Bedarf zur Verfügung stellt. Die Verwendung dieser Wrapper Typen erfolgt durch \textit{Autoboxing} transparent, das heißt, eine Variable wird automatisch in einem Wrappertyp gespeichert und gelesen.
+		
+		Die Namen der Wrappertypen entsprechen zu großen Teilen dem Namen des primitiven Typs mit einem großem Anfangsbuchstaben (die Klassen liegen allesamt in dem Package \lstinline|java.lang|):
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{l | l}
+				\textbf{Primitiver Typ} & \textbf{Wrappertyp}   \\ \hline
+				\lstinline|byte|        & \lstinline|Byte|      \\
+				\lstinline|short|       & \lstinline|Short|     \\
+				\lstinline|int|         & \lstinline|Integer|   \\
+				\lstinline|long|        & \lstinline|Long|      \\
+				\lstinline|float|       & \lstinline|Float|     \\
+				\lstinline|double|      & \lstinline|Double|    \\
+				\lstinline|char|        & \lstinline|Character| \\
+				\lstinline|boolean|     & \lstinline|Boolean|
+			\end{tabular}
+		\end{table}
+	
+		\paragraph{Autoboxing}
+			Weisen wir einer Variable \lstinline|Object obj| einen primitiven Wert (zum Beispiel \lstinline|1.2|) zu, so wird dieser primitive Typ automatisch in den entsprechenden Wrappertyp konvertiert und der Variable zugewiesen. Ebenfalls wird an Stellen, an denen primitive Typen gebraucht werden (zum Beispiel in arithmetischen Operationen oder Vergleichen) der Wrappertyp zurück in einen primitiven Wert gewandelt.
+			
+			Beispiel:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}
+double primitive = 1.2;
+int wholeNumber = (int) x;
+Double wrapper = primitive;   // Autoboxing.
+if (wrapper > wholeNumber) {  // Autounboxing.
+	...
+}
+\end{lstlisting}
+			\end{figure}
+		
+			\warning{Im Gegensatz zu primitiven Typen können Variablen von Wrappertypen \lstinline|null| sein. Wird versucht, Autounboxing auf \lstinline|null|-Werten anzuwenden, so wird eine \lstinline|NullPointerException| geworfen.}
+		% end
 	% end
 	
 	\subsubsection{Objekte (\enquote{Downcast})}
-		\todo{Schreiben}
+		Auch bei Objekten müssen wir manchmal eine Typenkonvertierung vornehmen. Implizite Typenkonvertierungen sind hier genau dann möglich, wenn der neue Typ eine Oberklasse des alten Typs ist. Eine explizite Typenkonvertierung wird benötigt, wenn in der Klassenhierarchie \enquote{nach unten} gegangen werden soll (dies wird \textit{Downcast} genannt). Eine explizite Typenkonvertierung findet wie bei primitiven Typen statt indem der neue Typ in Klammern vor den Ausdruck geschrieben wird.
+		
+		Schauen wir uns dies am Beispiel eines Strings an:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\umlemptyclass{Object}
+				\umlemptyclass[below = 1 of Object]{CharSequence}
+				\umlemptyclass[below = 1 of CharSequence]{String}
+				
+				\umlinherit{String}{CharSequence}
+				\umlinherit{CharSequence}{Object}
+			\end{tikzpicture}
+		\end{figure}
+		Eine implizite Typenkonvertierung ist nun immer nach oben in der Hierarchie möglich (also \( \texttt{String} \rightarrow \texttt{CharSequence} \rightarrow \texttt{Object} \)).
+		
+		Beispiel:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+String s = "Hello, World!";
+Object o = s;                // Implizite Typenkonvertierung.
+String casted = (String) o;  // Explizite Typenkonvertierung (Downcast).
+\end{lstlisting}
+		\end{figure}
 	% end
 % end
 

@@ -177,18 +177,13 @@
                 - Kommazahlen und Division
             * Logische Operatoren
             * Bitlogische Operatoren
-            * **Spezielle Operatoren (`new`, `instanceof`)**
-            * **Bindungsstärke der Operatoren**
-            * **Klammerung**
-        + **Rückgabe von Werten (`return`)**
-            * **Sondefall `finally`**
-        + **Polymorphie**
-            * **Schlüsselwort `this`**
-            * **Schlüsselwort `super`**
-        + **Implizite und Explizite Typkonversion (Casts)**
-            * **Primitive Typen**
-            * **Wrapper Typen**
-            * **Objekte ("Downcast")**
+            * Spezielle Operatoren (`new`, `instanceof`)
+            * Bindungsstärke der Operatoren
+            * Klammerung
+        + Implizite und Explizite Typkonversion (Casts)
+            * Primitive Typen
+            * Wrapper Typen
+            * Objekte ("Downcast")
         + **Links-/Rechtsausdrücke**
         + **Seiteneffekte (Multithreading, Schleifen)**
     - Kontrollstrukturen
@@ -209,23 +204,26 @@
         + Veträge in Form von Javadoc
         + Überladen
             * Problematiken bei ähnlichen Typen
+        + Rückgabe von Werten (`return`)
+            * Sondefall `finally`
 <!--
         + ***Abarbeitung von Methodenaufrufen***
             * ****Stack, Speichermodell****
 -->
     - Scoping
     - **Klassen und OOP**
-        + **Klassen, Objekte und Methoden (+ Attribute)**
-            * **Statische Methoden und Attribute**
-            * **Sichtbarkeit**
-            * **Abgrenzung: Objektvariable <--> Objektkonstante <--> Klassenvariable <--> Klassenkonstante**
-            * **Abgrenzung: Objektmethode <--> Klassenmethode**
-            * **Konstruktoren**
-                - **Überladen von Konstruktoren**
-                - **`this`**
-                - **`super`**
-            * **Initializer-Block**
-            * **Static-Initializer-Block**
+        + Klassen, Objekte und Methoden (+ Attribute)
+            * Statische Methoden und Attribute
+            * Sichtbarkeit
+            * Abgrenzung: Objektvariable <--> Objektkonstante <--> Klassenvariable <--> Klassenkonstante
+            * Abgrenzung: Objektmethode <--> Klassenmethode
+            * Konstruktoren
+                - Überladen von Konstruktoren
+                - `this`
+                - `super`
+            * Initializer-Block
+            * Static-Initializer-Block
+            * Ausführungsreihenfolge
         + **Referenzen**
             * **Vergleich zu primitiven Daten**
             * **Literal `null`**
@@ -233,34 +231,33 @@
             * **Zuweisen vs. Kopieren**
             * **Test auf Gleichheit und Identität (`==` vs. `equals`)**
             * **Downcasts (Referenz auf Anweisungen?)**
-        + **Vererbung**
-            * **Methoden (+ final)**
-            * **Variation der Sichtbarkeit**
-            * **Variation von Rückgabetyp und Exceptions**
-            * **Attribute**
-            * **Finale Klassen**
-        + **Abstrakte Klassen**
-        + **Interfaces**
-            * **Default-Methoden**
-            * **Funktionale Interfaces**
-                - **Interfaces in `java.util.function`**
+        + Vererbung
+            * Methoden (+ final)
+            * Variation von Sichtbarkeit, Sichtbarkeit und Exceptions
+            * Attribute
+        + Abstrakte Klassen
+        + Interfaces
+            * Default-Methoden
+            * Funktionale Interfaces
+                - Interfaces in `java.util.function`
         + **Polymorhpie und späte Bindung**
             * **statischer/dynamischer Typ**
-        + **Verschachtelte Klassen (static, inner)**
-            * **Statische verschachtelte Klassen**
-            * **Innere Klassen**
-            * **Anonyme Innere Klassen**
-        + **Lambda-Ausdrücke**
-            * **Methoden-Referenzen**
-        + **Enumerations (Enums)**
-            * **Klasse `java.lang.Enum`**
-            * **Vererbung**
+            * **Schlüsselwörter `this` und `super`**
+        + Verschachtelte Klassen (static, inner)
+            * Statische verschachtelte Klassen
+            * Innere Klassen
+            * Anonyme Innere Klassen
+        + Lambda-Ausdrücke
+            * Methoden-Referenzen
+            * Abschlussbeispiel
+        + Enumerations (Enums)
+            * Klasse `java.lang.Enum`
+            * Vererbung
         + **Metadaten**
             * **Zur Klasse**
             * **Zu den Attributen**
             * **Zu den Methoden**
             * **Methodentabelle**
-        + **Speicherverwaltung**
     - **Fehlerbehandlung**
         + **Exceptions**
             * **Fangen von Exceptions (`try`-`catch`-`finally`, `try` with resources)**

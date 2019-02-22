@@ -1,46 +1,251 @@
-% Ein Konstruktor ist eine besondere Methode innerhalb einer Klasse, welche keinen expliziten Rückgabetyp besitzt und den gleichen Namen trägt wie die Klasse. In dieser Methode werden alle zur Initialisierung der Klasse nötigen Aktionen vollführt, zum Beispiel Objektvariablen belegen. Jede Klasse besitzt einen Default-Konstruktor, welcher keine Parameter annimmt
+\implements{objektorientiertem Programmieren}{oop}{Java}
+
+\todo{Operator new}
 
 \subsection{Klassen, Objekte und Methoden}
-	\todo{Schreiben}
+	\implements{Klassen, Objekten und Methoden}{classes}{Java}
 	
-	\subsubsection{Statische Methoden und Attribute}
-		\todo{Schreiben}
+	Eine Klasse hat folgende allgemeine Syntax:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+<SICHTBARKEIT> [final] class <NAME> {
+	<KLASSENKOERPER>
+}
+\end{lstlisting}
+	\end{figure}
+	Die Sichtbarkeit kann dabei Public, Private, Protected oder Default sein. Was genau diese Sichtbarkeiten bedeuten, werden wir im Abschnitt \ref{sec:visibility} genauer betrachten. Der Name der Klasse muss ein gültiger Bezeichner sein und beginnt üblicherweise mit einem Großbuchstaben. Außerdem kann eine Klasse als \lstinline|final| markiert werden, wodurch keine Unterklassen mehr gebildet werden können.
+	
+	Der Körper der Klasse enthält den gesamten Klasseninhalt, das heißt Methoden, Attribute, Konstruktoren, Initialisierer, \dots.
+	
+	Dabei werden die Variablendeklarationen sowie die Methodendefinitionen einfach nacheinander in die Klasse geschrieben und es kann von jeder Instanzmethode auf jede Variable zugegriffen werden.
+	
+	\textbf{Beispiel:}
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+import java.util.Date;
+
+public class Human {
+	private String hairColor;  // Instanzvariable.
+	private int birthYear;     // Instanzvariable.
+
+	// Konstruktor.
+	public Human(String hairColor, int birthYear) {
+		this.hairColor = hairColor;
+		this.birthYear = birthYear;
+	}
+
+	// Methode.
+	public int calculateAge() {
+		return birthYear - new Date().getYear() - 1900;
+	}
+
+	// Methode.
+	public String getHairColor() {
+		return hairColor;
+	}
+
+	// Methode.
+	public int getBirthYear() {
+		return birthYear;
+	}
+}
+\end{lstlisting}
+	\end{figure}
+	
+	Die Definition einer Variablen innerhalb einer Klasse hat die gleiche Syntax wie die Definition einer lokalen Variable (siehe \refImpl{variablen}{Java}) mit dem Zusatz, dass ein Sichbarkeitsmodifizierer (Public, Protected, Private oder Default) gesetzt werden kann. Außerdem kann ein solches \enquote{Feld} als \textit{statisch} markiert werden, näheres werden wir im Abschnitt \ref{sec:static_fields} betrachten.
+	
+	Eine Methoden wird ebenfalls wie in \refImpl{methoden}{Java} beschrieben definiert, kann ebenfalls einen Sichbarkeitsmodifizierer aufweisen und als \textit{statisch} markiert werden.
+	
+	\subsubsection{Statische Methoden und statische Attribute}
+		\label{sec:static_fields}
+		
+		Um ein Attribut oder eine Methode als \textit{statisch} zu markieren, wird ihr der Modifizierer \lstinline|static| vorangestellt. Dadurch wird das Feld/die Methode zu einem statischen Feld/einer statischen Methode und kann auch ohne eine Instanz der Klasse genutzt werden.
+		
+		Außerdem ist ein statisches Feld nicht Instanzabhängig, das bedeutet, alle Instanzen haben den selben Wert, wenn sie auf ein statisches Feld zugreifen.
+		
+		\paragraph{Einschränkungen}
+			Da eine statische Methode nicht von einer Instanz abhängig ist, kann eine statische Methode auch nicht auf Instanzfelder (also nicht-statische Felder) zugreifen. Hierzu muss immer eine Instanz verfügbar sein.
+		% end
 	% end
 	
 	\subsubsection{Sichtbarkeit}
-		\todo{Schreiben}
+		\label{sec:visibility}
+	
+		Klassen sowie alle Attribute und alle Methoden (im Folgenden \enquote{Elemente}) können folgende Sichtbarkeitsmodifizierer enthalten:
+		\begin{description}
+			\item[\lstinline|public|] Das Element ist für jede Klasse und jedes Package sichtbar.
+			\item[\lstinline|private|] Das Element ist nur für die eigene Klasse sichtbar (bei Klassen ist dies nur möglich, wenn die Klasse geschachtelt ist, siehe \ref{sec:classes_nested}).
+			\item[\lstinline|protected|] Das Element ist nur für Klassen aus demselben Package und jede Unterklasse sichtbar.
+			\item[Default] Das Element ist nur für die Klassen aus demselben Package sichtbar. Dieser Modifizierer wird angewandt, indem der Modifizierer weggelassen wird.
+		\end{description}
+		\enquote{Sichtbar} bedeutet in diesem Falle, dass das Attribut lesbar und, sofern es nicht \lstinline|final| ist, auch lesbar ist.
 	% end
 	
 	\subsubsection{Abgrenzung: Objektvariable \(\leftrightarrow\) Objektkonstante \(\leftrightarrow\) Klassenvariable \(\leftrightarrow\) Klassenkonstante}
-		\todo{Schreiben}
+		\begin{description}
+			\item[Objektvariable] Eine Instanzabhängige, nicht-statische Variable, die nicht mit \lstinline|final| markiert ist. \\ Eine Objektvariable wird mit dem Default-Wert des jeweiligen Datentyps belegt bis sie zugewiesen wird.
+			\item[Objektkonstante] Eine Instanzabhängige, nicht-statische Variable, die mit \lstinline|final| markiert ist. \\ Eine Objektkonstante muss direkt bei der Deklaration, spätestens aber bei der Ausführung des Konstruktor initialisiert werden.
+			\item[Klassenvariable] Eine Instanzunabhängige, statische Variable, die nicht mit \lstinline|final| markiert ist. \\ Eine Klassenvariable wird mit dem Default-Wert des jeweiligen Datentyps belegt bis sie zugewiesen wird.
+			\item[Klassenkonstante] Eine Instanzunabhängige, statische Variable, die mit \lstinline|final| markiert ist. \\ Eine Klassenkonstante muss direkt bei der Deklaration, spätestens aber bei der Ausführung des Static-Initializers initialisiert werden.
+		\end{description}
+
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | c | c}
+				 \textbf{Name}   & \lstinline|static| & \lstinline|final| \\ \hline
+				 Objektvariable  & \(\square\)        & \(\square\)       \\
+				Objektkonstante  & \(\square\)        & \(\boxtimes\)     \\
+				Klassenvariable  & \(\boxtimes\)      & \(\square\)       \\
+				Klassenkonstante & \(\boxtimes\)      & \(\boxtimes\)
+			\end{tabular}
+		\end{table}
 	% end
 	
 	\subsubsection{Abgrenzung: Objektmethode \(\leftrightarrow\) Klassenmethode}
-		\todo{Schreiben}
+		\begin{description}
+			\item[Objektmethode] Eine Instanzabhängige, nicht-statische Methode, die auf Instanzvariablen und -konstanten zugreifen kann.
+			\item[Klassenmethode] Eine Instanzunabhängige, statische Methode, die nicht auf Instanzvariablen und -konstanten zugreife kann.
+		\end{description}
+	
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{c | c}
+				\textbf{Name}  & \lstinline|static| \\ \hline
+				Objektmethode  & \(\square\)        \\
+				Klassenmethode & \(\boxtimes\)
+			\end{tabular}
+		\end{table}
 	% end
 	
 	\subsubsection{Konstruktoren}
-		\todo{Schreiben}
+		\label{sec:constructor}
+	
+		Eine Konstruktor wird aufgerufen, wenn eine Instanz einer Klasse mit \lstinline|new| erstellt wird (zum Beispiel \lstinline|new Human("red", 1997)|). Ein Konstruktor muss in jeder Klasse vorhanden sein und ist eine spezielle Methode, die keinen Rückgabetyp aufweist und Objektkonstanten initialisieren kann/muss. Ein Konstruktor hat die folgende allgemeine Syntax:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+<SICHTBARKEIT> <KLASSENNAME>([PARAMETER]) {
+	...
+}
+\end{lstlisting}
+		\end{figure}
+		Die Sichtbarkeit ist dabei wie oben, jedoch müssen wir beachtet, dass eine Sichtbarkeit von \lstinline|private| dazu führt, dass keine Unterklasse der Klasse mehr erstellt werden kann, da mit jedem Konstruktoraufruf auch der Konstruktor der Oberklasse aufgerufen wird. Wird kein expliziter Konstruktor angegeben, dann wird eine Standard-Konstruktor erstellt, welcher keine Parameter annimmt und keine weiteren Initialisierungsschritte für die Klasse vornimmt.
 		
-		\paragraph{Überladen von Konstruktoren}
-			\todo{Schreiben}
-		% end
+		Bei der Erstellung eines Objektes wird zuerst der Konstruktor der Oberklasse aufgerufen, bis \lstinline|Object| erreicht wird. anschließend werden alle Konstruktoren von oben nach unten ausgeführt. Definiert eine Oberklasse keinen Standard-Konstruktor, dann muss der Aufruf des Oberklassenkonstruktors manuell geschehen, was wir uns gleich genauer anschauen werden (Schlüsselwort \lstinline|super|).
 		
-		\paragraph{\texttt{this}}
-			\todo{Schreiben}
-		% end
+		Es ist möglich, Konstruktoren ebenso wie Methoden zu überladen. Das bedeutet, es ist möglich, mehrere Konstruktoren in einer Klasse zu haben, welche die Klasse alle leicht unterschiedlich initialisieren oder auch nur Daten umwandeln. Hierzu ist es manchmal nötig, einen anderen Konstruktor aufzurufen.
 		
-		\paragraph{\texttt{super}}
-			\todo{Schreiben}
-		% end
+		Dies ist mit dem Schlüsselwort \lstinline|this| möglich, was wir uns am besten an einem Beispiel anschauen:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+...
+
+public Human(String hairColor, int birthYear) {
+	this.hairColor = hairColor;
+	this.birthYear = birthYear;
+}
+
+public Human(String hairColor, int ageInYears) {
+	this(hairColor, new Date().getYear() + 1900 - ageInYears);
+}
+
+...
+\end{lstlisting}
+		\end{figure}
+		Hier wird in Zeile 9 der andere Konstruktor innerhalb der Klasse aufgerufen, welcher das eigentliche Initialisieren vornimmt. Es kann maximal einen \lstinline|this|-Aufruf geben und dieser muss die erste Anweisung im Konstruktor geben. Gibt es nur einen Konstruktor oder wird kein anderer aufgerufen, so können wir den Aufruf weg lassen.
+		
+		Um einen expliziten Konstruktor der Oberklasse aufzurufen, wird das Schlüsselwort \lstinline|super| verwendet. Dies funktioniert ähnlich wie das Schlüsselwort \lstinline|this|, allerdings wird ein Konstruktor der Oberklasse aufgerufen.
+		
+		\warning{Sowohl \lstinline|this(...)| als auch \lstinline|super(...)| müssen die erste Anweisung im Konstruktor sein. Somit ist es nicht möglich, beide Schlüsselworte zeitgleich zu verwendet!}
 	% end
 	
 	\subsubsection{Initializer-Block}
-		\todo{Schreiben}
+		Der \textit{Initializer-Block} ist ein einfacher Block innerhalb der Klasse, der ohne Namen/Parametern/etc. in der Klasse steht:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public HelloInitializer {
+	{
+		// Initializer-Block.
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Sämtlicher Code innerhalb dieses Blockes wird vor dem Durchlauf von jedem Konstruktoraufruf ausgeführt. Der Inhalt des Blocks wird also quasi an den Anfang, aber unter die \lstinline|this|/\lstinline|super|-Aufrufe, aller Konstruktoren kopiert, aber nur einmal pro Aufruf ausgeführt.
 	% end
 	
 	\subsubsection{Static-Initializer-Block}
-		\todo{Schreiben}
+		Der \textit{Static-Initializer-Block} ist ebenso wie der Initializer-Block ein einfach Block, der allerdings mit dem Schlüsselwort \lstinline|static| markiert wird:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public HelloStaticInitializer {
+	static {
+		// Static-Initializer-Block.
+	}
+}
+\end{lstlisting}
+\end{figure}
+		Der Code in diesem Block wird ausgeführt, sobald die Klasse geladen wird (das heißt vor sämtlichem anderen Code innerhalb der Klasse).
+	% end
+	
+	\subsubsection{Ausführungsreihenfolge}
+		Schauen wir uns die Ausführungsreihenfolge von Methoden, Konstruktoren, Initializer-Blöcken und so weiter noch einmal an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+class ParentClass {
+	static {
+		// 1
+	}
+	
+	{
+		// 3
+	}
+	
+	ParentClass(String s) {
+		// 4
+	}
+	
+	void doIt() {
+		// 8
+	}
+}
+
+class ChildClass extends ParentClass {
+	static {
+		// 2
+	}
+	
+	{
+		// 5
+	}
+	
+	ChildClass(String s) {
+		super(s);
+		
+		// 6
+	}
+	
+	ChildClass() {
+		this("Hello, World!");
+		
+		// 7
+	}
+	
+	@Override
+	void doIt() {
+		super.doIt();
+		
+		// 9
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Bei einem Aufruf \lstinline|new ChildClass().doIt()| wird der Code nun in der oben angegebenen Reihenfolge ausgeführt. Die genaue Bedeutung des \lstinline|@Override| werden wir im Abschnitt \refImpl{inheritance}{Java} kennen lernen.
 	% end
 % end
 
@@ -75,45 +280,269 @@
 % end
 
 \subsection{Vererbung}
-	\todo{Schreiben}
+	\implements{Vererbung}{inheritance}{Java}
+
+	Java unterstützt die die meisten Sprachen keine Mehrfachvererbung, dafür können jedoch beliebig viele \textit{Interfaces} implementiert werden, in denen Methoden deklariert werden können, die von der Klasse zu implementieren sind. Wir werden uns in diesem Abschnitt jedoch nur um die eigentlich Vererbung kümmern.
 	
-	\subsubsection{Methoden}
-		\todo{Schreiben}
+	Die Syntax um eine Klasse von einer anderen Klasse ergeben zu lassen ist wie folgt:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+class <KLASSE> extends <OBERKLASSE> {
+	...
+}
+\end{lstlisting}
+	\end{figure}
+	Die einzige Voraussetzung ist, dass die Oberklasse nicht Final sein darf und mindestens einen sichtbaren Konstruktor besitzt.
+	
+	\subsubsection{Methoden} % this, super
+		Definiert die Oberklasse einige Methoden, so können diese in der Unterklasse \textit{überschrieben} werden. Das heißt, die Implementierung einer Methode wird ausgetauscht. Wird eine Methode der gleichen Klasse aufgerufen, so wird immer die Implementierung ausgeführt, die am weitesten unten in der Klassenhierarchie ist. Das heißt, eine Klasse kann sich nicht darauf verlassen, das auch garantiert der korrekte Code ausgeführt wird. Manchmal möchten wir jedoch verhindern, dass eine bestimmte Methode überschrieben wird, wenn diese zum Beispiel sicherheitskritisch ist. Wir können dies verhindern, indem wir der Methode den Modifizierer \lstinline|final| hinzufügen. Wollen wir explizit die Implementierung der Oberklasse aufrufen, so müssen wir dies mit dem Schlüsselwort \lstinline|super| verdeutlichen. Bei einem Aufruf mit \lstinline|this| kann das \lstinline|this| auch weggelassen werden, sofern der Aufruf eindeutig ist.
+		
+		Schauen wir uns all diese Konzepte an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+class Creature {
+	public void doIt() {
+		// 1
+
+		doAnother();
+
+		// 4
+	}
+
+	protected void doAnother() {
+		// 2
+	}
+}
+
+class Human extends Creature {
+	@Override
+	protected void doAnother() {
+		super.doAnother();
+
+		// 3
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Rufen wir die Methode \lstinline|doIt()| nun mit \lstinline|new Human().doIt()| auf, so wird der Code in der oben angegebenen Reihenfolge ausgeführt.
+		\begin{description}[leftmargin = 2cm]
+			\item[Zeile 5] Hier rufen wir nicht Zeile 10, sondern Zeile 18 auf, da wir eine Instanz der Klasse \lstinline|Creature| erstellt haben.
+			\item[Zeile 17] Hier rufen wir explizit die Implementierung in der Oberklasse, also Zeile 10 auf.
+		\end{description}
+	
+		Mit der Annotation \lstinline|@Override| markieren wir, dass eine Methode eine andere Methode überschreiben soll. Diese Annotation ist optional, hilft aber beim Lesen des Codes und sorgt außerdem dafür, dass ein Compiler-Fehler auftritt, sollte keine Methode überschrieben worden sein. Dies hilft uns dabei, Schreibfehler (zum Beispiel im Methodennamen) frühzeitig zu erkennen.
 	% end
 	
-	\subsubsection{Variation der Sichtbarkeit}
-		\todo{Schreiben}
-	% end
+	\subsubsection{Variation von Sichtbarkeit, Sichtbarkeit und Exceptions}
+		Bei dem Überschreiben von Methoden müssen wir darauf achten, dass der Name der Methode exakt gleich ist und die Typen der Parameter gleich strukturiert sind, das heißt die gleiche Reihenfolge und Anzahl haben und immer den gleichen oder einen weiter gefassten Typ vorweisen. Ähnliches gilt für den Rückgabetyp, der entweder gleich dem Rückgabetyp der Überschriebenen Methode sein muss oder konkreter. Das selbe gilt für Exceptions, die in der \lstinline|throws|-Klausel gelistet sind. Die Sichtbarkeit einer Methode dürfen wie ebenfalls nicht weiter einschränken, allerdings dürfen wir sie erhöhen.
+		
+		Zusammengefasst:
+		\begin{itemize}
+			\item Der Name der überschriebenen Methode muss exakt gleich sein.
+			\item Die Anzahl der Parameter muss gleich sein.
+			\item Der Typ eines jeden Parameters gleich dem Typ des Parameter der überschriebenen Methode sein.
+			\item Ist der Rückgabetyp der überschriebenen Methode \lstinline|void|, so muss der Rückgabetyp der überschreibenden Methode ebenfalls \lstinline|void| sein.
+			\item Der Rückgabetyp der überschreibenden Methode muss ein Untertyp oder der gleiche Typ wie der Rückgabetyp der überschriebenen Methode sein.
+			\item Jede deklarierte Exception muss eine Unterexception oder gleich der deklarierten Exception der überschriebenen Methode sein. Ebenfalls darf die überschreibende Methode keine Exceptions deklarieren. Es ist jedoch nicht möglich, neue Exceptions zu deklarieren.
+			\item Die Sichtbarkeit der überschreibenden Methode muss gleich oder weiter gefasst sein als die Sichtbarkeit der überschriebenen Methode. \\ \lstinline|public > protected > Default > private|
+		\end{itemize}
 	
-	\subsubsection{Variation von Rückgabetyp und Exceptions}
-		\todo{Schreiben}
+		\textbf{Beispiel:}
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+class Parent {
+	protected CharSequence format(Integer a) { /* ... */ return null; }
+}
+
+class Child1 extends Parent {
+	@Override
+	public String format(Integer a) { /* ... */ return null; }
+}
+
+class Child2 extends Parent {
+	@Override
+	protected CharSequence format(Integer a) { /* ... */ return null; }
+}
+
+class Child3 extends Parent {
+	@Override
+	public Object format(Integer a) { /* ... */ return null; }
+}
+
+class Child4 extends Parent {
+	@Override
+	CharSequence format(Integer a) { /* ... */ return null; }
+}
+\end{lstlisting}
+		\end{figure}
+		In diesem Beispiel sind die Klassen \lstinline|Child1| und \lstinline|Child2| valide, da sie entweder den gleichen oder einen genaueren Rückgabetyp haben und \lstinline|Child3| falsch, da der Rückgabetyp allgemeiner ist. \lstinline|Child4| ist nicht valide, da die Sichtbarkeit weiter eingeschränkt wurde.
 	% end
 	
 	\subsubsection{Attribute}
-		\todo{Schreiben}
-	% end
-	
-	\subsubsection{Finale Klassen}
-		\todo{Schreiben}
+		Die Attribute einer Klasse werden ebenfalls mit vererbt, sofern das Feld eine mindestens eine Sichtbarkeit von \lstinline|protected| hat.
+		
+		Im Gegensatz zu Methoden wird jedoch trotzdem immer auf das Feld in der aktuellen Klasse zugegriffen und nicht auf ein mögliches weiteres Feld mit dem gleichen Namen in einer Unterklasse, da hier das Prinzip der Polymorphie nicht gilt. Wir könnten jedoch einen sogenannten \enquote{Getter} implementieren, der ausschließlich den Wert eines Feldes zurück gibt und diesen überschreiben:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+class Parent {
+	public String field = "parent";
+
+	public void doIt() {
+		System.out.println(field);
+		System.out.println(getField());
+	}
+
+	public String getField() {
+		return field;
+	}
+}
+
+class Child extends Parent {
+	public String field = "child";
+
+	@Override
+	public void doIt() {
+		super.doIt();
+
+		System.out.println(field);
+		System.out.println(super.field);
+		System.out.println(getField());
+		System.out.println(super.getField());
+	}
+
+	public String getField() {
+		return field;
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Wenn wir den obigen Code nun mit \lstinline|new Child().doIt()| aufrufen, so werden die folgenden Zeilen ausgegeben:
+		\begin{figure}[H]
+			\centering
+			\begin{verbatim}
+parent
+child
+child
+parent
+child
+parent
+\end{verbatim}
+		\end{figure}
 	% end
 % end
 
 \subsection{Abstrakte Klassen}
-	\todo{Schreiben}
+	\implements{abstrakten Klassen}{abstractclasses}{Java}
+	
+	In Java werden abstrakte Methoden sowie abstrakte Klassen mit dem Schlüsselwort \lstinline|abstract| markiert:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public abstract class Example {
+	public abstract void doIt();
+}
+\end{lstlisting}
+	\end{figure}
+	Wir sehen, dass eine abstrakte Methode keine Implementierung besitzt und der Methodenkörper inklusive der Klammern durch ein Semikolon ersetzt wird. Wenn wir von einer abstrakten Klasse erben, müssen wir in dieser entweder alle abstrakten Klassen der Oberklasse(-n) implementieren oder die Klasse selbst als abstrakt markieren:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public class ConcreteExample extends Example {
+	@Override
+	public void doIt() { /* ... */ }
+}
+
+public abstract class ExtendedExample extends Example { /* ... */ }
+\end{lstlisting}
+	\end{figure}
+	Unsere Klasse \lstinline|ConcreteExample| implementiert hier die Methode \lstinline|doIt()|, die Klasse \lstinline|ExtendedExample| muss als abstrakt markiert werden, da sie die Methode nicht implementiert.
 % end
 
 \subsection{Interfaces}
-	\todo{Schreiben}
+	\implements{Interfaces}{interfaces}{Java}
+	
+	Wenn wir eine abstrakte Klasse schreiben, die ausschließlich abstrakte Methoden definiert, so sollten wir uns fragen, ob ein Interface an dieser Stelle nicht angemessener wäre. Da ein Interface ausschließlich abstrakte \lstinline|public|-Methoden implementieren kann, können diese beiden Modifizierer weg gelassen werden. Ein Interface wird mit dem Schlüsselwort \lstinline|interface| eingeleitet.
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public interface Example {
+	void doIt();
+}
+\end{lstlisting}
+	\end{figure}
+	Die Methode \lstinline|doIt()| ist aus den oben beschriebenen Gründen implizit \lstinline|public| und abstrakt.
+	
+	Im Gegensatz zu der Vererbung von Klassen sprechen wir bei Interfaces von \enquote{Implementierung}, das heißt eine Klasse \textit{implementiert} ein Interface und erbt nicht von diesen. Auch kennzeichnen wir eine solche Implementierung anders, nämlich mit der folgenden allgemeinen Syntax:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+<SICHTBARKEIT> class <KLASSENNAME> implements <INTERFACENAME>, <INTERFACENAME>, ... {
+	...
+}
+\end{lstlisting}
+	\end{figure}
+	Wir sehen hier auch schon, dass eine Klasse mehrere Interfaces implementieren kann. Dies ermöglicht uns, auch einfache Funktionen (zum Beispiel Vergleichbarkeit von Objekten) in Interfaces zu definieren und an vielen Stellen nutzen zu können. Ein Beispiel ist hierbei das Interface \lstinline|java.util.Comparable|, welches eine Methode \lstinline|int compareTo(Object other)| definiert, um das aktuelle Objekt mit einem anderen Objekt zu vergleichen und eine Ordnungsrelation über diesen zu erstellen.
+	
+	Ein Interface kann außerdem andere Interfaces erweitern, das heißt Methoden zu der Definition hinzufügen. Dies können wir mit dem Schlüsselwort \lstinline|extends| bei der Interfacedefinition angeben:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+<SICHTBARKEIT> interface <INTERFACENAME> extends <INTERFACENAME>, <INTERFACENAME>, ... {
+	...
+}
+\end{lstlisting}
+	\end{figure}
+	Auch hier können wir mehrere Interfaces erweitern.
 	
 	\subsubsection{Default-Methoden}
-		\todo{Schreiben}
+		Seit Java 8 ist es möglich, in Interfaces Default-Implementierungen für Methoden anzugeben, die dann in den implementierenden Klassen überschrieben werden können. Der Unterschied zu einer abstrakten Klasse besteht dabei darin, dass eine Klasse weiterhin mehrere Interfaces implementieren kann und somit auch Funktionalitäten von Interfaces erben kann.
+		
+		Die Syntax für Default-Methoden schauen wir uns an einem kleinen Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public interface ExampleA {
+	void doIt(String str);
+
+	default void doIt(String[] strs) {
+		for (String str : strs) {
+			doIt(str);
+		}
+	}
+}
+
+public interface ExampleB {
+	default void doIt(String[] strs) {
+		for (String str : strs) {
+			System.out.println(str);
+		}
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Hier haben wir zwei Interfaces erstellt, die beide eine Default-Implementierung für \lstinline|doIt(String[])| vorschreiben. Wenn wir nun eine Klasse erstellen, die Interface \lstinline|ExampleA| implementiert, so muss diese Klasse nur die Methode \lstinline|doIt(String)| implementieren und erbt die Funktionalität \lstinline|doIt(String[])| von dem Interface.
+		
+		Dies führt uns allerdings zu einem großen Problem: Erstellen wir eine andere Klasse, sie sowohl \lstinline|ExampleA| als auch \lstinline|ExampleB| implementiert, so erbt die Klasse zwei Implementierungen für \lstinline|doIt(String[])| und Java weiß nicht, welche der Implementierungen ausgeführt werden soll. Um dieses Problem zu umgehen kann Code mit diesem Phänomen nicht kompilieren und die Methode muss in der Klasse überschrieben werden.
 	% end
 	
 	\subsubsection{Funktionale Interfaces}
-		\todo{Schreiben}
+		Ein Interface, welches nur eine Methode definiert wird \textit{funktionales Interface} genannt. Außerdem sollte ein solches Interface mit der Annotation \lstinline|@FunctionalInterface| versehen werden, welche den Compiler dazu bringt, zu Prüfen, ob in dem Interface wirklich nur eine Methode definiert wird. Der Begriff des funktionalen Interfaces wurde in Java 8 mit der Einführung von Lambdas eingeführt. was dies genau zu bedeuten hat werden wir uns im Abschnitt \ref{sec:lambda} genauer anschauen.
 		
 		\paragraph{Interfaces in \texttt{java.util.function}}
-			\todo{Schreiben}
+			In dem Package \lstinline|java.util.function| sind einige funktionale Interfaces definiert, welche an vielen Stellen genutzt werden können, an denen Funktionen als Parameter angenommen werden und ähnliches (siehe auch hierzu \ref{sec:lambda}).
+			
+			Es existieren die folgenden Interfaces und die entsprechenden Methoden:
+			\begin{table}[H]
+				\centering
+				\begin{tabular}{l | l | l}
+					\textbf{Interface} & \textbf{Methode} & \textbf{Beschreibung} \\ \hline
+					\lstinline|BiConsumer<T, U>| & & \\
+				\end{tabular}
+			\end{table}
 		% end
 	% end
 % end
@@ -122,41 +551,373 @@
 	\todo{Schreiben}
 	
 	% statischer/dynamischer Typ
+	% Schlüsselwörter this und super
 % end
 
 \subsection{Verschachtelte Klassen}
-	\todo{Schreiben}
+	\label{sec:classes_nested}
+	
+	Üblicherweise legen wir für jede Klasse eine neue Datei an. Es ist aber auch möglich, innerhalb einer Klasse weitere Klassen zu definieren, was folgende Vorteile hat:
+	\begin{itemize}
+		\item Die sogenannte \textit{innere Klasse} kann auch auf private Attribute der äußeren Klasse zugreifen.
+		\item Die innere Klasse kann von der Instanz der äußeren Klasse abhängig sein, sodass auch auf Instanzvariablen der äußeren Klasse zugegriffen werden kann.
+	\end{itemize}
+	Oftmals nutzen wir innere Klassen aber auch einfach dazu, Dateien für sehr kleine Klassen zu vermeiden, die wir ausschließlich in der äußeren Klasse benötigen.
+	
+	Eine innere Klasse kann die gleichen Sichtbarkeiten haben wie Attribute und Methoden, also \lstinline|private|, Default, \lstinline|protected| und \lstinline|public|. Die Definition der inneren Klasse wird dabei einfach in den Körper der äußeren Klasse geschrieben:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public class OuterClass {
+	<SICHTBARKEIT> [static] class <KLASSENNAME> {
+		...
+	}
+}
+\end{lstlisting}
+	\end{figure}
+	Wir sehen hier auch schon, dass eine innere Klasse statisch sein kann.
 	
 	\subsubsection{Statische verschachtelte Klassen}
-		\todo{Schreiben}
+		Eine statische verschachtelte Klasse benötigt für ihre Existenz keine Instanz der äußeren Klasse, das heißt wir können ohne Referenz auf eine Instanz auf die äußere Klasse auf die innere Zugreifen. Schauen wir uns dies an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public class OuterClass {
+	public static class StaticInnerClass {
+		...
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Eine Instanz der inneren Klasse können wir nun mit \lstinline|new OuterClass.StaticInnerClass()| erstellen.
 	% end
 	
 	\subsubsection{Innere Klassen}
-		\todo{Schreiben}
+		Definieren wir eine innere Klasse nicht als statisch, so wird eine Instanz der äußeren Klasse benötigt, um eine Instanz der inneren Klasse zu erstellen. Schauen wir uns auch dies wieder an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public class OuterClass {
+	public class InnerClass {
+		...
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Um nun eine Instanz der inneren Klasse zu erstellen, benötigen wir eine Instanz der äußeren Klasse. Ist diese in einer Variable \lstinline|outer| gespeichert, so können wir die Instanz der inneren Klasse mit \lstinline|outer.new InnerClass()| erstellen. Um dies in einem Schritt zu tun können wir auch \lstinline|new OutClass().new InnerClass()| verwenden.
+		
+		\paragraph{Merkwürdige Konstrukte}
+			Die Kombination aus statischen und nicht-statischen inneren Klassen kann zu merkwürdigen Konstrukten führen. Nehmen wir an, wir haben eine äußere Klasse \lstinline|Outer|, eine normale innere Klasse \lstinline|Inner| und eine statische innere Klasse \lstinline|StaticInner|, wobei letztere eine Unterklasse von \lstinline|Inner| ist. Dann müssen wir den Konstruktor wie folgt gestalten, damit der Code kompiliert:
+			\begin{figure}[H]
+				\centering
+				\begin{lstlisting}
+public class Outer {
+	public class Inner { }
+	
+	public static class StaticInner extends Inner {
+		public StaticInner(Outer outer) {
+			outer.super();
+		}
+	}
+}
+\end{lstlisting}
+			\end{figure}
+			Um eine Instanz von \lstinline|StaticInner| er erhalten, müssen wir dem Konstruktor von \lstinline|StaticInner| also eine Instanz der äußeren Klasse übergeben: \lstinline|new Outer.StaticInner(new Outer)|.
+		% end
 	% end
 	
 	\subsubsection{Anonyme Innere Klassen}
-		\todo{Schreiben}
+		Bisher haben wir nur Klassen kennengelernt, die einen Namen haben. Manchmal kann es jedoch sinnvoll sein, eine Klasse ad-hoc zu definieren und ihr keinen Namen geben zu müssen. Eine anonyme innere Klasse ist also eine Klasse, die wir mitten im Code definieren und implementieren. Dies wird meist genutzt, um einfache Interfaces zu implementieren und diese Implementierung direkt an eine Methode weiterzugeben.
+		
+		Schauen wir uns ein Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public interface SimpleInterface {
+	void doIt();
+}
+
+public class Main {
+	public void foo() {
+		bar(new SimpleInterface() {
+			@Override
+			public void doIt() {
+				// Implementierung der anonymen Klasse.
+			}
+		});
+	}
+
+	private void bar(SimpleInterface si) {
+		si.doIt();
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Hier erstellen wir in Zeile 7 eine Instanz des Interfaces \lstinline|SimpleInterface|. Da es aber nicht möglich ist, direkt eine Instanz eines Interfaces oder einer abstrakten Klasse zu erzeugen, müssen wir das Interface ad-hoc implementieren. Dies tun wir, in dem wir nach dem Konstruktoraufruf einen Codeblock einfügen, der die entsprechenden Methode implementiert.
+		
+		Dieses Verfahren können wir übrigens auf alle Klasse, auch auf nicht-abstrakte, anwenden und damit ad-hoc Implementierungen austauschen, ohne eine separate benannte Klasse zu erstellen.
 	% end
 % end
 
 \subsection{Lambda-Ausdrücke}
-	\todo{Schreiben}
+	\label{sec:lambda}
+
+	Wie wir im vorherigen Abschnitt gesehen haben, können wir anonyme Klassen nutzen, um ad-hoc Interfaces zu implementieren. Da aber gerade für Interfaces mit nur einer Methode (genannt funktionale Interfaces) viel überflüssiger Code geschrieben wird, können wir Lambda-Ausdrücke nutzen, um den Code zu vereinfachen. Lambda-Ausdrücke generieren dabei mit einer speziellen Syntax ebenfalls anonyme Klassen, dies wird aber vor uns versteckt und geschieht im Hintergrund.
+	
+	Schauen wir uns den Code von oben nun nochmals mit einem Lambda-Ausdruck statt der anonymen Klasse an:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public interface SimpleInterface {
+	void doIt();
+}
+
+public class Main {
+	public void foo() {
+		bar(() -> {
+			// Implementierung der anonymen Klasse.
+		});
+	}
+
+	private void bar(SimpleInterface si) {
+		si.doIt();
+	}
+}
+\end{lstlisting}
+	\end{figure}
+	Diese Code ist äquivalent zu obigem Code. Die in Zeile 7 genutzte Syntax führt einen Lambda-Ausdruck ein, welcher den Code in Zeile 8 als Implementierung der Methode \lstinline|doIt()| enthält. Das bedeutet, der Lambda-Ausdruck erstellt eine anonyme Klasse und fügt den Code als Implementierung der einzigen Methode des Interfaces ein.
+	
+	Ein Lambda-Ausdruck kann auch Parameter annehmen, diese müssen wir dann in den runden Klammern vor dem Pfeil angeben (der Typ der Parameter ist optional, da der Compiler diesen aus der Methodendefinition lesen kann). Gibt es keine Parameter, so müssen die Klammern leer sein und bei nur einem Parameter können die Klammern weg gelassen werden. Innerhalb des Codeblocks nach dem Pfeil muss ein Return stehen, sofern die zu implementierende Methode einen Rückgabetyp ungleich \lstinline|void| definiert. Besteht der Codeblock nur aus einer Zeile, so können wir den gesamten Codeblock sowie das Return entfernen.
 	
 	\subsubsection{Methoden-Referenzen}
-		\todo{Schreiben}
+		Wollen wir die Implementierung eines Lambdas einfach an eine andere Methode delegieren, so können wir eine Methoden-Referenz erstellen, die eine Implementierung referenziert. Die Syntax für eine solche Methodenreferenz ist \lstinline|<OBJEKT>::<METHODENNAME>|, wobei das Objekt das Objekt ist, auf dem die Methode aufgerufen werden soll (bei statischen Methoden ist dies die Klasse) und der Methodenname der Name der Methode ist, die aufgerufen werden soll. Beispielsweise ist \lstinline|System.out::println| eine Methoden-Referenz auf die Methode \lstinline|println| auf dem Objekt \lstinline|System.out|.
+		
+		Die Parameter sowie der Rückgabetyp der referenzierten Methode müssen dabei zu den Parameterdefinitionen in dem zu implementierenden Interface kompatibel sein.
+	% end
+	
+	\subsubsection{Abschlussbeispiel}
+		Schauen wir uns nochmals alle Vereinfachungsschritte an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public interface IntegerComparator {
+	// a < b  -->  -1;   a > b  -->  1;   a == b  -->  0
+	int compare(int a, int b);
+}
+
+public class Main {
+	public void bar() {
+		// Ausgangsstand.
+		baz(new IntegerComparator() {
+			@Override
+			public int compare(int a, int b) {
+				if (a < b) {
+					return -1;
+				}
+				if (a > b) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+
+		// Nutzung des ternaeren Operators.
+		baz(new IntegerComparator() {
+			@Override
+			public int compare(int a, int b) {
+				return (a < b ? -1 : (a > b ? 1 : 0));
+			}
+		});
+
+		// Einfuehrung eines Lambdas.
+		baz((int a, int b) -> {
+			return (a < b ? -1 : (a > b ? 1 : 0));
+		});
+
+		// Wegnahme der Parametertypen.
+		baz((a, b) -> {
+			return (a < b ? -1 : (a > b ? 1 : 0));
+		});
+
+		// Wegnahme des Codeblocks.
+		baz((a, b) -> (a < b ? -1 : (a > b ? 1 : 0)));
+
+		// Referenzierung der compare-Methode von Integer.
+		baz(Integer::compare);
+	}
+	
+	public void baz(IntegerComparator comparator) {
+		comparator.compare(1, 2);
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Dabei ist folgendes äquivalent:
+		\begin{itemize}
+			\item Zeilen 9 bis 20
+			\item Zeilen 23 bis 28
+			\item Zeilen 31 bis 33
+			\item Zeilen 36 bis 38
+			\item Zeile 41
+			\item Zeile 44
+		\end{itemize}
 	% end
 % end
 
 \subsection{Enumerations}
-	\todo{Schreiben}
+	Eine besondere Art der Klasse stellen \textit{Enumerations} dar, also Aufzählungen. Ein Enum ist eine einfache Klasse, die einige Konstanten definiert.
 	
-	\subsubsection{Klasse \texttt{java.lang.Enum}}
-		\todo{Schreiben}
+	Hiermit können wir beispielsweise eine Aufzählung \( \texttt{Tier} \coloneqq \{ \texttt{Hund}, \texttt{Strauss}, \texttt{Fisch} \} \) definieren:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public enum Tier {
+	HUND,
+	STRAUSS,
+	FISCH
+}
+\end{lstlisting}
+	\end{figure}
+	In einem Enum schreiben wir üblicherweise alle Einträge in Capslock und trennen einzelne Wort mit einem Unterstrich. Diese Konvention kommt daher, dass die Elemente einer Aufzählung Instanzen der Klasse der Aufzählung (also in diesem Fall der Klasse \lstinline|Tier|) sind. Es sind also statische Klassenattribute der Klasse \lstinline|Tier|.
+	
+	Das führt uns auch dazu, dass Elemente eines Enums Eigenschaften haben können, die die Elemente einem Konstruktor übergeben können, den wir definieren müssen:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public class Tier {
+	HUND(4),
+	STRAUSS(2),
+	FISCH(0);
+
+	private final int legs;
+
+	private Tier(int legs) {
+		this.legs = legs;
+	}
+}
+\end{lstlisting}
+	\end{figure}
+	Die Parameter, die wir in den Klammern hinter dem Namen der Elemente angeben werden also an den Konstruktor weitergegeben. Des weiteren muss der Konstruktor eines Enums privat sein, damit keine weiteren Elemente erstellt werden können.
+	
+	Zusätzlich können wir in dem Körper des Enums normale sowie abstrakte Methoden definieren, die dann (wie bei anonymen inneren Klasse) an dem entsprechenden Element implementiert werden müssen:
+	\begin{figure}[H]
+		\centering
+		\begin{lstlisting}
+public class Tier {
+	HUND(4) {
+		@Override
+		public void move() {
+			// Laufen...
+		}
+	},
+	STRAUSS(2) {
+		@Override
+		public void move() {
+			// Laufen...
+		}
+	},
+	FISCH(0) {
+		@Override
+		public void move() {
+			// Schwimmen...
+		}
+	};
+
+	private final int legs;
+
+	private Tier(int legs) {
+		this.legs = legs;
+	}
+
+	public abstract void move();
+}
+\end{lstlisting}
+		\caption{Enum: Abstrakte Methoden}
+		\label{fig:enum_abstract_method}
+	\end{figure}
+
+	\subsubsection{Klasse \texttt{java.lang.Enum<E>}}
+		Wie wir bereits gesehen haben sind die Elemente eines Enums Instanzen der definierenden Klasse. Tatsächlich übersetzt der Compiler ein Enum zu einer Klasse, die von der Klasse \lstinline|java.lang.Enum<E>| erbt und damit einige Methoden erbt:
+		\begin{itemize}
+			\item \lstinline|compareTo(other: E): int| \\ Vergleicht des aktuellen mit der Ordinalzahl des übergebenen Elements (in obigem Beispiel gilt \( \texttt{HUND} < \texttt{STRAUSS} < \texttt{FISCH} \)).
+			\item \lstinline|equals(other: Object): boolean| \\ Prüft das aktuelle und das übergebene Objekt auf Gleichheit.
+			\item \lstinline|name(): String| \\ Gibt den Namen des aktuellen Elements zurück.
+			\item \lstinline|ordinal(): int| \\ Gibt die Ordinalzahl (das heißt den Index innerhalb des Enums) zurück. In obigem Beispiel gilt:
+				\begin{equation}
+					x.\texttt{ordinal()} =
+						\begin{cases*}
+							0 & \text{falls } x = \texttt{HUND}    \\
+							0 & \text{falls } x = \texttt{STRAUSS} \\
+							0 & \text{falls } x = \texttt{FISCH}
+						\end{cases*}
+				\end{equation}
+			\item \lstinline|toString(): String| \\ Gibt den Namen des aktuellen Elements zurück.
+			\item \lstinline|valueOf(name: String)| \\ Statische Methode auf der entsprechenden Enum-Klasse. Gibt das passende Element zu dem übergebenem Namen zurück. Existiert kein solches Element, so wird \lstinline|null| zurück gegeben. In obigem Beispiel gilt somit:
+				\begin{equation}
+					\texttt{Tier.valueOf(}x\texttt{)} =
+						\begin{cases*}
+							\texttt{HUND}    & \text{falls } x = \texttt{"HUND"}    \\
+							\texttt{STRAUSS} & \text{falls } x = \texttt{"{}STRAUSS"} \\
+							\texttt{FISCH}   & \text{falls } x = \texttt{"FISCH"}
+						\end{cases*}
+				\end{equation}
+			\item \lstinline|values(): E[]| \\ Statische Methode auf der entsprechenden Enum-Klasse. Gibt ein Array mit allen Elementen des Enums zurück.
+		\end{itemize}
+	
+		Das bedeutet, die Klasse in Abbildung \ref{fig:enum_abstract_method} wird durch den Compiler in etwa in folgende Klasse übersetzt:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public abstract class Tier extends Enum<Tier> {
+	public static final Tier HUND = new Tier(4) {
+		public void move() { /* Laufen... */ }
+		public int ordinal() {  return 0;  }
+		public String name() {  return "HUND";  }
+	};
+	public static final Tier STRAUSS = new Tier(2) {
+		public void move() { /* Laufen... */ }
+		public int ordinal() {  return 1;  }
+		public String name() {  return "STRAUSS";  }
+	};
+	public static final Tier FISCH = new Tier(0) {
+		public void move() { /* Schwimmen... */ }
+		public int ordinal() {  return 2;  }
+		public String name() {  return "FISCH";  }
+	};
+
+	private final int legs;
+
+	private Tier(int legs) {
+		this.legs = legs;
+	}
+
+	public abstract void move();
+
+	public abstract int ordinal();
+
+	public abstract String name();
+
+	public static Tier valueOf(String name) {
+		for (Tier tier : values()) {
+			if (tier.name().equals(name)) {
+				return tier;
+			}
+		}
+		return null;
+	}
+
+	public static Tier[] values() {
+		return new Tier[] { HUND, STRAUSS, FISCH };
+	}
+}
+\end{lstlisting}
+		\end{figure}
 	% end
 	
 	\subsubsection{Vererbung}
-		\todo{Schreiben}
+		Wie wir bereits gesehen haben können wir in Enums durchaus normale sowie abstrakte Methoden definieren. Außerdem können wir in einem Enum durchaus beliebig viele Interfaces implementieren, allerdings keine Klassen erweitern. Auch eine Enum-Klasse selbst ist \lstinline|final|, dass heißt es können keine Unterklassen von Enums gebildet werden.
+		
+		Methoden, die in den Interfaces definiert sind, müssen entweder in der Enum-Klasse selbst oder ähnlich wie die abstrakten Methoden bei jedem Element einzeln implementiert werden. Es ist auch möglich, in der Enum-Klasse eine \enquote{Default}-Implementierung zu erstellen und diese in den einzelnen Elementen zu überschreiben.
 	% end
 % end
 
@@ -167,8 +928,4 @@
 	% Zu den Attributen
 	% Zu den Methoden
 	% Methodentabelle
-% end
-
-\subsection{Speicherverwaltung}
-	\todo{Schreiben}
 % end

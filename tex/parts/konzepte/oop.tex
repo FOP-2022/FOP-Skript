@@ -42,6 +42,8 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 % end
 
 \subsection{Vererbung} \imperativeMark \oopMark
+	\introduces{von Vererbung}{inheritance}
+
 	Klassen und Objekte sind schön und gut, aber betrachten wir folgendes Beispiel: Wir haben die Klassen \enquote{Quadrat} und \enquote{Kreis}, die beide eine Methode \enquote{ausmalen} implementieren. Die Implementierung ist in dem Fall für beide Klassen gleich und wir haben den Code einfach kopiert. Ist die Implementierung nun Fehlerhaft, so müssen wir beide Methoden anpassen und dürfen dies auch nicht vergessen. Hier kommt Vererbung ins Spiel: Wir erstellen eine Oberklasse \enquote{Form}, von der die Klassen \enquote{Quadrat} und \enquote{Kreis} erben. Das bedeutet nun, dass alle Methoden, die in der Klasse \enquote{Form} definiert sind, auch in den Klassen \enquote{Kreis} und \enquote{Quadrat} verfügbar sind. Somit müssen wir die Methode \enquote{ausmalen} nur einmal implementieren.
 	
 	In den meisten Programmiersprachen ist es nur möglich, von maximal einer Klasse zu erben. Mehrfachvererbung wird auch von einigen Sprachen implementiert, dies erhöht an vielen Stellen allerdings die Komplexität und wurde deshalb in den moderneren Sprachen weg gelassen.
@@ -61,6 +63,8 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 % end
 
 \subsection{Abstrakte Klassen} \imperativeMark \oopMark
+	\introduces{von abstrakten Klassen}{abstractclass}
+
 	\textit{Abstrakte Klassen} bieten uns einen Weg, eine Methode zu definieren, aber nicht zu implementieren. Das bedeutet, wir definieren den Namen, die Parameter und den Rückgabetyp einer Methode ohne diese zu implementieren und überlassen es den Unterklassen, die Methode zu implementieren.
 	
 	Dadurch ist es möglich, eine ebene an Abstraktion zu erreichen, die wir uns am besten an einem Beispiel anschauen: Wir haben die abstrakte Klasse \enquote{Form}, welche die Methode \texttt{flaecheninhalt()} definiert. Diese Methode zur Berechnung des Flächeninhaltes der jeweiligen Form ist Abstrakt und wird von jeder Form (zum Beispiel \enquote{Kreis} oder \enquote{Quadrat}) implementiert. Wir können nun eine Methode \lstinline|double farbverbrauch(Form form, doubl)| entwickeln, welche den Farbverbrauch bei dem Ausmalen der jeweiligen Funktion berechnet. Den Flächeninhalt der Form erhält die Methode dabei durch die vorher definierte abstrakte Methode \texttt{flaecheninhalt()}, die auf der übergebenen Form aufgerufen wird.
@@ -82,6 +86,8 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 % end
 
 \subsection{Interfaces} \imperativeMark \oopMark
+	\introduces{von Interfaces}{interfaces}
+
 	Ein \textit{Interface} ist eine besondere abstrakte Klasse und definiert ausschließlich abstrakte Methoden und kann keine Methoden implementieren. Auch kann eine Klasse in den meisten Sprachen auch mehrere Interfaces \textit{implementieren}. Dadurch können wir feste Schnittstellen definieren und Klassen, welche diese Schnittstellen implementieren und können im Rahmen dieser alle gleich genutzt werden.
 	
 	Schauen wir uns dies wieder an einem Beispiel aus der Realität an: In Java existiert das Interface \lstinline|Comparable|. Dieses Interface definiert eine einzige Methode \lstinline|int compareTo(Object obj)|, mit der das Objekt, auf dem die Methode aufgerufen wird, mit dem übergebenen Objekt verglichen werden kann. Nun kann jede Klasse, die dieses Interface implementiert ist nun als \enquote{Vergleichbar} markiert und kann zum Beispiel innerhalb von sortierten Listen verwendet werden.\footnote{Hier gibt es auch noch andere Möglichkeiten, wir werden dies im Abschnitt \refImpl{datastruct}{Java} genauer betrachten.}
