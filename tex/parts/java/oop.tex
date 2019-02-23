@@ -1,7 +1,5 @@
 \implements{objektorientiertem Programmieren}{oop}{Java}
 
-\todo{Operator new}
-
 \subsection{Klassen, Objekte und Methoden}
 	\implements{Klassen, Objekten und Methoden}{classes}{Java}
 	
@@ -131,7 +129,7 @@ public class Human {
 }
 \end{lstlisting}
 		\end{figure}
-		Die Sichtbarkeit ist dabei wie oben, jedoch müssen wir beachtet, dass eine Sichtbarkeit von \lstinline|private| dazu führt, dass keine Unterklasse der Klasse mehr erstellt werden kann, da mit jedem Konstruktoraufruf auch der Konstruktor der Oberklasse aufgerufen wird. Wird kein expliziter Konstruktor angegeben, dann wird eine Standard-Konstruktor erstellt, welcher keine Parameter annimmt und keine weiteren Initialisierungsschritte für die Klasse vornimmt.
+		Die Sichtbarkeit ist dabei wie oben, jedoch müssen wir beachtet, dass eine Sichtbarkeit von \lstinline|private| dazu führt, dass keine Unterklasse der Klasse mehr erstellt werden kann, da mit jedem Konstruktoraufruf auch der Konstruktor der Oberklasse aufgerufen wird. Wird kein expliziter Konstruktor angegeben, dann wird eine Standard-Konstruktor erstellt, welcher keine Parameter annimmt und keine weiteren Initialisierungsschritte für die Klasse vornimmt. Geben wir explizit einen Konstruktor an, so wird kein Standard-Konstruktor erstellt und wir müssten einen solchen Konstruktor selber erstellen, wenn er benötigt wird.
 		
 		Bei der Erstellung eines Objektes wird zuerst der Konstruktor der Oberklasse aufgerufen, bis \lstinline|Object| erreicht wird. anschließend werden alle Konstruktoren von oben nach unten ausgeführt. Definiert eine Oberklasse keinen Standard-Konstruktor, dann muss der Aufruf des Oberklassenkonstruktors manuell geschehen, was wir uns gleich genauer anschauen werden (Schlüsselwort \lstinline|super|).
 		
@@ -250,32 +248,176 @@ class ChildClass extends ParentClass {
 % end
 
 \subsection{Referenzen}
-	\todo{Schreiben}
-	
-	\subsubsection{Vergleich zu primitiven Daten}
-		\todo{Schreiben}
-	% end
+	In Java greifen wir auf Objekte durch sogenannte \textit{Referenzen} zu. Diese können wir uns als \enquote{Zeiger} vorstellen, die auf das eigentliche Objekt zeigen. Um ein neues Objekt einer Klasse \lstinline|A| anzulegen und die Referenz auf dieses neu angelegte Objekt in eine Variable \lstinline|a| vom Typ \lstinline|A| zu speichern, nutzen wir den Operator \lstinline|new|:
+	\begin{figure}[H]
+		\centering
+		\lstinline|A a = new A();|
+	\end{figure}
+	Mit dem \lstinline|new|-Operator und den geschweiften Klammern wird der Konstruktor der Klasse \lstinline|A| aufgerufen.
 	
 	\subsubsection{Literal \texttt{null}}
-		\todo{Schreiben}
+		Wollen wir in einer Referenzvariablen (noch) kein Objekt referenzieren oder die Referenz auf ein vorhandenes Objekt entfernen, so können wir diese Variable auf den Wert \lstinline|null| setzen. Somit zeigt die Variable ins nichts (Null Pointer) und es kann durch diese auf kein Objekt zugegriffen werden.
+		
+		\warning{Wir müssen vor jedem Zugriff (Methodenaufruf, Attributzugriff) auf eine Variable prüfen, dass diese nicht \lstinline|null| ist. Greifen wir auf eine Null-Referenz zu, so wird eine \lstinline|NullPointerException| (NPE) geworfen und die Ausführung bricht ab.}
+	% end
+	
+	\subsubsection{Vergleich zu primitiven Daten}
+		Bei primitiven Daten werden direkt die Daten in der Variable abgelegt und keine Referenz auf diese. Was dies für einen Unterschied macht werden wir im Abschnitt \ref{sec:assign_copy} genauer sehen. Ebenfalls kann eine primitive Variable nicht \lstinline|null| sein, was an vielen Stellen ein Vorteil sein kann, den wir uns auch zu Nutzen machen sollten. Des weiteren werden die Datentypen von primitiven Datentypen im Allgemeinen klein geschrieben, wobei Klassen mit einem Großbuchstaben beginnen.
 	% end
 	
 	\subsubsection{Sonderfall \texttt{String}}
-		\todo{Schreiben}
+		Einen Sonderfall stellt die Klasse \lstinline|String| dar, da diese sich an einigen (nicht allen!) stellen wir ein primitiver Datentyp verhält. Dies liegt an folgenden Punkten:
+		\begin{itemize}
+			\item Ein String ist \textit{immutable}, das heißt nicht veränderlich. Wurde einmal ein String-Objekt angelegt, so kann dieses nicht mehr verändert werden.
+			\item String-Objekte werden implizit erstellt, wenn eine Zeichenkette in Anführungszeichen gesetzt wird. Das bedeutet, statt \lstinline|new String(new char[] { 'a', 'b', 'c' })| können wir \lstinline|"abc"| schreiben.
+		\end{itemize}
+	
+		\warning{Trotz dieser Gleichheiten können wir Strings nicht mit \lstinline|==| vergleichen, sondern müssen die Methode \lstinline|equals(..)| verwenden! Hierzu siehe \ref{sec:equals_identity}.}
 	% end
 	
 	\subsubsection{Zuweisen vs. Kopieren}
-		\todo{Schreiben}
+		\label{sec:assign_copy}
+		
+		Bei der Zuweisung von Referenzen mit dem Gleichheitszeichen wird ausschließlich die Referenz auf das Objekt kopiert und nicht der Inhalt des Objektes. Das heißt für uns, eine Modifikation an einer der Variablen spiegelt sich bei der anderen wieder, da die Variablen die gleiche Referenz enthalten und somit auf das selbe Objekt verweisen. Wenn wir eine Methode aufrufen und eine Referenz als Parameter übergeben, müssen wir genau dies beachten: Wir geben ausschließlich die Referenz weiter und diese verweist auf das selbe Objekt. Dies kann zu ungewollten Seiteneffekten führen.
+		
+		Schauen wir uns dies an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public class Foo {
+	public int bar = 1;
+}
+
+public class Main {
+	public void baz() {
+		Foo a = new Foo();
+		Foo b = a;
+		Foo c = b;
+
+		// 1:  a.bar == b.bar == c.bar == 1
+
+		a.bar = 2;
+
+		// 2:  a.bar == b.bar == c.bar == 2
+
+		b.bar = 3;
+
+		// 3:  a.bar == b.bar == c.bar == 3
+
+		c.bar = 4;
+
+		// 4:  a.bar == b.bar == c.bar == 4
+
+		boo(c);
+
+		// 5:  a.bar == b.bar == c.bar == 5
+	}
+
+	private void boo(Foo foo) {
+		foo.bar = 5;
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Wir sehen, dass sich sämtliche Änderungen auf \lstinline|a|, \lstinline|b|, \lstinline|c| jeweils auf den anderen Variablen widerspiegeln. Auch spiegeln sich die Änderungen der Methode \lstinline|boo(..)| auf den entsprechenden Objekten wider.
+		
+		Ist dies nicht das gewünschte Verhalten, so müssen wir das Objekt kopieren, das heißt wir müssen eine neue Instanz der entsprechende Klasse anlegen und den Wert jedes einzelnen Feldes kopieren. Hierzu gibt es mehrere Ansätze:
+		\begin{itemize}
+			\item Copy-Konstruktor. Wir erstellen einen Konstruktor, der als Parameter eine Instanz der Klasse selber annimmt und aus dieser die Daten kopiert.
+			\item Copy-Methode. Wir erstellen eine Objektmethode, die eine neue Instanz der Klasse erstellt und die Daten in die entsprechende Klasse kopiert.
+		\end{itemize}
+		Eine solche Implementierung kann zum Beispiel so aussehen:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public class Foo {
+	public int bar = 1;
+
+	// Standard-Konstruktor
+	public Foo() { }
+
+	// Copy-Konstruktor
+	public Foo(Foo foo) {
+		this.bar = foo.bar;
+	}
+
+	// Copy-Methode
+	public Foo copy() {
+		Foo foo = new Foo();
+		foo.bar = this.bar;
+		return foo;
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Mit diesen beiden Verfahren lässt sich ein Objekt nun kopieren.
 	% end
 	
 	\subsubsection{Test auf Gleichheit und Identität}
 		\label{sec:equals_identity}
 	
-		\todo{Schreiben}
+		Um Objekte auf Identität/Gleichheit zu prüfen, existiert einerseits der Operator \lstinline|==| und die Methode \lstinline|equals(..)|. Während bei primitiven Datentypen ausschließlich der Operator \lstinline|==| angewandt werden kann, macht dies bei Objekten einen großen Unterschied:
+		\begin{itemize}
+			\item Der Operator \lstinline|==| prüft auf \textit{Identität}, das heißt es wird geprüft, ob zwei Objekte auf dem selben Speicher liegen. Wertet der Ausdruck \lstinline|a == b| zu \lstinline|true| aus, so ist \lstinline|a| das Selbe wie \lstinline|b|.
+			\item Die Methode \lstinline|equals(..)| prüft auf \textit{Gleichheit}, das heißt es wird geprüft, ob der Inhalt von zwei Objekten gleich ist. Wertet der Ausdruck \lstinline|a.equals(b)| zu \lstinline|true| aus, so ist \lstinline|a| das Gleiche wie \lstinline|b|.
+		\end{itemize}
+	
+		\warning{Da die Methode \lstinline|equals(..)| auf einem Objekt aufgerufen werden muss, kann es zu Fehler führen, wenn dieses Objekt \lstinline|null| ist. Als Abhilfe kann hierbei auf die Hilfsmethode \lstinline|Objects.equals(Object, Object)| zurückgegriffen werden, die genau diesen Fall überprüft.}
+		
+		Die Methode \lstinline|equals(..)| ist in \lstinline|Object| implementiert, greift in der Standard-Implementierung aber nur auf den \lstinline|==| Operator zurück. Das bedeutet, wir müssen die Methode bei der Erstellung einer Klasse überschreiben, damit diese korrekt arbeitet.
+		
+		Schauen wir uns diese ganze Theorie nochmal an einem Beispiel an:
+		\begin{figure}[H]
+			\centering
+			\begin{lstlisting}
+public class Foo {
+	private final int bar;
+
+	public Foo(int bar) {
+		this.bar = bar;
+	}
+
+	public boolean equals(Object that) {
+		if (that == null) {
+			return false;
+		}
+		// bar hat einen primitiven Datentyp, weshalb wie hier den == Operator
+		// einsetzen.
+		return this.bar == that.bar;
+	}
+}
+
+public class Main {
+	public void baz() {
+		Foo a = new Foo(1);
+		Foo b = new Foo(1);
+		Foo c = new Foo(2);
+
+		a == b;  // false
+		a == c;  // false
+		b == c;  // false
+
+		a.equals(b);  // true
+		a.equals(c);  // false
+		b.equals(c);  // false
+	}
+}
+\end{lstlisting}
+		\end{figure}
+		Für eine korrekt Implementierung von \lstinline|equals(..)| muss folgende gelten:
+		\begin{align*}
+			!\texttt{a.equals(null)} \\
+			\texttt{a == b} \implies \texttt{a.equals(b)} \tag{Konsistenz} \\
+			\texttt{a.equals(a)} \tag{Reflexivität} \\
+			\texttt{a.equals(b)} \iff \texttt{b.equals(a)} \tag{Symmetrie} \\
+			\texttt{a.equals(b)} \land \texttt{b.equals(c)} \implies \texttt{a.equals(c)} \tag{Transitivität}
+		\end{align*}
 	% end
 	
 	\subsubsection{Downcasts}
-		\todo{Schreiben}
+		Der Typ einer Variable muss immer eine Oberklasse der zuzuweisenden Typs sein. Das bedeutet, eine \lstinline|ArrayList| kann einer Variable des Typs \lstinline|List| zugewiesen werden, aber nicht anders herum. Um eine möglichst hohe Wiederverwendbarkeit zu gewährleisten, sollten wir bei der Auswahl der Variablentypen darauf achten, den Typ so hoch wie möglich in der Klassenhierarchie zu wählen. Haben wir beispielsweise eine Variable mit dem Typ \lstinline|ArrayList|, so können dieser ausschließlich \lstinline|ArrayList|s zugewiesen werden. Haben wir jedoch eine Variable vom Typ \lstinline|List|, so können wir dieser auch eine \lstinline|LinkedList| zuweisen (statischer vs. dynamischer Typ, siehe \ref{sec:dynamic_static_type}).
+	
+		Um diese allgemeine Typen wieder in Untertypen zu konvertieren, werden \textit{Downcasts} benötigt. Siehe hierzu Abschnitt \ref{sec:downcast} über Downcasts.
 	% end
 % end
 
@@ -293,9 +435,11 @@ class <KLASSE> extends <OBERKLASSE> {
 }
 \end{lstlisting}
 	\end{figure}
-	Die einzige Voraussetzung ist, dass die Oberklasse nicht Final sein darf und mindestens einen sichtbaren Konstruktor besitzt.
+	Die einzige Voraussetzung ist, dass die Oberklasse nicht Final sein darf und mindestens einen sichtbaren Konstruktor besitzt. Jede Klasse, die keine explizite Oberklasse hat, erbt von der Klasse \lstinline|Object|. Hierdurch ist \lstinline|Object| die Oberklasse von allen existierenden Klassen und sämtliche auf \lstinline|Object| definierten Methoden sind in allen Klassen verfügbar.
 	
 	\subsubsection{Methoden} % this, super
+		\label{sec:method_this_super}
+	
 		Definiert die Oberklasse einige Methoden, so können diese in der Unterklasse \textit{überschrieben} werden. Das heißt, die Implementierung einer Methode wird ausgetauscht. Wird eine Methode der gleichen Klasse aufgerufen, so wird immer die Implementierung ausgeführt, die am weitesten unten in der Klassenhierarchie ist. Das heißt, eine Klasse kann sich nicht darauf verlassen, das auch garantiert der korrekte Code ausgeführt wird. Manchmal möchten wir jedoch verhindern, dass eine bestimmte Methode überschrieben wird, wenn diese zum Beispiel sicherheitskritisch ist. Wir können dies verhindern, indem wir der Methode den Modifizierer \lstinline|final| hinzufügen. Wollen wir explizit die Implementierung der Oberklasse aufrufen, so müssen wir dies mit dem Schlüsselwort \lstinline|super| verdeutlichen. Bei einem Aufruf mit \lstinline|this| kann das \lstinline|this| auch weggelassen werden, sofern der Aufruf eindeutig ist.
 		
 		Schauen wir uns all diese Konzepte an einem Beispiel an:
@@ -548,10 +692,30 @@ public interface ExampleB {
 % end
 
 \subsection{Polymorphie und späte Bindung}
-	\todo{Schreiben}
+	\implements{Polymorphie und später Bindung}{polymorphy}{Java}
 	
-	% statischer/dynamischer Typ
-	% Schlüsselwörter this und super
+	\subsubsection{Statischer vs. Dynamischer Typ}
+		\label{sec:dynamic_static_type}
+		
+		Um Polymorphie zu verstehen, müssen wir uns zuerst klar machen, was der Unterschied zwischen einem statischen und einem dynamischen Typ ist:
+		\begin{itemize}
+			\item Der statische Typ einer Variable ist der Typ, den wir bei der Deklaration der Variable angegeben haben.
+			\item Der dynamische Typ einer Variable ist der Typ, das \enquote{am Ende drin steckt}, also die Klasse, deren Instanz in der Variable gespeichert ist.
+		\end{itemize}
+	
+		\textbf{Beispiel:}
+		\begin{figure}[H]
+			\centering
+			\lstinline|List list = new ArrayList();|
+		\end{figure}
+		In diesem Beispiel ist \lstinline|List| der statische und \lstinline|ArrayList| der dynamische Typ.
+	% end
+	
+	\subsubsection{Polymorphie und späte Bindung}
+		Während des Compile-Vorgangs ist es nur möglich, Methoden aufzurufen, die auf dem statischen Typ definiert worden sind. Es wird allerdings erst zur Laufzeit entschieden, welche Implementierung aufgerufen wird. Hierbei wird nicht die Implementierung in dem statischen Typ, sondern die Implementierung in dem dynamischen Typ aufgerufen. Dieses Phänomen wird \textit{späte Bindung} genannt.
+		
+		Auch innerhalb von Klassen bei Aufrufen von Methoden der selben Instanz ist die Polymorphie anzutreffen, dies haben wir bereits im Abschnitt zu dem Überschreiben von Methoden (\ref{sec:method_this_super}) gesehen.
+	% end
 % end
 
 \subsection{Verschachtelte Klassen}
@@ -921,11 +1085,11 @@ public abstract class Tier extends Enum<Tier> {
 	% end
 % end
 
-\subsection{Metadaten}
-	\todo{Schreiben}
-	
-	% Zur Klasse
-	% Zu den Attributen
-	% Zu den Methoden
-	% Methodentabelle
-% end
+%\subsection{Metadaten}
+%	\todo{Schreiben}
+%	
+%	% Zur Klasse
+%	% Zu den Attributen
+%	% Zu den Methoden
+%	% Methodentabelle
+%% end

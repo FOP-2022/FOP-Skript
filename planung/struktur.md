@@ -211,7 +211,7 @@
             * ****Stack, Speichermodell****
 -->
     - Scoping
-    - **Klassen und OOP**
+    - Klassen und OOP
         + Klassen, Objekte und Methoden (+ Attribute)
             * Statische Methoden und Attribute
             * Sichtbarkeit
@@ -224,13 +224,13 @@
             * Initializer-Block
             * Static-Initializer-Block
             * Ausführungsreihenfolge
-        + **Referenzen**
-            * **Vergleich zu primitiven Daten**
-            * **Literal `null`**
-            * **Sonderfall `String`**
-            * **Zuweisen vs. Kopieren**
-            * **Test auf Gleichheit und Identität (`==` vs. `equals`)**
-            * **Downcasts (Referenz auf Anweisungen?)**
+        + Referenzen
+            * Vergleich zu primitiven Daten
+            * Literal `null`
+            * Sonderfall `String`
+            * Zuweisen vs. Kopieren
+            * Test auf Gleichheit und Identität (`==` vs. `equals`)
+            * Downcasts (Referenz auf Anweisungen?)
         + Vererbung
             * Methoden (+ final)
             * Variation von Sichtbarkeit, Sichtbarkeit und Exceptions
@@ -240,9 +240,9 @@
             * Default-Methoden
             * Funktionale Interfaces
                 - Interfaces in `java.util.function`
-        + **Polymorhpie und späte Bindung**
-            * **statischer/dynamischer Typ**
-            * **Schlüsselwörter `this` und `super`**
+        + Polymorhpie und späte Bindung
+            * statischer/dynamischer Typ
+            * Polymorhpie und späte Bindung
         + Verschachtelte Klassen (static, inner)
             * Statische verschachtelte Klassen
             * Innere Klassen
@@ -253,11 +253,13 @@
         + Enumerations (Enums)
             * Klasse `java.lang.Enum`
             * Vererbung
+<!--
         + **Metadaten**
             * **Zur Klasse**
             * **Zu den Attributen**
             * **Zu den Methoden**
             * **Methodentabelle**
+-->
     - **Fehlerbehandlung**
         + **Exceptions**
             * **Fangen von Exceptions (`try`-`catch`-`finally`, `try` with resources)**
