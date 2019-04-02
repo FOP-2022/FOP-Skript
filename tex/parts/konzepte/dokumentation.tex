@@ -2,7 +2,7 @@
 
 Dabei beschäftigen wir uns nicht mit der Dokumentation, welche für den Nutzer gedacht ist und erklärt, wie unsere Software zu benutzen ist und ebenfalls nicht mit der Dokumentation der Struktur unserer Software. Stattdessen handelt es sich hierbei um die Dokumentation innerhalb des Codes zur Beschreibung, \textit{was} unser Code tut.
 
-Dabei ist es im Allgemeinen nicht wichtig, zu Beschreiben, \textit{wie} der Code etwas tut, dies kann an aus dem Code ablesen. Stattdessen ist es wichtig zu beschreiben, \textit{was} unser Code tut und, im Falle von Kommentaren im Code, \textit{warum} dies so getan wird. Dadurch ist es für andere Entwickler einfacher, den Code zu verstehen, wiederzuverwenden und zu erweitern.
+Dabei ist es im Allgemeinen nicht wichtig, zu beschreiben, \textit{wie} der Code etwas tut, dies kann an aus dem Code ablesen. Stattdessen ist es wichtig zu beschreiben, \textit{was} unser Code tut und, im Falle von Kommentaren im Code, \textit{warum} dies so getan wird. Dadurch ist es für andere Entwickler einfacher, den Code zu verstehen, wiederzuverwenden und zu erweitern.
 
 \memo{Es ist wichtig, \textit{was} der Code tut und \textit{warum} auf diese Weise. Nicht wie.}
 
@@ -11,7 +11,7 @@ Wir schauen uns im folgenden einzelne Teile der Dokumentation an und dann Beispi
 \subsection{Verträge} \functionalMark \imperativeMark \oopMark
 	\introduces{von Veträgen}{vertraege}
 
-	Gerade in nicht-typisierten Programmiersprachen wie Racket ist es sehr sinnvoll, einen \textit{Vertrag} zwischen der Methode und dem Aufrufer zu schließen. In diesem Wird genau festgelegt, welcher Parameter von welchem Typ erwartet wird, wie dieser genau auszusehen hat und welchen Typ der Rückgabewert hat und wie dieser genau aussieht.
+	Gerade in nicht-typisierten Programmiersprachen wie Racket ist es sehr sinnvoll, einen \textit{Vertrag} zwischen der Methode und dem Aufrufer zu schließen. In diesem wird genau festgelegt, welcher Parameter von welchem Typ erwartet wird, wie dieser genau auszusehen hat und welchen Typ der Rückgabewert hat und wie dieser genau aussieht.
 	
 	Die Beschreibung der Funktionalität der Methode gehört nicht mit zu dem Vertrag!
 	
@@ -50,9 +50,9 @@ boolean isPrimeNumber(int p) {
 		return true;
 	}
 
-	// Laufe durch alle kleineren Zahlen ab Zwei bis zur aufgerundeten Wurzel
+	// Laufe durch alle kleineren Zahlen ab Zwei bis zur abgerundeten Wurzel
 	// aus 'p'.
-	for (int n = 2; n <= ceil(sqrt(p)); n++) {
+	for (int n = 2; n <= floor(sqrt(p)); n++) {
 		// Wenn die Zahl durch die andere Zahl teilbar ist, gib 'false' zurueck.
 		if (p % n == 0) {
 			return false;

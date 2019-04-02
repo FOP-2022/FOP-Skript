@@ -17,7 +17,7 @@ In Racket gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
 		\begin{figure}[H]
 			\centering
 			\begin{lstlisting}[language = Racket]
-(define (square-root-real x)
+(define (square-root-positive x)
 	(if (< x 0)
 		-1
 		(sqrt x) ; Die Funktion sqrt gibt fuer negative Werte ein komplexes Ergebnis.
@@ -45,7 +45,7 @@ In Racket gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
 		\begin{figure}[H]
 			\centering
 			\begin{lstlisting}[language = Racket]
-(define (square-root-real x)
+(define (square-root-positive x)
 	(if (< x 0)
 		(error 'square-root "Illegal value for real square root!")
 		(sqrt x) ; Die Funktion sqrt gibt fuer negative Werte ein komplexes Ergebnis.
@@ -54,6 +54,6 @@ In Racket gibt es die zwei typischen grundlegenden Arten von Fehlerbehandlung:
 			\end{lstlisting}
 		\end{figure}
 	
-		Rufen wir die Funktion nun mit \lstinline[language = Racket]|(square-root-real -4)| auf, so bekommen wir folgende Fehlermeldung: \texttt{square-root-real: Illegal value for real square root!}
+		Rufen wir die Funktion nun mit \lstinline[language = Racket]|(square-root-positive -4)| auf, so bekommen wir folgende Fehlermeldung: \texttt{square-root-real: Illegal value for real square root!}
 	% end
 % end

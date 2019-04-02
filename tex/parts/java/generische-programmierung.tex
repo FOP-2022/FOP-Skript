@@ -19,7 +19,7 @@ Wir werden in diesem Kontext nur Typparameter (Generics) betrachten, welche in J
 		Auffällig ist, dass sämtliche Element als Object-Referenz vorliegen. Es gibt für eine Methode, welche eine solche Liste annimmt, gibt es keine Möglichkeit, den Typ der Parameter einzuschränken. Schauen wir uns hierzu eine Methode an, welche alle Elemente aufsummieren soll. Natürlich ergibt eine solche Operation nur auf Zahlen Sinn, weshalb davon ausgegangen wird, dass sämtliche Elemente der Liste vom Typ \texttt{Integer} sind:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public Integer sum(List list) {
 	Integer result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -41,14 +41,14 @@ public Integer sum(List list) {
 		\end{enumerate}
 		Möglichkeit 1 mag bei solch kleinen Beispielen noch funktionieren, aber spätestens, wenn wir die Liste an andere Methoden weitergeben und nicht selbst für den Fehler sorgen, wird die Fehlersuche schrecklich. Ebenso ergeht es Möglichkeit 2, denn bei tief verschachtelten Klassenstrukturen bleibt das Prüfen der Korrektheit nicht so trivial wie in unserem Beispiel.
 		
-		\info{Generell gilt: Fail Fast, am besten noch zur Compilezeit. Dies vereinfacht die Fehlersuche erheblich. Fehler, die erst in den Tiefen eines Programmes passieren, sind schwer zu finden!}
+		\info{Generell gilt: Fail Fast, am besten noch zur Compilezeit. Dies vereinfacht die Fehlersuche erheblich. Fehler, die erst in den Tiefen eines Programms passieren, sind schwer zu finden!}
 		
 		Somit bleibt uns als einzig gute Möglichkeit die Typprüfung des Compilers zu nutzen, welche auch genau dazu dient. Es wäre also eine Möglichkeit, eine Unterklasse \texttt{IntegerList} von \texttt{List} zu erstellen, die nur \texttt{Integer}s akzeptiert. Das dies eine schlechte Idee ist, würden wir spätestens nach der zehnten, bis auf den Typ identischen, Klasse merken. Wäre es nicht toll, alles nur einmal schreiben zu müssen und den Typ nachher setzen zu können? Hier helfen uns die zuvor genannten Generics: Diese ermöglichen genau das.
 		
 		Klassen, welche Generics nutzen, sind für viele Typen geschrieben und ermöglichen die Angabe des expliziten Typs in Spitzen Klammern hinter dem Klassennamen. Des weiteren ist es auch auf Methodenebene möglich, für viele Typen generisch zu Programmieren und bei der Nutzung der Methode den eigentlichen Typ festzulegen. Wir werden uns diese beiden Fälle in den folgenden beiden Abschnitten zu generischen Klassen und Methoden anschauen. Um einen ersten Eindruck zu kriegen, was uns Generics ermöglichen, hier ein Beispiel, welche die obige Methode ersetzen kann und eine größere Typsicherheit ermöglicht:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public Integer sum(List@@?<Integer>@@@ list) {
 	Integer result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -70,7 +70,7 @@ public Integer sum(List@@?<Integer>@@@ list) {
 		Wir schauen uns hierzu eine mögliche Implementierung der oben beschriebenen Liste an, welche noch keine Generics nutzt (die Implementierung leitet einfach alle Aufrufe an eine andere, nicht von uns implementierte List weiter):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public class List {
 	private DelegateList delegateList = new DelegateList();
 
@@ -95,7 +95,7 @@ public class List {
 		Die Klasse sieht, unter Nutzung von Typparametern, nun folgendermaßen aus (der Einfachheit halber nehmen wir an, die Klasse \texttt{DelegateList} sei auch generisch):
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public class List@@?<T>@@@ {
 	private DelegateList@@?<T>@@@ delegateList = new DelegateList@@?<T>@@@();
 	
@@ -138,7 +138,7 @@ public class List@@?<T>@@@ {
 		Wir betrachten zuerst die nicht-generische Methode, welche nur Strings unterstützt:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public static String concatenate(List<String> list) {
 	String result = "";
 	for (int i = 0; i < list.size(); i++) {
@@ -155,7 +155,7 @@ public static String concatenate(List<String> list) {
 		Schauen wir uns nun also die obige Methode unter Verwendung von Typparametern an:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public static @@?<T>@@@ String concatenate(List<@@?T@@@> list) {
 	String result = "";
 	for (int i = 0; i < list.size(); i++) {
@@ -201,9 +201,9 @@ public static @@?<T>@@@ String concatenate(List<@@?T@@@> list) {
 		Schauen wir uns unter diesen Voraussetzungen folgenden Code an, der den Durchschnitt zweier benachbarten Zahlen (gleitender Durchschnitt) berechnet:
 		\begin{figure}[H]
 			\centering
-			\begin{lstlisting}
+			\begin{lstlisting}[style = base]
 public List<Double> floatingAverage(List<Integer> list) {
-	List<Double> result = new List<Double>();
+	List<Double> result = new ArrayList<Double>();
 	for (int i = 1; i < list.size(); i++) {
 		int previous = list.get(i - 1)@@?.intValue()@@@;
 		int current = list.get(i)@@?.intValue()@@@;
@@ -229,9 +229,9 @@ public List<Double> floatingAverage(List<Integer> list) {
 			Schauen wir uns also obigen Beispiel erneut an, diesmal aber mit Autoboxing:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}
+				\begin{lstlisting}[style = base]
 public List<Double> floatingAverage(List<Integer> list) {
-	List<Double> result = new List<Double>();
+	List<Double> result = new ArrayList<Double>();
 	for (int i = 1; i < list.size(); i++) {
 		int previous = list.get(i - 1);              // Autounboxing
 		int current = list.get(i);                   // Autounboxing
@@ -262,7 +262,7 @@ public List<Double> floatingAverage(List<Integer> list) {
 			Eine Möglichkeit ist es wie in \ref{fig:generics_methoden} einen uneingeschränkten Typparameter zu definieren. Eine andere Möglichkeit ist, die Wildcard \texttt{?} zu verwenden, welche alle Typen akzeptiert. Somit kann die Methode in \ref{fig:generics_methoden} zu folgender, äquivalenter, Methode umgeschrieben werden:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}
+				\begin{lstlisting}[style = base]
 public static String concatenate(List<@@??@@@> list) {
 	String result = "";
 	for (int i = 0; i < list.size(); i++) {
@@ -288,7 +288,7 @@ public static String concatenate(List<@@??@@@> list) {
 				Erweitern wir unsere Methoden zum Aufsummieren von Zahlen so, dass die Methode alle Zahlentypen akzeptiert und Wildcards nutzt (Achtung: In dieser Implementierung werden einfach alle Nachkommastellen abgeschnitten, sollte eine Fließkommazahl übergeben werden!):
 				\begin{figure}[H]
 					\centering
-					\begin{lstlisting}
+					\begin{lstlisting}[style = base]
 public long sum(List@@?<? extends Number>@@@ list) {
 	long result = 0;
 	for (int i = 0; i < list.size(); i++) {
@@ -298,18 +298,18 @@ public long sum(List@@?<? extends Number>@@@ list) {
 }
 
 // Erfolgreiche Aufrufe.
-List<Integer> integerList = new List<Integer>();
+List<Integer> integerList = new ArrayList<Integer>();
 sum(integerList);
 
-List<Long>    longList    = new List<Long>();
+List<Long>    longList    = new ArrayList<Long>();
 sum(longList);
 
-List<Float>   floatList   = new List<Float>();
+List<Float>   floatList   = new ArrayList<Float>();
 sum(floatList);
 
 
 // Fehlschlagende Aufrufe.
-List<String> stringList = new List<String>();
+List<String> stringList = new ArrayList<String>();
 @@!sum(stringList)@@@;
 					\end{lstlisting}
 					\caption{Java: Generic \texttt{extends}}
@@ -321,27 +321,27 @@ List<String> stringList = new List<String>();
 				Zur Nutzung von \texttt{super} schauen wir uns folgendes Beispiel an, welches die Elemente einer Liste \texttt{src} in eine Liste \texttt{dest} kopiert und dabei Typsicher verfährt:
 				\begin{figure}[H]
 					\centering
-					\begin{lstlisting}
-public static <T> copy(List<? extends T> src, List<? super T> dest) {
+					\begin{lstlisting}[style = base]
+public static <T> void copy(List<? extends T> src, List<? super T> dest) {
 	for (int i = 0; i < src.size(); i++) {
 		dest.add(a.get(i));
 	}
 }
 
 // Erfolgreiche Aufrufe.
-List<String>            src  = new List<String>();
-List<CharacterSequence> dest = new List<CharacterSequence>();
+List<String>            src  = new ArrayList<String>();
+List<CharSequence> dest = new ArrayList<CharSequence>();
 copy(src, dest);
 
 
 // Fehlschlagende Aufrufe.
-List<CharacterSequence> src  = new List<CharacterSequence>();
-List<String>            dest = new List<String>();
+List<CharSequence> src  = new ArrayList<CharSequence>();
+List<String>            dest = new ArrayList<String>();
 @@!copy(src, dest)@@@;
 					\end{lstlisting}
 					\caption{Java: Generics \texttt{super}}
 				\end{figure}
-				Der zweite Aufruf schlägt hierbei fehl, denn weder ist \texttt{CharacterSequence} eine Unterklasse von \texttt{String}, noch ist \texttt{String} eine Oberklasse von \texttt{CharacterSequence}. Das Gegenteil ist hingegen der Fall, womit der erste Aufruf erfolgreich ist.
+				Der zweite Aufruf von \lstinline|copy(..)| schlägt hierbei fehl, denn weder ist \texttt{CharSequence} eine Unterklasse von \texttt{String}, noch ist \texttt{String} eine Oberklasse von \texttt{CharSequence}. Das Gegenteil ist hingegen der Fall, womit der erste Aufruf erfolgreich ist.
 			% end
 			
 			\subparagraph{Zusammenfassung \texttt{extends}/\texttt{super}}
@@ -364,7 +364,7 @@ List<String>            dest = new List<String>();
 			Betrachten wir folgende Methode, welche das maximale Element einer List findet:
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}
+				\begin{lstlisting}[style = base]
 public <T extends Comparable<? super T>> T max(List<T> list) {
 	T max = null;
 	for (int i = 0; i < list.size(); i++) {
@@ -376,7 +376,7 @@ public <T extends Comparable<? super T>> T max(List<T> list) {
 }
 
 // Aufruf.
-List<Integer> list = new List<Integer>();
+List<Integer> list = new ArrayList<Integer>();
 list.add(1); list.add(2); list.add(3);
 Integer max = max(list);                  // max == 3
 				\end{lstlisting}
@@ -385,7 +385,7 @@ Integer max = max(list);                  // max == 3
 			von dem Compiler durch folgenden Code ersetzt (das Autoboxing wird hier außer Acht gelassen):
 			\begin{figure}[H]
 				\centering
-				\begin{lstlisting}
+				\begin{lstlisting}[style = base]
 public Comparable max(List list) {
 	Comparable max = null;
 	for (int i = 0; i < list.size(); i++) {
@@ -397,11 +397,11 @@ public Comparable max(List list) {
 }
 
 // Aufruf.
-List list = new List();
+List list = new ArrayList();
 list.add(1); list.add(2); list.add(3);
 Integer max = (Integer) max(list);     // max == 3
 				\end{lstlisting}
-				\caption{Java: Generics vor Typlöschung}
+				\caption{Java: Generics nach Typlöschung}
 			\end{figure}
 		% end
 	% end
@@ -412,7 +412,7 @@ Integer max = (Integer) max(list);     // max == 3
 			\item Es ist nicht (mit vertretbarem Aufwand) möglich, ein Array eines Typparameters erstellen. Dies lässt sich durch die Typlöschung einfach begründen, wenn Code der Form \texttt{new T[10]} würde zu \texttt{new Object[10]} umgebaut werden, was nicht zu \texttt{String[]} oder welchen Typ auch immer gecastet werden kann.
 			\item Es ist außerdem nicht möglich, neue Instanzen eines Typparameters zu erstellen. Dies ist lässt sich auf zwei Faktoren zurück führen:
 				\begin{enumerate}
-					\item Es ist zur Compilezeit nicht bekannt, welche Parameter der Konstruktor hat.
+					\item Es ist zur Compilezeit der generischen Klassen nicht bekannt, welche Parameter der Konstruktor hat.
 					\item Durch die Typlöschung würde Code der Form \texttt{new T()} zu \texttt{new Object()} umgebaut werden, was absolut nutzlos ist und auch nicht weiter gecastet werden kann.
 				\end{enumerate}
 		\end{itemize}

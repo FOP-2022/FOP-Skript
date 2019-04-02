@@ -13,7 +13,7 @@ In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in Racket imple
 	\begin{itemize}
 		\item \lstinline[language = Racket]|(cons <Elemente> <Liste>)| \\ Funktion. Hängt das Element vorne an die Liste.
 		\item \lstinline[language = Racket]|empty| \\ Konstante. entspricht einer leeren Liste und wird zum anlegen einer neuen Liste benötigt (als zweiter Parameter zur \texttt{cons}),
-		\item \lstinline[language = Racket]|(list [Elemente])| \\ Funktion. Erstellt eine eine neue Liste, die alle gegebenen Elemente enthält. Die Elemente werden durch Leerzeichen getrennt.
+		\item \lstinline[language = Racket]|(list [Elemente])| \\ Funktion. Erstellt eine neue Liste, die alle gegebenen Elemente enthält. Die Elemente werden durch Leerzeichen getrennt.
 		\item \lstinline[language = Racket]|(first <Liste>)| \\ Funktion. Gibt das erste Element der Liste zurück, also den Kopf.
 		\item \lstinline[language = Racket]|(rest <Liste>)| \\ Funktion. Gibt den Rest der Liste (also die gesamte Liste ohne den Kopf) zurück. Ist die Liste leer, gibt es einen Fehler.
 		\item \lstinline[language = Racket]|(second <Liste>)|, \lstinline[language = Racket]|(third <Liste>)|, \lstinline[language = Racket]|(fourth <Liste>)|, \lstinline[language = Racket]|(fifth <Liste>)|, \lstinline[language = Racket]|(sixth <Liste>)|, \lstinline[language = Racket]|(seventh <Liste>)|, \lstinline[language = Racket]|(eighth <Liste>)| \\ Funktionen. Geben das zweite/\dots/achte Element der Liste zurück.
@@ -31,7 +31,7 @@ In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in Racket imple
 		Zur Definition eines Struct-Typs wird folgender Code genutzt:
 		\begin{figure}[H]
 			\centering
-			\lstinline[language = Racket]|(define-struct <Name> ([Attribute]))|
+			\lstinline[language = Racket, style = base]|(@@+define-struct@@@ <Name> ([Attribute]))|
 		\end{figure}
 		Der Name gibt an, unter welchen Namen wir das Struct referenzieren können. Die Attribute definieren, unter welchem Namen wir Daten in dem Struct speichern können. Auf diese können wir anschließend zugreifen. Unterschiedliche Attribute können wir durch Leerzeichen separieren.
 		
@@ -40,7 +40,7 @@ In diesem Abschnitt schauen wir uns an, was für Datenstrukturen in Racket imple
 			\begin{figure}[H]
 				\centering
 				\begin{lstlisting}[language = Racket]
-(define-struct student (name matr-number))
+(@@+define-struct@@ student (name matr-num))
 \end{lstlisting}
 			\end{figure}
 		% end

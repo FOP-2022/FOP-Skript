@@ -1,9 +1,9 @@
-Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bestandteilen, wenden wir und nun den Anweisungen zu, die unserem Programm Leben einhauchen. Die schreiben dem Computer vor, welche Aufgaben er abzuarbeiten hat und in welcher Reihenfolge.
+Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bestandteilen, wenden wir und nun den Anweisungen zu, die unseren imperativen Programmen Leben einhauchen. Die schreiben dem Computer vor, welche Einzelschritte einer Aufgabe er abzuarbeiten hat und in welcher Reihenfolge.
 
 \subsection{Variablen und Konstanten} \imperativeMark \oopMark
-	\introduces{von Variablen Konstanten}{variablen}
+	\introduces{von Variablen und Konstanten}{variablen}
 	
-	Stellen wir uns vor, wir wollen das Durchschnittsalter aller Studierenden am Fachbereich Informatik berechnen. Zur Einfachheit nehmen wir hier an, es gibt nur $ 10 $ Studierende, welche die Alter $ 21, 41, 27, 18, 20, 24, 30, 17, 29, 25 $ haben. Zur Berechnung des Durchschnitts müssen wir nun alle Zahlen aufsummieren, uns das Ergebnis merken und durch die Anzahl an Studierenden dividieren. Wir merken hier schnell, das wir uns \enquote{das Ergebnis merken} müssen, da wir nicht mit so vielen Zahlen zur gleichen Zeit rechnen können.
+	Stellen wir uns vor, wir wollen das Durchschnittsalter aller Studierenden am Fachbereich Informatik berechnen. Zur Einfachheit nehmen wir hier an, es gibt nur $ 10 $ Studierende, welche die Alter $ 21, 41, 27, 18, 20, 24, 30, 17, 29, 25 $ haben. Zur Berechnung des Durchschnitts müssen wir nun alle Zahlen aufsummieren, uns das Ergebnis merken und durch die Anzahl an Studierenden dividieren. Wir merken hier schnell, das wir uns \enquote{die Zwischenergebnisse merken} müssen, da wir nicht mit so vielen Zahlen zur gleichen Zeit rechnen können.
 	
 	Das gleiche Phänomen tritt auch auf, wenn wir obigen Algorithmus programmieren wollen: Wir müssen uns Daten zwischenspeichern.
 	
@@ -15,7 +15,7 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 	
 	\paragraph{Begriffe}
 		\begin{itemize}
-			\item Wenn eine Variable erstellt wird, das heißt der Typ und der Name wird festgelegt, wird dies \textins{Deklaration} genannt.
+			\item Wenn eine Variable erstellt wird, das heißt der Typ und der Name wird festgelegt, wird dies \textit{Deklaration} genannt.
 			\item Die erste Festlegung, welchen Wert eine Variable am Anfang haben soll, wird \textit{Initialisierung} genannt. \\ Bei Konstanten ist dies dies einzige Wertfestlegung, die stattfinden kann.
 		\end{itemize}
 	% end
@@ -32,15 +32,13 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 \subsection{Nutzung von Methoden} \functionalMark \imperativeMark \oopMark
 	\introduces{Methoden}{methodenNutzung}
 	
-	Fürs erste reicht es uns hier zu wissen, dass eine Methode ein weg ist, um Code zu deduplizieren an zentraler Stelle zu halten. Näheres über Methoden werden wir im Abschnitt zu Methoden und Funktionen (\refIntr{methoden}) behandeln.
+	Fürs erste reicht es uns hier zu wissen, dass eine Methode ein Weg ist, um Code zu deduplizieren an zentraler Stelle zu halten. Näheres über Methoden werden wir im Abschnitt zu Methoden und Funktionen (\refIntr{methoden}) behandeln.
 	
-	Wir werden oftmals feststellen, dass einige Dinge schwierig zu implementieren sind. Zum Glück haben die meisten Programmiersprachen eine sogenannte \textit{Standardbibliothek}, welche viele Methoden zur Verfügung stellt, die Standardaufgaben implementieren (beispielsweise die Quadratwurzel). Um diese Methoden zu nutzen, müssen die Methoden aufgerufen werden. Dies ist zu Vergleichen mit dem Aufruf einer Funktion in der Mathematik, beispielsweise der Quadratwurzelfunktion ($ \sqrt{x} \coloneqq y \in \mathbb{R} _ + : y \cdot y = x $). Wird übergeben einer Methode \textit{Parameter}, die Methode bearbeitet diese irgendwie und liefert uns ein \textit{Ergebnis} (Eingabe-Verarbeitung-Ausgabe, EVA-Prinzip). Im Fall von der Quadratwurzel übergeben wir der Funktion als Parameter eine Zahl $ x \in \mathbb{R} _ + $ und kriegen ein solches Ergebnis, sodass $ x = \sqrt{x} \cdot \sqrt{x} $ gilt (das dies in einigen Fällen nicht oder nicht vollständig lösbar ist, behandeln wir hier nicht weiter).
+	Wir werden oftmals feststellen, dass einige Dinge schwierig zu implementieren sind. Zum Glück haben die meisten Programmiersprachen eine sogenannte \textit{Standardbibliothek}, welche viele Methoden zur Verfügung stellt, die Standardaufgaben implementieren (beispielsweise die Quadratwurzel). Um diese Methoden zu nutzen, müssen die Methoden aufgerufen werden. Dies ist zu vergleichen mit dem Aufruf einer Funktion in der Mathematik, beispielsweise der Quadratwurzelfunktion ($ \sqrt{x} \coloneqq y \in \mathbb{R} _ + : y \cdot y = x $). Wird übergeben einer Methode \textit{Parameter} (oder auch \textit{Argumente}), die Methode bearbeitet diese irgendwie und liefert uns ein \textit{Ergebnis} (Eingabe-Verarbeitung-Ausgabe, EVA-Prinzip). Im Fall von der Quadratwurzel übergeben wir der Funktion als Parameter eine Zahl $ x \in \mathbb{R} _ + $ und kriegen ein solches Ergebnis, sodass $ x = \sqrt{x} \cdot \sqrt{x} $ gilt (das dies in einigen Fällen nicht oder nicht vollständig lösbar ist, behandeln wir hier nicht weiter).
 % end
 
 \subsection{Operatoren} \functionalMark \imperativeMark \oopMark
 	\introduces{von Operatoren}{operatoren}
-	
-	Wir betrachten nun erneut Operatoren, welche wir bereits bei den lexikalischen Bestandteilen behandelt haben (siehe \refIntr{lexOperatoren}).
 	
 	In diesem Abschnitt behandeln wir nun einige Grundbegriffe, welche im Zusammenhang mit Operatoren immer wieder verwendet werden und schauen uns einige grundlegende Operatoren an, welche in annähernd allen Programmiersprachen vorhanden sind \footnote{Ausnahmen bilden hier manche esoterische Programmiersprachen wie beispielsweise Brainfuck. Siehe hierzu \HREF{https://de.wikipedia.org/wiki/Brainfuck}}.
 	
@@ -51,7 +49,7 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 		
 		Mathematisch kann man den Modulo-Operator wie folgt definieren:
 		\begin{equation*}
-			x \text{ modulo } y \coloneqq x - \lfloor \frac{x}{y} \rfloor
+			x \text{ modulo } y \coloneqq x - \bigg\lfloor \frac{x}{y} \bigg\rfloor
 		\end{equation*}
 	% end
 	
@@ -70,7 +68,7 @@ Nach Betrachtung des langweiligen Teil der Programmierung, den lexikalischen Bes
 			\caption{Wahrheitstafel für \enquote{and}, \enquote{or}, \enquote{not} und \enquote{xor}}
 		\end{table}
 		
-		\warning{Das logische Oder ist genau dann war, wenn \textbf{mindestens ein Parameter} wahr ist. Das in der Prosa übliche oder (entweder-oder) ist im \textit{exklusiven oder} (\enquote{xor}) implementiert und wird genau dann war, wenn \textbf{genau ein Parameter} wahr ist (in anderen Worten: Wenn die Parameter unterschiedlich sind).}
+		\warning{Das logische Oder ist genau dann wahr, wenn \textbf{mindestens ein Parameter} wahr ist. Das in der Prosa übliche \enquote{oder} ist im \textit{exklusiven oder} (\enquote{xor}) implementiert, dieses wird genau dann wahr, wenn \textbf{genau ein Parameter} wahr ist (in anderen Worten: Wenn die Parameter unterschiedlich sind).}
 		
 		Auch für die logischen Operatoren gilt, dass Gesetze und Axiome aus der Logik auch in der Programmierung anwendbar sind (beispielsweise die De Morganschen Gesetze).
 	% end

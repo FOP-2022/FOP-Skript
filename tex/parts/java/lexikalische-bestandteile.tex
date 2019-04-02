@@ -36,13 +36,13 @@
 		Neben primitiven Datentypen gibt es noch die Objektreferenzen. Diese verhalten sich anders als primitive Datentypen, wobei uns vor allem die folgenden Unterschiede auffallen:
 		\begin{itemize}
 			\item Es gibt als einziges \enquote{echtes} Literal den Wert \lstinline|null|, der aussagt, dass die Objektreferenz kein Objekt referenziert. Jegliche Methodenaufrufe auf dieser Referenz brechen mit einer \lstinline|NullPointerException| ab. Deshalb muss vor jedem Zugriff auf eine solche Referenz geprüft werden, ob sie ungleich \lstinline|null| ist.
-			\item Werden Objektreferenzen als Parameter übergeben, so wird hierbei ausschließlich die Referenz übergeben und auf das gleiche Objekt referenziert (Pass-by-Reference). Das bedeutet, eine Änderung an dem Objekt an einer Stelle kann sich an beliebig vielen anderen stellen auswirken.
+			\item Werden Objektreferenzen als Parameter übergeben, so wird hierbei ausschließlich die Referenz übergeben und auf das gleiche Objekt referenziert (Pass-by-Reference). Das bedeutet, eine Änderung an dem Objekt an einer Stelle kann sich an beliebig vielen anderen Stellen auswirken.
 		\end{itemize}
 		Wir werden uns Objektreferenzen im Abschnitt \refImpl{oop}{Java} über objektorientierte Programmierung in Java nochmals genauer anschauen.
 	% end
 	
 	\paragraph{Sonderfall \lstinline|String|}
-		Ein \lstinline|String| ist eine Objektreferenz, kann allerdings in manchen Bereichen als ein primitiver Datentyp angesehen werden. Beispielsweise existieren, wir wir weiter unten noch sehen werden, Literale für diesen Datentyp, welche implizit ein Objekt erzeugen. Auch scheint ein String mit Pass-by-Value übergeben zu werden, da ein String nicht veränderbar ist (alle Methoden eines Strings erzeugen immer einen neuen String).
+		Ein \lstinline|String| ist eine Objektreferenz, kann allerdings in manchen Bereichen als ein primitiver Datentyp angesehen werden. Beispielsweise existieren, wir wir weiter unten noch sehen werden, Literale für diesen Datentyp, welche implizit ein Objekt erzeugen. Auch scheint ein String mit Pass-by-Value übergeben zu werden, da ein String nicht veränderbar ist.
 		
 		Insgesamt existieren folgende Unterschiede:
 		\begin{itemize}
@@ -66,9 +66,9 @@
 		\begin{tabular}{l | l}
 			\textbf{Datentyp} & \textbf{Schreibweise}                          \\ \hline
 			\texttt{byte}     & \texttt{123}, \texttt{-123}                    \\
-			\texttt{short}    & \texttt{1234}, \texttt{1234}                   \\
-			\texttt{int}      & \texttt{12345}, \texttt{12345}                 \\
-			\texttt{long}     & \texttt{123456}, \texttt{123456}               \\
+			\texttt{short}    & \texttt{1234}, \texttt{-1234}                   \\
+			\texttt{int}      & \texttt{12345}, \texttt{-12345}                 \\
+			\texttt{long}     & \texttt{123456L}, \texttt{123456L}               \\
 			\texttt{float}    & \texttt{12.34F}, \texttt{0.34F}/\texttt{.34F}  \\
 			\texttt{double}   & \texttt{123.456}, \texttt{0.456}/\texttt{.456} \\
 			\texttt{char}     & \texttt{'a'}                                   \\
@@ -187,7 +187,7 @@
         \item[\texttt{finally}] Leitet einen finally-Block ein.
         \item[\texttt{long}] Datentyp.
         \item[\textit{\texttt{strictfp}}] \textit{Legt fest, dass innerhalb einer Methode/einer Klasse nur strikte mathematische Operationen verwendet werden, sodass diese nicht optimiert werden sollen (es wird sich strikt an den Standard gehalten).}
-        \item[\textit{\texttt{volatile}}] \textit{Markiert ein Attribut, sodass Modifikationen an diesem atomar durchgeführt werden.}
+        \item[\textit{\texttt{volatile}}] \textit{Markiert ein Attribut, sodass Modifikationen an diesem atomar durchgeführt werden und für andere Threads direkt sichtbar sind.}
         \item[\texttt{const}] Reserviert. Löst ausschließlich einen Compilefehler aus.
         \item[\texttt{float}] Datentyp.
         \item[\textit{\texttt{native}}] \textit{Markiert die Implementierung einer Methode als nativ, das heißt, die Implementierung liegt in nativem Code (C/C++) vor. Siehe JNI (Java Native Interface).}
@@ -212,7 +212,7 @@
 		\item Namen von Klassen beginnen mit einem Großbuchstaben.
 		\item Namen von Methoden/Parametern/Variablen/etc. beginnen mit einem Kleinbuchstaben.
 		\item Namen von Klassen sollen Subjekte und Objekte sein. Beispiel: \enquote{\texttt{User}}
-		\item Namen von Methoden sollen mit einem Adjektiv beginnen. Beispiel: \enquote{\texttt{generateAccessToken}}
+		\item Namen von Methoden sollen mit einem Verb beginnen. Beispiel: \enquote{\texttt{generateAccessToken}}
 	\end{itemize}
 	
 	\info{Die oben Bedingungen, wann eine Zeichenkette als Bezeichner dienen kann, stellen Vereinfachungen dar. Streng genommen können alle Zeichen verwendet werden, für die die Methoden \texttt{Character.isJavaIdentifierStart(char)} bzw. \texttt{Character.isJavaIdentifierPart(char)} den Wert \texttt{true} ergeben. Damit \textit{wären} auch Bezeichner wie \enquote{\texttt{\(\Delta\Psi\)}} möglich.}
@@ -252,11 +252,11 @@
 	% end
 	
 	\subsubsection{Whitespaces}
-		Jegliche Whitespaces (Tab, Zeilenumbruch, Leerzeichen) sind in Java optional und dienen nur der Strukturierung des Codes. Trotz das dies überflüssig ist, empfiehlt es sich, wenn wir unseren Code einrücken, gezielt Zeilenumbrüche setzen und so unseren Code lesbar machen.
+		Jegliche Whitespaces (Tab, Zeilenumbruch, Leerzeichen) sind in Java optional und dienen nur der Strukturierung des Codes. Trotz dass dies überflüssig ist, empfiehlt es sich, wenn wir unseren Code einrücken, gezielt Zeilenumbrüche setzen und so unseren Code lesbar machen.
 	% end
 	
 	\subsubsection{Klammerung}
-		In Java werden jegliche Verfügbaren Klammern genutzt ((), {}, [], <>). Sie haben die folgenden Zwecke:
+		In Java werden jegliche verfügbaren Klammern genutzt ((), {}, [], <>). Sie haben die folgenden Zwecke:
 		\begin{description}
 			\item[\texttt{()}] Klammerung von Ausdrücken (um die Operatorenpräzedenz festzulegen), Aufrufen von Methoden/Konstruktoren, Notwendig bei If-Ausdrücken, Switch-Case und Schleifen.
 			\item[\texttt{\{\}}] Kennzeichnung von Codeblöcken (Klassen-/Methodendefinition, If-Ausdrücke, Schleifen, Switch-Case, \dots).
@@ -275,7 +275,7 @@
 		\paragraph{Konvention}
 			Zur Vermeidung von Kollisionen ist es üblich, allen Packages innerhalb eines Projektes den umgekehrten Namen der Domain voranzustellen, für die das Projekt entwickelt wird (Bindestriche oder andere nicht-Java-konforme Zeichen werden dabei durch einen Unterstrich ersetzt, siehe §3.8 Java-Spezifikation). Danach folgt der Projektname.
 			
-			Bei der Entwicklung von Nabla für das Fachgebiet Algorithmik am Fachbereich Informatik an der TU Darmstadt sollte also der Packagename \lstinline|de.tu\_darmstadt.informatik.algo.nabla| vorangestellt werden.
+			Bei der Entwicklung von Nabla für das Fachgebiet Algorithmik am Fachbereich Informatik an der TU Darmstadt sollte also der Packagename \lstinline|de.tu_darmstadt.informatik.algo.nabla| vorangestellt werden.
 		% end
 	% end
 % end

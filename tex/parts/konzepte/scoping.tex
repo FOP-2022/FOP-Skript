@@ -10,7 +10,7 @@ Schauen wir uns mit obiger Regel zuerst ein Beispiel an, bevor wir zu den grundl
 	Wir betrachten folgendes Stück Code mit obiger Scoping-Regeln, dass unterschiedliche Methoden unterschiedliche Variablen definieren und unabhängig voneinander sind:
 	\begin{figure}[H]
 		\centering
-		\begin{lstlisting}
+		\begin{lstlisting}[style = base]
 foo() {
 	a = "foo/a"; // Anlegen einer neuen Variable 'a' im Scope 'foo'.
 	b = "foo/b"; // Anlegen einer neuen Variable 'b' im Scope 'foo'.
@@ -36,6 +36,6 @@ bar() {
 		\item[Global] Alle Variablen sind global gültig und können von überall verändert werden. \\ Dies stellt eigentlich keinen Scoping-Typ dar, da kein Scoping vorgenommen wird.
 		\item[Function-Based] Variablen sind nur innerhalb einer Funktion gültig und können auch nur dort verwendet werden. \\ Beispiele: Python, BASH
 		\item[Block-Based] Variablen sind nur innerhalb eines Codeblocks (beispielsweise abgetrennt durch geschweifte Klammern) gültig. Ein Codeblock kann beispielsweise mit einer Schleife, einem If, \dots eingeleitet werden. \\ Beispiele: Java, Kotlin
-		\item[Mixed] Es werden unterschiedliche Scoping-Verfahren implementiert und der Entwickler entscheidet, welches er nutzen will. \\ Beispiele: JavaScript (eine globale Variable wird ohne Schlüsselwort, eine funktionslokale Variable mit dem Schlüsselwort \texttt{var} und eine blocklokale Variable mit dem Schlüsselwort \texttt{let} eingeleitet)
+		\item[Mixed] Es werden unterschiedliche Scoping-Verfahren implementiert und der Entwickler entscheidet, welches er nutzen will. \\ Beispiele: JavaScript (eine globale Variable wird ohne Schlüsselwort, eine funktionslokale Variable mit dem Schlüsselwort \texttt{var} und eine block-scoped Variable mit dem Schlüsselwort \texttt{let} eingeleitet)
 	\end{description}
 % end

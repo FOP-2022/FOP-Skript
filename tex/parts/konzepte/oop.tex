@@ -67,9 +67,9 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 
 	\textit{Abstrakte Klassen} bieten uns einen Weg, eine Methode zu definieren, aber nicht zu implementieren. Das bedeutet, wir definieren den Namen, die Parameter und den Rückgabetyp einer Methode ohne diese zu implementieren und überlassen es den Unterklassen, die Methode zu implementieren.
 	
-	Dadurch ist es möglich, eine ebene an Abstraktion zu erreichen, die wir uns am besten an einem Beispiel anschauen: Wir haben die abstrakte Klasse \enquote{Form}, welche die Methode \texttt{flaecheninhalt()} definiert. Diese Methode zur Berechnung des Flächeninhaltes der jeweiligen Form ist Abstrakt und wird von jeder Form (zum Beispiel \enquote{Kreis} oder \enquote{Quadrat}) implementiert. Wir können nun eine Methode \lstinline|double farbverbrauch(Form form, doubl)| entwickeln, welche den Farbverbrauch bei dem Ausmalen der jeweiligen Funktion berechnet. Den Flächeninhalt der Form erhält die Methode dabei durch die vorher definierte abstrakte Methode \texttt{flaecheninhalt()}, die auf der übergebenen Form aufgerufen wird.
+	Dadurch ist es möglich, eine Ebene an Abstraktion zu erreichen, die wir uns am besten an einem Beispiel anschauen: Wir haben die abstrakte Klasse \enquote{Form}, welche die Methode \texttt{flaecheninhalt()} definiert. Diese Methode zur Berechnung des Flächeninhaltes der jeweiligen Form ist Abstrakt und wird von jeder Form (zum Beispiel \enquote{Kreis} oder \enquote{Quadrat}) implementiert. Wir können nun eine Methode \lstinline|double farbverbrauch(Form form, doubl)| entwickeln, welche den Farbverbrauch bei dem Ausmalen der jeweiligen Funktion berechnet. Den Flächeninhalt der Form erhält die Methode dabei durch die vorher definierte abstrakte Methode \texttt{flaecheninhalt()}, die auf der übergebenen Form aufgerufen wird.
 	
-	Dabei wird immer die Implementierung aufgerufen, die gerade in dem Objekt steht, siehe \refIntr{polymorphy}. Es ist auch möglich, dass eine Oberklasse eine Methode implementiert, welche wiederum andere, abstrakte, Methoden nutzt, die später erst in den Unterklassen implementiert werden\footnote{Dies stellt das }.
+	Dabei wird immer die Implementierung aufgerufen, die gerade in dem Objekt steht, siehe \refIntr{polymorphy}. Es ist auch möglich, dass eine Oberklasse eine Methode implementiert, welche wiederum andere, abstrakte, Methoden nutzt, die später erst in den Unterklassen implementiert werden.
 	
 	\paragraph{UML-Diagramm}
 		Abstrakte Methoden werden in UML kursiv gekennzeichnet:
@@ -90,7 +90,7 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 
 	Ein \textit{Interface} ist eine besondere abstrakte Klasse und definiert ausschließlich abstrakte Methoden und kann keine Methoden implementieren. Auch kann eine Klasse in den meisten Sprachen auch mehrere Interfaces \textit{implementieren}. Dadurch können wir feste Schnittstellen definieren und Klassen, welche diese Schnittstellen implementieren und können im Rahmen dieser alle gleich genutzt werden.
 	
-	Schauen wir uns dies wieder an einem Beispiel aus der Realität an: In Java existiert das Interface \lstinline|Comparable|. Dieses Interface definiert eine einzige Methode \lstinline|int compareTo(Object obj)|, mit der das Objekt, auf dem die Methode aufgerufen wird, mit dem übergebenen Objekt verglichen werden kann. Nun kann jede Klasse, die dieses Interface implementiert ist nun als \enquote{Vergleichbar} markiert und kann zum Beispiel innerhalb von sortierten Listen verwendet werden.\footnote{Hier gibt es auch noch andere Möglichkeiten, wir werden dies im Abschnitt \refImpl{datastruct}{Java} genauer betrachten.}
+	Schauen wir uns dies wieder an einem Beispiel aus der Realität an: In Java existiert das Interface \lstinline|Comparable|. Dieses Interface definiert eine einzige Methode \lstinline|int compareTo(Object obj)|, mit der das Objekt, auf dem die Methode aufgerufen wird, mit dem übergebenen Objekt verglichen werden kann. Nun kann jede Klasse, die dieses Interface implementiert ist nun als \enquote{vergleichbar} markiert und kann zum Beispiel innerhalb von sortierten Listen verwendet werden.\footnote{Hier gibt es auch noch andere Möglichkeiten, wir werden dies im Abschnitt \refImpl{datastruct}{Java} genauer betrachten.}
 	
 	\paragraph{UML-Diagramm}
 		Ein Interface wird in UML besonders mit einem sogenannten \enquote{Stereotyp} hervorgehoben, eine Implementierung wird mit gestrichelten Pfeilen dargestellt:
@@ -109,7 +109,7 @@ Wir werden uns in diesem Abschnitt einige abstrakte Konzepte zur objektorientier
 \subsection{Polymorphie und späte Bindung} \imperativeMark \oopMark
 	\introduces{von Polymorphie und später Bindung}{polymorphy}
 
-	Dies ist eines der wichtigsten Eigenschaften bei objektorientierter Programmierung. Polymorphie beschreibt die Eigenschaft, dass im die Implementierung einer Methode aufgerufen wird, die in dem Vererbungsbaum eines Objektes an tiefstmöglicher Stelle steht und nicht zwangsweise die Implementierung aufgerufen wird, die in der referenzierten Klasse vorhanden ist.
+	Dies ist eines der wichtigsten Eigenschaften bei objektorientierter Programmierung. Polymorphie beschreibt die Eigenschaft, dass die Implementierung einer Methode aufgerufen wird, die in dem Vererbungsbaum eines Objektes an tiefstmöglicher Stelle steht und nicht zwangsweise die Implementierung aufruft, die in der referenzierten Klasse vorhanden ist.
 	
 	Betrachten wir hierzu ein Beispiel, um das Prinzip zu veranschaulichen: Wir haben eine Klasse \enquote{Form} mit einer abstrakten Methode \enquote{gewicht()}, die von den Klassen \enquote{Kreis} und \enquote{Quadrat} überschrieben wird:
 	\begin{figure}[H]

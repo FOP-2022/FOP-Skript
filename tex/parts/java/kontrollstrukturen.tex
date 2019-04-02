@@ -243,7 +243,7 @@ for (int i = 0; i < array.length; i++) {
 		\begin{figure}[H]
 			\centering
 			\begin{lstlisting}
-for (Object element : array[i]) {
+for (Object element : array) {
 	/* Code */
 }
 			\end{lstlisting}
@@ -269,12 +269,12 @@ for (Object element : array[i]) {
 int sumOdd = 0;
 for (int x : array) {
 	if (x % 2 == 0) {
-		// Element is even *@\(\implies\)@* continue with next element.
+		// Element is even --> continue with next element.
 		continue;
 	}
 
 	if (sumOdd > 10) {
-		// Sum is over 10 *@\(\implies\)@* stop loop.
+		// Sum is over 10 --> stop loop.
 		break;
 	}
 

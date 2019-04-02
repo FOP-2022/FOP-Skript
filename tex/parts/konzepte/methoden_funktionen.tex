@@ -14,9 +14,9 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 	Schauen wir uns diese Einzelkomponenten von Methoden nochmals genauer an.
 
 	\subsubsection{Parameter} \functionalMark \imperativeMark \oopMark
-		Ein \textit{Parameter} wird von einer Methode spezifiziert (die Anzahl und der Typ der Parameter) und kann innerhalb der Methode wie eine normale Variable (oder in machen Sprachen Konstante) verwendet werden. Sie stellen die Eingabe der Daten in die Methode dar und werden vom Aufrufer übergeben.
+		Ein \textit{Parameter} wird von einer Methode spezifiziert (die Anzahl und der Typ der Parameter) und kann innerhalb der Methode wie eine normale Variable (oder in manchen Sprachen Konstante) verwendet werden. Sie stellen die Eingabe der Daten in die Methode dar und werden vom Aufrufer übergeben.
 		
-		Parameter sind auch bekannt aus der Mathematik, beispielsweise das \enquote{\(x\)} in der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{R} : \underline{x} \mapsto x ^ 2 \] wobei \enquote{\(\mathbb{N}\)} den Typ des Parameters festlegt.
+		Parameter sind auch bekannt aus der Mathematik, beispielsweise das \enquote{\(x\)} in der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{N} : \underline{x} \mapsto x ^ 2 \] wobei \enquote{\(\mathbb{N}\)} den Typ des Parameters festlegt.
 		
 		\paragraph{Formale Parameter vs. Aktualparameter}
 			Wir unterscheiden zwischen den \textit{Formalen Parametern} und den \textit{Aktualen Parametern}.
@@ -31,13 +31,13 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 	\subsubsection{Körper} \functionalMark \imperativeMark \oopMark
 		Der Code innerhalb einer Methode wird als \textit{Körper} der Methode bezeichnet. Dieser nutzt die Parameter der Methode, enthält den nötigen Code für die zu erledigende Aufgabe und führt die Rückgabe aus. Er stellt den wichtigsten Teil der Methode dar, denn ohne Code wäre eine Methode sinnfrei.
 		
-		Wieder als mathematische Funktion betrachtet, kann das \enquote{\( x ^ 2 \)} als Körper der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{R} : x \mapsto \underline{x ^ 2} \] verstanden werden.
+		Wieder als mathematische Funktion betrachtet, kann das \enquote{\( x ^ 2 \)} als Körper der Funktion \[ f : \mathbb{N} \rightarrow \mathbb{N} : x \mapsto \underline{x ^ 2} \] verstanden werden.
 	% end
 	
 	\subsubsection{Rückgabe} \functionalMark \imperativeMark \oopMark
 		Jede Methode hat eine \textit{Rückgabe}, welche bei imperativen Sprachen auch leer sein kann (also kein expliziter Rückgabewert). Dies wird meist als \textit{Void} (englisch für \enquote{Nichts}) bezeichnet. Der \textit{Rückgabewert} ist der Wert, den die Methode aus den Parametern berechnet hat und den der Aufrufer erhält. In einer (statisch) typisierten Sprache wird außerdem der Rückgabetyp definiert, mit dem der Aufrufer rechnen kann. Die Rückgabe ist bei einer funktionalen Programmiersprache implizit, das heißt es wird nicht genau angegeben, an welcher Stelle ein Wert zurück gegeben wird. In einer imperativen Programmiersprache erfolgt die Rückgabe explizit und kann auch schon vor vollständigem Ablauf der Methode ausgeführt werden. In diesem Fall bricht die Ausführung der Methode ab. Dies kann zum Beispiels nützlich sein, wenn auf invalide Eingaben (beispielsweise negative Zahlen) geprüft wird.
 		
-		Erneut als mathematische Funktion \[ f : \underline{\mathbb{N}} \rightarrow \mathbb{R} : x \mapsto x ^ 2 \] betrachtet, kann \enquote{\(\mathbb{R}\)} als Rückgabetyp verstanden werden. Da mathematische Funktionen funktional sind, findet keine explizite Rückgabe statt, sondert es wird einfach das Quadrat von \(x\) zurück gegeben.
+		Erneut als mathematische Funktion \[ f : \underline{\mathbb{N}} \rightarrow \mathbb{N} : x \mapsto x ^ 2 \] betrachtet, kann \enquote{\(\mathbb{R}\)} als Rückgabetyp verstanden werden. Da mathematische Funktionen funktional sind, findet keine explizite Rückgabe statt, sondert es wird einfach das Quadrat von \(x\) zurück gegeben.
 	% end
 % end
 
@@ -48,7 +48,7 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 \subsection{Rekursion} \functionalMark \imperativeMark \oopMark
 	\introduces{von Rekursion}{rekursion}
 
-	\textbox{Um die Rekursion zu verstehen, muss man zuerst die Rekursion (Siehe \refIntr{rekursion}) verstehen.}
+	\textbox{Um die Rekursion zu verstehen, muss man zuerst die Rekursion verstehen (siehe \refIntr{rekursion}) .}
 	
 	Rekursion bezeichnet ein Paradigma, bei dem sich eine Methode selbst aufruft und damit eine Schleife vermeidet. Dadurch ist es möglich, viele Probleme sehr übersichtlich zu lösen, wodurch der Code lesbarer und damit wartbarer wird. Wenn man es mit der Rekursion allerdings übertreibt, wird der Code sehr schwer verständlich.
 	
@@ -86,7 +86,7 @@ Eine Methode nimmt Daten entgegen (Eingabe), verarbeitet diese (Verarbeitung) un
 % end
 
 \subsection{Überladen} \functionalMark \imperativeMark \oopMark
-	In den meisten Programmiersprachen ist es möglich, eine mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (Racket, Python, \dots).
+	In vielen Programmiersprachen ist es möglich, mehrere Methoden mit dem gleichen Namen, aber unterschiedlichen Parametern, zu implementieren. Dann wird anhand der Parameter entschieden, welche Methode ausgeführt werden soll. Je nach Sprache ist es nur möglich, nach Anzahl der Parameter zu unterscheiden oder auch nach Typ zu unterscheiden (Java, Kotlin, \dots). Andere Sprachen unterstützen Überladung gar nicht (Racket, Python, \dots).
 % end
 
 \subsection{Überschreiben} \oopMark

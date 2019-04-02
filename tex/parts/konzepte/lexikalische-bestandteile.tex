@@ -19,7 +19,7 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 	\begin{itemize}
 		\item Zeichenketten (\enquote{String}),
 		\item Ganzzahlen (\enquote{Integer}/\enquote{Int}),
-		\item Kommazahlen (genauer: Fließkommazahlen, da sich das Komma an jeder Stelle befinden kann) (\enquote{Float}) und
+		\item Kommazahlen (Fetskommazahlen, bei denen die Position des Kommas fest ist, oder Fließkommazahlen, bei denen sich das Komma an jeder Stelle befinden kann) (\enquote{Float}) und
 		\item Wahrheitswerte (\enquote{Boolean}/\enquote{Bool}).
 	\end{itemize}
 	Auch werden häufig einzelne Zeichen (\enquote{Character}/\enquote{Char}) verwendet, aus welchen ein String wiederum besteht.
@@ -49,7 +49,7 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 \subsection{Schlüsselwörter} \functionalMark \imperativeMark \oopMark
 	\introduces{von Schlüsselwörtern}{keywords}
 	
-	Schlüsselwörter (\enquote{Keywords}) werden in Programmiersprachen dazu eingesetzt, bestimmte Funktionen zu kennzeichnen. Sie beschreiben ganz bestimmte Zeichenfolgen (meist nur Text), welche meist nicht in einen anderen Kontexten verwendet werden dürfen (wir werden dies weiter behandeln im Abschnitt zu Einschränkungen von Namensgebungen in Racket und Java).
+	Schlüsselwörter (\enquote{Keywords}) werden in Programmiersprachen dazu eingesetzt, bestimmte Funktionen zu kennzeichnen. Sie beschreiben ganz bestimmte Zeichenfolgen (meist nur Text), welche meist nicht in einen anderen Kontexten verwendet werden dürfen.
 	
 	Die Funktionalität und die Verfügbarkeit von Schlüsselwörtern ist von der Programmiersprache abhängig und wir werden diese weiter in den entsprechenden Abschnitten im Racket und Java Teil betrachten.
 % end
@@ -57,15 +57,15 @@ Der lexikalische Bestandteil einer Programmiersprache kann auch als \enquote{Lex
 \subsection{Bezeichner} \functionalMark \imperativeMark \oopMark
 	\introduces{von Bezeichnern}{identifier}
 	
-	Wie auch in der realen Welt müssen wir auch in der Programmierung Namen für die Elemente unseres Programms (beispielsweise Konstanten oder Variablen (siehe \refIntr{variablen})) Namen finden. Als Beispiel aus der Welt sei der Name \enquote{Streckenkilometer} gegeben, um bei dem Beispiels aus dem Abschnitt über Datentypen (\refIntr{datentypen}) zu bleiben. Innerhalb von Programmen nennen wir solche Namen \enquote{Bezeichner}, für die auch besondere Einschränkungen (Beispiel: \enquote{Ein Bezeichner darf nicht mit einer Ziffer beginnen.}) gelten können. Da letztere natürlich von der Programmiersprache abhängig sind, werden wir dies in jeweiligen Abschnitten von Racket und Java beleuchten.
+	Wie auch in der realen Welt müssen wir auch in der Programmierung Namen für die Elemente unseres Programms (beispielsweise Konstanten oder Variablen (siehe \refIntr{variablen})) Namen finden. Als Beispiel aus der Welt sei der Name \enquote{Streckenkilometer} gegeben, um bei dem Beispiel aus dem Abschnitt über Datentypen (\refIntr{datentypen}) zu bleiben. Innerhalb von Programmen nennen wir solche Namen \enquote{Bezeichner}, für die auch besondere Einschränkungen (Beispiel: \enquote{Ein Bezeichner darf nicht mit einer Ziffer beginnen.}) gelten können. Da letztere natürlich von der Programmiersprache abhängig sind, werden wir dies in jeweiligen Abschnitten von Racket und Java beleuchten.
 % end
 
 \subsection{Operatoren} \functionalMark \imperativeMark \oopMark
 	\introduces{von Operatoren}{lexOperatoren}
 
-	Ein Operator beschreibt eine Aktion auf mindestens einem Datensatz.
+	Ein Operator beschreibt eine Aktion auf mindestens einem Datum.
 	
-	Ein Beispiel für einen Operator ist die Addition, welche $ 2 $ oder mehr Zahlen summiert. Wie wir einen solchen Operator in den konkreten Sprachen nutzen, hängt von der Sprache ab. Es gibt allerdings eine Operatoren, die (zumindest von der Bedeutung her) in allen Programmiersprachen vorhanden sind, beispielsweise die Addition. Diese Operationen werden im Abschnitt \refIntr{operatoren} beschrieben.
+	Ein Beispiel für einen Operator ist die Addition, welche $ 2 $ oder mehr Zahlen summiert. Wie wir einen solchen Operator in den konkreten Sprachen nutzen, hängt von der Sprache ab. Es gibt allerdings eine Operatoren, die (zumindest von der Bedeutung her) in allen Programmiersprachen vorhanden sind, beispielsweise die Addition. Diese Operatoren werden im Abschnitt \refIntr{operatoren} beschrieben.
 % end
 
 \subsection{Strukturierung von Quellcodedateien} \functionalMark \imperativeMark \oopMark

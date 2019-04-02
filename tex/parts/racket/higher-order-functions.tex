@@ -1,6 +1,6 @@
 \label{sec:higher_order_func}
 
-In diesem Abschnitt schauen wir uns Funktionen höherer Ordnung an. Die Art von Funktionen, die eine funktionale Sprache so mächtig machen.
+In diesem Abschnitt schauen wir uns Funktionen höherer Ordnung an, die Art von Funktionen, die eine funktionale Sprache so mächtig machen.
 
 Die Idee von Funktionen höherer Ordnung (Higher-Order Functions) ist, dass eine Funktion von einer anderen Funktion generiert wird und die Parameter von ersterer Funktion nutzen kann. Um diese Möglichkeiten vollständig auszunutzen, müssen wir uns als erstes Lambdas anschauen.
 
@@ -21,11 +21,11 @@ Die Idee von Funktionen höherer Ordnung (Higher-Order Functions) ist, dass eine
 
 \subsection{Funktionen höherer Ordnung}
 	Wenn wir eine Funktion schreiben wollen, die eine Konstante \(k\) auf eine andere Zahl addiert, machen wir dies üblicherweise wie folgt:
-	\begin{itemize}
-		\item \( k = 2 \): \lstinline[language = Racket]|(define (add-2 x) (+ x 2))|
-		\item \( k = 3 \): \lstinline[language = Racket]|(define (add-3 x) (+ x 3))|
-		\item \( k = 4 \): \lstinline[language = Racket]|(define (add-4 x) (+ x 4))|
-	\end{itemize}
+	\begin{description}
+		\item[\( k = 2: \)] \qquad \lstinline[language = Racket]|(define (add-2 x) (+ x 2))|
+		\item[\( k = 3: \)] \qquad \lstinline[language = Racket]|(define (add-3 x) (+ x 3))|
+		\item[\( k = 4: \)] \qquad \lstinline[language = Racket]|(define (add-4 x) (+ x 4))|
+	\end{description}
 	Wie wir sehr schnell sehen, entsteht viel duplizierter Code.
 	
 	Um dies zu vermeiden, können wir die obigen Funktionen in einer Funktion höherer Ordnung umwandeln, die von einer anderen, äußeren, Funktion erstellt wird und beliebige Konstanten addiert:
@@ -45,7 +45,7 @@ Die Idee von Funktionen höherer Ordnung (Higher-Order Functions) ist, dass eine
 		\item \( k = 3 \): \lstinline[language = Racket]|(define add-3 (add-k 3))|
 		\item \( k = 4 \): \lstinline[language = Racket]|(define add-4 (add-k 4))|
 	\end{itemize}
-	Von von \texttt{add-k} produzierte Funktion heißt dann \textit{Funktion höherer Ordnung}.
+	Von \texttt{add-k} produzierte Funktion heißt dann \textit{Funktion höherer Ordnung}.
 	
 	\textbox{In einem solch kleinen Beispiel ist der Nutzen natürlich sehr überschaubar. Doch bei deutlich komplexen Funktion kommt zum Vorschein, wie viel Macht Funktionen höherer Ordnung haben.}
 % end
@@ -62,7 +62,8 @@ Die Idee von Funktionen höherer Ordnung (Higher-Order Functions) ist, dass eine
 ;; filter :: (X -> boolean) (listof X) -> (listof X)
 ;;
 ;; Nimmt die gegebene Liste und entfernt alle Elemente, fuer die predicate?
-;; false zurueck gibt.
+;; false zurueck gibt. predicate? ist also die Funktion, die von dem Aufrufer
+;; als Parameter gegeben werden muss.
 ;;
 ;; Beispiele:
 ;;   (filter even? (list 1 2 3 4 5 6 7 8 9)) -> (list 2 4 6 8)

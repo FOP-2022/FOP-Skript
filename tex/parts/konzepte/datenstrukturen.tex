@@ -6,19 +6,19 @@ Eine Datenstruktur ist ein Objekt zur Speicherung und Organisation von Daten, in
 
 Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 \begin{description}
-	\item[Indexbasiert] Jedes Element innerhalb einer Datenstruktur 
-	\item[Nicht Indexbasiert]
+	\item[Indexbasiert] Jedes Element innerhalb einer Datenstruktur wird einem festen Index zugeordnet, mit dem das Element genau ausgewiesen werden kann.
+	\item[Nicht Indexbasiert] Die Elemente innerhalb einer Datenstruktur werden nicht indiziert und es ist nicht möglich, direkt auf ein bestimmtes Element zuzugreifen, ohne sich andere Elemente anzuschauen.
 \end{description}
 
 \subsection{Arrays, Listen, Mengen} \functionalMark \imperativeMark \oopMark
 	Bevor wir uns einige Implementierungen von Arrays, Listen und Mengen anschauen, stellt sich zuerst die Frage, was das eigentlich alles ist?
 	
-	Alle drei stellen eine Auflistung von Elementen eines beliebigen Typs dar und dienen dazu, beliebig viele und noch nicht zur Compile-Zeit bekannte Elemente in einer Variablen zusammenzufassen. Dabei wird unterschieden zwischen \textit{indexbasierten} und \textit{nicht indexbasierten} Strukturen, wobei bei ersteren jedes Element mit einem Index (einer Zahl) identifiziert werden kann, bei letzteren nicht.
+	Alle drei stellen eine Auflistung von Elementen eines beliebigen Typs dar und dienen dazu, beliebig viele und noch nicht zur Compilezeit bekannte Elemente in einer Variablen zusammenzufassen. Dabei wird unterschieden zwischen \textit{indexbasierten} und \textit{nicht indexbasierten} Strukturen, wobei bei ersteren jedes Element mit einem Index (einer Zahl) identifiziert werden kann, bei letzteren nicht.
 	
 	\subsubsection{Array}
 		\introduces{von Arrays}{datastructArray}
 	
-		Ein Array ist eine solche Auflistung, welche in den meisten Sprachen nicht zur Laufzeit vergrößert werden kann und in einigen Sprachen (beispielsweise C) sogar schon zur Laufzeit feststehen muss. Grob gesagt kann man sich ein Array als beschriftetes Kistensystem vorstellen, bei dem jede Kiste eine Zahl zugewiesen bekommt:
+		Ein Array ist eine solche Auflistung, welche in den meisten Sprachen nicht zur Laufzeit vergrößert werden kann und in einigen Sprachen (beispielsweise C) sogar schon zur Compilezeit feststehen muss. Grob gesagt kann man sich ein Array als beschriftetes Kistensystem vorstellen, bei dem jede Kiste eine Zahl zugewiesen bekommt:
 		\begin{figure}[H]
 			\centering
 			\begin{tikzpicture}[->, shorten >= 2pt, every node/.style = { minimum width = 1cm }, elem/.style = { draw, rectangle, minimum width = 2cm }]
@@ -48,7 +48,7 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 	\subsubsection{Liste}
 		\introduces{von Listen}{datastructList}
 		
-		Eine Liste ist einem Array sehr ähnlich, die Größe kann im Allgemeinen aber zur Laufzeit angepasst werden und es existieren viele verschiedene Implementierungen (unter anderem Implementierungen zur Abbildung auf Arrays, sogenannte Array-Listen). Oftmals ist auch eine Liste indexbasiert, dies muss aber nicht immer der Fall sein (beispielsweise bei gelinkten Listen, die wir später behandeln werden).
+		Eine Liste ist einem Array sehr ähnlich, die Größe kann im Allgemeinen aber zur Laufzeit angepasst werden und es existieren viele verschiedene Implementierungen (unter anderem Implementierungen zur Abbildung auf Arrays, sogenannte Array-Listen). Oftmals ist auch eine Liste indexbasiert, dies muss aber nicht immer der Fall sein (beispielsweise bei verketteten Listen, die wir später behandeln werden).
 	% end
 	
 	\subsubsection{Menge}
@@ -57,20 +57,20 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 		Eine Menge ist, lapidar gesagt, eine Liste ohne Duplikate. Ansonsten gelten genau die gleichen Fakten wie bei einer Liste: Es kann indexbasiert sein, muss es aber nicht, \dots.
 	% end
 	
-	\subsubsection{Linked List (Gelinkte Liste)}
-		Eine \textit{gelinkte Liste} ist eine indexlose Liste, in der die Datenspeicherung wie folgt abgebildet wird:
+	\subsubsection{Linked List (Verkettete Liste)}
+		Eine \textit{verkettete Liste} ist eine indexlose Liste, in der die Datenspeicherung wie folgt abgebildet wird:
 		\begin{itemize}
 			\item Jedes Element der Liste enthält die Referenz auf:
 				\begin{itemize}
 					\item die eigentlichen Nutzdaten (data),
 					\item den Nachfolger des Elementes (next) und
-					\item im Fall von einer doppelt gelinkten Liste, eine Referenz auf das vorherige Element (previous).
+					\item im Fall von einer doppelt verkettete Liste, eine Referenz auf das vorherige Element (previous).
 				\end{itemize}
 			\item Existiert kein nachfolgendes/vorheriges Element, so wir nichts in das Feld eingetragen.
 			\item Manchmal gibt es noch eine Schnittstelle, die eine Referenz auf das erste Element enthält und einige Methoden zur Verfügung stellt (\texttt{first}, \texttt{second}, \texttt{third}, \dots). Diese ist aber nicht vorgeschrieben.
 		\end{itemize}
 		
-		Visualisiert sieht eine einfach gelinkte Liste wie folgt aus:
+		Visualisiert sieht eine einfach verkettete Liste wie folgt aus:
 		\begin{figure}[H]
 			\centering
 			\begin{tikzpicture}[every node/.style = { align = center }, elem/.style = { draw, rectangle, minimum width = 3cm }]
@@ -99,10 +99,10 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 				\draw (el2n) -| (el2a);
 				\draw [->] (el2a) -| (el3.north);
 			\end{tikzpicture}
-			\caption{Datenstruktur: Einfach gelinkte Liste}
+			\caption{Datenstruktur: Einfach verkettete Liste}
 		\end{figure}
 		
-		Und das gleiche als doppelt gelinkte Liste:
+		Und das gleiche als doppelt verkettete Liste:
 		\begin{figure}[H]
 			\centering
 			\begin{tikzpicture}[every node/.style = { align = center }, elem/.style = { draw, rectangle, minimum width = 3cm }]
@@ -171,12 +171,12 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 				\draw (el3o) -| (el3b);
 				\draw [->] (el3b) -| (el2.south);
 			\end{tikzpicture}
-			\caption{Datenstruktur: Doppelt gelinkte Liste}
+			\caption{Datenstruktur: Doppelt verkettete Liste}
 		\end{figure}
 	% end
 	
 	\subsubsection{Zyklische Listen}
-		Eine zyklische Liste ist eine indexlose Liste, die identisch zu einer Linked List im Speicher abgelegt ist, allerdings ist das \textit{next}-Feld des letzten Elements auf das erste Element gesetzt (und, im Falle einer doppelt gelinkten Liste, das \textit{previous}-Feld des ersten Elements auf das letzte Element). Natürlich ergibt es hier nicht wirklich einen Sinn, von einem ersten und letzten Element zu sprechen, da es in einem Kreis kein erstes/letztes Element gibt. Aber bei irgendeinem Element muss nun einmal begonnen werden.
+		Eine zyklische Liste ist eine indexlose Liste, die identisch zu einer Linked List im Speicher abgelegt ist, allerdings ist das \textit{next}-Feld des letzten Elements auf das erste Element gesetzt (und, im Falle einer doppelt verkettete Liste, das \textit{previous}-Feld des ersten Elements auf das letzte Element). Natürlich ergibt es hier nicht wirklich einen Sinn, von einem ersten und letzten Element zu sprechen, da es in einem Kreis kein erstes/letztes Element gibt. Aber bei irgendeinem Element muss nun einmal begonnen werden.
 
 		\begin{figure}[H]
 			\centering
@@ -252,16 +252,16 @@ Im allgemeinen unterscheidet man zwischen folgenden Typen von Datenstrukturen:
 		\centering
 			\begin{tikzpicture}[->, shorten >= 2pt, every node/.style = { minimum width = 2cm }, elem/.style = { draw, rectangle, minimum width = 1cm }]
 				\node (i0) {\texttt{"{}One{}"}};
-				\node [elem, right = of i0] (e0) {\enquote{0}};
+				\node [elem, right = of i0] (e0) {\enquote{Zero}};
 				
 				\node [right = 2 of e0] (i1) {\texttt{"{}Two{}"}};
-				\node [elem, right = of i1] (e1) {\enquote{1}};
+				\node [elem, right = of i1] (e1) {\enquote{One}};
 				
 				\node [below = of i0] (i2) {\texttt{"{}Three{}"}};
-				\node [elem, right = of i2] (e2) {\enquote{2}};
+				\node [elem, right = of i2] (e2) {\enquote{Two}};
 				
 				\node [right = 2 of e2] (i3) {\texttt{"{}Four{}"}};
-				\node [elem, right = of i3] (e3) {\enquote{3}};
+				\node [elem, right = of i3] (e3) {\enquote{Three}};
 				
 				\draw (i0) -- (e0);
 				\draw (i1) -- (e1);

@@ -93,7 +93,8 @@
 }
 \lstdefinestyle{base}{
 	moredelim = **[is][\color{errorred}]{@@!}{@@@},
-	moredelim = **[is][\color{changedpurple}]{@@?}{@@@}
+	moredelim = **[is][\color{changedpurple}]{@@?}{@@@},
+	moredelim = **[is][\color{lstkeywords}]{@@+}{@@@}
 }
 \lstset{
 	backgroundcolor = \color{white},
@@ -170,12 +171,17 @@
 %\providecommand{\imperativeMark}{\flushright \imperative \flushleft}
 %\providecommand{\oopMark}{\flushright \oop \flushleft}
 
-\providecommand{\introduces}[2]{\label{def:#2} Dieser Abschnitt führt das Konzept #1 ein.}
-\providecommand{\implements}[3]{\label{imp:#2_#3} Dieser Abschnitt beschreibt die Implementierung von #1 in #3. Für die abstrakte Definition siehe \ref{def:#2}.}
+%\providecommand{\introduces}[2]{\label{def:#2} Dieser Abschnitt führt das Konzept #1 ein.}
+\providecommand{\introduces}[2]{\label{def:#2}}
+%\providecommand{\implements}[3]{\label{imp:#2_#3} Dieser Abschnitt beschreibt die Implementierung von #1 in #3. Für die abstrakte Definition siehe \ref{def:#2}.}
+\providecommand{\implements}[3]{\label{imp:#2_#3}}
 \providecommand{\refIntr}[1]{\ref{def:#1}}
 \providecommand{\refImpl}[2]{\ref{imp:#1_#2}}
 
 \providecommand{\HREF}[1]{\href{#1}{#1}}
+
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1 \hfill}}
 
 \begin{document}
 	\bibliographystyle{alpha}

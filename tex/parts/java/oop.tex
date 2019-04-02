@@ -73,9 +73,9 @@ public class Human {
 	
 		Klassen sowie alle Attribute und alle Methoden (im Folgenden \enquote{Elemente}) können folgende Sichtbarkeitsmodifizierer enthalten:
 		\begin{description}
-			\item[\lstinline|public|] Das Element ist für jede Klasse und jedes Package sichtbar.
-			\item[\lstinline|private|] Das Element ist nur für die eigene Klasse sichtbar (bei Klassen ist dies nur möglich, wenn die Klasse geschachtelt ist, siehe \ref{sec:classes_nested}).
-			\item[\lstinline|protected|] Das Element ist nur für Klassen aus demselben Package und jede Unterklasse sichtbar.
+			\item[\texttt{\color{lstkeywords} public}] Das Element ist für jede Klasse und jedes Package sichtbar.
+			\item[\texttt{\color{lstkeywords} private}] Das Element ist nur für die eigene Klasse sichtbar (bei Klassen ist dies nur möglich, wenn die Klasse geschachtelt ist, siehe \ref{sec:classes_nested}).
+			\item[\texttt{\color{lstkeywords} protected}] Das Element ist nur für Klassen aus demselben Package und jede Unterklasse sichtbar.
 			\item[Default] Das Element ist nur für die Klassen aus demselben Package sichtbar. Dieser Modifizierer wird angewandt, indem der Modifizierer weggelassen wird.
 		\end{description}
 		\enquote{Sichtbar} bedeutet in diesem Falle, dass das Attribut lesbar und, sofern es nicht \lstinline|final| ist, auch lesbar ist.
@@ -84,7 +84,7 @@ public class Human {
 	\subsubsection{Abgrenzung: Objektvariable \(\leftrightarrow\) Objektkonstante \(\leftrightarrow\) Klassenvariable \(\leftrightarrow\) Klassenkonstante}
 		\begin{description}
 			\item[Objektvariable] Eine Instanzabhängige, nicht-statische Variable, die nicht mit \lstinline|final| markiert ist. \\ Eine Objektvariable wird mit dem Default-Wert des jeweiligen Datentyps belegt bis sie zugewiesen wird.
-			\item[Objektkonstante] Eine Instanzabhängige, nicht-statische Variable, die mit \lstinline|final| markiert ist. \\ Eine Objektkonstante muss direkt bei der Deklaration, spätestens aber bei der Ausführung des Konstruktor initialisiert werden.
+			\item[Objektkonstante] Eine Instanzabhängige, nicht-statische Variable, die mit \lstinline|final| markiert ist. \\ Eine Objektkonstante muss direkt bei der Deklaration, spätestens aber bei der Ausführung des Konstruktors initialisiert werden.
 			\item[Klassenvariable] Eine Instanzunabhängige, statische Variable, die nicht mit \lstinline|final| markiert ist. \\ Eine Klassenvariable wird mit dem Default-Wert des jeweiligen Datentyps belegt bis sie zugewiesen wird.
 			\item[Klassenkonstante] Eine Instanzunabhängige, statische Variable, die mit \lstinline|final| markiert ist. \\ Eine Klassenkonstante muss direkt bei der Deklaration, spätestens aber bei der Ausführung des Static-Initializers initialisiert werden.
 		\end{description}
@@ -266,7 +266,7 @@ class ChildClass extends ParentClass {
 	% end
 	
 	\subsubsection{Sonderfall \texttt{String}}
-		Einen Sonderfall stellt die Klasse \lstinline|String| dar, da diese sich an einigen (nicht allen!) stellen wir ein primitiver Datentyp verhält. Dies liegt an folgenden Punkten:
+		Einen Sonderfall stellt die Klasse \lstinline|String| dar, da diese sich an einigen (nicht allen!) Stellen wie ein primitiver Datentyp verhält. Dies liegt an folgenden Punkten:
 		\begin{itemize}
 			\item Ein String ist \textit{immutable}, das heißt nicht veränderlich. Wurde einmal ein String-Objekt angelegt, so kann dieses nicht mehr verändert werden.
 			\item String-Objekte werden implizit erstellt, wenn eine Zeichenkette in Anführungszeichen gesetzt wird. Das bedeutet, statt \lstinline|new String(new char[] { 'a', 'b', 'c' })| können wir \lstinline|"abc"| schreiben.
@@ -366,6 +366,8 @@ public class Foo {
 		
 		Die Methode \lstinline|equals(..)| ist in \lstinline|Object| implementiert, greift in der Standard-Implementierung aber nur auf den \lstinline|==| Operator zurück. Das bedeutet, wir müssen die Methode bei der Erstellung einer Klasse überschreiben, damit diese korrekt arbeitet.
 		
+		\warning{Überschreiben wir \lstinline|equals(..)|, dann müssen wir auch \lstinline|hashCode()| überschreiben, sodass die Gleichheit zweier Objekte die Gleichheit deren Hashcode impliziert. Was genau die Methode \lstinline|hashCode()| tut, werden wir hier nicht behandeln, es sei aber erwähnt. In üblichen Tools wie Eclipse oder Lombok lassen sich die beiden Methoden leicht generieren.}
+		
 		Schauen wir uns diese ganze Theorie nochmal an einem Beispiel an:
 		\begin{figure}[H]
 			\centering
@@ -384,6 +386,10 @@ public class Foo {
 		// bar hat einen primitiven Datentyp, weshalb wie hier den == Operator
 		// einsetzen.
 		return this.bar == that.bar;
+	}
+
+	public int hashCode() {
+		return this.bar;
 	}
 }
 
@@ -404,8 +410,9 @@ public class Main {
 }
 \end{lstlisting}
 		\end{figure}
-		Für eine korrekt Implementierung von \lstinline|equals(..)| muss folgende gelten:
+		Für eine korrekt Implementierung von \lstinline|equals(..)| und \lstinline|hashCode()| muss folgende gelten:
 		\begin{align*}
+			\texttt{a.equals(b)} \iff \texttt{a.hashCode() == b.hashCode()} \\
 			!\texttt{a.equals(null)} \\
 			\texttt{a == b} \implies \texttt{a.equals(b)} \tag{Konsistenz} \\
 			\texttt{a.equals(a)} \tag{Reflexivität} \\
@@ -476,7 +483,7 @@ class Human extends Creature {
 			\item[Zeile 17] Hier rufen wir explizit die Implementierung in der Oberklasse, also Zeile 10 auf.
 		\end{description}
 	
-		Mit der Annotation \lstinline|@Override| markieren wir, dass eine Methode eine andere Methode überschreiben soll. Diese Annotation ist optional, hilft aber beim Lesen des Codes und sorgt außerdem dafür, dass ein Compiler-Fehler auftritt, sollte keine Methode überschrieben worden sein. Dies hilft uns dabei, Schreibfehler (zum Beispiel im Methodennamen) frühzeitig zu erkennen.
+		Mit der Annotation \lstinline|@Override| markieren wir, dass eine Methode eine andere Methode überschreiben soll. Diese Annotation ist optional, hilft aber beim Lesen des Codes und sorgt außerdem dafür, dass ein Compiler-Fehler auftritt, sollte keine Methode überschrieben worden sein. Dies hilft uns dabei, Schreibfehler (zum Beispiel im Methodennamen) frühzeitig zu erkennen. \todo{Annotationen wurden nicht eingeführt.}
 	% end
 	
 	\subsubsection{Variation von Sichtbarkeit, Sichtbarkeit und Exceptions}
@@ -700,7 +707,7 @@ public interface ExampleB {
 		Um Polymorphie zu verstehen, müssen wir uns zuerst klar machen, was der Unterschied zwischen einem statischen und einem dynamischen Typ ist:
 		\begin{itemize}
 			\item Der statische Typ einer Variable ist der Typ, den wir bei der Deklaration der Variable angegeben haben.
-			\item Der dynamische Typ einer Variable ist der Typ, das \enquote{am Ende drin steckt}, also die Klasse, deren Instanz in der Variable gespeichert ist.
+			\item Der dynamische Typ einer Variable ist der Typ, der \enquote{am Ende drin steckt}, also die Klasse, deren Instanz in der Variable gespeichert ist.
 		\end{itemize}
 	
 		\textbf{Beispiel:}
@@ -786,7 +793,7 @@ public class Outer {
 }
 \end{lstlisting}
 			\end{figure}
-			Um eine Instanz von \lstinline|StaticInner| er erhalten, müssen wir dem Konstruktor von \lstinline|StaticInner| also eine Instanz der äußeren Klasse übergeben: \lstinline|new Outer.StaticInner(new Outer)|.
+			Um eine Instanz von \lstinline|StaticInner| er erhalten, müssen wir dem Konstruktor von \lstinline|StaticInner| also eine Instanz der äußeren Klasse übergeben: \lstinline|new Outer.StaticInner(new Outer())|.
 		% end
 	% end
 	
@@ -797,6 +804,7 @@ public class Outer {
 		\begin{figure}[H]
 			\centering
 			\begin{lstlisting}
+@FunctionalInterface
 public interface SimpleInterface {
 	void doIt();
 }
@@ -832,6 +840,7 @@ public class Main {
 	\begin{figure}[H]
 		\centering
 		\begin{lstlisting}
+@FunctionalInterface
 public interface SimpleInterface {
 	void doIt();
 }
@@ -864,6 +873,7 @@ public class Main {
 		\begin{figure}[H]
 			\centering
 			\begin{lstlisting}
+@FunctionalInterface
 public interface IntegerComparator {
 	// a < b  -->  -1;   a > b  -->  1;   a == b  -->  0
 	int compare(int a, int b);
@@ -1011,8 +1021,8 @@ public class Tier {
 					x.\texttt{ordinal()} =
 						\begin{cases*}
 							0 & \text{falls } x = \texttt{HUND}    \\
-							0 & \text{falls } x = \texttt{STRAUSS} \\
-							0 & \text{falls } x = \texttt{FISCH}
+							1 & \text{falls } x = \texttt{STRAUSS} \\
+							2 & \text{falls } x = \texttt{FISCH}
 						\end{cases*}
 				\end{equation}
 			\item \lstinline|toString(): String| \\ Gibt den Namen des aktuellen Elements zurück.

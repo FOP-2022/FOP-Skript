@@ -2,19 +2,19 @@
 
 Bisher sind uns nur Programme geläufig, welche sequentiell (das heißt nacheinander) ablaufen. In der Praxis ist dies in vielen Fällen nützlich, es gibt aber ebenso viele Fälle, in denen mehrere Dinge parallel ablaufen müssen (beispielsweise möchte man nicht immer die Musik pausieren müssen, nur um einen Absatz im Skript zu lesen).
 
-Vor ähnliche Problematiken werden wir gestellt, wenn unser Programm irgendetwas im Hintergrund abarbeiten muss (beispielsweise eine große Rechenaufgabe wir Wurzelziehen). Hierbei unterstützt uns Multithreading, was von vielen Sprachen in sehr unterschiedlichen Wegen implementiert wird. Damit ist es möglich, Dinge auszulagern und im Hintergrund laufen zu lassen.
+Vor ähnliche Problematiken werden wir gestellt, wenn unser Programm irgendetwas im Hintergrund abarbeiten muss (beispielsweise eine große Rechenaufgabe wie Wurzelziehen). Hierbei unterstützt uns Multithreading, was von vielen Sprachen in sehr unterschiedlichen Wegen implementiert wird. Damit ist es möglich, Dinge auszulagern und im Hintergrund laufen zu lassen.
 
 \subsection{Thread}
-	Ein \textit{Thread} bezeichnet einen Ausführungsstrang unserer Anwendung, welcher \textit{parallel}, also zeitgleich \footnote{\enquote{zeitgleich} ist hier tatsächlich etwas hoch gegriffen, das Betriebssystem und die CPU simulieren dies nur sehr gut.}, zu anderen Ausführungssträngen ausgeführt wird.
+	Ein \textit{Thread} bezeichnet einen Ausführungsstrang unserer Anwendung, welcher \textit{parallel}, also zeitgleich, zu anderen Ausführungssträngen ausgeführt wird.
 	
 	Gegenüber dem Betriebssystem tritt unsere Anwendung dennoch als ein Prozess (eine Applikation) auf, weshalb man bei Threads auch von \textit{leichtgewichtigen Prozessen} spricht.
 	
-	Ein Thread kann gestartet werden und läuft ab diesem Moment asynchron (zeitlich unabhängig) zu anderen Threads. Zum stoppen eines Threads kann dieser wieder mit anderen Threads synchronisiert werden (join) oder auch einfach gestoppt (terminiert) werden.
+	Ein Thread kann gestartet werden und läuft ab diesem Moment asynchron (zeitlich unabhängig) zu anderen Threads. Zum Stoppen eines Threads kann dieser wieder mit anderen Threads synchronisiert werden (join) oder auch einfach gestoppt (terminiert) werden.
 % end
 
 \subsection{Parallelisierung}
 	\subsubsection{Echte Parallelität}
-		Multithreading kann uns helfen, eine komplexe Rechenaufgabe drastisch zu beschleunigen, in dem wir mehrere Operationen zeitgleich durchführen. Hierbei ist zu beachten, dass uns dies nur etwas nützt, wenn unsere Threads \textit{echtparallel} ablaufen. Das bedeutet, dass die Operationen sogar auf der Hardware (der CPU) zeitgleich ausgeführt werden und die Parallelität nicht nur von dem Betriebssystem/der CPU simuliert wird. Konkret heißt das, wir dürfen maximal \( \text{Kernanzahl} - 1 \) Threads starten, damit noch eine Beschleunigung eintritt.
+		Multithreading kann uns helfen, eine komplexe Rechenaufgabe drastisch zu beschleunigen, in dem wir mehrere Operationen zeitgleich durchführen. Hierbei ist zu beachten, dass uns dies meist nur etwas nützt, wenn unsere Threads \textit{echtparallel} ablaufen. Das bedeutet, dass die Operationen sogar auf der Hardware (der CPU) zeitgleich ausgeführt werden und die Parallelität nicht nur von dem Betriebssystem/der CPU simuliert wird. Konkret heißt das, wir dürfen maximal \( \text{Kernanzahl} - 1 \) Threads starten, damit noch eine Beschleunigung eintritt.
 	% end
 	
 	\subsubsection{Simulierte Parallelität (Scheduling)}
@@ -22,7 +22,7 @@ Vor ähnliche Problematiken werden wir gestellt, wenn unser Programm irgendetwas
 		
 		Allerdings ist uns geholfen, wenn beispielsweise ein Thread die GUI aufbaut, ein anderer Thread die Verbindung zu einer Datenbank und ein dritter Thread die Benutzereingaben entgegen nimmt. \\ Auch kann dies sinnvoll sein, wenn ein Thread mit dem Nutzer interagiert und ein anderer auf Änderungen einer Datei wartet, um den Nutzer darüber zu informieren. \\ Diese Kette an Beispielen lässt sich ewig fortsetzen und wir sehen, dass Multithreading sehr viele unterschiedliche Anwendungsgebiete hat.
 		
-		Diese Form der Parallelität, beziehungsweise der Nutzung selbiger, ist die Häufigste in Anwenderprogrammen, die eben keine komplexen Berechnungen durchführen.
+		Diese Form der Parallelität, beziehungsweise der Nutzung selbiger, ist die häufigste in Anwenderprogrammen, die eben keine komplexen Berechnungen durchführen.
 	% end
 % end
 

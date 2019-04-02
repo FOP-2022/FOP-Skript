@@ -161,8 +161,8 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 	\subsubsection{Spezielle Operatoren}
 		Zusätzlich zu den oben genannten Operatoren gibt es noch die Operatoren \lstinline|new|, \lstinline|instanceof| und der Ternäre Operator, die etwas anders funktionieren.
 		\begin{description}
-			\item[\lstinline|new|] Mit diesem Operator können neue Instanzen (Objekte) einer Klasse erstellt werden und die allgemeine Syntax lautet \lstinline|new <klasse>([parameter], [parameter], ...)|; diesen Operator werden wird im Abschnitt \ref{sec:constructor} genauer betrachten.
-			\item[\lstinline|instanceof|] Mit diesem Operator kann geprüft werden, ob ein Objekt eine Instanz einer bestimmten Klasse darstellt, die allgemeine Syntax hierfür lautet \lstinline|<objekt> instanceof <klasse>|. Beispielsweise wäre für eine Variable \lstinline|Number x = 1.2| der Ausdruck \lstinline|x instanceof Double| wahr, der Ausdruck \lstinline|x instanceof Integer| jedoch falsch.
+			\item[\texttt{\color{lstkeywords} new}] Mit diesem Operator können neue Instanzen (Objekte) einer Klasse erstellt werden und die allgemeine Syntax lautet \lstinline|new <klasse>([parameter], [parameter], ...)|; diesen Operator werden wird im Abschnitt \ref{sec:constructor} genauer betrachten.
+			\item[\texttt{\color{lstkeywords} instanceof}] Mit diesem Operator kann geprüft werden, ob ein Objekt eine Instanz einer bestimmten Klasse darstellt, die allgemeine Syntax hierfür lautet \lstinline|<objekt> instanceof <klasse>|. Beispielsweise wäre für eine Variable \lstinline|Number x = 1.2| der Ausdruck \lstinline|x instanceof Double| wahr, der Ausdruck \lstinline|x instanceof Integer| jedoch falsch.
 			\item[Ternärer Operator] Mit diesem Operator können, ähnlich wie bei einem If, Fallunterscheidungen vorgenommen werden. Die allgemeine Syntax lautet \lstinline|<test> ? <wahr-fall> : <sonst-fall>|. Dabei wird zuerst der Test ausgewertet, ist dieser Wahr, so wird das Ergebnis von dem wahr-Fall zurück gegeben, sonst das Ergebnis von dem sonst-Fall. Dabei muss der Test zu einem Wahrheitswert auswerten und die beiden Fälle zu dem gleichen Typ, beziehungsweise einem kompatiblen Typ für den äußeren Ausdruck.
 		\end{description}
 	% end
@@ -233,7 +233,7 @@ Schauen wir uns nun an, wie man Dinge in Java tut, also wie wir Anweisungen und 
 	% end
 	
 	\subsubsection{Wrappertypen}
-		Wie wir im Abschnitt zu Generics (\ref{sec:generics}) sehen werden, sind primitive Typen nicht immer hilfreich. Manchmal möchten wir auch Zahlen oder ähnliches in Objekten speichern können. Hier kommen die sogenannten \textit{Wrappertypen} ins Spiel.
+		Wie wir im Abschnitt zu Generics (\ref{sec:generics}) sehen werden, sind primitive Typen nicht immer hilfreich. Manchmal möchten wir auch Zahlen oder ähnliches in Objekten speichern können. Hier kommen die sogenannten \textit{Wrappertypen} ins Spiel, die ebenso wir Strings immutable, das heißt nicht veränderlich, sind.
 		
 		Wrappertypen sind Klassen, die eine primitive Variable speichern und diese bei Bedarf zur Verfügung stellt. Die Verwendung dieser Wrapper Typen erfolgt durch \textit{Autoboxing} transparent, das heißt, eine Variable wird automatisch in einem Wrappertyp gespeichert und gelesen.
 		
