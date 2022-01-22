@@ -1,4 +1,11 @@
-\documentclass[a4paper, 11pt, accentcolor = tud3b]{tudreport}
+\documentclass[
+	a4paper, 
+	11pt, 
+	class=report, 
+	T1, 
+	accentcolor = TUDa-3b,
+	marginpar=false,
+]{tudapub}
 
 % Core packages.
 \usepackage[T1]{fontenc}
@@ -9,6 +16,8 @@
 \usepackage{cite}
 \usepackage{enumitem}
 \usepackage{tabto}
+\usepackage{amssymb}
+\usepackage[official]{eurosym}
 \usepackage[mathcal]{euscript} % Get readable mathcal font.
 \usepackage{hyperref}
 \usepackage{listings}
@@ -38,15 +47,15 @@
 \SetLabelAlign{parright}{\parbox[t]{\labelwidth}{\raggedleft#1}}
 \setlist[description]{style = multiline, leftmargin = 4cm, align = parright}
 
-\colorlet{lstcomments}{tud4c}
-\colorlet{lstkeywords}{tud9d}
-\colorlet{lstlinenumbers}{tud0c}
-\colorlet{lststrings}{tud2c}
-\colorlet{functionalmarker}{tud2b}
-\colorlet{imperativemarker}{tud4b}
-\colorlet{oopmarker}{tud6b}
-\colorlet{errorred}{tud9b}
-\colorlet{changedpurple}{tud11a}
+\colorlet{lstcomments}{TUDa-4c}
+\colorlet{lstkeywords}{TUDa-9d}
+\colorlet{lstlinenumbers}{TUDa-0c}
+\colorlet{lststrings}{TUDa-2c}
+\colorlet{functionalmarker}{TUDa-2b}
+\colorlet{imperativemarker}{TUDa-4b}
+\colorlet{oopmarker}{TUDa-6b}
+\colorlet{errorred}{TUDa-9b}
+\colorlet{changedpurple}{TUDa-11a}
 
 \tikzset{> = { Latex[length = 2mm] }}
 
@@ -138,17 +147,17 @@
 \providecommand{\intuition}[1]{\subsubparagraph{Intuition} #1}
 
 \providecommand{\functional}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = functionalmarker, colback = tud2a, width = 2.3cm, height = 0.5cm, top = -2pt, left = 5pt, boxrule = 3pt, opacityback = 0.8]
+	\begin{tcolorbox}[standard jigsaw, colframe = functionalmarker, colback = TUDa-2a, width = 2.3cm, height = 0.5cm, top = -2pt, left = 5pt, boxrule = 3pt, opacityback = 0.8]
 		\footnotesize Funktional
 	\end{tcolorbox}
 }
 \providecommand{\imperative}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = imperativemarker, colback = tud4a, width = 2.25cm, height = 0.5cm, top = -2pt, left = 7pt, boxrule = 3pt, opacityback = 0.8]
+	\begin{tcolorbox}[standard jigsaw, colframe = imperativemarker, colback = TUDa-4a, width = 2.25cm, height = 0.5cm, top = -2pt, left = 7pt, boxrule = 3pt, opacityback = 0.8]
 		\footnotesize Imperativ
 	\end{tcolorbox}
 }
 \providecommand{\oop}{%
-	\begin{tcolorbox}[standard jigsaw, colframe = oopmarker, colback = tud6a, width = 3.1cm, height = 0.5cm, top = -2pt, left = 6pt, boxrule = 3pt, opacityback = 0.8]
+	\begin{tcolorbox}[standard jigsaw, colframe = oopmarker, colback = TUDa-6a, width = 3.1cm, height = 0.5cm, top = -2pt, left = 6pt, boxrule = 3pt, opacityback = 0.8]
 		\footnotesize Objektorientiert
 	\end{tcolorbox}
 }
